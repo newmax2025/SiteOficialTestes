@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administração</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <div class="admin-container">
+        <h2>Painel de Administração</h2>
+
+        <h3>Adicionar Novo Usuário</h3>
+        <form id="userForm">
+            <input type="text" id="newUser" placeholder="Novo Usuário (Email)" required>
+            <input type="password" id="newPassword" placeholder="Nova Senha" required>
+            <button type="submit">Adicionar Usuário</button>
+        </form>
+        <p id="mensagemCadastro"></p>
+
+        <h3>Usuários Cadastrados</h3>
+        <ul id="userList"></ul>
+
+        <h3>Remover Usuário</h3>
+        <form id="removeUserForm">
+            <input type="text" id="removeUser" placeholder="Usuário para Remover" required>
+            <button type="submit">Remover Usuário</button>
+        </form>
+        <p id="mensagemRemocao"></p>
+
+        <button onclick="window.location.href='index.html'">Sair</button>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>
