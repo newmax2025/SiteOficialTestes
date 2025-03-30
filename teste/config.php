@@ -1,10 +1,10 @@
 <?php
-$host = "mysql.hostinger.com";
-$dbname = "u377990636_DataBase";
-$username = "u377990636_Admin";
-$password = "+c4Nrz@H5";
+$host = $_ENV['DB_HOST'];
+$dbname = $_ENV['DB_NAME'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
 
-$conexao = new mysqli($host, $usuario, $senha, $banco);
+$conexao = new mysqli($host, $username, $password, $dbname);
 
 if ($conexao->connect_error) {
     die("Erro na conexão: " . $conexao->connect_error);
