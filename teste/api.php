@@ -4,43 +4,33 @@ header("Content-Type: application/json");
 
 require 'config.php';
 
-try {
-    $token = getToken($conexao);
+$token = getToken($conexao);
 
-    if (!$token) {
-        throw new Exception("Erro interno");
-    }
+if (!$token) {
+    echo json_encode(["error" => "Token não encontrado"]);
+    exit;
+}
 
-    if (!isset($_GET['cpf'])) {
-        throw new Exception("CPF não informado");
-    }
+if (!isset($_GET['cpf'])) {
+    echo json_encode(["error" => "CPF não informado"]);
+    exit;
+}
 
-    $cpf = preg_replace('/\D/', '', $_GET['cpf']);
+$cpf = preg_replace('/\D/', '', $_GET['cpf']);
 
-    if (strlen($cpf) !== 11) {
-        throw new Exception("CPF inválido");
-    }
+if (strlen($cpf) !== 11) {
+    echo json_encode(["error" => "CPF inválido"]);
+    exit;
+}
 
-    // Monta a URL da API usando o token armazenado no banco
-    $url = "https://api.dbconsultas.com/api/v1/$token/datalinkcpf/$cpf";
+// Monta a URL da API usando o token do banco de dados
+$url = "https://api.dbconsultas.com/api/v1/" . $token . "/datalinkcpf/" . $cpf;
 
-    // Inicializa cURL
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    
-    $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+$response = file_get_contents($url);
 
-    if ($httpCode !== 200 || !$response) {
-        throw new Exception("Erro ao consultar API");
-    }
-
+if ($response === false) {
+    echo json_encode(["error" => "Erro ao consultar API"]);
+} else {
     echo $response;
-
-} catch (Exception $e) {
-    echo json_encode(["error" => $e->getMessage()]);
 }
 ?>
