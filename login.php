@@ -16,9 +16,9 @@ if (empty($user) || empty($pass)) {
 }
 
 // Função para verificar login
-function verificarLogin($conn, $user, $pass, $tabela, $sessao, $redirect) {
+function verificarLogin($conexao, $user, $pass, $tabela, $sessao, $redirect) {
     $sql = "SELECT senha FROM $tabela WHERE usuario = ?";
-    $stmt = $conn->prepare($sql);
+    $stmt = $conexao->prepare($sql);
     $stmt->bind_param("s", $user);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -36,13 +36,13 @@ function verificarLogin($conn, $user, $pass, $tabela, $sessao, $redirect) {
 }
 
 // Verifica primeiro na tabela clientes
-verificarLogin($conn, $user, $pass, "clientes", "usuario", "AM.html");
+verificarLogin($conexao, $user, $pass, "clientes", "usuario", "AM.html");
 
 // Se não encontrou, verifica na tabela admin
-verificarLogin($conn, $user, $pass, "admin", "admin", "admin.html");
+verificarLogin($conexao, $user, $pass, "admin", "admin", "admin.html");
 
 // Se não encontrou em nenhuma das tabelas
 echo json_encode(["success" => false, "message" => "Usuário ou senha inválidos"]);
 
-$conn->close();
+$conexao->close();
 ?>
