@@ -4,7 +4,7 @@ $dbname = "u377990636_DataBase";
 $username = "u377990636_Admin";
 $password = "+c4Nrz@H5";
 
-$conexao = new mysqli($host, $usuario, $senha, $banco);
+$conexao = new mysqli($host, $username, $password, $dbname);
 
 if ($conexao->connect_error) {
     die("Erro na conexão: " . $conexao->connect_error);
