@@ -65,6 +65,11 @@
     </div>
 
     <script>
+
+    function formatarCPF(cpf) {
+            return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+        }
+
         async function consultarCPF() {
             let cpf = document.getElementById("cpf").value.trim();
             cpf = cpf.replace(/\D/g, ""); // Remove caracteres não numéricos
@@ -100,13 +105,13 @@
                 const tabela = document.getElementById("dados");
                 tabela.innerHTML = `
                     <tr><th>Nome</th><td>${dados.dados_basicos.nome || "Não disponível"}</td></tr>
-                    <tr><th>CPF</th><td>${dados.dados_basicos.cpf}</td></tr>
+                    <tr><th>CPF</th><td>${formatarCPF(dados.dados_basicos.cpf)}</td></tr>
                     <tr><th>Safra</th><td>${dados.dados_basicos.safra || "Não disponível"}</td></tr>
                     <tr><th>Data de Nascimento</th><td>${dados.dados_basicos.nascimento || "Não disponível"}</td></tr>
                     <tr><th>Nome da Mãe</th><td>${dados.dados_basicos.nome_mae || "Não disponível"}</td></tr>
                     <tr><th>Sexo</th><td>${dados.dados_basicos.sexo === "M" ? "Masculino" : "Feminino"}</td></tr>
                     <tr><th>Email</th><td>${dados.dados_basicos.email || "Não disponível"}</td></tr>
-                    <tr><th>Óbito</th><td>${dados.dados_basicos.obito.status || "Não disponível"}</td></tr>
+                    <tr><th>Óbito</th><td>${dados.dados_basicos.obito?.status || "Não disponível"}</td></tr>
                     <tr><th>Status Receita</th><td>${dados.dados_basicos.status_receita || "Não disponível"}</td></tr>
                     <tr><th>CBO</th><td>${dados.dados_basicos.cbo || "Não disponível"}</td></tr>
                     <tr><th>Faixa de Renda</th><td>${dados.dados_basicos.faixa_renda || "Não disponível"}</td></tr>
