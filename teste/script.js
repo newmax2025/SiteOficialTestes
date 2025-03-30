@@ -25,10 +25,8 @@ async function consultarCPF() {
       throw new Error("Nenhuma informação encontrada.");
     }
 
-    const dados = data.data;
-    const endereco = dados.endereco || {}; // Garantir que não seja nulo
-
     // Exibe os dados na tabela
+    const dados = data.data;
     const tabela = document.getElementById("dados");
     tabela.innerHTML = `
             <tr><th>Nome</th><td>${
@@ -46,20 +44,6 @@ async function consultarCPF() {
                 .map((emplo) => `${emplo.nome_empregador} (${emplo.setor})`)
                 .join("<br>") || "Não disponível"
             }</td></tr>
-            <tr><th>Endereço</th><td>
-                ${endereco.tipo || ""} ${
-      endereco.logradouro || "Não disponível"
-    }, 
-                ${endereco.numero || "S/N"} ${
-      endereco.complemento ? `, ${endereco.complemento}` : ""
-    }
-                <br>
-                ${endereco.bairro || ""}, ${endereco.cidade || ""} - ${
-      endereco.uf || ""
-    }
-                <br>
-                CEP: ${endereco.cep || "Não disponível"}
-            </td></tr>
         `;
 
     document.getElementById("tabela-resultados").style.display = "table";
