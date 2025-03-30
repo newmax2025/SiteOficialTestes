@@ -118,6 +118,7 @@
                     <tr><th>Veículos</th><td>${dados.veiculos.length > 0 ? dados.veiculos.join(", ") : "Não disponível"}</td></tr>
                     <tr><th>Telefones</th><td>${dados.telefones.length > 0 ? dados.telefones.join(", ") : "Não disponível"}</td></tr>
                     <tr><th>Celulares</th><td>${dados.celulares.length > 0 ? dados.celulares.join(", ") : "Não disponível"}</td></tr>
+                    <tr><th>Endereço</th><td>${dados.endereco.tipo || ""} ${dados.endereco.logradouro || "Não disponível"}, ${dados.endereco.numero || "S/N"}, ${dados.endereco.bairro || "Não disponível"}, ${dados.endereco.cidade || "Não disponível"} - ${dados.endereco.uf || ""}, CEP: ${dados.endereco.cep || "Não disponível"}</td></tr>
                     <tr><th>Empregos</th><td>${dados.empregos.map(emplo => `${emplo.nome_empregador} (${emplo.setor})`).join("<br>") || "Não disponível"}</td></tr>
                 `;
 
