@@ -44,9 +44,9 @@ async function consultarCPF() {
               dados.dados_basicos.status_receita || "Não disponível"
             }</td></tr>
             <tr><th>Empregos</th><td>${
-              (dados.empregos ? dados.empregos
+              dados.empregos
                 .map((emplo) => `${emplo.nome_empregador} (${emplo.setor})`)
-                .join("<br>") || "Não disponível")
+                .join("<br>") || "Não disponível"
             }</td></tr>
             <tr><th>Endereço</th><td>
                 ${endereco.tipo || ""} ${
