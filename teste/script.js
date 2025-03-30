@@ -11,11 +11,8 @@ async function consultarCPF() {
   document.getElementById("erro").classList.add("hidden");
   document.getElementById("tabela-resultados").style.display = "none";
 
-  const TOKEN = "3cece996-29c9-40f7-94ab-198f008c3b17";
-  const URL = `https://api.dbconsultas.com/api/v1/${TOKEN}/datalinkcpf/${cpf}`;
-
   try {
-    const response = await fetch(URL);
+    const response = await fetch(`https://seusite.com/api.php?cpf=${cpf}`);
 
     if (!response.ok) {
       throw new Error("Erro ao consultar CPF.");
@@ -28,70 +25,40 @@ async function consultarCPF() {
       throw new Error("Nenhuma informação encontrada.");
     }
 
-    // Exibe os dados na tabela
     const dados = data.data;
-    const tabela = document.getElementById("dados");
+    const endereco = dados.endereco || {}; // Garantir que não seja nulo
 
+    // Exibe os dados na tabela
+    const tabela = document.getElementById("dados");
     tabela.innerHTML = `
             <tr><th>Nome</th><td>${
-              dados.dados_basicos?.nome || "Não disponível"
+              dados.dados_basicos.nome || "Não disponível"
             }</td></tr>
-            <tr><th>CPF</th><td>${
-              dados.dados_basicos?.cpf || "Não disponível"
-            }</td></tr>
-            <tr><th>Safra</th><td>${
-              dados.dados_basicos?.safra || "Não disponível"
-            }</td></tr>
+            <tr><th>CPF</th><td>${dados.dados_basicos.cpf}</td></tr>
             <tr><th>Data de Nascimento</th><td>${
-              dados.dados_basicos?.nascimento || "Não disponível"
-            }</td></tr>
-            <tr><th>Nome da Mãe</th><td>${
-              dados.dados_basicos?.nome_mae || "Não disponível"
-            }</td></tr>
-            <tr><th>Sexo</th><td>${
-              dados.dados_basicos?.sexo === "M" ? "Masculino" : "Feminino"
-            }</td></tr>
-            <tr><th>Email</th><td>${
-              dados.dados_basicos?.email || "Não disponível"
-            }</td></tr>
-            <tr><th>Óbito</th><td>${
-              dados.dados_basicos?.obito?.status || "Não disponível"
+              dados.dados_basicos.nascimento || "Não disponível"
             }</td></tr>
             <tr><th>Status Receita</th><td>${
-              dados.dados_basicos?.status_receita || "Não disponível"
+              dados.dados_basicos.status_receita || "Não disponível"
             }</td></tr>
-            <tr><th>CBO</th><td>${
-              dados.dados_basicos?.cbo || "Não disponível"
+            <tr><th>Empregos</th><td>${
+              dados.empregos
+                .map((emplo) => `${emplo.nome_empregador} (${emplo.setor})`)
+                .join("<br>") || "Não disponível"
             }</td></tr>
-            <tr><th>Faixa de Renda</th><td>${
-              dados.dados_basicos?.faixa_renda || "Não disponível"
-            }</td></tr>
-            <tr><th>Veículos</th><td>${
-              dados.veiculos?.length > 0
-                ? dados.veiculos.join(", ")
-                : "Não disponível"
-            }</td></tr>
-            <tr><th>Telefones</th><td>${
-              dados.telefones?.length > 0
-                ? dados.telefones.join(", ")
-                : "Não disponível"
-            }</td></tr>
-            <tr><th>Celulares</th><td>${
-              dados.celulares?.length > 0
-                ? dados.celulares.join(", ")
-                : "Não disponível"
-            }</td></tr>
-            <tr><th>Empregos</th><td>
-                ${
-                  dados.empregos?.length > 0
-                    ? dados.empregos
-                        .map(
-                          (emprego) =>
-                            `${emprego.nome_empregador} (${emprego.setor}, ${emprego.status})`
-                        )
-                        .join("<br>")
-                    : "Não disponível"
-                }
+            <tr><th>Endereço</th><td>
+                ${endereco.tipo || ""} ${
+      endereco.logradouro || "Não disponível"
+    }, 
+                ${endereco.numero || "S/N"} ${
+      endereco.complemento ? `, ${endereco.complemento}` : ""
+    }
+                <br>
+                ${endereco.bairro || ""}, ${endereco.cidade || ""} - ${
+      endereco.uf || ""
+    }
+                <br>
+                CEP: ${endereco.cep || "Não disponível"}
             </td></tr>
         `;
 
