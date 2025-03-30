@@ -1,5 +1,3 @@
-analise meu codigo:
-consulta.html:
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -87,7 +85,7 @@ consulta.html:
             document.getElementById("tabela-resultados").style.display = "none";
 
             try {
-                const response = await fetch(`https://api.dbconsultas.com/api.php?cpf=${cpf}`);
+                const response = await fetch(`https://seusite.com/api.php?cpf=${cpf}`);
 
                 if (!response.ok) {
                     throw new Error("Erro ao consultar CPF.");
