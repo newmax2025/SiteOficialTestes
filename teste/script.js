@@ -1,3 +1,10 @@
+let captchaValidado = false;
+
+function onCaptchaSuccess() {
+  captchaValidado = true;
+  document.getElementById("consultarBtn").disabled = false;
+}
+
 function formatCPF(input) {
   let value = input.value.replace(/\D/g, "");
   value = value.replace(/(\d{3})(\d)/, "$1.$2");

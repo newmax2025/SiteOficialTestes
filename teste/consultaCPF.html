@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +14,6 @@
             height: 100vh;
             margin: 0;
         }
-
         .container {
             display: flex;
             flex-direction: column;
@@ -28,11 +26,10 @@
             text-align: center;
             width: 400px;
             position: relative;
-            gap: 15px;
+            gap: 15px; 
         }
-
         h2 {
-            color: white;
+         color: white;
         }
 
         .logo-container {
@@ -41,12 +38,10 @@
             align-items: center;
             margin-bottom: 20px;
         }
-
         .logo {
             max-width: 150px;
             margin-bottom: 10px;
         }
-
         input[type="text"] {
             width: 100%;
             padding: 12px;
@@ -56,7 +51,7 @@
             font-size: 16px;
             text-align: center;
         }
-
+        
         button {
             background: #00ff22;
             color: rgb(0, 0, 0);
@@ -69,26 +64,22 @@
             font-weight: bold;
             transition: 0.3s;
         }
-
         #resultado {
             margin-top: 15px;
             font-size: 16px;
             font-weight: bold;
             color: #1e3c72;
         }
-
         .dados {
             margin-top: 15px;
             text-align: left;
             color: white;
         }
-
         .dados span {
             font-weight: bold;
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="logo-container">
@@ -97,6 +88,11 @@
         <h2>Consulta CPF Comum</h2>
         <input type="text" id="cpf" placeholder="Digite o CPF" maxlength="14" oninput="formatCPF(this)">
         <button onclick="consultarCPF()">Consultar</button>
+        <!-- CAPTCHA Cloudflare Turnstile -->
+                    <div class="cf-turnstile" 
+                        data-sitekey="0x4AAAAAABCwld1XrT-gkd_l" 
+                        data-callback="onCaptchaSuccess">
+                    </div>
         <p id="resultado"></p>
 
         <div id="dados" class="dados" style="display: none;">
@@ -121,5 +117,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
