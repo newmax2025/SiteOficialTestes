@@ -1,8 +1,8 @@
 <?php
-$host = $_ENV['DB_HOST'];
-$dbname = $_ENV['DB_NAME'];
-$username = $_ENV['DB_USER'];
-$password = $_ENV['DB_PASS'];
+$host = "mysql.hostinger.com";
+$dbname = "u377990636_DataBase";
+$username = "u377990636_Admin";
+$password = "+c4Nrz@H5";
 
 $conexao = new mysqli($host, $usuario, $senha, $banco);
 
