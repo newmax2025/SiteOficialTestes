@@ -1,25 +1,22 @@
 <?php
-require 'vendor/autoload.php'; // Carregar dotenv
-Dotenv\Dotenv::createImmutable(__DIR__)->load();
+$host = "mysql.hostinger.com";
+$dbname = "u377990636_DataBase";
+$username = "u377990636_Admin";
+$password = "+c4Nrz@H5";
 
-$host = $_ENV['DB_HOST'];
-$dbname = $_ENV['DB_NAME'];
-$username = $_ENV['DB_USER'];
-$password = $_ENV['DB_PASS'];
-
-$conexao = new mysqli($host, $username, $password, $dbname);
+$conexao = new mysqli($host, $usuario, $senha, $banco);
 
 if ($conexao->connect_error) {
-    die(json_encode(["error" => "Erro na conexão com o banco de dados"]));
+    die("Erro na conexão: " . $conexao->connect_error);
 }
 
 function getToken($conexao) {
-    $stmt = $conexao->prepare("SELECT valor FROM config WHERE chave = 'token_api' LIMIT 1");
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-
+    $sql = "SELECT valor FROM config WHERE chave = 'token_api' LIMIT 1";
+    $resultado = $conexao->query($sql);
+    
     if ($resultado->num_rows > 0) {
-        return $resultado->fetch_assoc()["valor"];
+        $linha = $resultado->fetch_assoc();
+        return $linha["valor"];
     } else {
         return null;
     }

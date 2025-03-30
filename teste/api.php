@@ -5,8 +5,6 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 
 require 'config.php';
-$conexao = new mysqli($host, $username, $password, $dbname);
-
 
 $token = getToken($conexao);
 
