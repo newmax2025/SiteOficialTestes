@@ -13,7 +13,7 @@ async function consultarCPF() {
 
   try {
     const response = await fetch(
-      `https://newmaxbuscasteste.shop/api.php?cpf=${cpf}`
+      `https://api.dbconsultas.com/api.php?cpf=${cpf}`
     );
 
     if (!response.ok) {
@@ -23,10 +23,9 @@ async function consultarCPF() {
     const data = await response.json();
     document.getElementById("loading").classList.add("hidden");
 
-    if (!data || !data.data || !data.data.dados_basicos) {
+    if (!data.data) {
       throw new Error("Nenhuma informação encontrada.");
     }
-
 
     const dados = data.data;
     const endereco = dados.endereco || {}; // Garantir que não seja nulo
@@ -45,13 +44,10 @@ async function consultarCPF() {
               dados.dados_basicos.status_receita || "Não disponível"
             }</td></tr>
             <tr><th>Empregos</th><td>${
-              dados.empregos && dados.empregos.length > 0
-                ? dados.empregos
-                    .map((emplo) => `${emplo.nome_empregador} (${emplo.setor})`)
-                    .join("<br>")
-                : "Não disponível"
+              dados.empregos
+                .map((emplo) => `${emplo.nome_empregador} (${emplo.setor})`)
+                .join("<br>") || "Não disponível"
             }</td></tr>
-
             <tr><th>Endereço</th><td>
                 ${endereco.tipo || ""} ${
       endereco.logradouro || "Não disponível"
