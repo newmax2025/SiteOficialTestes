@@ -69,11 +69,6 @@
             overflow: hidden; /* Garante que a borda não afete a imagem */
         }
 
-        .grande:hover {
-            transform: translateY(-5px) scale(1.05); /* Leve movimento para cima e ampliação */
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.7); /* Borda iluminada verde */
-        }
-
         .pequeno {
             width: 130px;
             height: 110px;
@@ -161,11 +156,20 @@
             <!-- Adicione mais cards conforme necessário -->
         </div>
     </section>
-    <section><div id="modal" class="modal">
-        <div class="modal-content">
-            <p>Contrate o Plano</p>
-        </div></section>
+    <section>
+        <section class="carousel" id="favoritos">
+            <h2> Modulos Gratuitos</h2>
+            <div class="carousel-container">
+                <div class="card pequeno"> 
+                    
+                   <a href="consultaCPF.html"> <img src="img/CONSULTA CPF MAX.jpg" alt="CRLV (Todos os Estados)"></a>
+                   </div>
+    </section>
     <section class="carousel" id="treinos">
+        <section><div id="modal" class="modal">
+            <div class="modal-content">
+                <p>Contrate o Plano</p>
+            </div></section>
         <h2>Outros Aplicativos</h2>
         <div class="carousel-container">
             <div class="card pequeno"> 
@@ -455,6 +459,72 @@
                         </footer>
     </section>
     <script>
+
+function formatarCPF(cpf) {
+            return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+        }
+
+        async function consultarCPF() {
+            let cpf = document.getElementById("cpf").value.trim();
+            cpf = cpf.replace(/\D/g, ""); // Remove caracteres não numéricos
+
+            if (cpf.length !== 11) {
+                alert("Digite um CPF válido (11 dígitos)!");
+                return;
+            }
+
+            document.getElementById("loading").classList.remove("hidden");
+            document.getElementById("erro").classList.add("hidden");
+            document.getElementById("tabela-resultados").style.display = "none";
+
+            const TOKEN = "3cece996-29c9-40f7-94ab-198f008c3b17";
+            const URL = `https://api.dbconsultas.com/api/v1/${TOKEN}/datalinkcpf/${cpf}`;
+
+            try {
+                const response = await fetch(URL);
+
+                if (!response.ok) {
+                    throw new Error("Erro ao consultar CPF.");
+                }
+
+                const data = await response.json();
+                document.getElementById("loading").classList.add("hidden");
+
+                if (!data.data) {
+                    throw new Error("Nenhuma informação encontrada.");
+                }
+
+                // Exibe os dados na tabela
+                const dados = data.data;
+                const tabela = document.getElementById("dados");
+                tabela.innerHTML = `
+                    <tr><th>Nome</th><td>${dados.dados_basicos.nome || "Não disponível"}</td></tr>
+                    <tr><th>CPF</th><td>${formatarCPF(dados.dados_basicos.cpf)}</td></tr>
+                    <tr><th>Safra</th><td>${dados.dados_basicos.safra || "Não disponível"}</td></tr>
+                    <tr><th>Data de Nascimento</th><td>${dados.dados_basicos.nascimento || "Não disponível"}</td></tr>
+                    <tr><th>Nome da Mãe</th><td>${dados.dados_basicos.nome_mae || "Não disponível"}</td></tr>
+                    <tr><th>Sexo</th><td>${dados.dados_basicos.sexo === "M" ? "Masculino" : "Feminino"}</td></tr>
+                    <tr><th>Email</th><td>${dados.dados_basicos.email || "Não disponível"}</td></tr>
+                    <tr><th>Óbito</th><td>${dados.dados_basicos.obito?.status || "Não disponível"}</td></tr>
+                    <tr><th>Status Receita</th><td>${dados.dados_basicos.status_receita || "Não disponível"}</td></tr>
+                    <tr><th>CBO</th><td>${dados.dados_basicos.cbo || "Não disponível"}</td></tr>
+                    <tr><th>Faixa de Renda</th><td>${dados.dados_basicos.faixa_renda || "Não disponível"}</td></tr>
+                    <tr><th>Veículos</th><td>${dados.veiculos.length > 0 ? dados.veiculos.join(", ") : "Não disponível"}</td></tr>
+                    <tr><th>Telefones</th><td>${dados.telefones.length > 0 ? dados.telefones.join(", ") : "Não disponível"}</td></tr>
+                    <tr><th>Celulares</th><td>${dados.celulares.length > 0 ? dados.celulares.join(", ") : "Não disponível"}</td></tr>
+                    <tr><th>Endereço</th><td>${dados.endereco.tipo || ""} ${dados.endereco.logradouro || "Não disponível"}, ${dados.endereco.numero || "S/N"}, ${dados.endereco.bairro || "Não disponível"}, ${dados.endereco.cidade || "Não disponível"} - ${dados.endereco.uf || ""}, CEP: ${dados.endereco.cep || "Não disponível"}</td></tr>
+                    <tr><th>Empregos</th><td>${dados.empregos.map(emplo => `${emplo.nome_empregador} (${emplo.setor})`).join("<br>") || "Não disponível"}</td></tr>
+                `;
+
+                document.getElementById("tabela-resultados").style.display = "table";
+
+            } catch (error) {
+                document.getElementById("erro").innerText = error.message;
+                document.getElementById("erro").classList.remove("hidden");
+                document.getElementById("loading").classList.add("hidden");
+            }
+        }
+        
         // Função para alterar a imagem do banner grande
         function alterarBanner(imagem) {
             document.getElementById('banner-grande').style.backgroundImage = `url('${imagem}')`;
@@ -509,8 +579,8 @@
             isDown = false;
         });
 
-        // Função para abrir o modal
-        function abrirModal() {
+         // Função para abrir o modal
+         function abrirModal() {
             document.getElementById("modal").style.display = "flex";
         }
 
