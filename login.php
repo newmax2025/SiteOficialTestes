@@ -2,17 +2,8 @@
 session_start();
 header('Content-Type: application/json');
 
-// Configuração do banco de dados
-$host = "mysql.hostinger.com";
-$dbname = "u377990636_DataBase";
-$username = "u377990636_Admin";
-$password = "+c4Nrz@H5";
-
-$conn = new mysqli($host, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die(json_encode(["success" => false, "message" => "Erro ao conectar ao banco de dados."]));
-}
+// Importa a configuração do banco
+require 'config.php';
 
 // Recebendo os dados do POST
 $data = json_decode(file_get_contents("php://input"), true);
