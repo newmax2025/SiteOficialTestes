@@ -1,132 +1,105 @@
-function formatarCPF(cpf) {
-  return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+function formatCPF(input) {
+  let value = input.value.replace(/\D/g, "");
+  value = value.replace(/(\d{3})(\d)/, "$1.$2");
+  value = value.replace(/(\d{3})(\d)/, "$1.$2");
+  value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  input.value = value;
 }
 
 async function consultarCPF() {
-  let cpf = document.getElementById("cpf").value.trim();
-  cpf = cpf.replace(/\D/g, ""); // Remove caracteres não numéricos
-
-  if (cpf.length !== 11) {
-    alert("Digite um CPF válido (11 dígitos)!");
+  const cpf = document.getElementById("cpf").value;
+  if (cpf.length < 14) {
+    document.getElementById("resultado").innerText = "CPF inválido!";
     return;
   }
 
-  document.getElementById("loading").classList.remove("hidden");
-  document.getElementById("erro").classList.add("hidden");
-  document.getElementById("tabela-resultados").style.display = "none";
+  document.getElementById("resultado").innerText = "Consultando...";
 
-  const TOKEN = "3cece996-29c9-40f7-94ab-198f008c3b17";
-  const URL = `https://api.dbconsultas.com/api/v1/${TOKEN}/datalinkcpf/${cpf}`;
+  const TOKEN = "3cece996-29c9-40f7-94ab-198f008c3b17"; // Substitua pelo seu token real
+  const URL = `https://api.dbconsultas.com/api/v1/${TOKEN}/datalinkcpf/${cpf.replace(
+    /\D/g,
+    ""
+  )}`;
 
   try {
     const response = await fetch(URL);
-
     if (!response.ok) {
       throw new Error("Erro ao consultar CPF.");
     }
 
     const data = await response.json();
-    document.getElementById("loading").classList.add("hidden");
 
     if (!data.data) {
-      throw new Error("Nenhuma informação encontrada.");
+      throw new Error("Nenhuma informação encontrada para este CPF.");
     }
 
     const dados = data.data;
-    const tabela = document.getElementById("dados");
-    let enderecosHtml = "";
-    let empregosHtml = "";
 
-    if (Array.isArray(dados.endereco)) {
-      dados.endereco.forEach((end, index) => {
-        let numeroEndereco = dados.endereco.length > 1 ? `${index + 1} - ` : "";
-        enderecosHtml += `<tr><th>Endereço</th><td>${numeroEndereco}${
-          end.tipo || ""
-        } ${end.logradouro || "Não disponível"}, ${end.numero || "S/N"}, ${
-          end.bairro || "Não disponível"
-        }, ${end.cidade || "Não disponível"} - ${end.uf || ""}, CEP: ${
-          end.cep || "Não disponível"
-        }</td></tr>`;
-      });
-    } else {
-      enderecosHtml = `<tr><th>Endereço</th><td>${dados.endereco.tipo || ""} ${
-        dados.endereco.logradouro || "Não disponível"
-      }, ${dados.endereco.numero || "S/N"}, ${
-        dados.endereco.bairro || "Não disponível"
-      }, ${dados.endereco.cidade || "Não disponível"} - ${
-        dados.endereco.uf || ""
-      }, CEP: ${dados.endereco.cep || "Não disponível"}</td></tr>`;
-    }
+    // Preenche os campos com os dados da API
+    document.getElementById("nome").innerText =
+      dados.dados_basicos.nome || "Não disponível";
+    document.getElementById("cpf_resultado").innerText =
+      formatarCPF(dados.dados_basicos.cpf) || "Não disponível";
+    document.getElementById("safra").innerText =
+      dados.dados_basicos.safra || "Não disponível";
+    document.getElementById("nascimento").innerText =
+      dados.dados_basicos.nascimento || "Não disponível";
+    document.getElementById("nome_mae").innerText =
+      dados.dados_basicos.nome_mae || "Não disponível";
+    document.getElementById("sexo").innerText =
+      dados.dados_basicos.sexo === "M"
+        ? "Masculino"
+        : "Feminino" || "Não disponível";
+    document.getElementById("email").innerText =
+      dados.dados_basicos.email || "Não disponível";
+    document.getElementById("obito").innerText =
+      dados.dados_basicos.obito?.status || "Não disponível";
+    document.getElementById("status_receita").innerText =
+      dados.dados_basicos.status_receita || "Não disponível";
+    document.getElementById("cbo").innerText =
+      dados.dados_basicos.cbo || "Não disponível";
+    document.getElementById("faixa_renda").innerText =
+      dados.dados_basicos.faixa_renda || "Não disponível";
+    document.getElementById("veiculos").innerText =
+      dados.veiculos.length > 0 ? dados.veiculos.join(", ") : "Não disponível";
+    document.getElementById("telefones").innerText =
+      dados.telefones.length > 0
+        ? dados.telefones.join(", ")
+        : "Não disponível";
+    document.getElementById("celulares").innerText =
+      dados.celulares.length > 0
+        ? dados.celulares.join(", ")
+        : "Não disponível";
 
-    if (Array.isArray(dados.empregos)) {
-      dados.empregos.forEach((emp) => {
-        empregosHtml += `<tr><th>Emprego</th><td>${
-          emp.nome_empregador || "Não disponível"
-        } (${emp.setor || "Não disponível"}) - ${
-          emp.status || "Não disponível"
-        }, Remuneração: ${emp.remuneracao || "Não disponível"}</td></tr>`;
-      });
-    } else {
-      empregosHtml = `<tr><th>Emprego</th><td>Não disponível</td></tr>`;
-    }
+    // Exibe todos os empregos como uma lista, cada emprego em uma linha
+    const empregos = dados.empregos
+      .map((emplo) => `${emplo.nome_empregador} (${emplo.setor})`)
+      .join("<br>");
+    document.getElementById("empregos").innerHTML =
+      empregos || "Não disponível";
 
-    tabela.innerHTML = `
-            <tr><th>Nome</th><td>${
-              dados.dados_basicos.nome || "Não disponível"
-            }</td></tr>
-            <tr><th>CPF</th><td>${formatarCPF(
-              dados.dados_basicos.cpf
-            )}</td></tr>
-            <tr><th>Safra</th><td>${
-              dados.dados_basicos.safra || "Não disponível"
-            }</td></tr>
-            <tr><th>Data de Nascimento</th><td>${
-              dados.dados_basicos.nascimento || "Não disponível"
-            }</td></tr>
-            <tr><th>Nome da Mãe</th><td>${
-              dados.dados_basicos.nome_mae || "Não disponível"
-            }</td></tr>
-            <tr><th>Sexo</th><td>${
-              dados.dados_basicos.sexo === "M" ? "Masculino" : "Feminino"
-            }</td></tr>
-            <tr><th>Email</th><td>${
-              dados.dados_basicos.email || "Não disponível"
-            }</td></tr>
-            <tr><th>Óbito</th><td>${
-              dados.dados_basicos.obito?.status || "Não disponível"
-            }</td></tr>
-            <tr><th>Status Receita</th><td>${
-              dados.dados_basicos.status_receita || "Não disponível"
-            }</td></tr>
-            <tr><th>CBO</th><td>${
-              dados.dados_basicos.cbo || "Não disponível"
-            }</td></tr>
-            <tr><th>Faixa de Renda</th><td>${
-              dados.dados_basicos.faixa_renda || "Não disponível"
-            }</td></tr>
-            ${enderecosHtml}
-            ${empregosHtml}
-            <tr><th>Veículos</th><td>${
-              dados.veiculos.length > 0
-                ? dados.veiculos.join(", ")
-                : "Não disponível"
-            }</td></tr>
-            <tr><th>Telefones</th><td>${
-              dados.telefones.length > 0
-                ? dados.telefones.join(", ")
-                : "Não disponível"
-            }</td></tr>
-            <tr><th>Celulares</th><td>${
-              dados.celulares.length > 0
-                ? dados.celulares.join(", ")
-                : "Não disponível"
-            }</td></tr>
-        `;
+    // Exibe todos os endereços como uma lista, cada endereço em uma linha
+    const enderecos = dados.endereco
+      ? `${dados.endereco.tipo || ""} ${
+          dados.endereco.logradouro || "Não disponível"
+        }, ${dados.endereco.numero || "S/N"}, ${
+          dados.endereco.bairro || "Não disponível"
+        }, ${dados.endereco.cidade || "Não disponível"} - ${
+          dados.endereco.uf || ""
+        }, CEP: ${dados.endereco.cep || "Não disponível"}`
+      : "Não disponível";
+    document.getElementById("enderecos").innerHTML =
+      enderecos || "Não disponível";
 
-    document.getElementById("tabela-resultados").style.display = "table";
+    document.getElementById("dados").style.display = "block";
+    document.getElementById(
+      "resultado"
+    ).innerText = `Consulta realizada para o CPF: ${cpf}`;
   } catch (error) {
-    document.getElementById("erro").innerText = error.message;
-    document.getElementById("erro").classList.remove("hidden");
-    document.getElementById("loading").classList.add("hidden");
+    document.getElementById("resultado").innerText = `Erro: ${error.message}`;
   }
+}
+
+function formatarCPF(cpf) {
+  return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 }
