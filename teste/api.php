@@ -9,6 +9,11 @@ $conexao = new mysqli($host, $username, $password, $dbname);
 
 
 $token = getToken($conexao);
+if (!$token) {
+    echo json_encode(["error" => "Token não encontrado no banco"]);
+    exit;
+}
+
 
 if (!$token) {
     echo json_encode(["error" => "Token não encontrado"]);
@@ -30,11 +35,19 @@ if (strlen($cpf) !== 11) {
 // Monta a URL da API usando o token do banco de dados
 $url = "https://api.dbconsultas.com/api/v1/" . $token . "/datalinkcpf/" . $cpf;
 
-$response = file_get_contents($url);
+$response = @file_get_contents($url);
+if ($response === false) {
+    echo json_encode(["error" => "Erro ao consultar API externa"]);
+    exit;
+}
+
 
 if ($response === false) {
     echo json_encode(["error" => "Erro ao consultar API"]);
 } else {
     echo $response;
 }
+
+$conexao->close();
+
 ?>
