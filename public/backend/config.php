@@ -1,10 +1,15 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php'; // Garante que está buscando no diretório correto
+require __DIR__ . '/../../vendor/autoload.php'; // Garante que está buscando no diretório correto
 
 use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../'); // Ajuste o caminho se necessário
 $dotenv->load();
+var_dump($_ENV); // Ou var_dump(getenv('DB_HOST'));
+
+// Teste se as variáveis do .env estão carregadas
+var_dump(getenv('DB_HOST'), getenv('DB_NAME'), getenv('DB_USER'), getenv('DB_PASS'));
+die(); // Interrompe a execução para testar
 
 // Verificação para garantir que o .env foi carregado corretamente
 if (!isset($_ENV['DB_HOST'])) {
