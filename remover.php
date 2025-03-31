@@ -4,10 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Configuração do banco de dados
-$host = "mysql.hostinger.com";
-$dbname = "u377990636_DataBase";
-$username = "u377990636_Admin";
-$password = "+c4Nrz@H5";
+
 
 $conn = new mysqli($host, $username, $password, $dbname);
 
