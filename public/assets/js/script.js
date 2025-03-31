@@ -57,26 +57,48 @@ async function consultarCPF() {
     // --- ALTERADO: Tratamento de erro mais detalhado ---
     if (!response.ok) {
       let errorMsg = `Erro na consulta (${response.status}).`;
+      let responseBodyText = ""; // Variável para guardar o corpo da resposta como texto
+
       try {
-        // Tenta pegar a mensagem de erro do seu api.php (que pode ser da API externa)
-        const errorData = await response.json();
-        // A resposta de erro do seu api.php tem a chave "message"
-        if (errorData && errorData.message) {
-          errorMsg = errorData.message;
-        } else {
-          // Se não conseguiu ler a mensagem JSON, usa o texto da resposta
-          let errorText = await response.text();
-          if (errorText)
-            errorMsg += ` Resposta: ${errorText.substring(0, 100)}`; // Limita o tamanho
+        // 1. Leia o corpo como TEXTO (APENAS UMA LEITURA)
+        responseBodyText = await response.text();
+
+        // 2. Tente interpretar o texto como JSON
+        let errorData = null;
+        try {
+          errorData = JSON.parse(responseBodyText);
+        } catch (parseError) {
+          // Não era JSON válido, ignoramos o erro de parse
+          // Usaremos o texto puro mais abaixo
+          console.warn(
+            "A resposta de erro do servidor não era JSON:",
+            parseError
+          );
         }
-      } catch (e) {
-        let errorText = await response.text();
-        if (errorText) errorMsg += ` Resposta: ${errorText.substring(0, 100)}`;
+
+        // 3. Verifique se conseguiu parsear e se tem a mensagem esperada
+        if (errorData && errorData.message) {
+          // Usa a mensagem específica do JSON de erro do backend
+          errorMsg = errorData.message;
+        } else if (responseBodyText) {
+          // Se não tinha a mensagem no JSON ou não era JSON,
+          // adiciona um trecho do texto da resposta à mensagem genérica
+          errorMsg += ` Resposta: ${responseBodyText.substring(0, 150)}`; // Mostra um trecho maior
+        }
+      } catch (readError) {
+        // Caso ocorra erro ao LER o corpo da resposta (menos comum)
+        console.error(
+          "Não foi possível ler o corpo da resposta de erro:",
+          readError
+        );
+        errorMsg += " (Não foi possível ler a resposta do servidor).";
       }
+      // 4. Lança o erro com a mensagem construída
       throw new Error(errorMsg);
     }
 
-    // A resposta do seu api.php (se sucesso) é a resposta DIRETA da API externa
+    // Se a resposta ESTAVA OK (status 2xx), então lemos o corpo como JSON aqui:
+    // Esta é a leitura única para o caso de sucesso.
     const data = await response.json();
 
     // O restante da lógica para processar 'data' permanece o mesmo
