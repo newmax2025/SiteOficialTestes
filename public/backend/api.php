@@ -100,8 +100,8 @@ try {
     echo json_encode(["success" => false, "message" => "Erro interno inesperado no servidor."]);
 
 } finally {
-    if (isset($conexao) && $conexao instanceof mysqli && $conexao->thread_id) {
-        $conexao->close();
-    }
+    if (!empty($conexao) && $conexao instanceof mysqli) {
+    $conexao->close();
+}
 }
 ?>
