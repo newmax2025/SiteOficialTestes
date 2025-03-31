@@ -1,23 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificação Cloudflare</title>
-    <body>
-        <div class="cf-turnstile" 
-                data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh" 
-                data-callback="onCaptchaSuccess">
-            </div>
-    </body>
+    <style>
+        html,
+        body {
+            height: 100%;
+            /* Garante que body possa ocupar a altura total */
+            margin: 0;
+            /* Remove margens padrão */
+            padding: 0;
+            /* Remove preenchimentos padrão */
+        }
+
+        body {
+            display: flex;
+            /* Ativa o Flexbox */
+            flex-direction: column;
+            /* Empilha os itens verticalmente */
+            justify-content: center;
+            /* Centraliza verticalmente */
+            align-items: center;
+            /* Centraliza horizontalmente */
+            min-height: 100vh;
+            /* Garante altura mínima da viewport */
+            text-align: center;
+            /* Centraliza texto dentro dos flex items (como o h1) */
+            font-family: sans-serif;
+            /* Define uma fonte básica */
+        }
+
+        /* Opcional: Adiciona um espaço entre o título e o captcha */
+        .cf-turnstile {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body> {/* Apenas uma tag body */}
+    <h1>Verificação em andamento...</h1>
+
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh" data-callback="onCaptchaSuccess">
+    </div>
+
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script>
-        setTimeout(function() {
+        // Função de callback chamada quando o captcha é resolvido com sucesso
+        function onCaptchaSuccess(token) {
+            console.log('Verificação bem-sucedida! Token:', token);
+            // Idealmente, você pode querer iniciar o redirecionamento aqui
+            // ou limpar o timeout se a verificação for rápida.
+            // Exemplo: clearTimeout(redirectTimer);
+            // window.location.href = '/public/views/login.html';
+        }
+
+        // Armazena o ID do timeout para poder cancelá-lo se necessário
+        const redirectTimer = setTimeout(function () {
+            console.log('Redirecionando por timeout...');
             window.location.href = '/public/views/login.html'; // Substitua pelo caminho real do login
-        }, 3000); // Redireciona após 3 segundos
+        }, 5000); // Aumentei um pouco o tempo para 5 segundos para testes
+
+        // Você pode adicionar um callback de erro também, se desejar
+        // data-error-callback="onCaptchaError"
+        function onCaptchaError(errorCode) {
+            console.error('Erro na verificação do Captcha:', errorCode);
+            // Lidar com o erro, talvez mostrar uma mensagem para o usuário
+        }
     </script>
-</head>
-<body>
-    <h1>Verificação em andamento...</h1>
 </body>
+
 </html>
