@@ -23,7 +23,6 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 try {
     $conexao = new mysqli($host, $username, $password, $dbname);
     $conexao->set_charset("utf8mb4");
-    echo "Banco de dados conectado com sucesso!"; // Mensagem de sucesso
 } catch (mysqli_sql_exception $e) {
     die("Erro na conexão com o banco de dados: " . $e->getMessage());
 }
