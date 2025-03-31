@@ -22,8 +22,8 @@ async function consultarCPF() {
 
   document.getElementById("resultado").innerText = "Consultando...";
 
-  const TOKEN = "3cece996-29c9-40f7-94ab-198f008c3b17"; // Substitua pelo seu token real
-  const URL = `https://api.dbconsultas.com/api/v1/${TOKEN}/datalinkcpf/${cpf.replace(
+  const verificacaoRobo = "3cece996-29c9-40f7-94ab-198f008c3b17"; // Substitua pelo seu token real
+  const URL = `https://api.dbconsultas.com/api/v1/${verificacaoRobo}/datalinkcpf/${cpf.replace(
     /\D/g,
     ""
   )}`;
