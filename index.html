@@ -51,23 +51,18 @@
         // Função de callback chamada quando o captcha é resolvido com sucesso
         function onCaptchaSuccess(token) {
             console.log('Verificação bem-sucedida! Token:', token);
-            // Idealmente, você pode querer iniciar o redirecionamento aqui
-            // ou limpar o timeout se a verificação for rápida.
-            // Exemplo: clearTimeout(redirectTimer);
-            // window.location.href = '/public/views/login.html';
+
         }
 
         // Armazena o ID do timeout para poder cancelá-lo se necessário
         const redirectTimer = setTimeout(function () {
             console.log('Redirecionando por timeout...');
-            window.location.href = '/public/views/login.html'; // Substitua pelo caminho real do login
-        }, 5000); // Aumentei um pouco o tempo para 5 segundos para testes
+            window.location.href = '/public/views/login.html';
+        }, 3000);
 
-        // Você pode adicionar um callback de erro também, se desejar
-        // data-error-callback="onCaptchaError"
         function onCaptchaError(errorCode) {
             console.error('Erro na verificação do Captcha:', errorCode);
-            // Lidar com o erro, talvez mostrar uma mensagem para o usuário
+
         }
     </script>
 </body>
