@@ -9,7 +9,7 @@ require 'config.php'; // Fornece $conexao
 
 // Chaves usadas para buscar configurações no banco de dados
 define('TOKEN_DB_KEY', 'token_api'); // Chave para o token da API dbconsultas (CORRIGIDO)
-define('CLOUDFLARE_SECRET_KEY_DB', 'cloudflare_secret'); // <-- Chave para a Chave Secreta
+define('CLOUDFLARE_SECRET_KEY_DB', 'token_cloudflare'); // <-- Chave para a Chave Secreta
 
 try {
     // 1. Receber CPF e Token CAPTCHA do frontend
