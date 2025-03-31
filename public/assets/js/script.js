@@ -54,7 +54,7 @@ async function consultarCPF() {
   resultadoElement.innerText = "Consultando...";
   dadosElement.style.display = "none";
 
-  const localApiUrl = "../backend/api.php"; // Ajuste o caminho se necessário
+  const localApiUrl = "../../backend/api.php"; // Ajuste o caminho se necessário
   const cpfLimpo = cpf.replace(/\D/g, "");
 
   try {
