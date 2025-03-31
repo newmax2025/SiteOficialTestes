@@ -39,7 +39,7 @@ function verificarLogin($conexao, $user, $pass, $tabela, $sessao, $redirect) {
 }
 
 // Verifica primeiro na tabela clientes
-verificarLogin($conexao, $user, $pass, "clientes", "usuario", "AM.html");
+verificarLogin($conexao, $user, $pass, "clientes", "usuario", "aM.html");
 
 // Se não encontrou, verifica na tabela admin
 verificarLogin($conexao, $user, $pass, "admin", "admin", "admin.html");
