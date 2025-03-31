@@ -27,6 +27,9 @@ async function consultarCPF() {
     return;
   }
 
+  const consultarBtn = document.getElementById("consultarBtn");
+  consultarBtn.disabled = true; // Desabilita botão ao iniciar requisição
+
   const cpfInput = document.getElementById("cpf");
   const cpf = cpfInput.value;
   const resultadoElement = document.getElementById("resultado");
@@ -176,6 +179,8 @@ async function consultarCPF() {
     console.error("Erro ao consultar CPF:", error); // Loga o erro detalhado no console
     resultadoElement.innerText = `Erro: ${error.message}`;
     dadosElement.style.display = "none"; // Esconde a área de dados em caso de erro
+  }finally {
+    consultarBtn.disabled = false; // Reabilita o botão após a requisição
   }
 }
 
