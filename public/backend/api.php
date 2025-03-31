@@ -8,7 +8,7 @@ ob_start();
 require 'config.php'; // Fornece $conexao
 
 // Defina a chave usada para buscar o token no seu banco de dados
-define('TOKEN_DB_KEY', 'dbconsultas_token'); // <-- AJUSTE SE O NOME DA CHAVE FOR DIFERENTE
+define('chave', 'valor'); // <-- AJUSTE SE O NOME DA CHAVE FOR DIFERENTE
 
 try {
     // 1. Receber o CPF do frontend
