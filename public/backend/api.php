@@ -1,11 +1,9 @@
 <?php
-// Define o tipo de conteúdo como JSON
 header('Content-Type: application/json');
-// Inicia o buffer de saída
 ob_start();
 
 // Inclui a configuração do banco de dados e outras configurações
-require 'config.php'; // Fornece $conexao
+require 'config.php';
 
 // Defina a chave usada para buscar o token no seu banco de dados
 define('TOKEN_DB_KEY', 'token_api');
@@ -22,7 +20,6 @@ try {
         throw new InvalidArgumentException("CPF não informado.");
     }
 
-    // Limpa e valida minimamente o CPF (somente dígitos)
     $cpfLimpo = preg_replace('/\D/', '', trim($inputData['cpf']));
     if (strlen($cpfLimpo) !== 11) {
          throw new InvalidArgumentException("Formato de CPF inválido.");
@@ -56,38 +53,29 @@ try {
     // Usando cURL para a requisição externa (mais robusto)
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $externalApiUrl);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Retorna a resposta como string
-    curl_setopt($ch, CURLOPT_TIMEOUT, 30); // Timeout de 30 segundos
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // Verifica o certificado SSL (importante!)
-    // Adicionar headers se a API externa exigir (ex: User-Agent)
-    // curl_setopt($ch, CURLOPT_HTTPHEADER, array('HeaderName: HeaderValue'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
     $externalApiResponse = curl_exec($ch);
-    $httpStatusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE); // Pega o status HTTP retornado pela API externa
-    $curlError = curl_error($ch); // Pega erros do cURL
+    $httpStatusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($ch);
     curl_close($ch);
 
-    // 4. Verificar a resposta da API externa
     if ($curlError) {
         error_log("Erro de cURL ao chamar API externa: " . $curlError);
         throw new RuntimeException("Erro ao comunicar com o serviço de consulta [cURL].");
     }
 
-    // Verifica o status HTTP retornado pela API externa
-    // A API externa pode retornar erros (4xx, 5xx) que precisam ser tratados
     if ($httpStatusCode >= 400) {
-         // Tenta decodificar a resposta de erro da API externa, se for JSON
          $errorData = json_decode($externalApiResponse, true);
          $externalMessage = isset($errorData['message']) ? $errorData['message'] : "Serviço de consulta retornou erro {$httpStatusCode}.";
         throw new RuntimeException($externalMessage); // Repassa a mensagem de erro da API externa
     }
 
-    // 5. Retornar a resposta da API externa para o frontend
-    // Simplesmente ecoamos a resposta que recebemos da API externa
-    // O JavaScript frontend já sabe como interpretar essa resposta
-    ob_end_clean(); // Limpa qualquer saída acidental antes de ecoar a resposta final
+    ob_end_clean();
     echo $externalApiResponse;
-    exit(); // Garante que nada mais seja executado
+    exit();
 
 } catch (mysqli_sql_exception $e) {
     ob_end_clean();
@@ -96,15 +84,14 @@ try {
 
 } catch (InvalidArgumentException $e) {
     ob_end_clean();
-    http_response_code(400); // Bad Request para erros de entrada
+    http_response_code(400);
     echo json_encode(["success" => false, "message" => $e->getMessage()]);
 
 } catch (RuntimeException $e) {
      ob_end_clean();
-     // Pode ser erro nosso (DB, cURL) ou erro reportado pela API externa
-     http_response_code(500); // Internal Server Error ou erro da API externa
-     error_log("Erro de Runtime (api.php): " . $e->getMessage()); // Loga o erro
-     echo json_encode(["success" => false, "message" => $e->getMessage()]); // Retorna a mensagem da exceção
+     http_response_code(500); 
+     error_log("Erro de Runtime (api.php): " . $e->getMessage());
+     echo json_encode(["success" => false, "message" => $e->getMessage()]);
 
 } catch (Exception $e) {
     ob_end_clean();
@@ -114,8 +101,7 @@ try {
 
 } finally {
     if (isset($conexao) && $conexao instanceof mysqli && $conexao->thread_id) {
-        // $conexao->close(); // Opcional
+        $conexao->close();
     }
-    // Não usar ob_end_flush() aqui se já usamos echo direto na resposta da API
 }
 ?>
