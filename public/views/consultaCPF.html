@@ -87,7 +87,7 @@
         </div>
         <h2>Consulta CPF Comum</h2>
         <input type="text" id="cpf" placeholder="Digite o CPF" maxlength="14" oninput="formatCPF(this)">
-        <button onclick="consultarCPF()">Consultar</button>
+        <button id="consultarBtn" onclick="consultarCPF()" disabled>Consultar</button>
         <!-- CAPTCHA Cloudflare Turnstile -->
                     <div class="cf-turnstile" 
                         data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh" 
@@ -114,8 +114,7 @@
             <p><span>Endereços:</span> <span id="enderecos"></span></p>
         </div>
     </div>
-
-    <script src="../assets/js/script.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>
