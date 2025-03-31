@@ -3,19 +3,16 @@ require __DIR__ . '/../../vendor/autoload.php'; // Garante que está buscando no
 
 use Dotenv\Dotenv;
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../'); // Ajuste o caminho se necessário
+// Carregar variáveis do .env
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
-var_dump($_ENV); // Ou var_dump(getenv('DB_HOST'));
 
-// Teste se as variáveis do .env estão carregadas
-var_dump(getenv('DB_HOST'), getenv('DB_NAME'), getenv('DB_USER'), getenv('DB_PASS'));
-die(); // Interrompe a execução para testar
-
-// Verificação para garantir que o .env foi carregado corretamente
+// Verifica se o .env foi carregado corretamente
 if (!isset($_ENV['DB_HOST'])) {
     die("Erro: Arquivo .env não carregado corretamente.");
 }
 
+// Configuração do banco de dados
 $host = $_ENV['DB_HOST'];
 $dbname = $_ENV['DB_NAME'];
 $username = $_ENV['DB_USER'];
@@ -28,20 +25,5 @@ try {
     $conexao->set_charset("utf8mb4");
 } catch (mysqli_sql_exception $e) {
     die("Erro na conexão com o banco de dados: " . $e->getMessage());
-}
-
-function getToken($conexao) {
-    $sql = "SELECT valor FROM config WHERE chave = ?";
-    $stmt = $conexao->prepare($sql);
-    $chave = 'token_api';
-    $stmt->bind_param("s", $chave);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-    
-    if ($resultado->num_rows > 0) {
-        $linha = $resultado->fetch_assoc();
-        return $linha["valor"];
-    }
-    return null;
 }
 ?>
