@@ -69,9 +69,16 @@ async function onCaptchaSuccess(token) {
     if (resultadoElement) {
       resultadoElement.innerText = `Erro CAPTCHA: ${error.message}`;
     }
-    if (typeof turnstile !== 'undefined') {
-        turnstile.reset('#captcha');
+    if (typeof turnstile !== "undefined") {
+      try {
+        turnstile.reset("#captcha");
+      } catch (e) {
+        console.error(
+          "Erro ao resetar Turnstile após falha na verificação:",
+          e
+        );
       }
+    }
   }
 }
 
@@ -100,6 +107,7 @@ async function consultarCPF() {
 
   if (cpf.length < 14) {
     currentResultadoElement.innerText = "CPF inválido!";
+    // Não reseta captcha aqui, apenas reabilita o botão para correção
     currentConsultarBtn.disabled = false;
     return;
   }
@@ -129,10 +137,7 @@ async function consultarCPF() {
         try {
           errorData = JSON.parse(responseBodyText);
         } catch (parseError) {
-          console.warn(
-            "A resposta de erro do servidor (api.php) não era JSON:",
-            parseError
-          );
+          // console.warn("A resposta de erro do servidor (api.php) não era JSON:", parseError);
         }
 
         if (errorData && errorData.message) {
@@ -141,10 +146,7 @@ async function consultarCPF() {
           errorMsg += ` Resposta: ${responseBodyText.substring(0, 150)}`;
         }
       } catch (readError) {
-        console.error(
-          "Não foi possível ler o corpo da resposta de erro (api.php):",
-          readError
-        );
+        // console.error("Não foi possível ler o corpo da resposta de erro (api.php):", readError);
         errorMsg += " (Não foi possível ler a resposta do servidor).";
       }
       throw new Error(errorMsg);
@@ -218,34 +220,31 @@ async function consultarCPF() {
     console.error("Erro ao consultar CPF (api.php):", error);
     currentResultadoElement.innerText = `Erro Consulta: ${error.message}`;
     currentDadosElement.style.display = "none";
-  } } finally {
-    // Em vez de apenas reabilitar, vamos resetar para a próxima consulta
-    currentConsultarBtn.disabled = true; // Desabilita o botão novamente
-    captchaValidado = false;         // Reseta o estado de validação interno
+  } finally {
+    currentConsultarBtn.disabled = true;
+    captchaValidado = false;
 
-    // Tenta resetar o widget do Turnstile
-    if (typeof turnstile !== 'undefined') {
+    if (typeof turnstile !== "undefined") {
       try {
-        turnstile.reset('#captcha'); // Use o seletor correto para o seu widget
-        if (currentResultadoElement) {
-           // Opcional: Adicionar uma mensagem ou limpar a anterior
-           // currentResultadoElement.innerText = "Resolva o CAPTCHA para nova consulta.";
-        }
+        turnstile.reset("#captcha");
       } catch (e) {
         console.error("Erro ao tentar resetar o Turnstile:", e);
-        // Informar o usuário que pode precisar recarregar a página se o reset falhar
         if (currentResultadoElement) {
-            currentResultadoElement.innerText += " (Erro ao resetar CAPTCHA, recarregue se necessário)";
+          currentResultadoElement.innerText +=
+            " (Erro ao resetar CAPTCHA, recarregue se necessário)";
         }
       }
     } else {
-        console.warn("Variável 'turnstile' não encontrada. O widget CAPTCHA pode não resetar automaticamente.");
-        // Informar o usuário
-         if (currentResultadoElement) {
-            currentResultadoElement.innerText += " (Recarregue a página para novo CAPTCHA)";
-        }
+      console.warn(
+        "Variável 'turnstile' não encontrada. O widget CAPTCHA pode não resetar automaticamente."
+      );
+      if (currentResultadoElement) {
+        currentResultadoElement.innerText +=
+          " (Recarregue a página para novo CAPTCHA)";
+      }
     }
   }
+}
 
 function formatarCPF(cpf) {
   if (!cpf) return "";
