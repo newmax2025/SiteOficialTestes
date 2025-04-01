@@ -246,7 +246,6 @@ async function consultarCPF() {
         }
     }
   }
-}
 
 function formatarCPF(cpf) {
   if (!cpf) return "";
