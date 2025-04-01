@@ -54,6 +54,7 @@ async function consultarCPF() {
 
   if (cpf.length !== 11) {
     resultadoElement.innerText = "CPF inválido!";
+    consultarBtn.disabled = false; // Reativa o botão caso o CPF seja inválido
     return;
   }
 
@@ -66,7 +67,7 @@ async function consultarCPF() {
     const response = await fetch(localApiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cpf: cpf }),
+      body: JSON.stringify({ cpf: cpf, captchaToken }),
     });
 
     if (!response.ok) throw new Error(`Erro na consulta (${response.status})`);
@@ -116,6 +117,7 @@ async function consultarCPF() {
     resultadoElement.innerText = `Erro: ${error.message}`;
   } finally {
     consultarBtn.disabled = false;
-    resetCaptcha();
+    resetCaptcha(); // Reseta o CAPTCHA após qualquer consulta
   }
 }
+
