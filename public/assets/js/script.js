@@ -221,6 +221,9 @@ async function consultarCPF() {
     currentResultadoElement.innerText = `Erro Consulta: ${error.message}`;
     currentDadosElement.style.display = "none";
   } finally {
+    console.log("Bloco finally alcançado. Verificando turnstile..."); // <-- Adicione este log
+    console.log("typeof turnstile:", typeof turnstile); // <-- Adicione este log
+
     currentConsultarBtn.disabled = true;
     captchaValidado = false;
 
