@@ -221,31 +221,9 @@ async function consultarCPF() {
     currentResultadoElement.innerText = `Erro Consulta: ${error.message}`;
     currentDadosElement.style.display = "none";
   } finally {
-    console.log("Bloco finally alcançado. Verificando turnstile..."); // <-- Adicione este log
-    console.log("typeof turnstile:", typeof turnstile); // <-- Adicione este log
-
     currentConsultarBtn.disabled = true;
     captchaValidado = false;
-
-    if (typeof turnstile !== "undefined") {
-      try {
-        turnstile.reset("#captcha");
-      } catch (e) {
-        console.error("Erro ao tentar resetar o Turnstile:", e);
-        if (currentResultadoElement) {
-          currentResultadoElement.innerText +=
-            " (Erro ao resetar CAPTCHA, recarregue se necessário)";
-        }
-      }
-    } else {
-      console.warn(
-        "Variável 'turnstile' não encontrada. O widget CAPTCHA pode não resetar automaticamente."
-      );
-      if (currentResultadoElement) {
-        currentResultadoElement.innerText +=
-          " (Recarregue a página para novo CAPTCHA)";
-      }
-    }
+    turnstile.reset("#captcha");
   }
 }
 
