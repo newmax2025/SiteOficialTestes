@@ -182,6 +182,7 @@ async function consultarCPF() {
   } finally {
     consultarBtn.disabled = false; // Reabilita o botão após a requisição
   }
+  
 }
 
 // Função auxiliar para formatar CPF (usada para exibir o CPF retornado)
