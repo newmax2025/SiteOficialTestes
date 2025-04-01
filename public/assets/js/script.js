@@ -1,24 +1,24 @@
 let captchaValidado = false;
+let captchaToken = null;
 
 function onCaptchaSuccess(token) {
+  captchaValidado = true;
   captchaToken = token;
-  const consultarBtn = document.getElementById("consultarBtn");
-  consultarBtn.disabled = false;
+  document.getElementById("consultarBtn").disabled = false;
 }
 
 function resetCaptcha() {
-  captchaValidado = false; // Reseta a variável
-  captchaToken = null; // Reseta o token armazenado
+  captchaValidado = false;
+  captchaToken = null;
 
   if (typeof turnstile !== "undefined") {
-    turnstile.reset(); // Reseta o CAPTCHA corretamente
+    turnstile.reset();
   } else {
     console.error("Turnstile não carregado corretamente.");
   }
 
-  document.getElementById("consultarBtn").disabled = true; // Desabilita o botão até novo CAPTCHA
+  document.getElementById("consultarBtn").disabled = true;
 }
-
 
 function formatCPF(input) {
   let value = input.value.replace(/\D/g, "");
@@ -29,112 +29,84 @@ function formatCPF(input) {
 }
 
 async function consultarCPF() {
+  if (!captchaValidado) {
+    document.getElementById("resultado").innerText =
+      "Por favor, resolva o CAPTCHA.";
+    return;
+  }
+
   const consultarBtn = document.getElementById("consultarBtn");
   consultarBtn.disabled = true;
 
   const cpfInput = document.getElementById("cpf");
-  const cpf = cpfInput.value;
+  const cpf = cpfInput.value.replace(/\D/g, "");
   const resultadoElement = document.getElementById("resultado");
   const dadosElement = document.getElementById("dados");
 
-  if (cpf.length < 14) {
+  if (cpf.length !== 11) {
     resultadoElement.innerText = "CPF inválido!";
-    consultarBtn.disabled = false;
     return;
   }
 
-  resultadoElement.innerText = "Validando CAPTCHA...";
-  const turnstileResponse = document.querySelector(
-    'input[name="cf-turnstile-response"]'
-  ).value;
+  resultadoElement.innerText = "Consultando...";
+  dadosElement.style.display = "none";
 
-  if (!turnstileResponse) {
-    resultadoElement.innerText = "Por favor, resolva o CAPTCHA.";
-    consultarBtn.disabled = false;
-    return;
-  }
+  const localApiUrl = "../backend/api.php";
 
-  // Primeiro, verificar se o Turnstile é válido
   try {
-    const captchaResponse = await fetch("../backend/verificar_turnstile.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `token=${encodeURIComponent(turnstileResponse)}`,
-    });
-
-    const captchaData = await captchaResponse.json();
-
-    if (!captchaData.success) {
-      resultadoElement.innerText =
-        "Falha na validação do CAPTCHA. Tente novamente.";
-      resetCaptcha();
-      consultarBtn.disabled = false;
-      return;
-    }
-  } catch (error) {
-    resultadoElement.innerText = "Erro ao validar CAPTCHA.";
-    console.error("Erro na verificação do Turnstile:", error);
-    resetCaptcha();
-    consultarBtn.disabled = false;
-    return;
-  }
-
-  resultadoElement.innerText = "Consultando CPF...";
-
-  // Envia a requisição para API apenas se o CAPTCHA foi validado
-  try {
-    const response = await fetch("../backend/api.php", {
+    const response = await fetch(localApiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cpf: cpf.replace(/\D/g, "") }),
+      body: JSON.stringify({ cpf: cpf }),
     });
 
-    if (!response.ok) {
-      throw new Error(`Erro ao consultar CPF. (${response.status})`);
-    }
+    if (!response.ok) throw new Error(`Erro na consulta (${response.status})`);
 
     const data = await response.json();
 
-    if (!data || !data.data) {
-      throw new Error("Nenhuma informação encontrada.");
-    }
+    if (!data || !data.data)
+      throw new Error("Nenhuma informação encontrada para este CPF.");
 
-    // Exibe os dados retornados (mantendo a lógica existente)
-    document.getElementById("nome").innerText =
-      data.data.dados_basicos?.nome || "Não disponível";
+    const dados = data.data;
+
+    document.getElementById("nome").innerText = dados.nome || "Não disponível";
     document.getElementById("cpf_resultado").innerText = formatarCPF(
-      data.data.dados_basicos?.cpf || ""
+      dados.cpf || ""
     );
     document.getElementById("safra").innerText =
-      data.data.dados_basicos?.safra || "Não disponível";
+      dados.safra || "Não disponível";
     document.getElementById("nascimento").innerText =
-      data.data.dados_basicos?.nascimento || "Não disponível";
+      dados.nascimento || "Não disponível";
     document.getElementById("nome_mae").innerText =
-      data.data.dados_basicos?.nome_mae || "Não disponível";
+      dados.nome_mae || "Não disponível";
+    document.getElementById("sexo").innerText =
+      dados.sexo === "M" ? "Masculino" : "Feminino";
+    document.getElementById("email").innerText =
+      dados.email || "Não disponível";
+    document.getElementById("obito").innerText =
+      dados.obito || "Não disponível";
+    document.getElementById("status_receita").innerText =
+      dados.status_receita || "Não disponível";
+    document.getElementById("cbo").innerText = dados.cbo || "Não disponível";
+    document.getElementById("faixa_renda").innerText =
+      dados.faixa_renda || "Não disponível";
+    document.getElementById("veiculos").innerText =
+      dados.veiculos || "Não disponível";
+    document.getElementById("telefones").innerText =
+      dados.telefones || "Não disponível";
+    document.getElementById("celulares").innerText =
+      dados.celulares || "Não disponível";
+    document.getElementById("empregos").innerText =
+      dados.empregos || "Não disponível";
+    document.getElementById("enderecos").innerText =
+      dados.enderecos || "Não disponível";
 
     dadosElement.style.display = "block";
     resultadoElement.innerText = `Consulta realizada para o CPF: ${cpf}`;
   } catch (error) {
-    console.error("Erro ao consultar CPF:", error);
     resultadoElement.innerText = `Erro: ${error.message}`;
-    dadosElement.style.display = "none";
   } finally {
     consultarBtn.disabled = false;
-    
+    resetCaptcha();
   }
-  resetCaptcha();
-}
-
-// Corrige o reset do CAPTCHA corretamente
-function resetCaptcha() {
-  turnstile.reset();
-}
-
-
-// Função auxiliar para formatar CPF (usada para exibir o CPF retornado)
-function formatarCPF(cpf) {
-  if (!cpf) return "";
-  const cpfLimpo = cpf.replace(/\D/g, "");
-  if (cpfLimpo.length !== 11) return cpf; // Retorna original se não for formato esperado
-  return cpfLimpo.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 }
