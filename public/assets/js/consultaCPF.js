@@ -28,9 +28,13 @@ function formatarCPF(cpf) {
     .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
 }
 
+
 function formatCPF(input) {
   let value = input.value.replace(/\D/g, "");
-  input.value = formatarCPF(value);
+  value = value.replace(/(\d{3})(\d)/, "$1.$2");
+  value = value.replace(/(\d{3})(\d)/, "$1.$2");
+  value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  input.value = value;
 }
 
 async function consultarCPF() {
@@ -107,9 +111,7 @@ async function consultarCPF() {
       dados.enderecos || "Não disponível";
 
     dadosElement.style.display = "block";
-    resultadoElement.innerText = `Consulta realizada para o CPF: ${formatarCPF(
-      cpf
-    )}`;
+    resultadoElement.innerText = `Consulta realizada para o CPF: ${cpf}`;
   } catch (error) {
     resultadoElement.innerText = `Erro: ${error.message}`;
   } finally {
