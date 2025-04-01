@@ -222,6 +222,7 @@ async function consultarCPF() {
     currentConsultarBtn.disabled = false;
     turnstile.reset("#captcha");
   }
+  turnstile.reset("#captcha");
 }
 
 function formatarCPF(cpf) {
