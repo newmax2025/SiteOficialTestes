@@ -121,7 +121,7 @@ async function consultarCPF() {
     resultadoElement.innerText = `Erro: ${error.message}`;
   } finally {
     consultarBtn.disabled = false;
-    resetCaptcha(); // Reseta o CAPTCHA após qualquer consulta
+    resetCaptcha(); // Garante que um novo CAPTCHA seja carregado
   }
 }
 
