@@ -220,6 +220,7 @@ async function consultarCPF() {
     currentDadosElement.style.display = "none";
   } finally {
     currentConsultarBtn.disabled = false;
+    turnstile.reset("#captcha");
   }
 }
 
