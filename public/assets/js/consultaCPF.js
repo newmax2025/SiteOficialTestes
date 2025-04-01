@@ -14,17 +14,13 @@ function resetCaptcha() {
   captchaToken = null;
 
   if (typeof turnstile !== "undefined") {
-    turnstile.render("#captcha", {
-      sitekey: "0x4AAAAAABDPzCDp7OiEAfvh",
-      callback: onCaptchaSuccess,
-    });
+    turnstile.reset();
   } else {
     console.error("Turnstile não carregado corretamente.");
   }
 
   document.getElementById("consultarBtn").disabled = true;
 }
-
 
 function formatarCPF(cpf) {
   if (!cpf) return "";
@@ -58,7 +54,6 @@ async function consultarCPF() {
 
   if (cpf.length !== 11) {
     resultadoElement.innerText = "CPF inválido!";
-    consultarBtn.disabled = false; // Reativa o botão caso o CPF seja inválido
     return;
   }
 
@@ -71,7 +66,7 @@ async function consultarCPF() {
     const response = await fetch(localApiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cpf: cpf, captchaToken }),
+      body: JSON.stringify({ cpf: cpf }),
     });
 
     if (!response.ok) throw new Error(`Erro na consulta (${response.status})`);
@@ -121,7 +116,6 @@ async function consultarCPF() {
     resultadoElement.innerText = `Erro: ${error.message}`;
   } finally {
     consultarBtn.disabled = false;
-    resetCaptcha(); // Garante que um novo CAPTCHA seja carregado
+    resetCaptcha();
   }
 }
-
