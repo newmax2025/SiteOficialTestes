@@ -20,6 +20,15 @@ function resetCaptcha() {
   document.getElementById("consultarBtn").disabled = true;
 }
 
+function formatarCPF(cpf) {
+  if (!cpf) return "";
+  return cpf
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+}
+
+
 function formatCPF(input) {
   let value = input.value.replace(/\D/g, "");
   value = value.replace(/(\d{3})(\d)/, "$1.$2");
