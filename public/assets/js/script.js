@@ -218,11 +218,34 @@ async function consultarCPF() {
     console.error("Erro ao consultar CPF (api.php):", error);
     currentResultadoElement.innerText = `Erro Consulta: ${error.message}`;
     currentDadosElement.style.display = "none";
-  } finally {
-    currentConsultarBtn.disabled = false;
-    turnstile.reset("#captcha");
+  } } finally {
+    // Em vez de apenas reabilitar, vamos resetar para a próxima consulta
+    currentConsultarBtn.disabled = true; // Desabilita o botão novamente
+    captchaValidado = false;         // Reseta o estado de validação interno
+
+    // Tenta resetar o widget do Turnstile
+    if (typeof turnstile !== 'undefined') {
+      try {
+        turnstile.reset('#captcha'); // Use o seletor correto para o seu widget
+        if (currentResultadoElement) {
+           // Opcional: Adicionar uma mensagem ou limpar a anterior
+           // currentResultadoElement.innerText = "Resolva o CAPTCHA para nova consulta.";
+        }
+      } catch (e) {
+        console.error("Erro ao tentar resetar o Turnstile:", e);
+        // Informar o usuário que pode precisar recarregar a página se o reset falhar
+        if (currentResultadoElement) {
+            currentResultadoElement.innerText += " (Erro ao resetar CAPTCHA, recarregue se necessário)";
+        }
+      }
+    } else {
+        console.warn("Variável 'turnstile' não encontrada. O widget CAPTCHA pode não resetar automaticamente.");
+        // Informar o usuário
+         if (currentResultadoElement) {
+            currentResultadoElement.innerText += " (Recarregue a página para novo CAPTCHA)";
+        }
+    }
   }
-  turnstile.reset("#captcha");
 }
 
 function formatarCPF(cpf) {
