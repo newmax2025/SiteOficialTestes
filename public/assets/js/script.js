@@ -4,8 +4,10 @@ let captchaToken = null;
 function onCaptchaSuccess(token) {
   captchaValidado = true;
   captchaToken = token;
-  document.getElementById("consultarBtn").disabled = false;
+  const cpfInput = document.getElementById("cpf").value.replace(/\D/g, "");
+  document.getElementById("consultarBtn").disabled = cpfInput.length !== 11;
 }
+
 
 function resetCaptcha() {
   captchaValidado = false;
@@ -30,12 +32,10 @@ function formatarCPF(cpf) {
 
 
 function formatCPF(input) {
-  let value = input.value.replace(/\D/g, "");
-  value = value.replace(/(\d{3})(\d)/, "$1.$2");
-  value = value.replace(/(\d{3})(\d)/, "$1.$2");
-  value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-  input.value = value;
+  let value = input.value.replace(/\D/g, "").slice(0, 11);
+  input.value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
 }
+
 
 async function consultarCPF() {
   if (!captchaValidado) {
