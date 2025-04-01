@@ -4,66 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificação Cloudflare</title>
+    <title>Verificando Acesso</title>
     <style>
-        html,
         body {
-            height: 100%;
-            /* Garante que body possa ocupar a altura total */
-            margin: 0;
-            /* Remove margens padrão */
-            padding: 0;
-            /* Remove preenchimentos padrão */
-        }
-
-        body {
-            display: flex;
-            /* Ativa o Flexbox */
-            flex-direction: column;
-            /* Empilha os itens verticalmente */
-            justify-content: center;
-            /* Centraliza verticalmente */
-            align-items: center;
-            /* Centraliza horizontalmente */
-            min-height: 100vh;
-            /* Garante altura mínima da viewport */
-            text-align: center;
-            /* Centraliza texto dentro dos flex items (como o h1) */
             font-family: sans-serif;
-            /* Define uma fonte básica */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
         }
 
-        /* Opcional: Adiciona um espaço entre o título e o captcha */
-        .cf-turnstile {
-            margin-top: 20px;
+        #turnstileWidget {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        #messageArea {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            min-height: 20px;
+            text-align: center;
+            width: 300px;
+            /* Largura fixa para mensagens */
+        }
+
+        .message-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-loading {
+            background-color: #e2e3e5;
+            color: #383d41;
+            border: 1px solid #d6d8db;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="cf-turnstile" data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh" data-callback="onCaptchaSuccess">
+    <h1>Verificando seu acesso...</h1>
+    <p>Por favor, complete a verificação abaixo para continuar.</p>
+
+    <div id="turnstileWidget" class="cf-turnstile" data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh"
+        data-callback="onCaptchaSuccess" data-error-callback="onCaptchaError">
     </div>
 
+    <div id="messageArea" aria-live="polite"></div>
+
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <script>
-        // Função de callback chamada quando o captcha é resolvido com sucesso
-        function onCaptchaSuccess(token) {
-            console.log('Verificação bem-sucedida! Token:', token);
 
-        }
+    <script src="js/verificacao_entrada.js" defer></script>
 
-        // Armazena o ID do timeout para poder cancelá-lo se necessário
-        const redirectTimer = setTimeout(function () {
-            console.log('Redirecionando por timeout...');
-            window.location.href = '/public/views/login.html';
-        }, 3000);
-
-        function onCaptchaError(errorCode) {
-            console.error('Erro na verificação do Captcha:', errorCode);
-
-        }
-    </script>
 </body>
 
 </html>
