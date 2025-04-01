@@ -1,5 +1,5 @@
 <?php
-require 'chave_turnstile.php'; // Inclui apenas a lógica da chave sem afetar outras funções
+require 'chave_turnstile.php'; // Obtém a chave secreta do banco
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $token = $_POST['token'] ?? '';

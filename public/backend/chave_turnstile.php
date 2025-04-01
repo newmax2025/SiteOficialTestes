@@ -1,14 +1,14 @@
 <?php
-require 'config.php'; // Mantém a conexão com o banco de dados sem alterar o config.php
+require 'config.php'; // Garante que a conexão com o banco de dados está disponível
 
-// Buscar a chave secreta do Turnstile na tabela 'configuracoes'
-$query = "SELECT chave FROM configuracoes LIMIT 1";
+// Buscar a chave do Cloudflare na tabela 'config'
+$query = "SELECT valor FROM config WHERE chave = 'token_cloudflare' LIMIT 1";
 $stmt = $conexao->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
-$cloudflare_secret = $row['chave'] ?? null;
+$cloudflare_secret = $row['valor'] ?? null;
 
 if (!$cloudflare_secret) {
     die("Erro: Chave do Cloudflare não encontrada no banco de dados.");
