@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 ob_start(); // Inicia o buffer de saída
 
 require 'config.php'; // Sua configuração de BD
-require 'includes/verificador_turnstile.php'; // Onde está a função verificarTokenTurnstile
+require 'verificador_turnstile.php'; // Onde está a função verificarTokenTurnstile
 
 $conexao = null; // Inicializa a variável de conexão
 

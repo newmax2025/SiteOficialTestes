@@ -3,8 +3,8 @@
 // Referências e Variáveis Globais (se necessário fora das funções)
 const messageArea = document.getElementById("messageArea"); // Pode ser pego aqui se preferir
 const turnstileWidgetId = "#turnstileWidget"; // ID do div do Turnstile
-const loginPageUrl = "/public/views/login.html"; // *** URL PARA ONDE REDIRECIONAR ***
-const verificationApiUrl = "/verificar_entrada.php"; // *** API PHP DE VERIFICAÇÃO ***
+const loginPageUrl = "public/views/login.html"; // *** URL PARA ONDE REDIRECIONAR ***
+const verificationApiUrl = "public/backend/verificar_entrada.php"; // *** API PHP DE VERIFICAÇÃO ***
 
 // ---- Funções de Callback Globais para o Turnstile ----
 
