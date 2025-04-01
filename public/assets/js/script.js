@@ -120,8 +120,9 @@ async function consultarCPF() {
     dadosElement.style.display = "none";
   } finally {
     consultarBtn.disabled = false;
-    resetCaptcha();
+    
   }
+  resetCaptcha();
 }
 
 // Corrige o reset do CAPTCHA corretamente
