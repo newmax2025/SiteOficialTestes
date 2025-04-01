@@ -1,7 +1,8 @@
 <?php
+require 'chave_turnstile.php'; // Inclui apenas a lógica da chave sem afetar outras funções
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $token = $_POST['token'] ?? '';
-    $secret = "0x4AAAAAABDPzHzQwzdA07NeFU-TQASzkUU"; // Substitua pela sua chave secreta do Cloudflare
 
     if (!$token) {
         echo json_encode(["success" => false, "error" => "Token ausente."]);
@@ -10,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $url = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
     $data = [
-        "secret" => $secret,
+        "secret" => $cloudflare_secret, 
         "response" => $token
     ];
 
