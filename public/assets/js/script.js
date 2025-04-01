@@ -1,15 +1,24 @@
 let captchaValidado = false;
 
-function onCaptchaSuccess() {
-  captchaValidado = true;
-  // Garante que o botão tem o ID correto no HTML: id="consultarBtn"
+function onCaptchaSuccess(token) {
+  captchaToken = token;
   const consultarBtn = document.getElementById("consultarBtn");
-  if (consultarBtn) {
-    consultarBtn.disabled = false;
-  } else {
-    console.error("Botão com id 'consultarBtn' não encontrado.");
-  }
+  consultarBtn.disabled = false;
 }
+
+function resetCaptcha() {
+  captchaValidado = false; // Reseta a variável
+  captchaToken = null; // Reseta o token armazenado
+
+  if (typeof turnstile !== "undefined") {
+    turnstile.reset(); // Reseta o CAPTCHA corretamente
+  } else {
+    console.error("Turnstile não carregado corretamente.");
+  }
+
+  document.getElementById("consultarBtn").disabled = true; // Desabilita o botão até novo CAPTCHA
+}
+
 
 function formatCPF(input) {
   let value = input.value.replace(/\D/g, "");
@@ -20,15 +29,8 @@ function formatCPF(input) {
 }
 
 async function consultarCPF() {
-  // --- ADICIONADO: Verificação do CAPTCHA ---
-  if (!captchaValidado) {
-    document.getElementById("resultado").innerText =
-      "Por favor, resolva o CAPTCHA.";
-    return;
-  }
-
   const consultarBtn = document.getElementById("consultarBtn");
-  consultarBtn.disabled = true; // Desabilita botão ao iniciar requisição
+  consultarBtn.disabled = true;
 
   const cpfInput = document.getElementById("cpf");
   const cpf = cpfInput.value;
@@ -37,152 +39,96 @@ async function consultarCPF() {
 
   if (cpf.length < 14) {
     resultadoElement.innerText = "CPF inválido!";
+    consultarBtn.disabled = false;
     return;
   }
 
-  resultadoElement.innerText = "Consultando...";
-  dadosElement.style.display = "none"; // Esconde resultados anteriores
+  resultadoElement.innerText = "Validando CAPTCHA...";
+  const turnstileResponse = document.querySelector(
+    'input[name="cf-turnstile-response"]'
+  ).value;
 
-  // --- ALTERADO: URL agora aponta para o seu backend api.php ---
-  const localApiUrl = "../backend/api.php"; // <-- Ajuste o caminho se necessário
-  const cpfLimpo = cpf.replace(/\D/g, "");
+  if (!turnstileResponse) {
+    resultadoElement.innerText = "Por favor, resolva o CAPTCHA.";
+    consultarBtn.disabled = false;
+    return;
+  }
 
+  // Primeiro, verificar se o Turnstile é válido
   try {
-    // --- ALTERADO: Fetch para api.php usando POST e enviando CPF no corpo ---
-    const response = await fetch(localApiUrl, {
+    const captchaResponse = await fetch("../backend/verificar_turnstile.php", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ cpf: cpfLimpo }), // Envia o CPF limpo
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `token=${encodeURIComponent(turnstileResponse)}`,
     });
 
-    // --- ALTERADO: Tratamento de erro mais detalhado ---
+    const captchaData = await captchaResponse.json();
+
+    if (!captchaData.success) {
+      resultadoElement.innerText =
+        "Falha na validação do CAPTCHA. Tente novamente.";
+      resetCaptcha();
+      consultarBtn.disabled = false;
+      return;
+    }
+  } catch (error) {
+    resultadoElement.innerText = "Erro ao validar CAPTCHA.";
+    console.error("Erro na verificação do Turnstile:", error);
+    resetCaptcha();
+    consultarBtn.disabled = false;
+    return;
+  }
+
+  resultadoElement.innerText = "Consultando CPF...";
+
+  // Envia a requisição para API apenas se o CAPTCHA foi validado
+  try {
+    const response = await fetch("../backend/api.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cpf: cpf.replace(/\D/g, "") }),
+    });
+
     if (!response.ok) {
-      let errorMsg = `Erro na consulta (${response.status}).`;
-      let responseBodyText = ""; // Variável para guardar o corpo da resposta como texto
-
-      try {
-        // 1. Leia o corpo como TEXTO (APENAS UMA LEITURA)
-        responseBodyText = await response.text();
-
-        // 2. Tente interpretar o texto como JSON
-        let errorData = null;
-        try {
-          errorData = JSON.parse(responseBodyText);
-        } catch (parseError) {
-          // Não era JSON válido, ignoramos o erro de parse
-          // Usaremos o texto puro mais abaixo
-          console.warn(
-            "A resposta de erro do servidor não era JSON:",
-            parseError
-          );
-        }
-
-        // 3. Verifique se conseguiu parsear e se tem a mensagem esperada
-        if (errorData && errorData.message) {
-          // Usa a mensagem específica do JSON de erro do backend
-          errorMsg = errorData.message;
-        } else if (responseBodyText) {
-          // Se não tinha a mensagem no JSON ou não era JSON,
-          // adiciona um trecho do texto da resposta à mensagem genérica
-          errorMsg += ` Resposta: ${responseBodyText.substring(0, 150)}`; // Mostra um trecho maior
-        }
-      } catch (readError) {
-        // Caso ocorra erro ao LER o corpo da resposta (menos comum)
-        console.error(
-          "Não foi possível ler o corpo da resposta de erro:",
-          readError
-        );
-        errorMsg += " (Não foi possível ler a resposta do servidor).";
-      }
-      // 4. Lança o erro com a mensagem construída
-      throw new Error(errorMsg);
+      throw new Error(`Erro ao consultar CPF. (${response.status})`);
     }
 
-    // Se a resposta ESTAVA OK (status 2xx), então lemos o corpo como JSON aqui:
-    // Esta é a leitura única para o caso de sucesso.
     const data = await response.json();
 
-    // O restante da lógica para processar 'data' permanece o mesmo
     if (!data || !data.data) {
-      // Verifica se 'data' existe e tem a propriedade 'data'
-      throw new Error(
-        "Nenhuma informação encontrada para este CPF ou resposta inválida."
-      );
+      throw new Error("Nenhuma informação encontrada.");
     }
 
-    const dados = data.data;
-
-    // Preenche os campos com os dados da API (lógica existente mantida)
+    // Exibe os dados retornados (mantendo a lógica existente)
     document.getElementById("nome").innerText =
-      dados.dados_basicos?.nome || "Não disponível";
-    document.getElementById("cpf_resultado").innerText =
-      formatarCPF(dados.dados_basicos?.cpf || "") || "Não disponível";
+      data.data.dados_basicos?.nome || "Não disponível";
+    document.getElementById("cpf_resultado").innerText = formatarCPF(
+      data.data.dados_basicos?.cpf || ""
+    );
     document.getElementById("safra").innerText =
-      dados.dados_basicos?.safra || "Não disponível";
+      data.data.dados_basicos?.safra || "Não disponível";
     document.getElementById("nascimento").innerText =
-      dados.dados_basicos?.nascimento || "Não disponível";
+      data.data.dados_basicos?.nascimento || "Não disponível";
     document.getElementById("nome_mae").innerText =
-      dados.dados_basicos?.nome_mae || "Não disponível";
-    document.getElementById("sexo").innerText =
-      dados.dados_basicos?.sexo === "M"
-        ? "Masculino"
-        : dados.dados_basicos?.sexo === "F"
-        ? "Feminino"
-        : "Não disponível";
-    document.getElementById("email").innerText =
-      dados.dados_basicos?.email || "Não disponível";
-    document.getElementById("obito").innerText =
-      dados.dados_basicos?.obito?.status || "Não disponível";
-    document.getElementById("status_receita").innerText =
-      dados.dados_basicos?.status_receita || "Não disponível";
-    document.getElementById("cbo").innerText =
-      dados.dados_basicos?.cbo || "Não disponível";
-    document.getElementById("faixa_renda").innerText =
-      dados.dados_basicos?.faixa_renda || "Não disponível";
-
-    // Usando optional chaining (?) e nullish coalescing (??) para segurança
-    document.getElementById("veiculos").innerText =
-      dados.veiculos?.length > 0 ? dados.veiculos.join(", ") : "Não disponível";
-    document.getElementById("telefones").innerText =
-      dados.telefones?.length > 0
-        ? dados.telefones.join(", ")
-        : "Não disponível";
-    document.getElementById("celulares").innerText =
-      dados.celulares?.length > 0
-        ? dados.celulares.join(", ")
-        : "Não disponível";
-
-    const empregos =
-      dados.empregos
-        ?.map(
-          (emplo) => `${emplo.nome_empregador || "?"} (${emplo.setor || "?"})`
-        )
-        .join("<br>") ?? "";
-    document.getElementById("empregos").innerHTML =
-      empregos || "Não disponível";
-
-    const end = dados.endereco; // Acesso único para evitar repetição
-    const enderecos = end
-      ? `${end.tipo || ""} ${end.logradouro || "Não disponível"}, ${
-          end.numero || "S/N"
-        }, ${end.bairro || "Não disponível"}, ${
-          end.cidade || "Não disponível"
-        } - ${end.uf || ""}, CEP: ${end.cep || "Não disponível"}`
-      : "Não disponível";
-    document.getElementById("enderecos").innerHTML = enderecos; // Removido '|| "Não disponível"' redundante
+      data.data.dados_basicos?.nome_mae || "Não disponível";
 
     dadosElement.style.display = "block";
     resultadoElement.innerText = `Consulta realizada para o CPF: ${cpf}`;
   } catch (error) {
-    console.error("Erro ao consultar CPF:", error); // Loga o erro detalhado no console
+    console.error("Erro ao consultar CPF:", error);
     resultadoElement.innerText = `Erro: ${error.message}`;
-    dadosElement.style.display = "none"; // Esconde a área de dados em caso de erro
-  }finally {
-    consultarBtn.disabled = false; // Reabilita o botão após a requisição
+    dadosElement.style.display = "none";
+  } finally {
+    consultarBtn.disabled = false;
+    resetCaptcha();
   }
 }
+
+// Corrige o reset do CAPTCHA corretamente
+function resetCaptcha() {
+  turnstile.reset();
+}
+
 
 // Função auxiliar para formatar CPF (usada para exibir o CPF retornado)
 function formatarCPF(cpf) {

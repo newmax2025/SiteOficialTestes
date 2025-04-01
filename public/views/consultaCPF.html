@@ -88,11 +88,12 @@
         <h2>Consulta CPF Comum</h2>
         <input type="text" id="cpf" placeholder="Digite o CPF" maxlength="14" oninput="formatCPF(this)">
         <button id="consultarBtn" onclick="consultarCPF()">Consultar</button>
-        <!-- CAPTCHA Cloudflare Turnstile -->
-                    <div class="cf-turnstile" 
-                        data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh" 
-                        data-callback="onCaptchaSuccess">
-                    </div>
+        <!-- Modificação para capturar a resposta do Turnstile -->
+        <div class="cf-turnstile" id="captcha" data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh" data-callback="onCaptchaSuccess"></div>
+
+        </div>
+        
+        <input type="hidden" id="captcha-response" name="cf-turnstile-response">
         <p id="resultado"></p>
 
         <div id="dados" class="dados" style="display: none;">
