@@ -25,6 +25,12 @@
         <p id="error-message" class="error-message"></p>
     </div>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script>
+        function onCaptchaSuccess(token) {
+            document.getElementById("captcha-response").value = token;
+        }
+    </script>
+
 
     <script src="../assets/js/scriptLogin.js"></script>
 </body>
