@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $token = $_POST['token'] ?? '';
-    $secret = "SUA_CHAVE_SECRETA"; // Substitua pela sua chave secreta do Cloudflare
+    $secret = "0x4AAAAAABDPzHzQwzdA07NeFU-TQASzkUU"; // Substitua pela sua chave secreta do Cloudflare
 
     if (!$token) {
         echo json_encode(["success" => false, "error" => "Token ausente."]);
