@@ -1,6 +1,15 @@
 let captchaValidado = false;
 let captchaToken = null;
 
+// Função para formatar CPF
+function formatarCPF(cpf) {
+  if (!cpf) return "";
+  return cpf
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+}
+
 function onCaptchaSuccess(token) {
   captchaValidado = true;
   captchaToken = token;
@@ -18,14 +27,6 @@ function resetCaptcha() {
   }
 
   document.getElementById("consultarBtn").disabled = true;
-}
-
-function formatarCPF(cpf) {
-  if (!cpf) return "";
-  return cpf
-    .replace(/(\d{3})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
 }
 
 function formatCPF(input) {
@@ -50,6 +51,7 @@ async function consultarCPF() {
 
   if (cpf.length !== 11) {
     resultadoElement.innerText = "CPF inválido!";
+    consultarBtn.disabled = false;
     return;
   }
 
