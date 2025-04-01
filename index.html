@@ -28,7 +28,6 @@
             min-height: 20px;
             text-align: center;
             width: 300px;
-            /* Largura fixa para mensagens */
         }
 
         .message-error {
@@ -56,15 +55,42 @@
     <h1>Verificando seu acesso...</h1>
     <p>Por favor, complete a verificação abaixo para continuar.</p>
 
-    <div id="turnstileWidget" class="cf-turnstile" data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh"
-        data-callback="onCaptchaSuccess" data-error-callback="onCaptchaError">
+    <div id="turnstileWidget" class="cf-turnstile" data-sitekey="SUA_CHAVE_PUBLICA" data-callback="onCaptchaSuccess"
+        data-error-callback="onCaptchaError">
     </div>
 
     <div id="messageArea" aria-live="polite"></div>
 
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script>
+        function onCaptchaSuccess(token) {
+            const messageArea = document.getElementById('messageArea');
+            messageArea.textContent = "Verificando...";
+            messageArea.className = "message-loading";
 
-    <script src="public/assets/js/verificacao_entrada.js" defer></script>
+            fetch('public/backend/verificar_turnstile.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ token })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        messageArea.textContent = "Verificação concluída!";
+                        messageArea.className = "message-success";
+                        setTimeout(() => { window.location.href = 'login.html'; }, 1000);
+                    } else {
+                        messageArea.textContent = "Falha na verificação. Tente novamente.";
+                        messageArea.className = "message-error";
+                    }
+                })
+                .catch(() => {
+                    messageArea.textContent = "Erro ao validar. Tente novamente.";
+                    messageArea.className = "message-error";
+                });
+        }
+    </script>
+
 
 </body>
 
