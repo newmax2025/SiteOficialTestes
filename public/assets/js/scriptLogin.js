@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
-    const captchaResponse = document.getElementById("captcha-response").value;
+    const captchaResponse = document.getElementById("captcha-response").value; // Obtém o token do CAPTCHA
     const errorMessage = document.getElementById("error-message");
 
     errorMessage.textContent = ""; // Limpa mensagens anteriores
@@ -14,6 +14,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Validação básica
     if (!username || !password) {
       errorMessage.textContent = "Preencha todos os campos!";
+      return;
+    }
+
+    if (!captchaResponse) {
+      errorMessage.textContent = "Por favor, resolva o CAPTCHA.";
       return;
     }
 

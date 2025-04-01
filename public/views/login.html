@@ -13,13 +13,12 @@
             <input type="text" id="username" placeholder="Usuário" required>
             <input type="password" id="password" placeholder="Senha" required>
 
-            <!-- CAPTCHA Cloudflare Turnstile -->
-            <div class="cf-turnstile" 
-                data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh" 
-                data-callback="onCaptchaSuccess">
+            <!-- Modificação para capturar a resposta do Turnstile -->
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh" data-callback="onCaptchaSuccess">
             </div>
-
+            
             <input type="hidden" id="captcha-response" name="cf-turnstile-response">
+
 
             <button type="submit">Entrar</button>
         </form>
