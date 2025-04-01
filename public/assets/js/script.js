@@ -14,13 +14,17 @@ function resetCaptcha() {
   captchaToken = null;
 
   if (typeof turnstile !== "undefined") {
-    turnstile.reset();
+    turnstile.render("#captcha", {
+      sitekey: "0x4AAAAAABDPzCDp7OiEAfvh",
+      callback: onCaptchaSuccess,
+    });
   } else {
     console.error("Turnstile não carregado corretamente.");
   }
 
   document.getElementById("consultarBtn").disabled = true;
 }
+
 
 function formatarCPF(cpf) {
   if (!cpf) return "";
