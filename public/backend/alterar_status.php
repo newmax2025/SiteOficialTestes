@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json");
-include "conexao.php"; // Conexão com o banco de dados
+include "../config.php"; // Conexão com o banco de dados
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -9,21 +9,28 @@ if (!isset($data['username']) || !isset($data['status'])) {
     exit;
 }
 
-$username = $data['username'];
-$status = $data['status'];
+$username = trim($data['username']); 
+$status = trim($data['status']);
+
+// Verificando se os valores não estão vazios
+if (empty($username) || empty($status)) {
+    echo json_encode(["success" => false, "message" => "Usuário ou status inválido."]);
+    exit;
+}
 
 // Validando se o status é permitido
-if ($status !== "ativo" && $status !== "inativo") {
+$allowed_status = ["ativo", "inativo"];
+if (!in_array($status, $allowed_status)) {
     echo json_encode(["success" => false, "message" => "Status inválido."]);
     exit;
 }
 
 // Atualizando o status do cliente
 $sql = "UPDATE clientes SET status = ? WHERE usuario = ?";
-$stmt = $conn->prepare($sql);
+$stmt = $conexao->prepare($sql);
 
 if (!$stmt) {
-    error_log("Erro ao preparar SQL: " . $conn->error);
+    error_log("Erro ao preparar SQL: " . $conexao->error);
     echo json_encode(["success" => false, "message" => "Erro interno no servidor."]);
     exit;
 }
@@ -34,7 +41,7 @@ if ($stmt->execute()) {
     if ($stmt->affected_rows > 0) {
         echo json_encode(["success" => true, "message" => "Status atualizado com sucesso!"]);
     } else {
-        echo json_encode(["success" => false, "message" => "Nenhum usuário encontrado ou status já definido."]);
+        echo json_encode(["success" => false, "message" => "Nenhum usuário encontrado ou status já está atualizado."]);
     }
 } else {
     error_log("Erro ao executar SQL: " . $stmt->error);
@@ -42,5 +49,5 @@ if ($stmt->execute()) {
 }
 
 $stmt->close();
-$conn->close();
+$conexao->close();
 ?>
