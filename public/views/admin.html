@@ -30,6 +30,17 @@
         </form>
         <p id="mensagemRemocao"></p>
 
+        <h3>Alterar Status do Usuário</h3>
+        <form id="statusForm">
+            <input type="text" id="statusUser" placeholder="Usuário para Alterar" required>
+            <select id="newStatus">
+                <option value="ativo">Ativo</option>
+                <option value="inativo">Inativo</option>
+            </select>
+            <button type="submit">Alterar Status</button>
+        </form>
+        <p id="mensagemStatus"></p>
+
         <button onclick="window.location.href='index.html'">Sair</button>
     </div>
 
