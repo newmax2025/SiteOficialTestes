@@ -1,53 +1,105 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // ====================== CADASTRAR USUÁRIO ======================
-  let formCadastro = document.getElementById("formCadastro");
-  if (formCadastro) {
-    formCadastro.addEventListener("submit", async function (event) {
-      event.preventDefault(); // Evita recarregar a página
+  const userForm = document.getElementById("userForm");
+  const removeUserForm = document.getElementById("removeUserForm");
+  const statusForm = document.getElementById("statusForm");
+  const userListElement = document.getElementById("userList");
 
-      let username = document.getElementById("cadastroUsername").value.trim();
-      let password = document.getElementById("cadastroPassword").value.trim();
+  const mensagemCadastro = document.getElementById("mensagemCadastro");
+  const mensagemRemocao = document.getElementById("mensagemRemocao");
+  const mensagemStatus = document.getElementById("mensagemStatus");
 
-      if (username === "" || password === "") {
-        alert("Preencha todos os campos!");
-        return;
-      }
+  const statusUserInput = document.getElementById("statusUser");
+  const statusSelect = document.getElementById("statusSelect");
 
-      try {
-        let response = await fetch("cadastrar.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username: username, password: password }),
-        });
-
-        let result = await response.json();
-        console.log(result);
-
-        if (result.success) {
-          alert("Usuário cadastrado com sucesso!");
-          formCadastro.reset();
-        } else {
-          alert("Erro ao cadastrar: " + result.message);
-        }
-      } catch (error) {
-        console.error("Erro ao cadastrar usuário:", error);
-      }
-    });
-  } else {
-    console.error("Erro: Formulário de cadastro não encontrado.");
+  // Verifica se os elementos existem antes de adicionar eventos
+  if (!userForm || !removeUserForm || !statusForm || !userListElement) {
+    console.error(
+      "Erro: Um ou mais elementos do formulário não foram encontrados no HTML."
+    );
+    return;
   }
 
-  // ====================== ALTERAR STATUS DO USUÁRIO ======================
-  let formAlterarStatus = document.getElementById("formAlterarStatus");
-  if (formAlterarStatus) {
-    formAlterarStatus.addEventListener("submit", async function (event) {
-      event.preventDefault();
+  // Função genérica para tratar erros de fetch
+  function handleFetchError(error, elementMensagem, tipoAcao) {
+    console.error(`Erro ao ${tipoAcao}:`, error);
+    elementMensagem.textContent = `Erro ao conectar ao servidor durante ${tipoAcao}. Verifique o console (F12).`;
+    elementMensagem.style.color = "red";
+  }
+
+  // Atualiza a lista de usuários ao carregar a página
+  updateUserList();
+
+  // 📌 Cadastro de novo usuário
+  userForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const username = document.getElementById("newUser").value;
+    const password = document.getElementById("newPassword").value;
+    mensagemCadastro.textContent = "";
+
+    try {
+      const response = await fetch("../backend/cadastro.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        mensagemCadastro.textContent =
+          result.message || "Usuário cadastrado com sucesso!";
+        mensagemCadastro.style.color = "green";
+        userForm.reset();
+        updateUserList();
+      } else {
+        mensagemCadastro.textContent = result.message || "Erro ao cadastrar.";
+        mensagemCadastro.style.color = "red";
+      }
+    } catch (error) {
+      handleFetchError(error, mensagemCadastro, "cadastro");
+    }
+  });
+
+  // 📌 Remover usuário
+  removeUserForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const username = document.getElementById("removeUser").value;
+    mensagemRemocao.textContent = "";
+
+    try {
+      const response = await fetch("../backend/remover.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        mensagemRemocao.textContent =
+          result.message || "Usuário removido com sucesso!";
+        mensagemRemocao.style.color = "green";
+        removeUserForm.reset();
+        updateUserList();
+      } else {
+        mensagemRemocao.textContent = result.message || "Erro ao remover.";
+        mensagemRemocao.style.color = "red";
+      }
+    } catch (error) {
+      handleFetchError(error, mensagemRemocao, "remoção");
+    }
+  });
+
+  // 📌 Alterar Status do Usuário
+  document
+    .getElementById("formAlterarStatus")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault(); // Evita que o formulário recarregue a página
 
       let usernameInput = document.getElementById("username");
       let statusInput = document.getElementById("status");
 
+      // Verifica se os elementos existem antes de acessar .value
       if (!usernameInput || !statusInput) {
         console.error("Erro: Campo de usuário ou status não encontrado.");
         return;
@@ -57,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let status = statusInput.value.trim();
 
       if (username === "" || status === "") {
-        alert("Preencha todos os campos!");
+        console.error("Erro: Usuário ou status não pode estar vazio.");
         return;
       }
 
@@ -79,41 +131,45 @@ document.addEventListener("DOMContentLoaded", function () {
           alert("Erro ao atualizar status: " + result.message);
         }
       } catch (error) {
-        console.error("Erro ao alterar status:", error);
+        console.error("Erro ao enviar requisição:", error);
       }
     });
-  } else {
-    console.error("Erro: Formulário de alteração de status não encontrado.");
-  }
 
-  // ====================== LISTAR USUÁRIOS ======================
-  async function listarUsuarios() {
+
+  // 📌 Atualiza a lista de usuários
+  async function updateUserList() {
+    userListElement.innerHTML = "<li>Carregando...</li>";
+
     try {
-      let response = await fetch("listar_usuarios.php");
-      let result = await response.json();
+      const response = await fetch("../backend/listar.php");
 
-      let tabelaUsuarios = document.getElementById("tabelaUsuarios");
-      if (!tabelaUsuarios) {
-        console.error("Erro: Tabela de usuários não encontrada.");
-        return;
+      if (!response.ok) {
+        let errorText = await response.text();
+        throw new Error(
+          `Erro do servidor: ${response.status} ${response.statusText}. Resposta: ${errorText}`
+        );
       }
 
-      tabelaUsuarios.innerHTML = "";
+      const result = await response.json();
 
-      result.forEach((user) => {
-        let row = document.createElement("tr");
-        row.innerHTML = `
-                    <td>${user.id}</td>
-                    <td>${user.username}</td>
-                    <td>${user.status}</td>
-                `;
-        tabelaUsuarios.appendChild(row);
-      });
+      if (result.success && Array.isArray(result.data)) {
+        userListElement.innerHTML = "";
+        if (result.data.length === 0) {
+          userListElement.innerHTML = "<li>Nenhum usuário cadastrado.</li>";
+        } else {
+          result.data.forEach((user) => {
+            const li = document.createElement("li");
+            li.textContent = `${user.usuario} - Status: ${user.status}`;
+            userListElement.appendChild(li);
+          });
+        }
+      } else {
+        throw new Error(result.message || "Erro ao carregar lista.");
+      }
     } catch (error) {
-      console.error("Erro ao listar usuários:", error);
+      userListElement.innerHTML =
+        "<li style='color: red;'>Erro ao carregar lista.</li>";
+      console.error("Erro ao carregar lista:", error);
     }
   }
-
-  // Chama a função ao carregar a página
-  listarUsuarios();
 });
