@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mensagemCadastro.textContent = "";
 
     try {
-      const response = await fetch("../backend/cadastro.php", {
+      const response = await fetch("../../backend/cadastro.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
