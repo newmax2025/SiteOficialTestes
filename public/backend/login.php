@@ -43,11 +43,11 @@ if (!$captchaValidation["success"]) {
 $user = trim($data["username"]);
 $pass = trim($data["password"]);
 
-if (verificarLogin($conexao, $user, $pass, "clientes", "usuario", "aM.html")) {
+if (verificarLogin($conexao, $user, $pass, "clientes", "usuario", "aM.html", true)) {
     exit();
 }
 
-if (verificarLogin($conexao, $user, $pass, "admin", "admin", "admin.html")) {
+if (verificarLogin($conexao, $user, $pass, "admin", "admin", "admin.html", false)) {
     exit();
 }
 
@@ -55,8 +55,12 @@ echo json_encode(["success" => false, "message" => "Usuário ou senha inválidos
 exit();
 
 // Função para verificar login
-function verificarLogin($conexao, $user, $pass, $tabela, $sessao, $redirect) {
-    $sql = "SELECT senha FROM $tabela WHERE usuario = ?";
+function verificarLogin($conexao, $user, $pass, $tabela, $sessao, $redirect, $verificarStatus) {
+    // Se for clientes, buscamos o status; se for admin, não
+    $sql = $verificarStatus 
+        ? "SELECT senha, status FROM $tabela WHERE usuario = ?" 
+        : "SELECT senha FROM $tabela WHERE usuario = ?";
+    
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param("s", $user);
     $stmt->execute();
@@ -64,7 +68,13 @@ function verificarLogin($conexao, $user, $pass, $tabela, $sessao, $redirect) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        
+
+        // Se a verificação de status for necessária e o usuário estiver inativo, bloqueia o login
+        if ($verificarStatus && isset($row["status"]) && $row["status"] === "inativo") {
+            echo json_encode(["success" => false, "message" => "Conta inativa. Entre em contato com o suporte."]);
+            return false;
+        }
+
         if (password_verify($pass, $row["senha"])) {
             $_SESSION[$sessao] = $user;
             echo json_encode(["success" => true, "redirect" => $redirect]);
