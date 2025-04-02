@@ -1,15 +1,15 @@
 <?php
-// Define o tipo de conteúdo como JSON
+
 header('Content-Type: application/json');
-// Inicia o buffer de saída
 ob_start();
 
-// Inclui a configuração do banco de dados
-require 'config.php'; // Fornece $conexao
+require 'config.php';
 
 try {
     // Seleciona os usuários (considerar adicionar limites/paginação para muitos usuários)
-    $sql = "SELECT usuario FROM clientes ORDER BY usuario ASC"; // Adicionado ORDER BY
+    $sql = "SELECT usuario, status FROM clientes ORDER BY usuario ASC";
+$stmt = $conexao->prepare($sql);
+
 
     // Usando prepare/execute mesmo sem parâmetros por consistência e segurança futura
     $stmt = $conexao->prepare($sql);
