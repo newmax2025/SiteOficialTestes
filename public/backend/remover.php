@@ -4,8 +4,6 @@ header('Content-Type: application/json');
 // Inicia o buffer de saída
 ob_start();
 
-// Inclui a configuração do banco de dados
-// Isso já deve incluir as configurações de error_reporting do config.php
 require 'config.php'; // Fornece $conexao
 
 try {
@@ -22,10 +20,6 @@ try {
          echo json_encode(["success" => false, "message" => "Nome de usuário não informado."]);
          exit();
     }
-
-    // É uma boa prática verificar se o usuário existe antes de tentar remover,
-    // mas o DELETE em si não dará erro se o usuário não existir.
-    // A verificação anterior no seu código original era boa, vamos mantê-la por segurança.
 
     $sqlCheck = "SELECT id FROM clientes WHERE usuario = ?";
     $stmtCheck = $conexao->prepare($sqlCheck);

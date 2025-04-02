@@ -93,8 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // 📌 Alterar Status do Usuário
   statusForm.addEventListener("submit", async function (event) {
     event.preventDefault();
-    const username = document.getElementById("statusUser").value;
-    const status = document.getElementById("statusSelect").value;
+    const username = document.getElementById("username").value;
+    const status = document.getElementById("status").value;
     mensagemStatus.textContent = "";
 
     try {
