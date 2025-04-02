@@ -54,9 +54,9 @@ if (verificarLogin($conexao, $user, $pass, "admin", "admin", "admin.html")) {
 echo json_encode(["success" => false, "message" => "Usuário ou senha inválidos"]);
 exit();
 
-// Função para verificar login
+// Função para verificar login com status de conta
 function verificarLogin($conexao, $user, $pass, $tabela, $sessao, $redirect) {
-    $sql = "SELECT senha FROM $tabela WHERE usuario = ?";
+    $sql = "SELECT senha, status FROM $tabela WHERE usuario = ?";
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param("s", $user);
     $stmt->execute();
@@ -64,7 +64,12 @@ function verificarLogin($conexao, $user, $pass, $tabela, $sessao, $redirect) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        
+
+        if ($row["status"] === "inativo") {
+            echo json_encode(["success" => false, "message" => "Conta inativa. Entre em contato com o suporte."]);
+            return false;
+        }
+
         if (password_verify($pass, $row["senha"])) {
             $_SESSION[$sessao] = $user;
             echo json_encode(["success" => true, "redirect" => $redirect]);
