@@ -8,8 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const mensagemRemocao = document.getElementById("mensagemRemocao");
   const mensagemStatus = document.getElementById("mensagemStatus");
 
-  const statusUserInput = document.getElementById("statusUser");
-  const statusSelect = document.getElementById("statusSelect");
 
   // Verifica se os elementos existem antes de adicionar eventos
   if (!userForm || !removeUserForm || !statusForm || !userListElement) {
