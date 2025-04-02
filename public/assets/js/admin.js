@@ -91,39 +91,50 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // 📌 Alterar Status do Usuário
-  statusForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
-    const username = statusUserInput.value;
-    const status = statusSelect.value;
-    mensagemStatus.textContent = "";
+  document
+    .getElementById("formAlterarStatus")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault(); // Evita que o formulário recarregue a página
 
-    try {
-      const response = await fetch("../backend/alterar_status.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, status }),
-      });
+      let usernameInput = document.getElementById("username");
+      let statusInput = document.getElementById("status");
 
-      const textResponse = await response.text();
-      console.log("Resposta do servidor:", textResponse);
-
-      const result = JSON.parse(textResponse);
-
-      if (result.success) {
-        mensagemStatus.textContent =
-          result.message || "Status alterado com sucesso!";
-        mensagemStatus.style.color = "green";
-        statusForm.reset();
-        updateUserList();
-      } else {
-        mensagemStatus.textContent =
-          result.message || "Erro ao alterar status.";
-        mensagemStatus.style.color = "red";
+      // Verifica se os elementos existem antes de acessar .value
+      if (!usernameInput || !statusInput) {
+        console.error("Erro: Campo de usuário ou status não encontrado.");
+        return;
       }
-    } catch (error) {
-      handleFetchError(error, mensagemStatus, "alteração de status");
-    }
-  });
+
+      let username = usernameInput.value.trim();
+      let status = statusInput.value.trim();
+
+      if (username === "" || status === "") {
+        console.error("Erro: Usuário ou status não pode estar vazio.");
+        return;
+      }
+
+      try {
+        let response = await fetch("alterar_status.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username: username, status: status }),
+        });
+
+        let result = await response.json();
+        console.log(result);
+
+        if (result.success) {
+          alert("Status atualizado com sucesso!");
+        } else {
+          alert("Erro ao atualizar status: " + result.message);
+        }
+      } catch (error) {
+        console.error("Erro ao enviar requisição:", error);
+      }
+    });
+
 
   // 📌 Atualiza a lista de usuários
   async function updateUserList() {
