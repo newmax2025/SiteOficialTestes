@@ -91,49 +91,35 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // 📌 Alterar Status do Usuário
-  document
-    .getElementById("formAlterarStatus")
-    .addEventListener("submit", async function (event) {
-      event.preventDefault(); // Evita que o formulário recarregue a página
+  statusForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const username = document.getElementById("statusUser").value;
+    const status = document.getElementById("statusSelect").value;
+    mensagemStatus.textContent = "";
 
-      let usernameInput = document.getElementById("username");
-      let statusInput = document.getElementById("status");
+    try {
+      const response = await fetch("../backend/alterar_status.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, status }),
+      });
 
-      // Verifica se os elementos existem antes de acessar .value
-      if (!usernameInput || !statusInput) {
-        console.error("Erro: Campo de usuário ou status não encontrado.");
-        return;
+      const result = await response.json();
+
+      if (result.success) {
+        mensagemStatus.textContent =
+          result.message || "Status alterado com sucesso!";
+        mensagemStatus.style.color = "green";
+        statusForm.reset();
+        updateUserList();
+      } else {
+        mensagemStatus.textContent = result.message || "Erro ao alterar status.";
+        mensagemStatus.style.color = "red";
       }
-
-      let username = usernameInput.value.trim();
-      let status = statusInput.value.trim();
-
-      if (username === "" || status === "") {
-        console.error("Erro: Usuário ou status não pode estar vazio.");
-        return;
-      }
-
-      try {
-        let response = await fetch("alterar_status.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username: username, status: status }),
-        });
-
-        let result = await response.json();
-        console.log(result);
-
-        if (result.success) {
-          alert("Status atualizado com sucesso!");
-        } else {
-          alert("Erro ao atualizar status: " + result.message);
-        }
-      } catch (error) {
-        console.error("Erro ao enviar requisição:", error);
-      }
-    });
+    } catch (error) {
+      handleFetchError(error, mensagemStatus, "alteração de status");
+    }
+  });
 
 
   // 📌 Atualiza a lista de usuários
