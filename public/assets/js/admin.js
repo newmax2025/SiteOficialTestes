@@ -76,34 +76,54 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Alterar status do usuário
-  statusForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
-    const username = document.getElementById("statusUser").value;
-    const status = document.getElementById("statusSelect").value;
-    mensagemStatus.textContent = "";
+  document.addEventListener("DOMContentLoaded", function () {
+    const statusForm = document.getElementById("statusForm");
+    const statusUserInput = document.getElementById("statusUser");
+    const statusSelect = document.getElementById("statusSelect");
+    const mensagemStatus = document.getElementById("mensagemStatus");
 
-    try {
-      const response = await fetch("../backend/alterar_status.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, status }),
-      });
+    if (!statusForm || !statusUserInput || !statusSelect || !mensagemStatus) {
+      console.error(
+        "Erro: Um ou mais elementos do formulário de status não foram encontrados no HTML."
+      );
+      return; // Sai da função para evitar erro
+    }
 
-      const result = await response.json();
+    statusForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const username = statusUserInput.value;
+      const status = statusSelect.value;
+      mensagemStatus.textContent = "";
 
-      if (result.success) {
-        mensagemStatus.textContent = result.message;
-        mensagemStatus.style.color = "green";
-        updateUserList();
-      } else {
-        mensagemStatus.textContent =
-          result.message || "Erro ao alterar status.";
+      try {
+        const response = await fetch("../backend/alterar_status.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, status }),
+        });
+
+        const textResponse = await response.text();
+        console.log("Resposta do servidor:", textResponse);
+
+        const result = JSON.parse(textResponse);
+
+        if (result.success) {
+          mensagemStatus.textContent = result.message;
+          mensagemStatus.style.color = "green";
+          updateUserList();
+        } else {
+          mensagemStatus.textContent =
+            result.message || "Erro ao alterar status.";
+          mensagemStatus.style.color = "red";
+        }
+      } catch (error) {
+        console.error("Erro na requisição:", error);
+        mensagemStatus.textContent = "Erro ao conectar ao servidor.";
         mensagemStatus.style.color = "red";
       }
-    } catch (error) {
-      handleFetchError(error, mensagemStatus, "alteração de status");
-    }
+    });
   });
+
 
   // Atualiza a lista de usuários
   async function updateUserList() {
