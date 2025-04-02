@@ -3,10 +3,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const removeUserForm = document.getElementById("removeUserForm");
   const statusForm = document.getElementById("statusForm");
   const userListElement = document.getElementById("userList");
+
   const mensagemCadastro = document.getElementById("mensagemCadastro");
   const mensagemRemocao = document.getElementById("mensagemRemocao");
   const mensagemStatus = document.getElementById("mensagemStatus");
 
+  const statusUserInput = document.getElementById("statusUser");
+  const statusSelect = document.getElementById("statusSelect");
+
+  // Verifica se os elementos existem antes de adicionar eventos
+  if (!userForm || !removeUserForm || !statusForm || !userListElement) {
+    console.error(
+      "Erro: Um ou mais elementos do formulário não foram encontrados no HTML."
+    );
+    return;
+  }
+
+  // Função genérica para tratar erros de fetch
   function handleFetchError(error, elementMensagem, tipoAcao) {
     console.error(`Erro ao ${tipoAcao}:`, error);
     elementMensagem.textContent = `Erro ao conectar ao servidor durante ${tipoAcao}. Verifique o console (F12).`;
@@ -16,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Atualiza a lista de usuários ao carregar a página
   updateUserList();
 
-  // Cadastro de novo usuário
+  // 📌 Cadastro de novo usuário
   userForm.addEventListener("submit", async function (event) {
     event.preventDefault();
     const username = document.getElementById("newUser").value;
@@ -33,7 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const result = await response.json();
 
       if (result.success) {
-        mensagemCadastro.textContent = "Usuário cadastrado com sucesso!";
+        mensagemCadastro.textContent =
+          result.message || "Usuário cadastrado com sucesso!";
         mensagemCadastro.style.color = "green";
         userForm.reset();
         updateUserList();
@@ -46,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Remover usuário
+  // 📌 Remover usuário
   removeUserForm.addEventListener("submit", async function (event) {
     event.preventDefault();
     const username = document.getElementById("removeUser").value;
@@ -62,7 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const result = await response.json();
 
       if (result.success) {
-        mensagemRemocao.textContent = "Usuário removido com sucesso!";
+        mensagemRemocao.textContent =
+          result.message || "Usuário removido com sucesso!";
         mensagemRemocao.style.color = "green";
         removeUserForm.reset();
         updateUserList();
@@ -75,62 +90,54 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Alterar status do usuário
-  document.addEventListener("DOMContentLoaded", function () {
-    const statusForm = document.getElementById("statusForm");
-    const statusUserInput = document.getElementById("statusUser");
-    const statusSelect = document.getElementById("statusSelect");
-    const mensagemStatus = document.getElementById("mensagemStatus");
+  // 📌 Alterar Status do Usuário
+  statusForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const username = statusUserInput.value;
+    const status = statusSelect.value;
+    mensagemStatus.textContent = "";
 
-    if (!statusForm || !statusUserInput || !statusSelect || !mensagemStatus) {
-      console.error(
-        "Erro: Um ou mais elementos do formulário de status não foram encontrados no HTML."
-      );
-      return; // Sai da função para evitar erro
-    }
+    try {
+      const response = await fetch("../backend/alterar_status.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, status }),
+      });
 
-    statusForm.addEventListener("submit", async function (event) {
-      event.preventDefault();
-      const username = statusUserInput.value;
-      const status = statusSelect.value;
-      mensagemStatus.textContent = "";
+      const textResponse = await response.text();
+      console.log("Resposta do servidor:", textResponse);
 
-      try {
-        const response = await fetch("../backend/alterar_status.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, status }),
-        });
+      const result = JSON.parse(textResponse);
 
-        const textResponse = await response.text();
-        console.log("Resposta do servidor:", textResponse);
-
-        const result = JSON.parse(textResponse);
-
-        if (result.success) {
-          mensagemStatus.textContent = result.message;
-          mensagemStatus.style.color = "green";
-          updateUserList();
-        } else {
-          mensagemStatus.textContent =
-            result.message || "Erro ao alterar status.";
-          mensagemStatus.style.color = "red";
-        }
-      } catch (error) {
-        console.error("Erro na requisição:", error);
-        mensagemStatus.textContent = "Erro ao conectar ao servidor.";
+      if (result.success) {
+        mensagemStatus.textContent =
+          result.message || "Status alterado com sucesso!";
+        mensagemStatus.style.color = "green";
+        statusForm.reset();
+        updateUserList();
+      } else {
+        mensagemStatus.textContent =
+          result.message || "Erro ao alterar status.";
         mensagemStatus.style.color = "red";
       }
-    });
+    } catch (error) {
+      handleFetchError(error, mensagemStatus, "alteração de status");
+    }
   });
 
-
-  // Atualiza a lista de usuários
+  // 📌 Atualiza a lista de usuários
   async function updateUserList() {
     userListElement.innerHTML = "<li>Carregando...</li>";
 
     try {
       const response = await fetch("../backend/listar.php");
+
+      if (!response.ok) {
+        let errorText = await response.text();
+        throw new Error(
+          `Erro do servidor: ${response.status} ${response.statusText}. Resposta: ${errorText}`
+        );
+      }
 
       const result = await response.json();
 
@@ -141,12 +148,12 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
           result.data.forEach((user) => {
             const li = document.createElement("li");
-            li.innerHTML = `${user.usuario} - <strong>${user.status}</strong>`;
+            li.textContent = `${user.usuario} - Status: ${user.status}`;
             userListElement.appendChild(li);
           });
         }
       } else {
-        throw new Error(result.message || "Erro ao listar usuários.");
+        throw new Error(result.message || "Erro ao carregar lista.");
       }
     } catch (error) {
       userListElement.innerHTML =
