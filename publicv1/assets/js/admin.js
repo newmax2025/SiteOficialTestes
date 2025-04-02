@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const userForm = document.getElementById("userForm");
   const removeUserForm = document.getElementById("removeUserForm");
-  const statusForm = document.getElementById("statusForm");
+  const statusForm = document.getElementById("formAlterarStatus");
   const userListElement = document.getElementById("userList");
 
   const mensagemCadastro = document.getElementById("mensagemCadastro");
