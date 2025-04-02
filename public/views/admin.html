@@ -31,12 +31,16 @@
         <p id="mensagemRemocao"></p>
 
         <h3>Alterar Status do Usuário</h3>
-        <form id="statusForm">
-            <input type="text" id="statusUser" placeholder="Usuário (Email)" required>
-            <select id="statusSelect">
+        <form id="formAlterarStatus">
+            <label for="username">Nome de usuário:</label>
+            <input type="text" id="username" required>
+        
+            <label for="status">Status:</label>
+            <select id="status" required>
                 <option value="ativo">Ativo</option>
                 <option value="inativo">Inativo</option>
             </select>
+        
             <button type="submit">Alterar Status</button>
         </form>
         <p id="mensagemStatus"></p>
