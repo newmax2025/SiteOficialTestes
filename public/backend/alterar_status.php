@@ -17,7 +17,7 @@ if ($status !== "ativo" && $status !== "inativo") {
     exit;
 }
 
-$sql = "UPDATE usuarios SET status = ? WHERE usuario = ?";
+$sql = "UPDATE clientes SET status = ? WHERE usuario = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $status, $username);
 
