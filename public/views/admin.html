@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Administração</title>
     <link rel="stylesheet" href="../assets/css/admin.css?v=2.0">
+    <script>
+        fetch("../backend/verifica_sessao.php")
+    .then(response => response.json())
+    .then(data => {
+        if (!data.autenticado) {
+            window.location.href = "login.html"; // Redireciona se não estiver autenticado
+        }
+    })
+    .catch(error => {
+        console.error("Erro ao verificar sessão:", error);
+        window.location.href = "login.html"; // Opcional: Redireciona em caso de erro
+    });
+
+        </script>
 
 </head>
 
