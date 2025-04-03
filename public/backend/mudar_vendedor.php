@@ -5,7 +5,7 @@ require 'config.php';
 try {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    if (!isset($data["cliente"]) || !isset($data["vendedor_id"])) {
+    if (!isset($data["cliente_nome"]) || !isset($data["novo_vendedor_id"])) {
         throw new InvalidArgumentException("Campos 'cliente' e 'vendedor_id' são obrigatórios.");
     }
 
