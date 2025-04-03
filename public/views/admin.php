@@ -73,17 +73,17 @@
       <p id="mensagemStatus"></p>
       
       <h3>Mudar Vendedor do Cliente</h3>
-      <form id="formMudarVendedor" action="mudar_vendedor.php" method="POST">
-
+      <form id="formMudarVendedor">
         <label for="clienteNome">Nome do Cliente:</label>
-        <input type="text" id="clienteNome" required />
+        <input type="text" id="clienteNome" name="clienteNome" required />
 
         <label for="novoVendedorId">Novo Vendedor (ID):</label>
-        <input type="number" id="novoVendedorId" required />
+        <input type="number" id="novoVendedorId" name="novoVendedorId" required />
 
         <button type="submit">Mudar Vendedor</button>
       </form>
-      <p id="mensagemMudarVendedor"></p>
+<p id="mensagemMudarVendedor"></p>
+
 
       <button onclick="window.location.href='login.php'">Sair</button>
     </div>
