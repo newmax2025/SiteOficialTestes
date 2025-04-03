@@ -147,13 +147,18 @@
         }
     </style>
     <script>
-        fetch("verifica_sessao.php")
-          .then(response => response.json())
-          .then(data => {
-            if (!data.autenticado) {
-              window.location.href = "login.html"; // Redireciona se não estiver autenticado
-            }
-          });
+        fetch("../backend/verifica_sessao.php")
+    .then(response => response.json())
+    .then(data => {
+        if (!data.autenticado) {
+            window.location.href = "login.html"; // Redireciona se não estiver autenticado
+        }
+    })
+    .catch(error => {
+        console.error("Erro ao verificar sessão:", error);
+        window.location.href = "login.html"; // Opcional: Redireciona em caso de erro
+    });
+
         </script>
         
 </head>
@@ -170,7 +175,7 @@
      <li><a href="#"><i class=""></i>Revendedor: Max Consultas</a></li>
      <li><a href="https://w.app/z3fpki"><i class="fa-brands fa-whatsapp"></i>Whatsapp</a></li>
      <li><a href="#"><i class=""></i>Status: Ativo</a></li>
-     <a href="logout.php">Sair</a>
+     <a href="../backend/logout.php">Sair</a>
 
     </ul>
     </div>
