@@ -28,18 +28,18 @@
             font-size: 24px;
             background: black;
         }
-        /* Banner grande ajustado para 100% da largura e altura da tela */
-.banner-grande {
-    width: 100%;
-    height: 40vh; /* Altura adaptável ao tamanho da tela */
-    background-image: url('../assets/img/assine o plano premium .jpg'); /* Imagem inicial */
-    background-size: contain; /* Ajusta a imagem sem cortar, mantendo a proporção */
-    background-position: center;
-    transition: background-image 0.5s ease;
-    background-repeat: no-repeat; /* Evita que a imagem se repita */
-    align-self: center;
-    padding: auto;
-}
+            /* Banner grande ajustado para 100% da largura e altura da tela */
+            .banner-grande {
+            width: 100%;
+            height: 40vh; /* Altura adaptável ao tamanho da tela */
+            background-image: url('../assets/img/assine o plano premium .jpg'); /* Imagem inicial */
+            background-size: contain; /* Ajusta a imagem sem cortar, mantendo a proporção */
+            background-position: center;
+            transition: background-image 0.5s ease;
+            background-repeat: no-repeat; /* Evita que a imagem se repita */
+            align-self: center;
+            padding: auto;
+        }
 
         .carousel h2 {
             margin-left: 10px;
@@ -148,8 +148,8 @@
         }
     </style>
     <script>
-       document.addEventListener("DOMContentLoaded", function () {
-    fetch("../backend/get_user_data.php")
+        document.addEventListener("DOMContentLoaded", function () {
+        fetch("../backend/get_user_data.php")
         .then(response => {
             if (!response.ok) {
                 throw new Error("Erro ao carregar os dados do usuário");
@@ -174,9 +174,9 @@
             console.error("Erro ao carregar os dados do usuário:", error);
             window.location.href = "login.html"; 
         });
-});
+        });
 
-        </script>
+    </script>
         
 </head>
 <body>
