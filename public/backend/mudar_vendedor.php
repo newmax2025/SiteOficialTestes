@@ -1,49 +1,83 @@
 <?php
 header('Content-Type: application/json');
-ob_start();
+ob_start(); // Inicia buffer de saída
+
 require 'config.php';
 
-$data = json_decode(file_get_contents("php://input"), true);
+try {
+    // Obtém os dados enviados via JSON
+    $data = json_decode(file_get_contents("php://input"), true);
 
-if (!isset($data["cliente_nome"], $data["novo_vendedor_id"])) {
-    echo json_encode(["success" => false, "message" => "Dados insuficientes."]);
-    exit();
+    // Verifica se o JSON foi decodificado corretamente
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new InvalidArgumentException("Erro ao decodificar JSON.");
+    }
+
+    // Verifica se os campos esperados foram recebidos
+    if (!isset($data["cliente"]) || !isset($data["novo_vendedor"])) {
+        throw new InvalidArgumentException("Campos 'cliente' e 'novo_vendedor' são obrigatórios.");
+    }
+
+    $cliente = trim($data["cliente"]);
+    $novo_vendedor = trim($data["novo_vendedor"]);
+
+    // Validação básica
+    if (empty($cliente) || empty($novo_vendedor)) {
+        echo json_encode(["success" => false, "message" => "Preencha todos os campos!"]);
+        exit();
+    }
+
+    // Verifica se o cliente existe
+    $sqlCheck = "SELECT id FROM clientes WHERE usuario = ?";
+    $stmtCheck = $conexao->prepare($sqlCheck);
+    $stmtCheck->bind_param("s", $cliente);
+    $stmtCheck->execute();
+    $resultCheck = $stmtCheck->get_result();
+
+    if ($resultCheck->num_rows === 0) {
+        error_log("Cliente não encontrado: " . $cliente);
+        $stmtCheck->close();
+        echo json_encode(["success" => false, "message" => "Cliente não encontrado."]);
+        exit();
+    }
+    $stmtCheck->close();
+
+    // Atualiza o vendedor do cliente
+    $sqlUpdate = "UPDATE clientes SET vendedor_id = (SELECT id FROM vendedores WHERE nome = ?) WHERE usuario = ?";
+    $stmtUpdate = $conexao->prepare($sqlUpdate);
+
+    if ($stmtUpdate === false) {
+        error_log("Erro ao preparar o UPDATE: " . $conexao->error);
+        throw new RuntimeException("Erro ao preparar a atualização: " . $conexao->error);
+    }
+
+    $stmtUpdate->bind_param("ss", $novo_vendedor, $cliente);
+
+    if ($stmtUpdate->execute()) {
+        error_log("Vendedor atualizado para o cliente: " . $cliente . " - Novo Vendedor: " . $novo_vendedor);
+        echo json_encode(["success" => true, "message" => "Vendedor atualizado com sucesso!"]);
+    } else {
+        error_log("Erro ao executar UPDATE para cliente: " . $cliente . " - Erro: " . $stmtUpdate->error);
+        echo json_encode(["success" => false, "message" => "Erro ao atualizar vendedor."]);
+    }
+
+    $stmtUpdate->close();
+
+} catch (mysqli_sql_exception $e) {
+    ob_end_clean();
+    error_log("Erro MySQL (muda_vendedor.php): " . $e->getMessage());
+    echo json_encode(["success" => false, "message" => "Erro interno no servidor [DB]."]);
+
+} catch (InvalidArgumentException $e) {
+    ob_end_clean();
+    echo json_encode(["success" => false, "message" => $e->getMessage()]);
+
+} catch (Exception $e) {
+    ob_end_clean();
+    error_log("Erro Geral (muda_vendedor.php): " . $e->getMessage());
+    echo json_encode(["success" => false, "message" => "Erro interno no servidor."]);
+
+} finally {
+    ob_end_flush();
 }
-
-$cliente_nome = trim($data["cliente_nome"]);
-$novo_vendedor_id = intval($data["novo_vendedor_id"]);
-
-// Debug: Exibir nome do cliente recebido
-error_log("Nome do cliente recebido: " . $cliente_nome);
-
-// Buscar o ID do cliente pelo nome
-$stmt = $conexao->prepare("SELECT id FROM clientes WHERE usuario = ?");
-$stmt->bind_param("s", $cliente_nome);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows === 0) {
-    echo json_encode(["success" => false, "message" => "Cliente não encontrado."]);
-    error_log("Cliente não encontrado: " . $cliente_nome);
-    exit();
-}
-
-$row = $result->fetch_assoc();
-$cliente_id = $row["id"];
-error_log("Cliente encontrado - ID: " . $cliente_id);
-
-// Atualizar o vendedor_id na tabela clientes
-$stmt = $conexao->prepare("UPDATE clientes SET vendedor_id = ? WHERE id = ?");
-$stmt->bind_param("ii", $novo_vendedor_id, $cliente_id);
-
-if ($stmt->execute()) {
-    echo json_encode(["success" => true, "message" => "Vendedor alterado com sucesso."]);
-    error_log("Vendedor alterado com sucesso para o cliente ID: " . $cliente_id);
-} else {
-    echo json_encode(["success" => false, "message" => "Erro ao alterar vendedor."]);
-    error_log("Erro ao executar UPDATE para o cliente ID: " . $cliente_id);
-}
-
-$stmt->close();
-$conexao->close();
 ?>
