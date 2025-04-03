@@ -159,6 +159,22 @@
         window.location.href = "login.html"; // Opcional: Redireciona em caso de erro
     });
 
+    fetch("../backend/get_user_data.php")
+        .then(response => response.json())
+        .then(data => {
+            if (!data.autenticado) {
+                window.location.href = "login.html"; // Redireciona se não estiver autenticado
+            } else {
+                document.getElementById("revendedor").innerHTML = `<i class=""></i>Revendedor: ${data.nome}`;
+                document.getElementById("whatsapp").setAttribute("href", data.whatsapp);
+                document.getElementById("status").innerHTML = `<i class=""></i>Status: ${data.status}`;
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao carregar os dados do usuário:", error);
+            window.location.href = "login.html";
+        });
+
         </script>
         
 </head>
@@ -171,12 +187,11 @@
     <div class="sidebar">
     <header>Menu</header>
     <ul>
-     <li><a href="#"><i class=""></i>Perfil 🔐</a></li>
-     <li><a href="#"><i class=""></i>Revendedor: Max Consultas</a></li>
-     <li><a href="https://w.app/z3fpki"><i class="fa-brands fa-whatsapp"></i>Whatsapp</a></li>
-     <li><a href="#"><i class=""></i>Status: Ativo</a></li>
-     <a href="../backend/logout.php">Sair</a>
-
+        <li><a href="#"><i class=""></i>Perfil 🔐</a></li>
+        <li><a href="#" id="revendedor"><i class=""></i>Revendedor: Carregando...</a></li>
+        <li><a href="#" id="whatsapp"><i class="fa-brands fa-whatsapp"></i>Whatsapp</a></li>
+        <li><a href="#" id="status"><i class=""></i>Status: Carregando...</a></li>
+        <a href="../backend/logout.php">Sair</a>
     </ul>
     </div>
     <header>
