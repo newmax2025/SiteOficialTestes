@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const mensagemRemocao = document.getElementById("mensagemRemocao");
   const mensagemStatus = document.getElementById("mensagemStatus");
 
-  const formMudarVendedor = document.getElementById("formMudarVendedor");
+  const formMudarVendedor = document.getElementById("formMudarVendedor"); // Pega o elemento
   const mensagemMudarVendedor = document.getElementById(
     "mensagemMudarVendedor"
   );
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     !removeUserForm ||
     !statusForm ||
     !userListElement ||
-    !formMudarVendedor
+    !formMudarVendedor // Verifica se o form de mudar vendedor existe
   ) {
     console.error(
       "Erro: Um ou mais elementos do formulário não foram encontrados no HTML."
@@ -37,46 +37,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Atualiza a lista de usuários ao carregar a página
   updateUserList();
 
-  // 📌 Mudar Vendedor do Cliente
-  document
-    .getElementById("formMudarVendedor")
-    .addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const clienteNome = document.getElementById("clienteNome").value.trim();
-      const novoVendedorId = document.getElementById("novoVendedorId").value;
-      const mensagemMudarVendedor = document.getElementById(
-        "mensagemMudarVendedor"
-      );
-
-      try {
-        const response = await fetch("../backend/mudar_vendedor.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            cliente_nome: clienteNome,
-            novo_vendedor_id: novoVendedorId,
-          }),
-        });
-
-        const result = await response.json();
-
-        mensagemMudarVendedor.textContent = result.message;
-        mensagemMudarVendedor.style.color = result.success ? "green" : "red";
-        document.getElementById("formMudarVendedor").reset();
-      } catch (error) {
-        console.error("Erro ao mudar vendedor:", error);
-        mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
-        mensagemMudarVendedor.style.color = "red";
-      }
-    });
-
-
+  // 📌 Mudar Vendedor do Cliente - MANTENHA APENAS ESTE BLOCO
   formMudarVendedor.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const clienteNome = document.getElementById("clienteNome").value.trim();
     const novoVendedorId = document.getElementById("novoVendedorId").value;
+
+    // Limpa a mensagem anterior
+    mensagemMudarVendedor.textContent = "";
 
     try {
       const response = await fetch("../backend/mudar_vendedor.php", {
@@ -88,14 +57,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }),
       });
 
-      const result = await response.json();
+      // Verifica se a resposta da rede foi ok
+      if (!response.ok) {
+        // Tenta ler a resposta como texto para depuração, mesmo se não for JSON
+        const errorText = await response.text();
+        throw new Error(
+          `Erro HTTP: ${response.status} - ${response.statusText}. Resposta: ${errorText}`
+        );
+      }
+
+      const result = await response.json(); // Agora seguro para chamar json()
 
       mensagemMudarVendedor.textContent = result.message;
       mensagemMudarVendedor.style.color = result.success ? "green" : "red";
-      formMudarVendedor.reset();
+      if (result.success) {
+        formMudarVendedor.reset(); // Reseta apenas em caso de sucesso
+      }
     } catch (error) {
+      // Usar a função de erro genérica seria bom aqui também
+      // handleFetchError(error, mensagemMudarVendedor, "mudança de vendedor");
       console.error("Erro ao mudar vendedor:", error);
-      mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
+      mensagemMudarVendedor.textContent =
+        error.message || "Erro ao conectar ao servidor."; // Exibe a mensagem de erro capturada
       mensagemMudarVendedor.style.color = "red";
     }
   });
