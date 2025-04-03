@@ -147,33 +147,31 @@
         }
     </style>
     <script>
-        fetch("../backend/verifica_sessao.php")
-    .then(response => response.json())
-    .then(data => {
-        if (!data.autenticado) {
-            window.location.href = "login.html"; // Redireciona se não estiver autenticado
-        }
-    })
-    .catch(error => {
-        console.error("Erro ao verificar sessão:", error);
-        window.location.href = "login.html"; // Opcional: Redireciona em caso de erro
-    });
-
+        document.addEventListener("DOMContentLoaded", function () {
     fetch("../backend/get_user_data.php")
-        .then(response => response.json())
-        .then(data => {
-            if (!data.autenticado) {
-                window.location.href = "login.html"; // Redireciona se não estiver autenticado
-            } else {
-                document.getElementById("revendedor").innerHTML = `<i class=""></i>Revendedor: ${data.nome}`;
-                document.getElementById("whatsapp").setAttribute("href", data.whatsapp);
-                document.getElementById("status").innerHTML = `<i class=""></i>Status: ${data.status}`;
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Erro ao carregar os dados do usuário");
             }
+            return response.json();
+        })
+        .then(data => {
+            if (!data || !data.autenticado) {
+                window.location.href = "login.html"; // Redireciona se não autenticado
+                return;
+            }
+
+            // Atualiza os elementos da página com os dados do usuário
+            document.getElementById("revendedor").innerHTML = `Revendedor: ${data.nome}`;
+            document.getElementById("whatsapp").setAttribute("href", data.whatsapp);
+            document.getElementById("status").innerHTML = `Status: ${data.status}`;
         })
         .catch(error => {
             console.error("Erro ao carregar os dados do usuário:", error);
-            //window.location.href = "login.html";
+            window.location.href = "login.html"; // Redireciona em caso de erro
         });
+});
+
 
         </script>
         
