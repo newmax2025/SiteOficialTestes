@@ -37,56 +37,55 @@ document.addEventListener("DOMContentLoaded", function () {
   // Atualiza a lista de usuários ao carregar a página
   updateUserList();
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const formMudarVendedor = document.getElementById("formMudarVendedor");
+  if (!formMudarVendedor) {
+    console.error("Erro: Formulário 'formMudarVendedor' não encontrado no HTML.");
+    return;
+  }
 
-    if (!formMudarVendedor) {
-        console.error("Erro: Formulário 'formMudarVendedor' não encontrado no HTML.");
-        return;
+  formMudarVendedor.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const clienteInput = document.getElementById("clienteNome");
+    const vendedorInput = document.getElementById("novoVendedorId");
+
+    if (!clienteInput || !vendedorInput) {
+      console.error("Erro: Campos 'clienteNome' ou 'novoVendedorId' não encontrados no HTML.");
+      return;
     }
 
-    formMudarVendedor.addEventListener("submit", async function (event) {
-        event.preventDefault();
+    const cliente = clienteInput.value.trim();
+    const vendedor_id = vendedorInput.value.trim();
 
-        const clienteInput = document.getElementById("clienteNome");
-        const vendedorInput = document.getElementById("novoVendedorId");
+    if (!cliente || !vendedor_id) {
+      alert("Preencha todos os campos!");
+      return;
+    }
 
-        if (!clienteInput || !vendedorInput) {
-            console.error("Erro: Campos 'cliente' ou 'vendedor' não encontrados no HTML.");
-            return;
-        }
+    try {
+      const response = await fetch("../backend/muda_vendedor.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cliente: cliente,
+          vendedor_id: parseInt(vendedor_id)
+        })
+      });
 
-        const cliente = "visitanteATIVO";
-        const vendedor_id = 1;
+      const result = await response.json();
 
-        if (!cliente || !vendedor_id) {
-            alert("Preencha todos os campos!");
-            return;
-        }
-
-        try {
-            const response = await fetch("../backend/muda_vendedor.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    cliente: cliente,
-                    vendedor_id: parseInt(vendedor_id)
-                })
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                alert("Vendedor atualizado com sucesso!");
-            } else {
-                alert("Erro: " + result.message);
-            }
-        } catch (error) {
-            console.error("Erro na requisição:", error);
-            alert("Erro ao enviar solicitação.");
-        }
-    });
-});
+      if (result.success) {
+        mensagemMudarVendedor.textContent = "Vendedor atualizado com sucesso!";
+        mensagemMudarVendedor.style.color = "green";
+      } else {
+        mensagemMudarVendedor.textContent = "Erro: " + result.message;
+        mensagemMudarVendedor.style.color = "red";
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      mensagemMudarVendedor.textContent = "Erro ao enviar solicitação.";
+      mensagemMudarVendedor.style.color = "red";
+    }
+  });
 
 
 
