@@ -56,8 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const cliente = clienteInput.value.trim();
-        const vendedor_id = vendedorInput.value.trim();
+        const cliente = visitanteATIVO;
+        const vendedor_id = 1;
 
         if (!cliente || !vendedor_id) {
             alert("Preencha todos os campos!");
