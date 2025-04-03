@@ -78,6 +78,36 @@
             border-radius: 10px; /* Cantos arredondados */
             overflow: hidden; /* Garante que a borda não afete a imagem */
         }
+        
+        .Gratuitos {
+            width: 130px;
+            height: 110px;
+            text-align: center;
+            position:relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px; /* Cantos arredondados */
+            overflow: hidden; /* Garante que a borda não afete a imagem */
+        }
+
+        .Gratuitos:hover {
+            transform: translateY(-5px) scale(1.05); /* Leve movimento para cima e ampliação */
+            box-shadow: 0 0 15px rgba(9, 255, 0, 0.7); /* Borda iluminada verde */
+        }
+
+        .adicionando {
+            width: 130px;
+            height: 110px;
+            text-align: center;
+            position:relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px; /* Cantos arredondados */
+            overflow: hidden; /* Garante que a borda não afete a imagem */
+        }
+
+        .adicionando:hover {
+            transform: translateY(-5px) scale(1.05); /* Leve movimento para cima e ampliação */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); /* Borda iluminada verde */
+        }
 
         .pequeno:hover {
             transform: translateY(-5px) scale(1.05); /* Leve movimento para cima e ampliação */
@@ -103,7 +133,7 @@
             bottom: 5px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #73ff61;
+            background-color: #26ff00;
             color: white;
             border: none;
             padding: 10px 10px;
@@ -130,7 +160,7 @@
      <li><a href="#"><i class=""></i>Revendedor: Max Consultas</a></li>
      <li><a href="https://w.app/z3fpki"><i class="fa-brands fa-whatsapp"></i>Whatsapp</a></li>
      <li><a href="#"><i class=""></i>Status: Ativo</a></li>
-     <li><a href="login.html"><i class=""></i>Sair</a></li>
+     <li><a href="index.html"><i class=""></i>Sair</a></li>
     </ul>
     </div>
     <header>
@@ -152,7 +182,6 @@
             <div class="card grande"> <img src="../assets/img/CONSULTA Detran Pro Horizontal.jpg" alt="CONSULTA Detran Pro Horizontal"> </div>
             <div class="card grande"> <img src="../assets/img/Placa Plus Plano Premium Horinzontal.jpg" alt="Placa Plus Plano Premium Horinzontal"> </div>
             <div class="card grande"> <img src="../assets/img/Consulta  CREDI LINK Horizontal.jpg" alt="Consulta  CREDI LINK Horizontal"> </div>
-
             <!-- Adicione mais cards conforme necessário -->
         </div>
     </section>
@@ -160,10 +189,30 @@
         <section class="carousel" id="favoritos">
             <h2> Modulos Gratuitos</h2>
             <div class="carousel-container">
-                <div class="card pequeno"> 
-                    
-                   <a href="consultaCPF.html"> <img src="../assets/img/CONSULTA CPF MAX.jpg" alt="CRLV (Todos os Estados)"></a>
+                <div class="card Gratuitos">  
+                   <a href="consultaCPF.html"> <img src="../assets/img/CONSULTA CPF MAX.jpg" alt="CRLV (Todos os Estados)"></a> 
                    </div>
+                  <div class="card adicionando" onclick="mostrarBotao(this)">  
+        <img src="../assets/img/Consulta Email (adicionando).jpg" alt="CRLV (Todos os Estados)">
+        <button class="botao">Sendo Adicionado</button>
+    </div>
+    <div class="card adicionando" onclick="mostrarBotao(this)">  
+        <img src="../assets/img/Consulta CNPJ (adicionando).jpg" alt="CRLV (Todos os Estados)">
+        <button class="botao">Sendo Adicionado</button>
+    </div>
+    <div class="card adicionando" onclick="mostrarBotao(this)">  
+        <img src="../assets/img/Consulta Funcionário (adicionando).jpg" alt="CRLV (Todos os Estados)">
+        <button class="botao">Sendo Adicionado</button>
+    </div>
+    <div class="card adicionando" onclick="mostrarBotao(this)">  
+        <img src="../assets/img/Consulta Placa (adicionando).jpg" alt="CRLV (Todos os Estados)">
+        <button class="botao">Sendo Adicionado</button>
+    </div>
+    <div class="card adicionando" onclick="mostrarBotao(this)">  
+        <img src="../assets/img/desmascarar Pix (adicionando).jpg" alt="CRLV (Todos os Estados)">
+        <button class="botao">Sendo Adicionado</button>
+    </div>
+
     </section>
     <section class="carousel" id="treinos">
         <section><div id="modal" class="modal">
@@ -175,11 +224,12 @@
             <div class="card pequeno"> 
                 
                 <img src="../assets/img/CRLV (Todos os Estados).jpg" alt="CRLV (Todos os Estados)">
+                <p>Anel de Sole em Ouro e Diamante 50 pontos</p>
                
             </div>
             <div class="card pequeno"> 
                
-                <img src="../assets/img/Impressão CNH (Original).jpg" alt="../assets/img/Impressão CNH (Original)a">
+                <img src="../assets/img/Impressão CNH (Original).jpg" alt="img/Impressão CNH (Original)a">
                 
             </div>
             <div class="card pequeno"> 
@@ -208,11 +258,6 @@
                
             </div>
             <div class="card pequeno"> 
-                
-                <img src="../assets/img/Placa Plus Plano Premium.jpg" alt="Placa Plus Plano Premium">
-             
-            </div>
-            <div class="card pequeno"> 
                
                 <img src="../assets/img/Consulta  CREDI LINK.jpg" alt="Consulta  CREDI LINK">
                
@@ -226,20 +271,27 @@
                 
                 <img src="../assets/img/Consulta Veicular Max.jpg" alt="Consulta Veicular Max">
             </div>
-            <!-- Adicione mais cards conforme necessário -->
-        </div>
-        <section class="carousel" id="treinos">
-        <div class="carousel-container">
             <div class="card pequeno"> 
               
                 <img src="../assets/img/CONSULTA CPF MAX.jpg" alt="CONSULTA CPF MAX">
                
             </div>
-            <div class="card pequeno"> 
+            <!-- Adicione mais cards conforme necessário -->
+        </div>
+        <section class="carousel" id="treinos">
+        <div class="carousel-container">
+
+               <div class="card pequeno"> 
                
-                <img src="../assets/img/Consulta CNPJ Max.jpg" alt="Consulta CNPJ Max">
-               
-            </div>
+                        <img src="../assets/img/Consulta Frota Veicular.jpg" alt="Treino Academia">
+                      
+                    </div>
+                    <div class="card pequeno"> 
+                        
+                        <img src="../assets/img/CONSULTA RECEITA FEDERAL.jpg" alt="Treino Academia">
+                       
+                    </div>
+
             <div class="card pequeno"> 
                
                 <img src="../assets/img/CONSULTA  CADSUS.jpg" alt="CONSULTA  CADSUS">
@@ -290,21 +342,6 @@
             <div class="carousel-container">
 
                     <div class="card pequeno"> 
-               
-                        <img src="../assets/img/Consulta Frota Veicular.jpg" alt="Treino Academia">
-                      
-                    </div>
-                    <div class="card pequeno"> 
-                       
-                        <img src="../assets/img/Consulta Funcionários.jpg" alt="Treino Academia">
-                      
-                    </div>
-                    <div class="card pequeno"> 
-                        
-                        <img src="../assets/img/CONSULTA RECEITA FEDERAL.jpg" alt="Treino Academia">
-                       
-                    </div>
-                    <div class="card pequeno"> 
                         
                         <img src="../assets/img/Gerar Score.jpg" alt="Treino Academia">
                        
@@ -334,43 +371,35 @@
                         <img src="../assets/img/Consultar Empréstimo.jpg" alt="Treino Casa">
                        
                     </div>
-                    <div class="card pequeno"> 
-                       
-                        <img src="../assets/img/Consulta EMAIL.jpg" alt="Treino Academia">
-                        </div>
                         <div class="card pequeno"> 
                        
                             <img src="../assets/img/óbito.jpg" alt="óbito">
                             </div>
+                            
+                            <div class="card pequeno"> 
+                               
+                                <img src="../assets/img/Buscar Foto.jpg" alt="Buscar Foto">
+                              
+                            </div>
+                            <div class="card pequeno"> 
+                               
+                                <img src="../assets/img/Buscar Processo.jpg" alt="Buscar Processo">
+                              
+                            </div>
+                            <div class="card pequeno"> 
+                                
+                                <img src="../assets/img/Buscar Assinatura.jpg" alt="Consultar FGTS">
+                               
+                            </div>
+                            <div class="card pequeno"> 
+                                
+                                <img src="../assets/img/Consultar FGTS.jpg" alt="Buscar Processo">
+                               
+                            </div>
                         </div>
                         <section class="carousel" id="treinos">
                             <div class="carousel-container">
-                
-                                    <div class="card pequeno"> 
-                               
-                                        <img src="../assets/img/Buscar Foto.jpg" alt="Buscar Foto">
-                                      
-                                    </div>
-                                    <div class="card pequeno"> 
-                                       
-                                        <img src="../assets/img/Buscar Processo.jpg" alt="Buscar Processo">
-                                      
-                                    </div>
-                                    <div class="card pequeno"> 
-                                        
-                                        <img src="../assets/img/Buscar Assinatura.jpg" alt="Consultar FGTS">
-                                       
-                                    </div>
-                                    <div class="card pequeno"> 
-                                        
-                                        <img src="../assets/img/Consultar FGTS.jpg" alt="Buscar Processo">
-                                       
-                                    </div>
-                                    <div class="card pequeno"> 
-                                       
-                                        <img src="../assets/img/Buscar Telefone.jpg" alt="Buscar Telefone">
-                                       
-                                    </div>
+
                                     <div class="card pequeno"> 
                                      
                                         <img src="../assets/img/buscar mandato.jpg" alt="buscar mandato">
@@ -400,39 +429,40 @@
                                        
                                             <img src="../assets/img/condutor pro.jpg" alt="condutor pro">
                                             </div>
+                                            
+                                            <div class="card pequeno"> 
+                                               
+                                                <img src="../assets/img/BACEN.jpg" alt="BACEN">
+                                              
+                                            </div>
+
+                                            <div class="card pequeno"> 
+                                       
+                                                <img src="../assets/img/buscar cep.jpg" alt="BACEN">
+                                              
+                                            </div>
+
+                                            <div class="card pequeno"> 
+                                       
+                                                <img src="../assets/img/faceMatch.jpg" alt="BACEN">
+                                              
+                                            </div>
+
+                                            <div class="card pequeno"> 
+                                       
+                                                <img src="../assets/img/consulta pai e mãe.jpg" alt="BACEN">
+                                              
+                                            </div>
+
+                                            <div class="card pequeno"> 
+                                       
+                                                <img src="../assets/img/buscar parentes.jpg" alt="BACEN">
+                                              
+                                            </div>
+                                            <!-- Adicione mais cards conforme necessário -->
                                         </div>
                                         <section class="carousel" id="treinos">
                                             <div class="carousel-container">
-                                
-                                                    <div class="card pequeno"> 
-                                               
-                                                        <img src="../assets/img/BACEN.jpg" alt="BACEN">
-                                                      
-                                                    </div>
-
-                                                    <div class="card pequeno"> 
-                                               
-                                                        <img src="../assets/img/buscar cep.jpg" alt="BACEN">
-                                                      
-                                                    </div>
-
-                                                    <div class="card pequeno"> 
-                                               
-                                                        <img src="../assets/img/faceMatch.jpg" alt="BACEN">
-                                                      
-                                                    </div>
-
-                                                    <div class="card pequeno"> 
-                                               
-                                                        <img src="../assets/img/consulta pai e mãe.jpg" alt="BACEN">
-                                                      
-                                                    </div>
-
-                                                    <div class="card pequeno"> 
-                                               
-                                                        <img src="../assets/img/buscar parentes.jpg" alt="BACEN">
-                                                      
-                                                    </div>
 
                                                     <div class="card pequeno"> 
                                                
