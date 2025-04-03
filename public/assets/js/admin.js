@@ -37,41 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Atualiza a lista de usuários ao carregar a página
   updateUserList();
 
-  // 📌 Mudar Vendedor do Cliente
-    document
-    .getElementById("formMudarVendedor")
-    .addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const clienteNome = document.getElementById("clienteNome").value.trim();
-      const novoVendedorId = document.getElementById("novoVendedorId").value;
-      const mensagemMudarVendedor = document.getElementById(
-        "mensagemMudarVendedor"
-      );
-
-      try {
-        const response = await fetch("../backend/mudar_vendedor.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            cliente_nome: clienteNome,
-            novo_vendedor_id: novoVendedorId,
-          }),
-        });
-
-        const result = await response.json();
-
-        mensagemMudarVendedor.textContent = result.message;
-        mensagemMudarVendedor.style.color = result.success ? "green" : "red";
-        document.getElementById("formMudarVendedor").reset();
-      } catch (error) {
-        console.error("Erro ao mudar vendedor:", error);
-        mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
-        mensagemMudarVendedor.style.color = "red";
-      }
-    });
-
-
   formMudarVendedor.addEventListener("submit", async function (event) {
     event.preventDefault();
 
