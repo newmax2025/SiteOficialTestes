@@ -3,6 +3,8 @@ header('Content-Type: application/json');
 require 'config.php';
 
 try {
+    var_dump($data);
+    die();  // Para interromper a execução e visualizar o conteúdo de $data
     $data = json_decode(file_get_contents("php://input"), true);
 
     if (!isset($data["cliente_nome"]) || !isset($data["novo_vendedor_id"])) {
