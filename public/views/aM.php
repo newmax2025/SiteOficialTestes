@@ -161,7 +161,7 @@
 
             if (!data || !data.autenticado) {
                 console.warn("Usuário não autenticado, redirecionando...");
-                window.location.href = "login.html"; 
+                window.location.href = "login.php"; 
                 return;
             }
 
@@ -172,7 +172,7 @@
         })
         .catch(error => {
             console.error("Erro ao carregar os dados do usuário:", error);
-            window.location.href = "login.html"; 
+            window.location.href = "login.php"; 
         });
         });
 

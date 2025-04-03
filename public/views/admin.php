@@ -10,12 +10,12 @@
         .then((response) => response.json())
         .then((data) => {
           if (!data.autenticado) {
-            window.location.href = "login.html"; // Redireciona se não estiver autenticado
+            window.location.href = "login.php"; // Redireciona se não estiver autenticado
           }
         })
         .catch((error) => {
           console.error("Erro ao verificar sessão:", error);
-          window.location.href = "login.html"; // Opcional: Redireciona em caso de erro
+          window.location.href = "login.php"; // Opcional: Redireciona em caso de erro
         });
     </script>
   </head>
@@ -84,7 +84,7 @@
       </form>
       <p id="mensagemMudarVendedor"></p>
 
-      <button onclick="window.location.href='index.html'">Sair</button>
+      <button onclick="window.location.href='login.php'">Sair</button>
     </div>
 
     <script src="../assets/js/admin.js?v=<?php echo md5_file('../assets/js/admin.js'); ?>"></script>
