@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000d1e;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(3, 255, 11, 0.3);
+    text-align: center;
+    width: 400px;
+    position: relative;
+    gap: 15px;
+}
+
+h2 {
+    color: white;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 150px;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #1ba924;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+}
+
+button {
+    background: #00ff22;
+    color: rgb(0, 0, 0);
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#resultado {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+.dados {
+    margin-top: 15px;
+    text-align: left;
+    color: white;
+    display: none;
+}
+
+.dados span {
+    font-weight: bold;
+}
