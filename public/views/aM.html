@@ -147,7 +147,7 @@
         }
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+       document.addEventListener("DOMContentLoaded", function () {
     fetch("../backend/get_user_data.php")
         .then(response => {
             if (!response.ok) {
@@ -156,8 +156,11 @@
             return response.json();
         })
         .then(data => {
+            console.log("Dados recebidos:", data); // Exibe a resposta no console
+
             if (!data || !data.autenticado) {
-                window.location.href = "login.html"; // Redireciona se não autenticado
+                console.warn("Usuário não autenticado, redirecionando...");
+                window.location.href = "login.html"; 
                 return;
             }
 
@@ -168,10 +171,9 @@
         })
         .catch(error => {
             console.error("Erro ao carregar os dados do usuário:", error);
-            window.location.href = "login.html"; // Redireciona em caso de erro
+            window.location.href = "login.html"; 
         });
 });
-
 
         </script>
         
