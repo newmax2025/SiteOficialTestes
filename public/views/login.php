@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login New Max Consultas</title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=2.0">
+    <link rel="stylesheet" href="../assets/css/style.css?v=<?php echo md5_file('../assets/css/style.css'); ?>">
 </head>
 <body>
     <div class="login-container">
@@ -33,7 +33,6 @@
         }
     </script>
 
-
-    <script src="../assets/js/login.js?v=2.0"></script>
+    <script src="../assets/js/login.js?v=<?php echo md5_file('../assets/js/login.js'); ?>"></script>
 </body>
 </html>

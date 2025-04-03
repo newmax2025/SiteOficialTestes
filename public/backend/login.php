@@ -47,11 +47,11 @@ if (!$captchaValidation["success"]) {
 $user = trim($data["username"]);
 $pass = trim($data["password"]);
 
-if (verificarLogin($conexao, $user, $pass, "clientes", "usuario", "aM.html", true)) {
+if (verificarLogin($conexao, $user, $pass, "clientes", "usuario", "aM.php", true)) {
     exit();
 }
 
-if (verificarLogin($conexao, $user, $pass, "admin", "admin", "admin.html", false)) {
+if (verificarLogin($conexao, $user, $pass, "admin", "admin", "admin.php", false)) {
     exit();
 }
 
