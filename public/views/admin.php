@@ -73,7 +73,8 @@
       <p id="mensagemStatus"></p>
       
       <h3>Mudar Vendedor do Cliente</h3>
-      <form id="formMudarVendedor">
+      <form id="formMudarVendedor" action="mudar_vendedor.php" method="POST">
+
         <label for="clienteNome">Nome do Cliente:</label>
         <input type="text" id="clienteNome" required />
 
