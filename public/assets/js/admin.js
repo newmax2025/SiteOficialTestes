@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const cliente = visitanteATIVO;
+        const cliente = "visitanteATIVO";
         const vendedor_id = 1;
 
         if (!cliente || !vendedor_id) {
