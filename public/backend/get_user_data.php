@@ -9,10 +9,8 @@ if (!isset($_SESSION["usuario"])) {
     exit();
 }
 
-// Obtém o nome do usuário logado
 $usuario = $_SESSION["usuario"];
 
-// Busca os dados do cliente junto com o revendedor correspondente
 $sql = "SELECT c.usuario, c.status, v.nome AS revendedor_nome, v.whatsapp AS revendedor_whatsapp 
         FROM clientes c
         LEFT JOIN vendedores v ON c.vendedor_id = v.id

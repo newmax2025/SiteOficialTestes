@@ -14,6 +14,10 @@ if (!isset($data["username"], $data["password"], $data["captchaResponse"])) {
     exit();
 }
 
+// Garante que as sessões não sejam perdidas
+ini_set("session.gc_maxlifetime", 86400); // 24 horas
+session_set_cookie_params(86400); // Cookie da sessão válido por 24 horas
+
 // Verifica o CAPTCHA primeiro
 $captchaResponse = $data["captchaResponse"];
 $captchaUrl = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
@@ -56,10 +60,12 @@ exit();
 
 // Função para verificar login
 function verificarLogin($conexao, $user, $pass, $tabela, $sessao, $redirect, $verificarStatus) {
+    global $conexao; // Certifica-se de usar a conexão global
+
     // Se for clientes, buscamos o status; se for admin, não
     $sql = $verificarStatus 
-        ? "SELECT senha, status FROM $tabela WHERE usuario = ?" 
-        : "SELECT senha FROM $tabela WHERE usuario = ?";
+        ? "SELECT id, senha, status FROM $tabela WHERE usuario = ?" 
+        : "SELECT id, senha FROM $tabela WHERE usuario = ?";
     
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param("s", $user);
@@ -76,11 +82,10 @@ function verificarLogin($conexao, $user, $pass, $tabela, $sessao, $redirect, $ve
         }
 
         if (password_verify($pass, $row["senha"])) {
-            $_SESSION['usuario'] = [
-                "nome" => $user,
-                "status" => $row["status"] ?? "admin", // Defina um status padrão se for admin
-            ];
-            
+            // Registra a sessão corretamente
+            session_regenerate_id(true); // Evita session fixation
+            $_SESSION[$sessao] = $user;
+            $_SESSION["usuario_id"] = $row["id"]; // Salva o ID do usuário para futuras consultas
             echo json_encode(["success" => true, "redirect" => $redirect]);
             return true;
         }
