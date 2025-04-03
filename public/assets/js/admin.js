@@ -38,39 +38,39 @@ document.addEventListener("DOMContentLoaded", function () {
   updateUserList();
 
   // 📌 Mudar Vendedor do Cliente
-  document.getElementById("formMudarVendedor").addEventListener("submit", async function (event) {
+  document
+    .getElementById("formMudarVendedor")
+    .addEventListener("submit", async function (event) {
       event.preventDefault();
-      const cliente = document.getElementById("clienteNome").value;
-      const vendedor_id = document.getElementById("novoVendedorId").value;
-      const mensagemVendedor = document.getElementById("mensagemMudarVendedor");
 
-      mensagemVendedor.textContent = "";
+      const clienteNome = document.getElementById("clienteNome").value.trim();
+      const novoVendedorId = document.getElementById("novoVendedorId").value;
+      const mensagemMudarVendedor = document.getElementById(
+        "mensagemMudarVendedor"
+      );
 
       try {
         const response = await fetch("../backend/mudar_vendedor.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ cliente, vendedor_id }),
+          body: JSON.stringify({
+            cliente_nome: clienteNome,
+            novo_vendedor_id: novoVendedorId,
+          }),
         });
 
         const result = await response.json();
 
-        if (result.success) {
-          mensagemVendedor.textContent =
-            result.message || "Vendedor alterado com sucesso!";
-          mensagemVendedor.style.color = "green";
-          document.getElementById("formMudarVendedor").reset();
-        } else {
-          mensagemVendedor.textContent =
-            result.message || "Erro ao mudar vendedor.";
-          mensagemVendedor.style.color = "red";
-        }
+        mensagemMudarVendedor.textContent = result.message;
+        mensagemMudarVendedor.style.color = result.success ? "green" : "red";
+        document.getElementById("formMudarVendedor").reset();
       } catch (error) {
         console.error("Erro ao mudar vendedor:", error);
-        mensagemVendedor.textContent = "Erro ao conectar ao servidor.";
-        mensagemVendedor.style.color = "red";
+        mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
+        mensagemMudarVendedor.style.color = "red";
       }
     });
+
 
   formMudarVendedor.addEventListener("submit", async function (event) {
     event.preventDefault();
