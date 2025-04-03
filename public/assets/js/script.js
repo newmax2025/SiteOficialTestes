@@ -2,14 +2,34 @@ let captchaValidado = false;
 
 function onCaptchaSuccess() {
   captchaValidado = true;
-  // Garante que o botão tem o ID correto no HTML: id="consultarBtn"
-  const consultarBtn = document.getElementById("consultarBtn");
-  if (consultarBtn) {
-    consultarBtn.disabled = false;
-  } else {
-    console.error("Botão com id 'consultarBtn' não encontrado.");
-  }
+  document.getElementById("consultarBtn").disabled = false;
 }
+
+
+function resetCaptcha() {
+  captchaValidado = false; // Invalida o CAPTCHA
+  document.getElementById("consultarBtn").disabled = true; // Desativa o botão
+
+  // Remove o CAPTCHA antigo
+  const captchaContainer = document.getElementById("captcha");
+  captchaContainer.innerHTML = ""; // Remove conteúdo anterior
+
+  // Recria o CAPTCHA
+  const novoCaptcha = document.createElement("div");
+  novoCaptcha.className = "cf-turnstile";
+  novoCaptcha.setAttribute("data-sitekey", "0x4AAAAAABDPzCDp7OiEAfvh");
+  novoCaptcha.setAttribute("data-callback", "onCaptchaSuccess");
+
+  captchaContainer.appendChild(novoCaptcha);
+
+  // Recarrega o script do Turnstile para garantir que o novo CAPTCHA funcione
+  const script = document.createElement("script");
+  script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+  script.async = true;
+  script.defer = true;
+  document.body.appendChild(script);
+}
+
 
 function formatCPF(input) {
   let value = input.value.replace(/\D/g, "");
@@ -181,7 +201,9 @@ async function consultarCPF() {
     dadosElement.style.display = "none"; // Esconde a área de dados em caso de erro
   } finally {
     consultarBtn.disabled = false; // Reabilita o botão após a requisição
+    resetCaptcha(); // Reseta o CAPTCHA para a próxima consulta
   }
+
 }
 
 // Função auxiliar para formatar CPF (usada para exibir o CPF retornado)
