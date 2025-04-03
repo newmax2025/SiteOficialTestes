@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
     formMudarVendedor.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        const clienteInput = document.getElementById("cliente");
-        const vendedorInput = document.getElementById("vendedor");
+        const clienteInput = document.getElementById("clienteNome");
+        const vendedorInput = document.getElementById("novoVendedorId");
 
         if (!clienteInput || !vendedorInput) {
             console.error("Erro: Campos 'cliente' ou 'vendedor' não encontrados no HTML.");
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch("../backend/muda_vendedor.php", {
+            const response = await fetch("../../backend/muda_vendedor.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
