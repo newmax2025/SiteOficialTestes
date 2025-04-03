@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel de Administração</title>
-    <link rel="stylesheet" href="../assets/css/admin.css?v=<?php echo md5_file('../assets/css/admin.css'); ?>">
+    <link rel="stylesheet" href="../assets/css/admin.css?v=<?php echo md5_file('../assets/css/admin.css'); ?>">
     <script>
       fetch("../backend/verifica_sessao.php")
         .then((response) => response.json())
