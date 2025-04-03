@@ -30,35 +30,34 @@ document.addEventListener("DOMContentLoaded", function () {
   // Atualiza a lista de usuários ao carregar a página
   updateUserList();
 
-  document.addEventListener("DOMContentLoaded", function () {
-    
+  formMudarVendedor.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-    if (formMudarVendedor) {
-        formMudarVendedor.addEventListener("submit", async function (event) {
-            event.preventDefault();
+    const clienteNome = document.getElementById("clienteNome").value.trim();
+    const novoVendedorId = document.getElementById("novoVendedorId").value;
 
-            const clienteNome = document.getElementById("clienteNome").value.trim();
-            const novoVendedorId = document.getElementById("novoVendedorId").value;
+    console.log("Enviando:", { cliente_nome: clienteNome, novo_vendedor_id: novoVendedorId });
 
-            try {
-                const response = await fetch("../backend/mudar_vendedor.php", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ cliente_nome: clienteNome, novo_vendedor_id: novoVendedorId }),
-                });
-
-                const result = await response.json();
-                mensagemMudarVendedor.textContent = result.message;
-                mensagemMudarVendedor.style.color = result.success ? "green" : "red";
-                formMudarVendedor.reset();
-            } catch (error) {
-                console.error("Erro ao mudar vendedor:", error);
-                mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
-                mensagemMudarVendedor.style.color = "red";
-            }
+    try {
+        const response = await fetch("../backend/mudar_vendedor.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ cliente_nome: clienteNome, novo_vendedor_id: novoVendedorId }),
         });
+
+        const result = await response.json();
+        console.log("Resposta do backend:", result);
+
+        mensagemMudarVendedor.textContent = result.message;
+        mensagemMudarVendedor.style.color = result.success ? "green" : "red";
+        formMudarVendedor.reset();
+    } catch (error) {
+        console.error("Erro ao mudar vendedor:", error);
+        mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
+        mensagemMudarVendedor.style.color = "red";
     }
 });
+
 
 
 
