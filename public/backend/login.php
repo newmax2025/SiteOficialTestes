@@ -76,7 +76,11 @@ function verificarLogin($conexao, $user, $pass, $tabela, $sessao, $redirect, $ve
         }
 
         if (password_verify($pass, $row["senha"])) {
-            $_SESSION[$sessao] = $user;
+            $_SESSION['usuario'] = [
+                "nome" => $user,
+                "status" => $row["status"] ?? "admin", // Defina um status padrão se for admin
+            ];
+            
             echo json_encode(["success" => true, "redirect" => $redirect]);
             return true;
         }
