@@ -9,11 +9,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const mensagemStatus = document.getElementById("mensagemStatus");
 
   const formMudarVendedor = document.getElementById("formMudarVendedor");
-  const mensagemMudarVendedor = document.getElementById("mensagemMudarVendedor");
-
+  const mensagemMudarVendedor = document.getElementById(
+    "mensagemMudarVendedor"
+  );
 
   // Verifica se os elementos existem antes de adicionar eventos
-  if (!userForm || !removeUserForm || !statusForm || !userListElement || !formMudarVendedor) {
+  if (
+    !userForm ||
+    !removeUserForm ||
+    !statusForm ||
+    !userListElement ||
+    !formMudarVendedor
+  ) {
     console.error(
       "Erro: Um ou mais elementos do formulário não foram encontrados no HTML."
     );
@@ -30,31 +37,68 @@ document.addEventListener("DOMContentLoaded", function () {
   // Atualiza a lista de usuários ao carregar a página
   updateUserList();
 
+  // 📌 Mudar Vendedor do Cliente
+  document.getElementById("formMudarVendedor").addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const cliente = document.getElementById("clienteNome").value;
+      const vendedor_id = document.getElementById("novoVendedorId").value;
+      const mensagemVendedor = document.getElementById("mensagemMudarVendedor");
+
+      mensagemVendedor.textContent = "";
+
+      try {
+        const response = await fetch("../backend/mudar_vendedor.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ cliente, vendedor_id }),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          mensagemVendedor.textContent =
+            result.message || "Vendedor alterado com sucesso!";
+          mensagemVendedor.style.color = "green";
+          document.getElementById("formMudarVendedor").reset();
+        } else {
+          mensagemVendedor.textContent =
+            result.message || "Erro ao mudar vendedor.";
+          mensagemVendedor.style.color = "red";
+        }
+      } catch (error) {
+        console.error("Erro ao mudar vendedor:", error);
+        mensagemVendedor.textContent = "Erro ao conectar ao servidor.";
+        mensagemVendedor.style.color = "red";
+      }
+    });
+
   formMudarVendedor.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const clienteNome = document.getElementById("clienteNome").value.trim();
     const novoVendedorId = document.getElementById("novoVendedorId").value;
 
-
     try {
-        const response = await fetch("../backend/mudar_vendedor.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cliente_nome: clienteNome, novo_vendedor_id: novoVendedorId }),
-        });
+      const response = await fetch("../backend/mudar_vendedor.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cliente_nome: clienteNome,
+          novo_vendedor_id: novoVendedorId,
+        }),
+      });
 
-        const result = await response.json();
+      const result = await response.json();
 
-        mensagemMudarVendedor.textContent = result.message;
-        mensagemMudarVendedor.style.color = result.success ? "green" : "red";
-        formMudarVendedor.reset();
+      mensagemMudarVendedor.textContent = result.message;
+      mensagemMudarVendedor.style.color = result.success ? "green" : "red";
+      formMudarVendedor.reset();
     } catch (error) {
-        console.error("Erro ao mudar vendedor:", error);
-        mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
-        mensagemMudarVendedor.style.color = "red";
+      console.error("Erro ao mudar vendedor:", error);
+      mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
+      mensagemMudarVendedor.style.color = "red";
     }
-});
+  });
 
   // Cadastro de novo usuário
   userForm.addEventListener("submit", async function (event) {
@@ -140,14 +184,14 @@ document.addEventListener("DOMContentLoaded", function () {
         statusForm.reset();
         updateUserList();
       } else {
-        mensagemStatus.textContent = result.message || "Erro ao alterar status.";
+        mensagemStatus.textContent =
+          result.message || "Erro ao alterar status.";
         mensagemStatus.style.color = "red";
       }
     } catch (error) {
       handleFetchError(error, mensagemStatus, "alteração de status");
     }
   });
-
 
   // Atualiza a lista de usuários
   async function updateUserList() {
