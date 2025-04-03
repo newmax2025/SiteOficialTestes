@@ -37,33 +37,42 @@ document.addEventListener("DOMContentLoaded", function () {
   // Atualiza a lista de usuários ao carregar a página
   updateUserList();
 
-  formMudarVendedor.addEventListener("submit", async function (event) {
+  document.getElementById("formMudarVendedor").addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const clienteNome = document.getElementById("clienteNome").value.trim();
-    const novoVendedorId = document.getElementById("novoVendedorId").value;
+    const cliente = document.getElementById("cliente").value.trim();
+    const vendedor_id = document.getElementById("vendedor").value.trim();
+
+    if (!cliente || !vendedor_id) {
+        alert("Preencha todos os campos!");
+        return;
+    }
 
     try {
-      const response = await fetch("../backend/mudar_vendedor.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          cliente_nome: clienteNome,
-          novo_vendedor_id: novoVendedorId,
-        }),
-      });
+        const response = await fetch("../backend/muda_vendedor.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"  // 🚀 Isso garante que o servidor interprete como JSON
+            },
+            body: JSON.stringify({
+                cliente: cliente,
+                vendedor_id: parseInt(vendedor_id)  // 🚀 Converte para número
+            })
+        });
 
-      const result = await response.json();
+        const result = await response.json();
 
-      mensagemMudarVendedor.textContent = result.message;
-      mensagemMudarVendedor.style.color = result.success ? "green" : "red";
-      formMudarVendedor.reset();
+        if (result.success) {
+            alert("Vendedor atualizado com sucesso!");
+        } else {
+            alert("Erro: " + result.message);
+        }
     } catch (error) {
-      console.error("Erro ao mudar vendedor:", error);
-      mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
-      mensagemMudarVendedor.style.color = "red";
+        console.error("Erro na requisição:", error);
+        alert("Erro ao enviar solicitação.");
     }
-  });
+});
+
 
   // Cadastro de novo usuário
   userForm.addEventListener("submit", async function (event) {
