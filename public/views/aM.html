@@ -146,6 +146,16 @@
             background-color: #0b03ff;
         }
     </style>
+    <script>
+        fetch("verifica_sessao.php")
+          .then(response => response.json())
+          .then(data => {
+            if (!data.autenticado) {
+              window.location.href = "login.html"; // Redireciona se não estiver autenticado
+            }
+          });
+        </script>
+        
 </head>
 <body>
     <input type="checkbox" id="check">
