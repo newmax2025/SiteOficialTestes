@@ -1,17 +1,41 @@
 <?php
-session_start(); // Inicia a sessão
+session_start();
 header('Content-Type: application/json');
+require 'config.php';
 
-if (!isset($_SESSION['usuario'])) {
+// Verifica se o usuário está autenticado
+if (!isset($_SESSION["usuario"])) {
     echo json_encode(["autenticado" => false]);
-    exit;
+    exit();
 }
 
-// Retorna os dados do usuário autenticado
-echo json_encode([
-    "autenticado" => true,
-    "nome" => $_SESSION['usuario']['nome'],
-    "whatsapp" => $_SESSION['usuario']['whatsapp'],
-    "status" => $_SESSION['usuario']['status']
-]);
+// Obtém o nome do usuário logado
+$usuario = $_SESSION["usuario"];
+
+// Busca os dados do cliente junto com o revendedor correspondente
+$sql = "SELECT c.usuario, c.status, v.nome AS revendedor_nome, v.whatsapp AS revendedor_whatsapp 
+        FROM clientes c
+        LEFT JOIN vendedores v ON c.vendedor_id = v.id
+        WHERE c.usuario = ?";
+
+$stmt = $conexao->prepare($sql);
+$stmt->bind_param("s", $usuario);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $dados = $result->fetch_assoc();
+
+    echo json_encode([
+        "autenticado" => true,
+        "nome" => $dados["revendedor_nome"] ?? "Não informado",
+        "whatsapp" => !empty($dados["revendedor_whatsapp"]) ? "https://wa.me/".$dados["revendedor_whatsapp"] : "#",
+        "status" => $dados["status"]
+    ]);
+} else {
+    echo json_encode(["autenticado" => false]);
+}
+
+$stmt->close();
+$conexao->close();
 ?>
