@@ -37,41 +37,57 @@ document.addEventListener("DOMContentLoaded", function () {
   // Atualiza a lista de usuários ao carregar a página
   updateUserList();
 
-  document.getElementById("formMudarVendedor").addEventListener("submit", async function (event) {
-    event.preventDefault();
+  document.addEventListener("DOMContentLoaded", function () {
+    const formMudarVendedor = document.getElementById("formMudarVendedor");
 
-    const cliente = document.getElementById("cliente").value.trim();
-    const vendedor_id = document.getElementById("vendedor").value.trim();
-
-    if (!cliente || !vendedor_id) {
-        alert("Preencha todos os campos!");
+    if (!formMudarVendedor) {
+        console.error("Erro: Formulário 'formMudarVendedor' não encontrado no HTML.");
         return;
     }
 
-    try {
-        const response = await fetch("../backend/muda_vendedor.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"  // 🚀 Isso garante que o servidor interprete como JSON
-            },
-            body: JSON.stringify({
-                cliente: cliente,
-                vendedor_id: parseInt(vendedor_id)  // 🚀 Converte para número
-            })
-        });
+    formMudarVendedor.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-        const result = await response.json();
+        const clienteInput = document.getElementById("cliente");
+        const vendedorInput = document.getElementById("vendedor");
 
-        if (result.success) {
-            alert("Vendedor atualizado com sucesso!");
-        } else {
-            alert("Erro: " + result.message);
+        if (!clienteInput || !vendedorInput) {
+            console.error("Erro: Campos 'cliente' ou 'vendedor' não encontrados no HTML.");
+            return;
         }
-    } catch (error) {
-        console.error("Erro na requisição:", error);
-        alert("Erro ao enviar solicitação.");
-    }
+
+        const cliente = clienteInput.value.trim();
+        const vendedor_id = vendedorInput.value.trim();
+
+        if (!cliente || !vendedor_id) {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        try {
+            const response = await fetch("../backend/muda_vendedor.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    cliente: cliente,
+                    vendedor_id: parseInt(vendedor_id)
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert("Vendedor atualizado com sucesso!");
+            } else {
+                alert("Erro: " + result.message);
+            }
+        } catch (error) {
+            console.error("Erro na requisição:", error);
+            alert("Erro ao enviar solicitação.");
+        }
+    });
 });
+
 
 
   // Cadastro de novo usuário

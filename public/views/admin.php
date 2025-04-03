@@ -74,15 +74,20 @@
       
       <h3>Mudar Vendedor do Cliente</h3>
       <form id="formMudarVendedor">
-        <label for="clienteNome">Nome do Cliente:</label>
-        <input type="text" id="clienteNome" name="clienteNome" required />
+    <label for="cliente">Nome do Cliente:</label>
+    <input type="text" id="cliente" required>
 
-        <label for="novoVendedorId">Novo Vendedor (ID):</label>
-        <input type="number" id="novoVendedorId" name="novoVendedorId" required />
+    <label for="vendedor">Novo Vendedor:</label>
+    <select id="vendedor" required>
+        <option value="1">Vendedor 1</option>
+        <option value="2">Vendedor 2</option>
+        <option value="3">Vendedor 3</option>
+    </select>
 
-        <button type="submit">Mudar Vendedor</button>
-      </form>
-<p id="mensagemMudarVendedor"></p>
+    <button type="submit">Alterar Vendedor</button>
+</form>
+
+      <p id="mensagemMudarVendedor"></p>
 
 
       <button onclick="window.location.href='login.php'">Sair</button>
