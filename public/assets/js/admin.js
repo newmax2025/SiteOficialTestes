@@ -8,9 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const mensagemRemocao = document.getElementById("mensagemRemocao");
   const mensagemStatus = document.getElementById("mensagemStatus");
 
+  const formMudarVendedor = document.getElementById("formMudarVendedor");
+  const mensagemMudarVendedor = document.getElementById("mensagemMudarVendedor");
+
 
   // Verifica se os elementos existem antes de adicionar eventos
-  if (!userForm || !removeUserForm || !statusForm || !userListElement) {
+  if (!userForm || !removeUserForm || !statusForm || !userListElement || !formMudarVendedor) {
     console.error(
       "Erro: Um ou mais elementos do formulário não foram encontrados no HTML."
     );
@@ -28,8 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
   updateUserList();
 
   document.addEventListener("DOMContentLoaded", function () {
-    const formMudarVendedor = document.getElementById("formMudarVendedor");
-    const mensagemMudarVendedor = document.getElementById("mensagemMudarVendedor");
+    
 
     if (formMudarVendedor) {
         formMudarVendedor.addEventListener("submit", async function (event) {
