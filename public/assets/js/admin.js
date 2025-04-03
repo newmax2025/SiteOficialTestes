@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch("../../backend/muda_vendedor.php", {
+            const response = await fetch("../backend/muda_vendedor.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
