@@ -35,14 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
         formMudarVendedor.addEventListener("submit", async function (event) {
             event.preventDefault();
 
-            const clienteId = document.getElementById("clienteId").value;
+            const clienteNome = document.getElementById("clienteNome").value.trim();
             const novoVendedorId = document.getElementById("novoVendedorId").value;
 
             try {
                 const response = await fetch("../backend/mudar_vendedor.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ cliente_id: clienteId, novo_vendedor_id: novoVendedorId }),
+                    body: JSON.stringify({ cliente_nome: clienteNome, novo_vendedor_id: novoVendedorId }),
                 });
 
                 const result = await response.json();
@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
 
 
   // Cadastro de novo usuário
