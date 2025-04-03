@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Validação básica
     if (!username || !password) {
       errorMessage.textContent = "Preencha todos os campos!";
+      resetCaptcha();
       return;
     }
 
@@ -35,10 +36,29 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = data.redirect;
       } else {
         errorMessage.textContent = data.message;
+        resetCaptcha(); // Reseta o CAPTCHA ao falhar
       }
     } catch (error) {
       console.error("Erro na requisição:", error);
       errorMessage.textContent = "Erro ao conectar ao servidor.";
+      resetCaptcha(); // Reseta o CAPTCHA mesmo em caso de erro inesperado
     }
   });
+
+  function resetCaptcha() {
+    document.getElementById("captcha-response").value = ""; // Limpa o token
+
+    setTimeout(() => {
+      const captchaContainer = document.getElementById("captcha");
+      if (captchaContainer) {
+        captchaContainer.innerHTML = ""; // Remove o CAPTCHA antigo
+        turnstile.render("#captcha", {
+          sitekey: "0x4AAAAAABDPzCDp7OiEAfvh",
+          callback: onCaptchaSuccess,
+        });
+      } else {
+        console.warn("Elemento CAPTCHA não encontrado!");
+      }
+    }, 500); // Pequeno delay para evitar falhas no reset
+  }
 });
