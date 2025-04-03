@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const clienteNome = document.getElementById("clienteNome").value.trim();
     const novoVendedorId = document.getElementById("novoVendedorId").value;
 
-    console.log("Enviando:", { cliente_nome: clienteNome, novo_vendedor_id: novoVendedorId });
 
     try {
         const response = await fetch("../backend/mudar_vendedor.php", {
@@ -46,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         const result = await response.json();
-        console.log("Resposta do backend:", result);
 
         mensagemMudarVendedor.textContent = result.message;
         mensagemMudarVendedor.style.color = result.success ? "green" : "red";
@@ -57,9 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
         mensagemMudarVendedor.style.color = "red";
     }
 });
-
-
-
 
   // Cadastro de novo usuário
   userForm.addEventListener("submit", async function (event) {
