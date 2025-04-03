@@ -27,7 +27,39 @@ document.addEventListener("DOMContentLoaded", function () {
   // Atualiza a lista de usuários ao carregar a página
   updateUserList();
 
-  // 📌 Cadastro de novo usuário
+  document.addEventListener("DOMContentLoaded", function () {
+    const formMudarVendedor = document.getElementById("formMudarVendedor");
+    const mensagemMudarVendedor = document.getElementById("mensagemMudarVendedor");
+
+    if (formMudarVendedor) {
+        formMudarVendedor.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const clienteId = document.getElementById("clienteId").value;
+            const novoVendedorId = document.getElementById("novoVendedorId").value;
+
+            try {
+                const response = await fetch("../backend/mudar_vendedor.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ cliente_id: clienteId, novo_vendedor_id: novoVendedorId }),
+                });
+
+                const result = await response.json();
+                mensagemMudarVendedor.textContent = result.message;
+                mensagemMudarVendedor.style.color = result.success ? "green" : "red";
+                formMudarVendedor.reset();
+            } catch (error) {
+                console.error("Erro ao mudar vendedor:", error);
+                mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
+                mensagemMudarVendedor.style.color = "red";
+            }
+        });
+    }
+});
+
+
+  // Cadastro de novo usuário
   userForm.addEventListener("submit", async function (event) {
     event.preventDefault();
     const username = document.getElementById("newUser").value;
@@ -58,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 📌 Remover usuário
+  // Remover usuário
   removeUserForm.addEventListener("submit", async function (event) {
     event.preventDefault();
     const username = document.getElementById("removeUser").value;
@@ -88,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 📌 Alterar Status do Usuário
+  // Alterar Status do Usuário
   statusForm.addEventListener("submit", async function (event) {
     event.preventDefault();
     const username = document.getElementById("username").value;
@@ -120,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  // 📌 Atualiza a lista de usuários
+  // Atualiza a lista de usuários
   async function updateUserList() {
     userListElement.innerHTML = "<li>Carregando...</li>";
 
