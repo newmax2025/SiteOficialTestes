@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const mensagemRemocao = document.getElementById("mensagemRemocao");
   const mensagemStatus = document.getElementById("mensagemStatus");
 
-  const formMudarVendedor = document.getElementById("formMudarVendedor"); // Pega o elemento
+  const formMudarVendedor = document.getElementById("formMudarVendedor");
   const mensagemMudarVendedor = document.getElementById(
     "mensagemMudarVendedor"
   );
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     !removeUserForm ||
     !statusForm ||
     !userListElement ||
-    !formMudarVendedor // Verifica se o form de mudar vendedor existe
+    !formMudarVendedor
   ) {
     console.error(
       "Erro: Um ou mais elementos do formulário não foram encontrados no HTML."
@@ -37,15 +37,46 @@ document.addEventListener("DOMContentLoaded", function () {
   // Atualiza a lista de usuários ao carregar a página
   updateUserList();
 
-  // 📌 Mudar Vendedor do Cliente - MANTENHA APENAS ESTE BLOCO
+  // 📌 Mudar Vendedor do Cliente
+    document
+    .getElementById("formMudarVendedor")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const clienteNome = document.getElementById("clienteNome").value.trim();
+      const novoVendedorId = document.getElementById("novoVendedorId").value;
+      const mensagemMudarVendedor = document.getElementById(
+        "mensagemMudarVendedor"
+      );
+
+      try {
+        const response = await fetch("../backend/mudar_vendedor.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            cliente_nome: clienteNome,
+            novo_vendedor_id: novoVendedorId,
+          }),
+        });
+
+        const result = await response.json();
+
+        mensagemMudarVendedor.textContent = result.message;
+        mensagemMudarVendedor.style.color = result.success ? "green" : "red";
+        document.getElementById("formMudarVendedor").reset();
+      } catch (error) {
+        console.error("Erro ao mudar vendedor:", error);
+        mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
+        mensagemMudarVendedor.style.color = "red";
+      }
+    });
+
+
   formMudarVendedor.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const clienteNome = document.getElementById("clienteNome").value.trim();
     const novoVendedorId = document.getElementById("novoVendedorId").value;
-
-    // Limpa a mensagem anterior
-    mensagemMudarVendedor.textContent = "";
 
     try {
       const response = await fetch("../backend/mudar_vendedor.php", {
@@ -57,28 +88,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }),
       });
 
-      // Verifica se a resposta da rede foi ok
-      if (!response.ok) {
-        // Tenta ler a resposta como texto para depuração, mesmo se não for JSON
-        const errorText = await response.text();
-        throw new Error(
-          `Erro HTTP: ${response.status} - ${response.statusText}. Resposta: ${errorText}`
-        );
-      }
-
-      const result = await response.json(); // Agora seguro para chamar json()
+      const result = await response.json();
 
       mensagemMudarVendedor.textContent = result.message;
       mensagemMudarVendedor.style.color = result.success ? "green" : "red";
-      if (result.success) {
-        formMudarVendedor.reset(); // Reseta apenas em caso de sucesso
-      }
+      formMudarVendedor.reset();
     } catch (error) {
-      // Usar a função de erro genérica seria bom aqui também
-      // handleFetchError(error, mensagemMudarVendedor, "mudança de vendedor");
       console.error("Erro ao mudar vendedor:", error);
-      mensagemMudarVendedor.textContent =
-        error.message || "Erro ao conectar ao servidor."; // Exibe a mensagem de erro capturada
+      mensagemMudarVendedor.textContent = "Erro ao conectar ao servidor.";
       mensagemMudarVendedor.style.color = "red";
     }
   });
