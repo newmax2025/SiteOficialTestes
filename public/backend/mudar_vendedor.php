@@ -1,6 +1,6 @@
 <?php
-session_start();
 header('Content-Type: application/json');
+ob_start();
 require 'config.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
