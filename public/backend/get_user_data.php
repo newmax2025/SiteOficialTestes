@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("config.php"); // Certifique-se de incluir seu arquivo de conexão
+include("../backend/config.php"); // Certifique-se de incluir seu arquivo de conexão
 
 if (!isset($_SESSION['user_id'])) {
     echo json_encode(["autenticado" => false]);
