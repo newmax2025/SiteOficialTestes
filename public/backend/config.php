@@ -18,6 +18,18 @@ $dbname = $_ENV['DB_NAME'];
 $username = $_ENV['DB_USER'];
 $password = $_ENV['DB_PASS'];
 
+// Define o fuso horário para esta conexão específica
+// Use 'America/Sao_Paulo' para abranger corretamente horários de verão (se/quando aplicável)
+// para a maior parte do Brasil, incluindo MG.
+if (!$conexao->query("SET time_zone = 'America/Sao_Paulo'")) {
+    error_log("Falha ao definir time_zone da conexão: " . $conexao->error);
+     // Considere se isso é um erro fatal para sua aplicação
+}
+// Define o charset para UTF-8 (boa prática geral)
+if (!$conexao->set_charset("utf8mb4")) {
+    error_log("Erro ao definir charset da conexão: " . $conexao->error);
+}
+
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 try {
