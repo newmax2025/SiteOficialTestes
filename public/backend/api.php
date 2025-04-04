@@ -23,7 +23,7 @@ try {
     // --- Obtenção do ID do Cliente da Sessão ---
     // **CRÍTICO: Verifique qual chave ('user_id', 'cliente_id', etc.) seu sistema de login
     // usa para armazenar o ID do cliente na sessão e ajuste abaixo!**
-    $idClienteLog = $_SESSION['user_id'] ?? null;
+    $idClienteLog = $_SESSION['usuario_id'] ?? null;
 
     // **Verificação Opcional (Recomendado):**
     // Se a consulta SÓ pode ser feita por clientes logados, descomente para lançar erro 401.
