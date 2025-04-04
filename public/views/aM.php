@@ -251,7 +251,7 @@
             <div class="modal-content">
                 <p>Contrate o Plano</p>
             </div></section>
-        <h2>Outros Aplicativos</h2>
+        <h2>Modulos Avançados</h2>
         <div class="carousel-container">
             <div class="card pequeno"> 
                 
