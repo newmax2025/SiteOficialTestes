@@ -8,7 +8,7 @@ require 'config.php';
 // Defina a chave usada para buscar o token no seu banco de dados
 define('TOKEN_DB_KEY', 'token_api');
 
-define('CONTADOR_NOME_CONSULTA', 'ConsultaCPF_DBConsultas');
+define('CONTADOR_NOME_CONSULTA', 'ModuloConsultaCPF');
 
 try {
     // 1. Receber o CPF do frontend
