@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 // **IMPORTANTE: Garanta que a sessão seja iniciada ANTES de qualquer output**
 // Coloque isso no topo do seu script ou em um 'require' inicial
 if (session_status() == PHP_SESSION_NONE) {
@@ -111,49 +112,45 @@ try {
 
 
     // --- 4. Processar Resposta e Inserir no Log se Sucesso ---
-    if ($httpStatusCode >= 200 && $httpStatusCode < 300) { // Intervalo de sucesso HTTP (2xx)
+    // --- VERIFICAÇÃO DE SUCESSO E **INSERÇÃO NO LOG (COM DATETIME PHP)** ---
+if ($httpStatusCode >= 200 && $httpStatusCode < 300) { // Sucesso (2xx)
 
-        // -------- INÍCIO: Bloco de inserção no log de consultas --------
-        // Verifica se a conexão com o BD ainda está ativa
-        if (isset($conexao) && $conexao instanceof mysqli && $conexao->ping()) {
-            $tipoConsultaLog = TIPO_CONSULTA_ATUAL;
-            // $idClienteLog foi obtido da sessão no início do bloco try
+    // -------- INÍCIO: Bloco de inserção no log (MODIFICADO) --------
+    if (isset($conexao) && $conexao instanceof mysqli && $conexao->ping()) {
+        $tipoConsultaLog = TIPO_CONSULTA_ATUAL;
+        $idClienteLog = $_SESSION['usuario_id'] ?? null; // Use a chave correta da sessão
 
-            $sqlLog = "INSERT INTO log_consultas (tipo_consulta, id_cliente) VALUES (?, ?)";
-            $stmtLog = $conexao->prepare($sqlLog);
+        // **NOVO: Gerar data/hora atual no PHP usando o timezone definido**
+        $dataHoraAtualPHP = date('Y-m-d H:i:s'); // Formato padrão MySQL DATETIME
 
-            if ($stmtLog) {
-                // Associa os parâmetros: 's' para string (tipo_consulta), 'i' para integer (id_cliente)
-                $stmtLog->bind_param("si", $tipoConsultaLog, $idClienteLog);
-                if (!$stmtLog->execute()) {
-                    // Loga o erro, mas não impede a resposta principal de ser enviada
-                    error_log("Falha ao inserir no log de consultas (Tipo: " . $tipoConsultaLog . ", Cliente: " . $idClienteLog . "): " . $stmtLog->error);
-                }
-                $stmtLog->close(); // Fecha o statement do log
-            } else {
-                error_log("Falha ao preparar statement do log: " . $conexao->error);
+        // **NOVO: SQL inclui a coluna data_hora_consulta**
+        $sqlLog = "INSERT INTO log_consultas (tipo_consulta, id_cliente, data_hora_consulta) VALUES (?, ?, ?)";
+        $stmtLog = $conexao->prepare($sqlLog);
+
+        if ($stmtLog) {
+            // **NOVO: Bind parameters: s=tipo, i=id_cliente, s=datahora**
+            $stmtLog->bind_param("sis", $tipoConsultaLog, $idClienteLog, $dataHoraAtualPHP);
+            if (!$stmtLog->execute()) {
+                error_log("Falha ao inserir no log (" . $tipoConsultaLog . "): " . $stmtLog->error);
             }
+            $stmtLog->close();
         } else {
-            error_log("Conexão com BD perdida ou inválida antes de tentar inserir no log.");
-            // Decida se isso é crítico. Geralmente, logar é suficiente.
+            error_log("Falha ao preparar statement do log: " . $conexao->error);
         }
-        // -------- FIM: Bloco de inserção no log --------
+    } else {
+        error_log("Conexão com BD perdida antes de inserir no log.");
+    }
+    // -------- FIM: Bloco de inserção no log --------
 
-        // Limpa o buffer de saída (caso haja algum aviso ou espaço em branco indesejado)
-        ob_end_clean();
-        // Envia a resposta original da API externa para o frontend
-        echo $externalApiResponse;
-        // Termina a execução do script imediatamente após enviar a resposta de sucesso
-        exit();
+    ob_end_clean();
+    echo $externalApiResponse;
+    exit();
 
     } else {
-        // A API externa retornou um código de erro (não 2xx)
-        $errorData = json_decode($externalApiResponse, true); // Tenta decodificar a resposta de erro
-        $externalMessage = $errorData['message'] ?? "Serviço de consulta externa retornou erro HTTP {$httpStatusCode}.";
-        // Lança uma exceção para ser tratada pelos blocos catch abaixo
-        // Usando o $httpStatusCode como código da exceção se for um erro de cliente/servidor
-        $exceptionCode = ($httpStatusCode >= 400) ? $httpStatusCode : 0;
-        throw new RuntimeException($externalMessage, $exceptionCode);
+    // ... (Tratamento de erro da API externa - permanece igual) ...
+        $errorData = json_decode($externalApiResponse, true);
+        $externalMessage = $errorData['message'] ?? "Serviço de consulta retornou erro {$httpStatusCode}.";
+        throw new RuntimeException($externalMessage);
     }
 
 } catch (mysqli_sql_exception $e) {
