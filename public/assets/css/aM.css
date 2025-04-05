@@ -106,6 +106,7 @@ transition: opacity 4s ease-in-out;
   border: 4px solid rgba(255, 191, 0, 0.7); /* Verde fluorescente */
  box-shadow: 0 0 15px rgba(255, 191, 0, 0.7); /* Brilho ao redor */
  border-radius: 12px; /* Cantos arredondados, opcional */
+ animation: pulse-border 2s infinite;
 }
 
 .Premium:hover {
@@ -384,3 +385,19 @@ footer .copy p {
     from { transform: translateY(-20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
   }
+
+  @keyframes pulse-border {
+    0% {
+      box-shadow: 0 0 10px rgba(255, 191, 0, 0.6);
+      border-color: rgba(255, 191, 0, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(255, 191, 0, 1);
+      border-color: rgba(255, 191, 0, 1);
+    }
+    100% {
+      box-shadow: 0 0 10px rgba(255, 191, 0, 0.6);
+      border-color: rgba(255, 191, 0, 0.7);
+    }
+  }
+  
