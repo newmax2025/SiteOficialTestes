@@ -38,7 +38,7 @@ header img {
 .banner-grande {
 width: 100%;
 height: 40vh; /* Altura adaptável ao tamanho da tela */
-background-image: url('../assets/img/assine\ o\ plano\ premium\ .jpg'); /* Imagem inicial */
+background-image: url('img/assine\ o\ plano\ premium\ .jpg'); /* Imagem inicial */
 background-size: contain; /* Ajusta a imagem sem cortar, mantendo a proporção */
 background-position: center;
 transition: background-image 0.5s ease;
@@ -321,25 +321,46 @@ footer .copy p {
 
 /* Caixa do popup */
 .popup {
-  background:  #000d1e; 
+  background: #000d1e; 
   border: 4px solid #28a745; 
   border-radius: 16px;
   max-width: 600px;
   width: 90%;
   padding: 15px;
   color: #ffffff;
-  position: relative;
+  position: fixed; /* Muda para fixed pra centralizar na tela */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   animation: slideDown 0.4s ease;
   font-family: 'Arial', sans-serif;
-  line-height: 1.6; /* Ideal para leitura */
+  line-height: 1.6;
   font-size: 1rem;
-  text-align: left; /* Evita espaçamento forçado */
+  text-align: left;
   box-sizing: border-box;
   word-wrap: break-word;
-  hyphens: auto; /* Ajuda em palavras grandes */
+  hyphens: auto;
+  z-index: 9999;
+  overflow: auto; /* Garante que conteúdo extra role em telas pequenas */
 }
- 
+
+/* Responsivo para dispositivos móveis */
+@media (max-width: 768px) {
+  .popup {
+    max-width: 90%;
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .popup {
+    max-width: 95%;
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+}
 
 /* Logo */
 .popup img {
@@ -384,9 +405,11 @@ footer .copy p {
   font-size: 24px;
   background: none;
   border: none;
-  color: #fefefe;
+  color: #ffffff;
   cursor: pointer;
   transition: color 0.3s ease;
+  font-size: 1.5rem;
+  z-index: 10000;
 }
 
 .close-btn:hover {
@@ -425,6 +448,7 @@ footer .copy p {
     display: inline-block;
     font-size: 20px;
   }
+
   
   /* Faz a animação acontecer em sequência */
   .estrelas-animadas span:nth-child(1) { animation-delay: 0s; }
@@ -450,4 +474,19 @@ footer .copy p {
     100% { color: white; transform: scale(1); }
   }
   
-  
+  /* Responsivo para dispositivos móveis */
+@media (max-width: 768px) {
+  .popup {
+    max-width: 90%;
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .popup {
+    max-width: 95%;
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+}
