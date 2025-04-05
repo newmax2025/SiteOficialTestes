@@ -89,8 +89,8 @@ if (!isset($_SESSION['usuario'])) {
                 document.getElementById("usuario-card").innerHTML = `
                     <h2>Bem-vindo, ${"<?php echo $_SESSION['usuario']; ?>"}!</h2>
                     <div class="info"><span class="label">Plano:</span> ${dados.plano}</div>
-                    <div class="info"><span class="label">Vendedor:</span><br>
-                        ${dados.nome}<br>
+                    <div class="info"><span class="label">Vendedor: </span>${dados.nome}<br>
+                        
                         <a href="${dados.whatsapp}" class="whatsapp-link" target="_blank">Falar no WhatsApp</a>
                     </div>
                 `;
