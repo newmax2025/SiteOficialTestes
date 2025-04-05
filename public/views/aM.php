@@ -168,7 +168,7 @@
             // Atualiza os elementos da página com os dados do usuário
             document.getElementById("revendedor").innerHTML = `Revendedor: ${data.nome}`;
             document.getElementById("whatsapp").setAttribute("href", data.whatsapp);
-            document.getElementById("status").innerHTML = `Status: ${data.status}`;
+            document.getElementById("plano").innerHTML = `Status: ${data.plano}`;
         })
         .catch(error => {
             console.error("Erro ao carregar os dados do usuário:", error);
@@ -191,7 +191,7 @@
         <li><a href="#"><i class=""></i>Perfil 🔐</a></li>
         <li><a href="#" id="revendedor"><i class=""></i>Revendedor: Carregando...</a></li>
         <li><a href="https://wa.me/" id="whatsapp"><i class="fa-brands fa-whatsapp"></i>Whatsapp</a></li>
-        <li><a href="#" id="status"><i class=""></i>Status: Carregando...</a></li>
+        <li><a href="#" id="plano"><i class=""></i>Plano: Carregando...</a></li>
         <a href="../backend/logout.php">Sair</a>
     </ul>
     </div>
