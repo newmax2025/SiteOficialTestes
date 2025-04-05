@@ -6,8 +6,159 @@
   text-decoration: none;
 }
 body {
-  font-family: 'Roboto', sans-serif;
+  background-color: #111;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
+header {
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+  background: black;
+}
+
+header h1 {
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+  background: black;
+}
+/* Banner grande ajustado para 100% da largura e altura da tela */
+.banner-grande {
+width: 100%;
+height: 40vh; /* Altura adaptável ao tamanho da tela */
+background-image: url('img/assine\ o\ plano\ premium\ .jpg'); /* Imagem inicial */
+background-size: contain; /* Ajusta a imagem sem cortar, mantendo a proporção */
+background-position: center;
+transition: background-image 0.5s ease;
+background-repeat: no-repeat; /* Evita que a imagem se repita */
+align-self: center;
+padding: auto;
+transition: opacity 4s ease-in-out;
+}
+
+.carousel h2 {
+  margin-left: 10px;
+  align-self: center;
+}
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.carousel-container::-webkit-scrollbar { 
+  display: none;  /* Chrome, Safari, Opera */
+}
+.card {
+  flex: 0 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.grande {
+  width: 500px;
+  height: 170px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px; /* Cantos arredondados */
+  overflow: hidden; /* Garante que a borda não afete a imagem */
+}
+
+.pequeno {
+  width: 130px;
+  height: 110px;
+  text-align: center;
+  position:relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px; /* Cantos arredondados */
+  overflow: hidden; /* Garante que a borda não afete a imagem */
+}
+
+.Gratuitos {
+  width: 130px;
+  height: 110px;
+  text-align: center;
+  position:relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px; /* Cantos arredondados */
+  overflow: hidden; /* Garante que a borda não afete a imagem */
+}
+
+.Gratuitos:hover {
+  transform: translateY(-5px) scale(1.05); /* Leve movimento para cima e ampliação */
+  box-shadow: 0 0 15px rgba(9, 255, 0, 0.7); /* Borda iluminada verde */
+}
+
+.Premium {
+  width: 130px;
+  height: 110px;
+  text-align: center;
+  position:relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px; /* Cantos arredondados */
+  overflow: hidden; /* Garante que a borda não afete a imagem */
+  border: 4px solid rgba(255, 191, 0, 0.7); /* Verde fluorescente */
+ box-shadow: 0 0 15px rgba(255, 191, 0, 0.7); /* Brilho ao redor */
+ border-radius: 12px; /* Cantos arredondados, opcional */
+}
+
+.Premium:hover {
+  transform: translateY(-5px) scale(1.05); /* Leve movimento para cima e ampliação */
+  box-shadow: 0 0 15px rgba(255, 191, 0, 0.7); /* Borda iluminada verde */
+}
+
+.adicionando {
+  width: 130px;
+  height: 110px;
+  text-align: center;
+  position:relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px; /* Cantos arredondados */
+  overflow: hidden; /* Garante que a borda não afete a imagem */
+}
+
+.adicionando:hover {
+  transform: translateY(-5px) scale(1.05); /* Leve movimento para cima e ampliação */
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); /* Borda iluminada verde */
+}
+
+.pequeno:hover {
+  transform: translateY(-5px) scale(1.05); /* Leve movimento para cima e ampliação */
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.7); /* Borda iluminada verde */
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-assinatura {
+  width: 90%;
+  height: 30%;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #26ff00;
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  font-size: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.btn-assinatura:hover {
+  background-color: #0b03ff;
+}
+
 .sidebar {
   position: fixed;
   left: -250px;
@@ -138,3 +289,98 @@ footer .copy p {
   font-size: 18px;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Fundo escuro (overlay) */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Caixa do popup */
+.popup {
+  background:  #000d1e; 
+  border: 4px solid #28a745; 
+  border-radius: 16px;
+  max-width: 600px;
+  width: 90%;
+  padding: 2rem;
+  color: #ffffff;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.4s ease;
+}
+
+/* Logo */
+.popup img {
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  max-width: 120px;
+}
+
+/* Títulos */
+.popup h2 {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.popup h3 {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #28a745;
+  margin-bottom: 1.5rem;
+}
+
+/* Texto */
+.popup p {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+.popup p:last-of-type {
+  margin-bottom: 0;
+  font-style: italic;
+  font-size: 0.85rem;
+  text-align: right;
+  color: #1de110;
+}
+
+/* Botão de fechar */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #fefefe;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: rgb(4, 255, 0);
+}
+
+  /* Animações */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
