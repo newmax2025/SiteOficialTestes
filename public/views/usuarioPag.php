@@ -54,6 +54,11 @@ if (!isset($_SESSION['usuario'])) {
     </style>
 </head>
 <body>
+    <input type="checkbox" id="check">
+    <label for="check">
+      <i class="fas fa-bars" id="btn"></i>
+      <i class="fas fa-times" id="cancel"></i>
+    </label>
     <div class="sidebar">
     <header>Menu</header>
     <ul>
@@ -64,6 +69,9 @@ if (!isset($_SESSION['usuario'])) {
         <a href="../backend/logout.php">Sair</a>
     </ul>
     </div>
+    <header>
+        <h1></h1>
+    </header>
     <div class="card" id="usuario-card">
         <h2>Carregando...</h2>
     </div>
