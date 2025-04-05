@@ -1,14 +1,11 @@
 <?php
-// Dados simulados (você pode puxar isso de um banco de dados futuramente)
-$usuario = [
-    'nome' => 'João da Silva',
-    'status' => 'Ativo',
-    'plano' => 'Premium',
-    'vendedor' => [
-        'nome' => 'Carlos Vendas',
-        'whatsapp' => '5511999999999' // no formato código do país + número
-    ]
-];
+session_start();
+
+// Redireciona se não estiver logado
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +16,7 @@ $usuario = [
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f7fa;
+            background: #f5f7fa;
             padding: 40px;
         }
         .card {
@@ -56,22 +53,41 @@ $usuario = [
     </style>
 </head>
 <body>
-    <div class="card">
-        <h2>Bem-vindo, <?php echo htmlspecialchars($usuario['nome']); ?>!</h2>
-
-        <div class="info">
-            <span class="label">Status:</span> <?php echo $usuario['status']; ?>
-        </div>
-        <div class="info">
-            <span class="label">Plano:</span> <?php echo $usuario['plano']; ?>
-        </div>
-        <div class="info">
-            <span class="label">Vendedor Responsável:</span><br>
-            <?php echo $usuario['vendedor']['nome']; ?><br>
-            <a class="whatsapp-link" 
-               href="https://wa.me/<?php echo $usuario['vendedor']['whatsapp']; ?>" 
-               target="_blank">Falar no WhatsApp</a>
-        </div>
+    <div class="card" id="usuario-card">
+        <h2>Carregando...</h2>
     </div>
+
+    <script>
+        async function carregarDadosUsuario() {
+            try {
+                const resposta = await fetch("dados_usuario.php");
+                const dados = await resposta.json();
+
+                if (!dados.autenticado) {
+                    document.getElementById("usuario-card").innerHTML = `
+                        <h2>Usuário não autenticado</h2>
+                        <p>Por favor, faça login novamente.</p>
+                    `;
+                    return;
+                }
+
+                document.getElementById("usuario-card").innerHTML = `
+                    <h2>Bem-vindo, ${"<?php echo $_SESSION['usuario']; ?>"}!</h2>
+                    <div class="info"><span class="label">Plano:</span> ${dados.plano}</div>
+                    <div class="info"><span class="label">Vendedor:</span><br>
+                        ${dados.nome}<br>
+                        <a href="${dados.whatsapp}" class="whatsapp-link" target="_blank">Falar no WhatsApp</a>
+                    </div>
+                `;
+            } catch (erro) {
+                document.getElementById("usuario-card").innerHTML = `
+                    <h2>Erro ao carregar os dados</h2>
+                    <p>${erro}</p>
+                `;
+            }
+        }
+
+        carregarDadosUsuario();
+    </script>
 </body>
 </html>
