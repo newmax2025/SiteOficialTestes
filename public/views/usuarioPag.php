@@ -60,7 +60,7 @@ if (!isset($_SESSION['usuario'])) {
     <script>
         async function carregarDadosUsuario() {
             try {
-                const resposta = await fetch("dados_usuario.php");
+                const resposta = await fetch("../backend/get_user_data.php");
                 const dados = await resposta.json();
 
                 if (!dados.autenticado) {
