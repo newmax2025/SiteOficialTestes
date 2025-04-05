@@ -13,6 +13,14 @@ body {
   padding: 0;
 }
 
+h2 {
+  color: #ffffff;
+}
+.carousel2 h2 {
+color: gold;
+margin-left: 10px;
+align-self: center;
+}
 header {
   text-align: center;
   padding: 20px;
@@ -30,7 +38,7 @@ header img {
 .banner-grande {
 width: 100%;
 height: 40vh; /* Altura adaptável ao tamanho da tela */
-background-image: url('../assets/img/assine\ o\ plano\ premium\ .jpg'); /* Imagem inicial */
+background-image: url('img/assine\ o\ plano\ premium\ .jpg'); /* Imagem inicial */
 background-size: contain; /* Ajusta a imagem sem cortar, mantendo a proporção */
 background-position: center;
 transition: background-image 0.5s ease;
@@ -39,9 +47,11 @@ align-self: center;
 padding: auto;
 transition: opacity 4s ease-in-out;
 }
+
 .carousel h2 {
   margin-left: 10px;
   align-self: center;
+  
 }
 .carousel-container {
   display: flex;
@@ -69,6 +79,7 @@ transition: opacity 4s ease-in-out;
   border-radius: 10px; /* Cantos arredondados */
   overflow: hidden; /* Garante que a borda não afete a imagem */
 }
+
 .pequeno {
   width: 130px;
   height: 110px;
@@ -399,4 +410,36 @@ footer .copy p {
       border-color: rgba(255, 191, 0, 0.7);
     }
   }
+  
+  .estrelas-animadas span {
+    color: white;
+    animation: preencherEstrela 1s ease-in-out infinite alternate;
+    display: inline-block;
+    font-size: 20px;
+  }
+  
+  /* Faz a animação acontecer em sequência */
+  .estrelas-animadas span:nth-child(1) { animation-delay: 0s; }
+  .estrelas-animadas span:nth-child(2) { animation-delay: 0.2s; }
+  .estrelas-animadas span:nth-child(3) { animation-delay: 0.4s; }
+  .estrelas-animadas span:nth-child(4) { animation-delay: 0.6s; }
+  .estrelas-animadas span:nth-child(5) { animation-delay: 0.8s; }
+  
+  @keyframes preencherEstrela {
+    50%  { color: gold; transform: scale(1.3); }
+    100% { color: white; transform: scale(1); }
+  }
+  
+  /* Faz a animação acontecer em sequência "NOME" */
+  .carusel2 h2 span:nth-child(1) { animation-delay: 0s; }
+  .carusel2 h2 span:nth-child(2) { animation-delay: 0.2s; }
+  .carusel2 h2 span:nth-child(3) { animation-delay: 0.4s; }
+  .carusel2 h2 span:nth-child(4) { animation-delay: 0.6s; }
+  .carusel2 h2 span:nth-child(5) { animation-delay: 0.8s; }
+  
+  @keyframes preencherEstrela {
+    50%  { color: gold; transform: scale(1.3); }
+    100% { color: white; transform: scale(1); }
+  }
+  
   
