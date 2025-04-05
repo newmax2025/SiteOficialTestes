@@ -99,7 +99,7 @@
     <!-- Banner grande acima da seção de favoritos -->
     <div class="banner-grande" id="banner-grande"></div>
 
-    <section class="carousel" id="favoritos">
+    <section class="carousel2" id="favoritos">
         <h2>Favoritos</h2>
         <div class="carousel-container">
             <div class="card grande"> <img src="../assets/img/CRLV DIGITAL Horizontal.jpg" alt="CRLV DIGITAL Horizontal"> </div>
