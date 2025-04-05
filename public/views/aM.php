@@ -151,7 +151,16 @@
     </div>
     </section>
     <section class="carousel" id="favoritos">
-        <h2>Exclusivos Premium</h2>
+          <h2>
+            Exclusivos Premium 
+            <span class="estrelas-animadas">
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+            </span>
+          </h2>
         <div class="carousel-container">
             <div class="card Premium"> 
                 
