@@ -69,7 +69,6 @@ transition: opacity 4s ease-in-out;
   border-radius: 10px; /* Cantos arredondados */
   overflow: hidden; /* Garante que a borda não afete a imagem */
 }
-
 .pequeno {
   width: 130px;
   height: 110px;
