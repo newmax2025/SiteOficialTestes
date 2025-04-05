@@ -119,7 +119,7 @@
             <h2> Modulos Gratuitos</h2>
             <div class="carousel-container">
                 <div class="card Gratuitos">  
-                   <a href="Consulta CPF.html"> <img src="img/CONSULTA CPF MAX.jpg" alt="CRLV (Todos os Estados)"></a>
+                   <a href="Consulta CPF.html"> <img src="../assets/img/CONSULTA CPF MAX.jpg" alt="CRLV (Todos os Estados)"></a>
                    </div>
                    <div class="card adicionando" onclick="mostrarBotao(this)">  
                     <img src="../assets/img/Consulta Telefone (adicionando).jpg" alt="CRLV (Todos os Estados)">
@@ -437,8 +437,8 @@
               
   const banner = document.querySelector('.banner-grande');
   const imagens = [
-    'img/assine\ o\ plano\ premium\ .jpg',
-    'img/Banner\ principal\ 1.jpg'
+    '../assets/img/assine\ o\ plano\ premium\ .jpg',
+    '../assets/img/Banner\ principal\ 1.jpg'
   ];
 
   let index = 0;
