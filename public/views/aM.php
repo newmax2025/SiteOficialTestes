@@ -426,6 +426,7 @@
                                                         <div class="modal-content">
                                                             <p>Contrate o Plano</p>
                                                         </div>
+                                                        </section>
                         <footer>
                             <div class="copy">
                                 <p>Copyright © 2025 New Max Buscas | All Rights Reserved </p>
