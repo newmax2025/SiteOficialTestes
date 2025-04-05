@@ -7,146 +7,6 @@
     <link rel="stylesheet" href="../assets/css/aM.css?v=<?php echo md5_file('../assets/css/aM.css'); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
-    <style>
-        body {
-            background-color: #111;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            text-align: center;
-            padding: 20px;
-            font-size: 24px;
-            background: black;
-        }
-
-        header h1 {
-            text-align: center;
-            padding: 20px;
-            font-size: 24px;
-            background: black;
-        }
-            /* Banner grande ajustado para 100% da largura e altura da tela */
-            .banner-grande {
-            width: 100%;
-            height: 40vh; /* Altura adaptável ao tamanho da tela */
-            background-image: url('../assets/img/assine o plano premium .jpg'); /* Imagem inicial */
-            background-size: contain; /* Ajusta a imagem sem cortar, mantendo a proporção */
-            background-position: center;
-            transition: background-image 0.5s ease;
-            background-repeat: no-repeat; /* Evita que a imagem se repita */
-            align-self: center;
-            padding: auto;
-        }
-
-        .carousel h2 {
-            margin-left: 10px;
-        }
-        .carousel-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 10px;
-            padding: 10px;
-            scroll-behavior: smooth;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none;  /* Internet Explorer 10+ */
-        }
-        .carousel-container::-webkit-scrollbar { 
-            display: none;  /* Chrome, Safari, Opera */
-        }
-        .card {
-            flex: 0 0 auto;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-        .grande {
-            width: 500px;
-            height: 170px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 10px; /* Cantos arredondados */
-            overflow: hidden; /* Garante que a borda não afete a imagem */
-        }
-
-        .pequeno {
-            width: 130px;
-            height: 110px;
-            text-align: center;
-            position:relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 10px; /* Cantos arredondados */
-            overflow: hidden; /* Garante que a borda não afete a imagem */
-        }
-        
-        .Gratuitos {
-            width: 130px;
-            height: 110px;
-            text-align: center;
-            position:relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 10px; /* Cantos arredondados */
-            overflow: hidden; /* Garante que a borda não afete a imagem */
-        }
-
-        .Gratuitos:hover {
-            transform: translateY(-5px) scale(1.05); /* Leve movimento para cima e ampliação */
-            box-shadow: 0 0 15px rgba(9, 255, 0, 0.7); /* Borda iluminada verde */
-        }
-
-        .adicionando {
-            width: 130px;
-            height: 110px;
-            text-align: center;
-            position:relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 10px; /* Cantos arredondados */
-            overflow: hidden; /* Garante que a borda não afete a imagem */
-        }
-
-        .adicionando:hover {
-            transform: translateY(-5px) scale(1.05); /* Leve movimento para cima e ampliação */
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); /* Borda iluminada verde */
-        }
-
-        .pequeno:hover {
-            transform: translateY(-5px) scale(1.05); /* Leve movimento para cima e ampliação */
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.7); /* Borda iluminada verde */
-        }
-
-        .card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .titulo-card {
-            font-size: 8px;
-            font-weight: bold;
-            color: #fff;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-        .btn-assinatura {
-            width: 90%;
-            height: 30%;
-            position: absolute;
-            bottom: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #26ff00;
-            color: white;
-            border: none;
-            padding: 10px 10px;
-            font-size: 8px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .btn-assinatura:hover {
-            background-color: #0b03ff;
-        }
-    </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
         fetch("../backend/get_user_data.php")
@@ -198,7 +58,44 @@
     <header>
         <h1></h1>
     </header>
-    
+     <!-- código do popup -->
+
+ <!-- POPUP -->
+<div class="overlay" id="popupOverlay">
+    <div class="popup">
+      <button class="close-btn" onclick="document.getElementById('popupOverlay').style.display='none'">×</button>
+  
+      <img src="/assets/img/New Max Buscas.png" alt="Logo NEW MAX BUSCAS" />
+  
+      <h2>⚠️ Atenção!</h2>
+  
+      <p>
+        Todos os pagamentos devem ser realizados exclusivamente através do link oficial <strong>NewMaxBuscasPay</strong>.
+      </p>
+      <p>
+        ⚠️ <strong>Não efetue pagamentos em nome de pessoas físicas.</strong>
+      </p>
+      <p>
+        O cadastro será liberado automaticamente após a confirmação do pagamento pelo link oficial.
+      </p>
+  
+      <h3>🔒 Aviso Importante!</h3>
+  
+      <p>
+        Nenhum representante está autorizado a enviar login e senha para acesso ao painel de consultas.
+      </p>
+      <p>
+        Nosso sistema é de uso exclusivo para assinantes. Disponibilizamos alguns módulos gratuitos apenas para que você possa experimentar nossos serviços.
+      </p>
+      <p>
+        Para ter acesso completo, é necessário adquirir um plano ativo.
+      </p>
+      <p>
+        Atenciosamente,<br>
+        Equipe NEW MAX BUSCAS
+      </p>
+    </div>
+  </div>
     <!-- Banner grande acima da seção de favoritos -->
     <div class="banner-grande" id="banner-grande"></div>
 
@@ -222,8 +119,12 @@
             <h2> Modulos Gratuitos</h2>
             <div class="carousel-container">
                 <div class="card Gratuitos">  
-                   <a href="consultaCPF.php"> <img src="../assets/img/CONSULTA CPF MAX.jpg" alt="CRLV (Todos os Estados)"></a> 
+                   <a href="Consulta CPF.html"> <img src="img/CONSULTA CPF MAX.jpg" alt="CRLV (Todos os Estados)"></a>
                    </div>
+                   <div class="card adicionando" onclick="mostrarBotao(this)">  
+                    <img src="../assets/img/Consulta Telefone (adicionando).jpg" alt="CRLV (Todos os Estados)">
+                    <button class="botao">Sendo Adicionado</button>
+                </div>
                   <div class="card adicionando" onclick="mostrarBotao(this)">  
         <img src="../assets/img/Consulta Email (adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
@@ -244,95 +145,121 @@
         <img src="../assets/img/desmascarar Pix (adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
-
+    <div class="card adicionando" onclick="mostrarBotao(this)">  
+        <img src="../assets/img/desmascarar Pix (adicionando).jpg" alt="CRLV (Todos os Estados)">
+        <button class="botao">Sendo Adicionado</button>
+    </div>
     </section>
-    <section class="carousel" id="treinos">
-        <section><div id="modal" class="modal">
-            <div class="modal-content">
-                <p>Contrate o Plano</p>
-            </div></section>
-        <h2>Modulos Avançados</h2>
+    <section class="carousel" id="favoritos">
+        <h2>Exclusivos Premium</h2>
+        <div class="carousel-container">
+            <div class="card Premium"> 
+                
+                <img src="../assets/img/Consulta  CREDI LINK.jpg" alt="CRLV (Todos os Estados)">
+    
+            </div>
+            <div class="card Premium"> 
+               
+                <img src="../assets/img/CNH Completa com Foto.jpg" alt="img/Impressão CNH (Original)a">
+                
+            </div>
+            <div class="card Premium"> 
+                
+                <img src="../assets/img/Placa Plus Plano Premium.jpg" alt="Consulta SERASA">
+                
+            </div>
+            <div class="card Premium"> 
+               
+                <img src="../assets/img/cONSULTA Detran Pro.jpg" alt="SCPC">
+                
+            </div>
+    </section>
+    <section class="carousel" id="favoritos">
+
+    <h2>Modulos Avançados</h2>
+    <div class="carousel-container">
+        <div class="card pequeno"> 
+            
+            <img src="../assets/img/CRLV (Todos os Estados).jpg" alt="CRLV (Todos os Estados)">
+
+        </div>
+        <div class="card pequeno"> 
+           
+            <img src="../assets/img/Impressão CNH (Original).jpg" alt="img/Impressão CNH (Original)a">
+            
+        </div>
+        <div class="card pequeno"> 
+            
+            <img src="../assets/img/Consulta SERASA.jpg" alt="Consulta SERASA">
+            
+        </div>
+        <div class="card pequeno"> 
+           
+            <img src="../assets/img/SCPC.jpg" alt="SCPC">
+            
+        </div>
+
+        <div class="card pequeno"> 
+            
+            <img src="../assets/img/CONSULTA RADAR DE VEÍCULOS.jpg" alt="CONSULTA RADAR DE VEÍCULOS">
+            
+        </div>
+
+        <div class="card pequeno"> 
+            
+            <img src="../assets/img/CNH Simples.jpg" alt="CNH Simples">
+            
+        </div>
+        <div class="card pequeno"> 
+            
+            <img src="../assets/img/Consulta Veicular Max.jpg" alt="Consulta Veicular Max">
+        </div>
+        <div class="card pequeno"> 
+               
+            <img src="../assets/img/Consulta Frota Veicular.jpg" alt="Treino Academia">
+          
+        </div>
+        <div class="card pequeno"> 
+            
+            <img src="../assets/img/CONSULTA RECEITA FEDERAL.jpg" alt="Treino Academia">
+           
+        </div>
+
+<div class="card pequeno"> 
+   
+    <img src="../assets/img/CONSULTA  CADSUS.jpg" alt="CONSULTA  CADSUS">
+</div>
+<div class="card pequeno"> 
+    
+    <img src="../assets/img/Consulta Tracker.jpg" alt="Consulta Tracker">
+   
+</div>
+        <!-- Adicione mais cards conforme necessário -->
+    </div>
+    <!-- Adicione mais Colunas conforme necessário -->
+        <section class="carousel" id="treinos">
         <div class="carousel-container">
             <div class="card pequeno"> 
-                
-                <img src="../assets/img/CRLV (Todos os Estados).jpg" alt="CRLV (Todos os Estados)">
-                <p>Anel de Sole em Ouro e Diamante 50 pontos</p>
+                        
+                <img src="../assets/img/Gerar Score.jpg" alt="Treino Academia">
                
             </div>
             <div class="card pequeno"> 
                
-                <img src="../assets/img/Impressão CNH (Original).jpg" alt="img/Impressão CNH (Original)a">
-                
-            </div>
-            <div class="card pequeno"> 
-                
-                <img src="../assets/img/Consulta SERASA.jpg" alt="Consulta SERASA">
-                
-            </div>
-            <div class="card pequeno"> 
-               
-                <img src="../assets/img/SCPC.jpg" alt="SCPC">
-                
-            </div>
-            <div class="card pequeno"> 
-                
-                <img src="../assets/img/CNH Completa com Foto.jpg" alt="CNH Completa com Foto">
-                
-            </div>
-            <div class="card pequeno"> 
-                
-                <img src="../assets/img/CONSULTA RADAR DE VEÍCULOS.jpg" alt="CONSULTA RADAR DE VEÍCULOS">
-                
-            </div>
-            <div class="card pequeno"> 
-                
-                <img src="../assets/img/cONSULTA Detran Pro.jpg" alt="cONSULTA Detran Pro">
+                <img src="../assets/img/Buscar Modelo de Veículo.jpg" alt="Treino Academia">
                
             </div>
             <div class="card pequeno"> 
+             
+                <img src="../assets/img/Gerador de Aniversário.jpg" alt="Treino Academia">
                
-                <img src="../assets/img/Consulta  CREDI LINK.jpg" alt="Consulta  CREDI LINK">
-               
-            </div>
-            <div class="card pequeno"> 
-                
-                <img src="../assets/img/CNH Simples.jpg" alt="CNH Simples">
-                
-            </div>
-            <div class="card pequeno"> 
-                
-                <img src="../assets/img/Consulta Veicular Max.jpg" alt="Consulta Veicular Max">
             </div>
             <div class="card pequeno"> 
               
-                <img src="../assets/img/CONSULTA CPF MAX.jpg" alt="CONSULTA CPF MAX">
-               
-            </div>
-            <!-- Adicione mais cards conforme necessário -->
-        </div>
-        <section class="carousel" id="treinos">
-        <div class="carousel-container">
-
-               <div class="card pequeno"> 
-               
-                        <img src="../assets/img/Consulta Frota Veicular.jpg" alt="Treino Academia">
-                      
-                    </div>
-                    <div class="card pequeno"> 
-                        
-                        <img src="../assets/img/CONSULTA RECEITA FEDERAL.jpg" alt="Treino Academia">
-                       
-                    </div>
-
-            <div class="card pequeno"> 
-               
-                <img src="../assets/img/CONSULTA  CADSUS.jpg" alt="CONSULTA  CADSUS">
-            </div>
-            <div class="card pequeno"> 
+                <img src="../assets/img/CONSULTA INSS.jpg" alt="Treino Casa">
                 
-                <img src="../assets/img/Consulta Tracker.jpg" alt="Consulta Tracker">
-               
             </div>
+
             <div class="card pequeno"> 
                 
                 <img src="../assets/img/Consulta Tracker AVANÇADO.jpg" alt="Consulta Tracker AVANÇADO">
@@ -368,31 +295,33 @@
                 <img src="../assets/img/CONSULTA EMPRESARIAL.jpg" alt="CONSULTA EMPRESARIAL">
               
             </div>
+            
             <!-- Adicione mais cards conforme necessário -->
         </div>
         <section class="carousel" id="treinos">
             <div class="carousel-container">
 
-                    <div class="card pequeno"> 
-                        
-                        <img src="../assets/img/Gerar Score.jpg" alt="Treino Academia">
-                       
-                    </div>
-                    <div class="card pequeno"> 
-                       
-                        <img src="../assets/img/Buscar Modelo de Veículo.jpg" alt="Treino Academia">
-                       
-                    </div>
-                    <div class="card pequeno"> 
-                     
-                        <img src="../assets/img/Gerador de Aniversário.jpg" alt="Treino Academia">
-                       
-                    </div>
-                    <div class="card pequeno"> 
-                      
-                        <img src="../assets/img/CONSULTA INSS.jpg" alt="Treino Casa">
-                        
-                    </div>
+                <div class="card pequeno"> 
+                                     
+                    <img src="../assets/img/buscar mandato.jpg" alt="buscar mandato">
+                   
+                </div>
+                <div class="card pequeno"> 
+                  
+                    <img src="../assets/img/imprimir boletim de ocorrência.jpg" alt="imprimir boletim de ocorrência">
+                    
+                </div>
+                <div class="card pequeno"> 
+                    
+                    <img src="../assets/img/listagem novos aposentados.jpg" alt="listagem novos aposentados">
+                   
+                </div>
+                <div class="card pequeno"> 
+                  
+                    <img src="../assets/img/CRV + código.jpg" alt="CRV + código">
+                   
+                </div>
+
                     <div class="card pequeno"> 
                         
                         <img src="../assets/img/Buscar Servidor Público.jpg" alt="Treino Academia">
@@ -433,26 +362,6 @@
                             <div class="carousel-container">
 
                                     <div class="card pequeno"> 
-                                     
-                                        <img src="../assets/img/buscar mandato.jpg" alt="buscar mandato">
-                                       
-                                    </div>
-                                    <div class="card pequeno"> 
-                                      
-                                        <img src="../assets/img/imprimir boletim de ocorrência.jpg" alt="imprimir boletim de ocorrência">
-                                        
-                                    </div>
-                                    <div class="card pequeno"> 
-                                        
-                                        <img src="../assets/img/listagem novos aposentados.jpg" alt="listagem novos aposentados">
-                                       
-                                    </div>
-                                    <div class="card pequeno"> 
-                                      
-                                        <img src="../assets/img/CRV + código.jpg" alt="CRV + código">
-                                       
-                                    </div>
-                                    <div class="card pequeno"> 
                                        
                                         <img src="../assets/img/gerador de rendas.jpg" alt="gerador de rendas">
                                         
@@ -491,29 +400,32 @@
                                                 <img src="../assets/img/buscar parentes.jpg" alt="BACEN">
                                               
                                             </div>
+
+                                            <div class="card pequeno"> 
+                                               
+                                                <img src="../assets/img/Pesquisa por nome.jpg" alt="BACEN">
+                                              
+                                            </div>
+
+                                            <div class="card pequeno"> 
+                                       
+                                                <img src="../assets/img/motorista  de 99_uber.jpg" alt="BACEN">
+                                              
+                                            </div>
+
+                                            <div class="card pequeno"> 
+                                       
+                                                <img src="../assets/img/motorista  de ifood_uber eats.jpg" alt="BACEN">
+                                              
+                                            </div>
                                             <!-- Adicione mais cards conforme necessário -->
                                         </div>
-                                        <section class="carousel" id="treinos">
-                                            <div class="carousel-container">
-
-                                                    <div class="card pequeno"> 
-                                               
-                                                        <img src="../assets/img/Pesquisa por nome.jpg" alt="BACEN">
-                                                      
-                                                    </div>
-
-                                                    <div class="card pequeno"> 
-                                               
-                                                        <img src="../assets/img/motorista  de 99_uber.jpg" alt="BACEN">
-                                                      
-                                                    </div>
-
-                                                    <div class="card pequeno"> 
-                                               
-                                                        <img src="../assets/img/motorista  de ifood_uber eats.jpg" alt="BACEN">
-                                                      
-                                                    </div>
                                                 </div>
+                                                <section class="carousel" id="treinos">
+                                                    <section><div id="modal" class="modal">
+                                                        <div class="modal-content">
+                                                            <p>Contrate o Plano</p>
+                                                        </div>
                         <footer>
                             <div class="copy">
                                 <p>Copyright © 2025 New Max Buscas | All Rights Reserved </p>
@@ -522,6 +434,21 @@
     </section>
     <script>
         
+              
+  const banner = document.querySelector('.banner-grande');
+  const imagens = [
+    'img/assine\ o\ plano\ premium\ .jpg',
+    'img/Banner\ principal\ 1.jpg'
+  ];
+
+  let index = 0;
+
+  setInterval(() => {
+    index = (index + 1) % imagens.length;
+    banner.style.backgroundImage = `url('${imagens[index]}')`;
+  }, 4000); // Troca a imagem a cada 4 segundos
+
+
         // Função para alterar a imagem do banner grande
         function alterarBanner(imagem) {
             document.getElementById('banner-grande').style.backgroundImage = `url('${imagem}')`;
@@ -550,32 +477,7 @@
                 container.scrollLeft = scrollLeft - walk;
             });
 
-            container.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - container.offsetLeft;
-            const walk = (x - startX) * 2;
-            container.scrollLeft = scrollLeft - walk;
-        });
-
-        // Adiciona suporte a toque para mobile
-        container.addEventListener('touchstart', (e) => {
-            isDown = true;
-            startX = e.touches[0].pageX - container.offsetLeft;
-            scrollLeft = container.scrollLeft;
-        });
-
-        container.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            const x = e.touches[0].pageX - container.offsetLeft;
-            const walk = (x - startX) * 2;
-            container.scrollLeft = scrollLeft - walk;
-        });
-
-        container.addEventListener('touchend', () => {
-            isDown = false;
-        });
-
+  
          // Função para abrir o modal
          function abrirModal() {
             document.getElementById("modal").style.display = "flex";
