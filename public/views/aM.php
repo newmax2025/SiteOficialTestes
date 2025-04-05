@@ -56,7 +56,7 @@
     </ul>
     </div>
     <header>
-         <a href="AM.html"> <img src="../assets/img/New Max Buscas.png" alt="New Max Buscas.png"></a>
+         <a href="../assets/views/aM.php"> <img src="../assets/img/New Max Buscas.png" alt="New Max Buscas.png"></a>
     </header>
      <!-- código do popup -->
 
