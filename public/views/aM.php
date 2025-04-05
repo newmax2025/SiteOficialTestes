@@ -40,7 +40,6 @@
         
 </head>
 <body>
-    <a href="AM.html"> <img src="../assets/img/New Max Buscas.png" alt="New Max Buscas.png"></a>
     <input type="checkbox" id="check">
     <label for="check">
       <i class="fas fa-bars" id="btn"></i>
@@ -57,7 +56,7 @@
     </ul>
     </div>
     <header>
-        <h1></h1>
+         <a href="AM.html"> <img src="../assets/img/New Max Buscas.png" alt="New Max Buscas.png"></a>
     </header>
      <!-- código do popup -->
 
