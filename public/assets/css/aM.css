@@ -19,7 +19,7 @@ h2 {
 .carousel2 h2 {
 color: gold;
 margin-left: 10px;
-align-self: center;
+  align-self: center;
 }
 header {
   text-align: center;
@@ -331,7 +331,15 @@ footer .copy p {
   position: relative;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   animation: slideDown 0.4s ease;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6; /* Ideal para leitura */
+  font-size: 1rem;
+  text-align: left; /* Evita espaçamento forçado */
+  box-sizing: border-box;
+  word-wrap: break-word;
+  hyphens: auto; /* Ajuda em palavras grandes */
 }
+ 
 
 /* Logo */
 .popup img {
