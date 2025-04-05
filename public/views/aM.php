@@ -191,7 +191,15 @@
                
                 <img src="../assets/img/Despachante Veicular.jpg" alt="SCPC">
                 
+            </div> <div class="card Premium"> 
+               
+                <img src="../assets/img/CONSULTA RADAR DE VEÍCULOS.jpg" alt="CONSULTA RADAR DE VEÍCULOS">
+
             </div>
+            <!-- Adicione mais cards conforme necessário -->
+        </div>
+
+            
     </section>
     <section class="carousel" id="favoritos">
 
@@ -215,12 +223,6 @@
         <div class="card pequeno"> 
            
             <img src="../assets/img/SCPC.jpg" alt="SCPC">
-            
-        </div>
-
-        <div class="card pequeno"> 
-            
-            <img src="../assets/img/CONSULTA RADAR DE VEÍCULOS.jpg" alt="CONSULTA RADAR DE VEÍCULOS">
             
         </div>
 
@@ -252,6 +254,13 @@
     
     <img src="../assets/img/Consulta Tracker.jpg" alt="Consulta Tracker">
    
+</div>
+           <div class="card pequeno"> 
+                                       
+     <img src="../assets/img/motorista  de ifood_uber eats.jpg" alt="BACEN">
+                                              
+</div>
+ <!-- Adicione mais cards conforme necessário -->
 </div>
         <!-- Adicione mais cards conforme necessário -->
     </div>
