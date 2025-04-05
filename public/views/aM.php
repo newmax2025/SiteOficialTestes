@@ -168,7 +168,7 @@
             // Atualiza os elementos da página com os dados do usuário
             document.getElementById("revendedor").innerHTML = `Revendedor: ${data.nome}`;
             document.getElementById("whatsapp").setAttribute("href", data.whatsapp);
-            document.getElementById("plano").innerHTML = `Status: ${data.plano}`;
+            document.getElementById("plano").innerHTML = `Plano: ${data.plano}`;
         })
         .catch(error => {
             console.error("Erro ao carregar os dados do usuário:", error);
