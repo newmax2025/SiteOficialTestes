@@ -13,6 +13,7 @@ if (!isset($_SESSION['usuario'])) {
 <head>
     <meta charset="UTF-8">
     <title>Página do Usuário</title>
+    <link rel="stylesheet" href="../assets/css/aM.css?v=<?php echo md5_file('../assets/css/aM.css'); ?>">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,6 +54,16 @@ if (!isset($_SESSION['usuario'])) {
     </style>
 </head>
 <body>
+    <div class="sidebar">
+    <header>Menu</header>
+    <ul>
+        <li><a href="#"><i class=""></i>Perfil 🔐</a></li>
+        <li><a href="#" id="revendedor"><i class=""></i>Revendedor: Carregando...</a></li>
+        <li><a href="https://wa.me/" id="whatsapp"><i class="fa-brands fa-whatsapp"></i>Whatsapp</a></li>
+        <li><a href="#" id="plano"><i class=""></i>Plano: Carregando...</a></li>
+        <a href="../backend/logout.php">Sair</a>
+    </ul>
+    </div>
     <div class="card" id="usuario-card">
         <h2>Carregando...</h2>
     </div>
