@@ -182,6 +182,16 @@
                 <img src="../assets/img/cONSULTA Detran Pro.jpg" alt="SCPC">
                 
             </div>
+            <div class="card Premium"> 
+               
+                <img src="../assets/img/Despachante Condutor.jpg" alt="SCPC">
+                
+            </div>
+            <div class="card Premium"> 
+               
+                <img src="../assets/img/Despachante Veicular.jpg" alt="SCPC">
+                
+            </div>
     </section>
     <section class="carousel" id="favoritos">
 
