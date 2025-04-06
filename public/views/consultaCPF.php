@@ -39,24 +39,8 @@
 
         <p id="resultado"></p>
 
-        <div id="dados" class="dados" style="display: none;">
-            <p><span>Nome:</span> <span id="nome"></span></p>
-            <p><span>CPF:</span> <span id="cpf_resultado"></span></p>
-            <p><span>Safra:</span> <span id="safra"></span></p>
-            <p><span>Data de Nascimento:</span> <span id="nascimento"></span></p>
-            <p><span>Nome da Mãe:</span> <span id="nome_mae"></span></p>
-            <p><span>Sexo:</span> <span id="sexo"></span></p>
-            <p><span>Email:</span> <span id="email"></span></p>
-            <p><span>Óbito:</span> <span id="obito"></span></p>
-            <p><span>Status Receita:</span> <span id="status_receita"></span></p>
-            <p><span>CBO:</span> <span id="cbo"></span></p>
-            <p><span>Faixa de Renda:</span> <span id="faixa_renda"></span></p>
-            <p><span>Veículos:</span> <span id="veiculos"></span></p>
-            <p><span>Telefones:</span> <span id="telefones"></span></p>
-            <p><span>Celulares:</span> <span id="celulares"></span></p>
-            <p><span>Empregos:</span> <span id="empregos"></span></p>
-            <p><span>Endereços:</span> <span id="enderecos"></span></p>
-        </div>
+        <div id="dados" class="dados" style="display: none;"></div>
+
     </div>
 
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>

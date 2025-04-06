@@ -16,7 +16,7 @@ require 'config.php';
 
 // --- Constantes ---
 // Chave usada para buscar o token da API no banco de dados (tabela 'config')
-define('TOKEN_DB_KEY', 'token_api');
+define('TOKEN_DB_KEY', 'token_nova_api');
 // Nome/Tipo desta consulta para ser registrado na tabela 'log_consultas'
 define('TIPO_CONSULTA_ATUAL', 'ConsultaCPF_DBConsultas'); // <-- Ajuste se desejar outro nome no log
 
@@ -91,7 +91,8 @@ try {
 
 
     // --- 3. Chamar a API Externa (api.dbconsultas.com) usando cURL ---
-    $externalApiUrl = "https://api.dbconsultas.com/api/v1/{$token}/datalinkcpf/{$cpfLimpo}";
+    //$externalApiUrl = "https://api.dbconsultas.com/api/v1/{$token}/datalinkcpf/{$cpfLimpo}";
+    $externalApiUrl = "https://consultafacil.pro/api/cpf/{$cpfLimpo}?token={$token}";
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $externalApiUrl);

@@ -12,7 +12,7 @@ function resetCaptcha() {
     setTimeout(() => {
         const captchaContainer = document.getElementById("captcha");
         if (captchaContainer) {
-            captchaContainer.innerHTML = ""; // Remove o CAPTCHA antigo
+            captchaContainer. innerHTML = ""; // Remove o CAPTCHA antigo
             turnstile.render("#captcha", {
                 sitekey: "0x4AAAAAABDPzCDp7OiEAfvh",
                 callback: onCaptchaSuccess,
@@ -21,6 +21,10 @@ function resetCaptcha() {
             console.warn("Elemento CAPTCHA não encontrado!");
         }
     }, 500); // Aguarda 500ms antes de recriar o CAPTCHA
+}
+
+function exibirCampo(label, valor) {
+    return `<p><strong>${label}:</strong> ${valor ?? "Não disponível"}</p>`;
 }
 
 function consultarCPF() {
@@ -53,45 +57,106 @@ function consultarCPF() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cpf: cpfLimpo }),
     })
-        .then((response) => {
-            if (!response.ok) throw new Error(`Erro na consulta (${response.status}).`);
-            return response.json();
-        })
-        .then((data) => {
-            if (!data || !data.data) throw new Error("Nenhuma informação encontrada para este CPF.");
+    .then((response) => {
+        if (!response.ok) throw new Error(`Erro na consulta (${response.status}).`);
+        return response.json();
+    })
+    .then((data) => {
+        if (!data || !data.data) throw new Error("Nenhuma informação encontrada para este CPF.");
 
-            const dados = data.data;
-            document.getElementById("nome").innerText = dados.dados_basicos?.nome || "Não disponível";
-            document.getElementById("cpf_resultado").innerText = formatarCPF(dados.dados_basicos?.cpf || "") || "Não disponível";
-            document.getElementById("safra").innerText = dados.dados_basicos?.safra || "Não disponível";
-            document.getElementById("nascimento").innerText = dados.dados_basicos?.nascimento || "Não disponível";
-            document.getElementById("nome_mae").innerText = dados.dados_basicos?.nome_mae || "Não disponível";
-            document.getElementById("sexo").innerText = dados.dados_basicos?.sexo === "M" ? "Masculino" : "Feminino";
-            document.getElementById("email").innerText = dados.dados_basicos?.email || "Não disponível";
-            document.getElementById("obito").innerText = dados.dados_basicos?.obito?.status || "Não disponível";
-            document.getElementById("status_receita").innerText = dados.dados_basicos?.status_receita || "Não disponível";
-            document.getElementById("cbo").innerText = dados.dados_basicos?.cbo || "Não disponível";
-            document.getElementById("faixa_renda").innerText = dados.dados_basicos?.faixa_renda || "Não disponível";
+        const dados = data.data;
+        let html = "";
 
-            document.getElementById("veiculos").innerText = dados.veiculos?.length > 0 ? dados.veiculos.join(", ") : "Não disponível";
-            document.getElementById("telefones").innerText = dados.telefones?.length > 0 ? dados.telefones.join(", ") : "Não disponível";
-            document.getElementById("celulares").innerText = dados.celulares?.length > 0 ? dados.celulares.join(", ") : "Não disponível";
+        const info = dados.personal_info || {};
+        html += "<h3>Informações Pessoais</h3>";
+        html += exibirCampo("Nome", info.name);
+        html += exibirCampo("CPF", formatarCPF(info.document_number));
+        html += exibirCampo("Nascimento", info.birthday_date);
+        html += exibirCampo("Sexo", info.gender === "M" ? "Masculino" : "Feminino");
+        html += exibirCampo("Nome da Mãe", info.mother_name);
+        html += exibirCampo("Nome do Pai", info.father_name);
+        html += exibirCampo("Nacionalidade", info.nationality);
+        html += exibirCampo("Renda", info.income);
 
-            document.getElementById("enderecos").innerText = dados.endereco ? `${dados.endereco.logradouro || "Não disponível"}, ${dados.endereco.cidade || "Não disponível"} - ${dados.endereco.uf || ""}` : "Não disponível";
+        const status = dados.status?.registration_status || {};
+        html += "<h3>Status</h3>";
+        html += exibirCampo("Status Receita", status.description);
+        html += exibirCampo("Data", status.date);
+        html += exibirCampo("Óbito", dados.status?.death ? "Sim" : "Não");
 
-            dadosElement.style.display = "block";
-            resultadoElement.innerText = `Consulta realizada para o CPF: ${cpf}`;
-        })
-        .catch((error) => {
-            console.error("Erro ao consultar CPF:", error);
-            resultadoElement.innerText = `Erro: ${error.message}`;
-            dadosElement.style.display = "none";
-        })
-        .finally(() => {
-            consultarBtn.disabled = false;
-            resetCaptcha(); // Agora recria o CAPTCHA corretamente
-        });
+        const score = dados.score || {};
+        html += "<h3>Score</h3>";
+        html += exibirCampo("Score CSBA", score.score_csba);
+        html += exibirCampo("Risco", score.score_csba_risk_range);
+
+        const serasa = dados.serasa?.new_mosaic || {};
+        html += "<h3>Perfil Serasa</h3>";
+        html += exibirCampo("Código", serasa.code);
+        html += exibirCampo("Descrição", serasa.description);
+        html += exibirCampo("Classe", serasa.class);
+
+        const poderCompra = dados.purchasing_power || {};
+        html += "<h3>Poder de Compra</h3>";
+        html += exibirCampo("Descrição", poderCompra.description);
+        html += exibirCampo("Faixa", poderCompra.range);
+        html += exibirCampo("Renda Estimada", poderCompra.income);
+
+        html += "<h3>Endereços</h3>";
+        if (dados.addresses?.length) {
+            dados.addresses.forEach(end => {
+                html += `<p>${end.type || ""} ${end.place || ""}, ${end.number || "s/n"} - ${end.neighborhood || ""}, ${end.city || ""} - ${end.state || ""} (${end.zip_code || ""})</p>`;
+            });
+        } else {
+            html += "<p>Não disponível</p>";
+        }
+
+        html += "<h3>Telefones</h3>";
+        if (dados.phones?.length) {
+            html += dados.phones.map(tel => `<p>${tel.number}</p>`).join("");
+        } else {
+            html += "<p>Não disponível</p>";
+        }
+
+        html += "<h3>Empregos</h3>";
+        if (dados.jobs?.length) {
+            dados.jobs.forEach(emp => {
+                html += `<p><strong>Empresa:</strong> ${emp.trade_name || "N/A"} | <strong>Admissão:</strong> ${emp.admission_date} | <strong>Saída:</strong> ${emp.termination_date}</p>`;
+            });
+        } else {
+            html += "<p>Não disponível</p>";
+        }
+
+        html += "<h3>Vacinas</h3>";
+        if (dados.vaccines?.length) {
+            dados.vaccines.forEach(vac => {
+                html += `<p><strong>${vac.vaccine}</strong> - ${vac.dose}, ${vac.date} - ${vac.establishment}</p>`;
+            });
+        } else {
+            html += "<p>Não disponível</p>";
+        }
+
+        html += "<h3>Interesses</h3>";
+        const interesses = dados.interests || {};
+        for (const [chave, valor] of Object.entries(interesses)) {
+            const nome = chave.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            html += exibirCampo(nome, typeof valor === "boolean" ? (valor ? "Sim" : "Não") : valor);
+        }
+
+        dadosElement.innerHTML = html;
+        dadosElement.style.display = "block";
+        resultadoElement.innerText = `Consulta realizada para o CPF: ${cpf}`;
+    })
+    .catch((error) => {
+        console.error("Erro ao consultar CPF:", error);
+        resultadoElement.innerText = `Erro: ${error.message}`;
+        dadosElement.style.display = "none";
+    })
+    .finally(() => {
+        consultarBtn.disabled = false;
+        resetCaptcha(); // Agora recria o CAPTCHA corretamente
+    });
 }
+
 
 function formatarCPF(cpf) {
     if (!cpf) return "";
