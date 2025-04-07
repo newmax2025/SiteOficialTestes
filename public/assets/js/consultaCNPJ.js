@@ -78,7 +78,7 @@ function consultarCNPJ() {
         throw new Error(data.erro);
       }
 
-      let empresa = data;
+      let empresa = data.dados;
       const endereco = empresa.address || {};
       const contato = empresa.contact || {};
       const atividades = empresa.activities || {};
