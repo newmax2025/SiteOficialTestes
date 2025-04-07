@@ -262,6 +262,11 @@
     <img src="../assets/img/Consulta Tracker.jpg" alt="Consulta Tracker">
    
 </div>
+        <div class="card pequeno"> 
+                                
+                                <img src="../assets/img/Consultar FGTS.jpg" alt="Buscar Processo">
+                               
+                            </div>
         <!-- Adicione mais cards conforme necessário -->
     </div>
     <!-- Adicione mais Colunas conforme necessário -->
@@ -378,11 +383,6 @@
                             <div class="card pequeno"> 
                                 
                                 <img src="../assets/img/Buscar Assinatura.jpg" alt="Consultar FGTS">
-                               
-                            </div>
-                            <div class="card pequeno"> 
-                                
-                                <img src="../assets/img/Consultar FGTS.jpg" alt="Buscar Processo">
                                
                             </div>
                         </div>
