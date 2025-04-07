@@ -74,37 +74,39 @@ function consultarCep() {
       return response.json();
     })
     .then((data) => {
-      if (!data.sucesso || !Array.isArray(data.dados) || data.dados.length === 0) {
+      if (
+        !data.sucesso ||
+        !Array.isArray(data.dados) ||
+        data.dados.length === 0
+      ) {
         throw new Error("Nenhuma informação encontrada para este CEP.");
       }
 
       let html = `<h3>Resultados encontrados: ${data.dados.length}</h3>`;
 
       data.dados.forEach((pessoa, index) => {
-
         const endereco = pessoa.endereco || {};
-
         html += `<div style="margin-bottom: 16px; border-bottom: 1px solid #ccc; padding-bottom: 8px;">
-        <strong>Resultado ${index + 1}</strong><br>
-        ${exibirCampo("Nome", pessoa.nome)}
-        ${exibirCampo("CPF", pessoa.cpf)}
-        ${exibirCampo("Nome da Mãe", pessoa.mae)}
-        <br><strong>Endereço:</strong><br>
-        ${exibirCampo("Rua", endereco.logradouro)}
-        ${exibirCampo("Número", endereco.numero)}
-        ${exibirCampo("Complemento", endereco.complemento)}
-        ${exibirCampo("Bairro", endereco.bairro)}
-        ${exibirCampo("CEP", endereco.cep)}
-        ${exibirCampo("Cidade", endereco.cidade)}
-        ${exibirCampo("Estado", endereco.estado)}
-        </div>`;
-
+      <strong>Resultado ${index + 1}</strong><br>
+      ${exibirCampo("Nome", pessoa.nome)}
+      ${exibirCampo("CPF", pessoa.cpf)}
+      ${exibirCampo("Nome da Mãe", pessoa.mae)}
+      <br><strong>Endereço:</strong><br>
+      ${exibirCampo("Rua", endereco.logradouro)}
+      ${exibirCampo("Número", endereco.numero)}
+      ${exibirCampo("Complemento", endereco.complemento)}
+      ${exibirCampo("Bairro", endereco.bairro)}
+      ${exibirCampo("CEP", endereco.cep)}
+      ${exibirCampo("Cidade", endereco.cidade)}
+      ${exibirCampo("Estado", endereco.estado)}
+    </div>`;
       });
 
       dadosElement.innerHTML = html;
       dadosElement.style.display = "block";
       resultadoElement.innerText = `Consulta realizada para o CEP: ${cep}`;
     })
+
     .catch((error) => {
       console.error("Erro ao consultar CEP:", error);
       resultadoElement.innerText = `Erro: ${error.message}`;
