@@ -74,13 +74,14 @@ function consultarCep() {
       return response.json();
     })
     .then((data) => {
-      if (!Array.isArray(data) || data.length === 0) {
+      if (!data.sucesso || !Array.isArray(data.dados) || data.dados.length === 0) {
         throw new Error("Nenhuma informação encontrada para este CEP.");
       }
 
-      let html = `<h3>Resultados encontrados: ${data.length}</h3>`;
+      let html = `<h3>Resultados encontrados: ${data.dados.length}</h3>`;
 
-      data.forEach((pessoa, index) => {
+      data.dados.forEach((pessoa, index) => {
+
         const endereco = pessoa.endereco || {};
 
         html += `<div style="margin-bottom: 16px; border-bottom: 1px solid #ccc; padding-bottom: 8px;">
