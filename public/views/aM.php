@@ -385,15 +385,15 @@
                                 <img src="../assets/img/Buscar Assinatura.jpg" alt="Consultar FGTS">
                                
                             </div>
-                        </div>
-                        <section class="carousel" id="treinos">
-                            <div class="carousel-container">
-
-                                    <div class="card pequeno"> 
+                 <div class="card pequeno"> 
                                        
                                         <img src="../assets/img/gerador de rendas.jpg" alt="gerador de rendas">
                                         
                                         </div>
+                        </div>
+                        <section class="carousel" id="treinos">
+                            <div class="carousel-container">
+
                                         <div class="card pequeno"> 
                                        <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
                                             <img src="../assets/img/condutor pro.jpg" alt="condutor pro">
