@@ -127,7 +127,7 @@
                     <button class="botao">Sendo Adicionado</button>
                 </div>
                   <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <img src=".public/assets/img/consulta_EMAIL.jpg" alt="CRLV (Todos os Estados)">
+        <img src="../assets/img/consulta_EMAIL.jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
