@@ -62,9 +62,11 @@ function consultarCPF() {
         return response.json();
     })
     .then((data) => {
-        if (!data || !data.data) throw new Error("Nenhuma informação encontrada para este CPF.");
-
-        const dados = data.data;
+        if (!data || !data.dados || typeof data.dados !== "object") {
+            console.log("Resposta inesperada:", data);
+            throw new Error("Nenhuma informação encontrada para este CPF.");
+        }
+        const dados = data.dados;
         let html = "";
 
         const info = dados.personal_info || {};
