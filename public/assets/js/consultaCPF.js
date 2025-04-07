@@ -56,7 +56,6 @@ const interessesLabels = {
     early_adopters_probability: "Probabilidade de Ser um Inovador (Early Adopter)"
 };
 
-
 function onCaptchaSuccess() {
     captchaValidado = true;
     document.getElementById("consultarBtn").disabled = false;
