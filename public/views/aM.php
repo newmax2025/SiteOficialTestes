@@ -122,31 +122,31 @@
                 <div class="card Gratuitos">  
                    <a href="consultaCPF.php"> <img src="../assets/img/CONSULTA CPF MAX.jpg" alt="CRLV (Todos os Estados)"></a>
                    </div>
-                   <div class="card adicionando" onclick="mostrarBotao(this)">  
+                   <div class="card Gratuitos" onclick="mostrarBotao(this)">  
                     <img src="../assets/img/Consulta Telefone (adicionando).jpg" alt="CRLV (Todos os Estados)">
                     <button class="botao">Sendo Adicionado</button>
                 </div>
-                  <div class="card adicionando" onclick="mostrarBotao(this)">  
+                  <div class="card Gratuitos" onclick="mostrarBotao(this)">  
         <img src="../assets/img/Consulta Email (adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
-    <div class="card adicionando" onclick="mostrarBotao(this)">  
+    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
         <img src="../assets/img/Consulta CNPJ (adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
-    <div class="card adicionando" onclick="mostrarBotao(this)">  
+    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
         <img src="../assets/img/Consulta Funcionário (adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
-    <div class="card adicionando" onclick="mostrarBotao(this)">  
+    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
         <img src="../assets/img/Consulta Placa (adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
-    <div class="card adicionando" onclick="mostrarBotao(this)">  
+    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
         <img src="../assets/img/desmascarar Pix (adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
-    <div class="card adicionando" onclick="mostrarBotao(this)">  
+    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
         <img src="../assets/img/desmascarar Pix (adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
