@@ -47,7 +47,7 @@ if (empty($token)) {
 }
 
 // Consulta à API externa
-$url = "https://consultafacil.pro/api/phone/{$cep}?token={$token}";
+$url = "https://consultafacil.pro/api/cep/{$cep}?token={$token}";
 $ch = curl_init($url);
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
