@@ -21,11 +21,6 @@ if (!isset($input['email'])) {
 }
 
 $email = preg_replace('/\D/', '', $input['email']);
-if (strlen($email) !== 14) {
-    http_response_code(400);
-    echo json_encode(['erro' => 'Email inválido.']);
-    exit;
-}
 
 // Busca o token no banco de dados
 $token = null;
