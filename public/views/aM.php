@@ -103,15 +103,15 @@
     <section class="carousel" id="favoritos">
         <h2>Favoritos</h2>
         <div class="carousel-container">
-            <div class="card grande"> <img src="../assets/img/CRLV DIGITAL Horizontal.jpg" alt="CRLV DIGITAL Horizontal"> </div>
-            <div class="card grande"> <img src="../assets/img/Impressão CNH Horizontal.jpg" alt="Impressão CNH Horizontal"> </div>
-            <div class="card grande"> <img src="../assets/img/Consulta SERASA Horizontal.jpg" alt="Consulta SERASA Horizontal"> </div>
-            <div class="card grande"> <img src="../assets/img/SCPC Horizontal.jpg" alt="SCPC Horizontal"> </div>
-            <div class="card grande"> <img src="../assets/img/CNH Completa com Foto Horizontal.jpg" alt="CNH Completa com Foto Horizontal"> </div>
-            <div class="card grande"> <img src="../assets/img/CONSULTA RADAR DE VEÍCULOS Horizontal.jpg" alt="CONSULTA RADAR DE VEÍCULOS Horizontal"> </div>
-            <div class="card grande"> <img src="../assets/img/CONSULTA Detran Pro Horizontal.jpg" alt="CONSULTA Detran Pro Horizontal"> </div>
-            <div class="card grande"> <img src="../assets/img/Placa Plus Plano Premium Horinzontal.jpg" alt="Placa Plus Plano Premium Horinzontal"> </div>
-            <div class="card grande"> <img src="../assets/img/Consulta  CREDI LINK Horizontal.jpg" alt="Consulta  CREDI LINK Horizontal"> </div>
+             <div class="card grande"> <img src="../assets/img/CRLV_digital_horizontal.jpg" alt="CRLV DIGITAL Horizontal"> </div>
+            <div class="card grande"> <img src="../assets/img/Impressão_CNH_horizontal.jpg" alt="Impressão CNH Horizontal"> </div>
+            <div class="card grande"> <img src="../assets/img/consulta_SERASA_horizontal.jpg" alt="Consulta SERASA Horizontal"> </div>
+            <div class="card grande"> <img src="../assets/img/SCPC_horizontal.jpg" alt="SCPC Horizontal"> </div>
+            <div class="card grande"> <img src="../assets/img/CNH_completa_com_foto_horizontal.jpg" alt="CNH Completa com Foto Horizontal"> </div>
+            <div class="card grande"> <img src="../assets/img/consulta_radar_de_veiculos_horizontal.jpg" alt="CONSULTA RADAR DE VEÍCULOS Horizontal"> </div>
+            <div class="card grande"> <img src="../assets/img/consulta_detran_pro.jpg" alt="CONSULTA Detran Pro Horizontal"> </div>
+            <div class="card grande"> <img src="../assets/img/placa_plus_plano_premium_horinzontal.jpg" alt="Placa Plus Plano Premium Horinzontal"> </div>
+            <div class="card grande"> <img src="../assets/img/consulta_credi_link_horizontal.jpg" alt="Consulta  CREDI LINK Horizontal"> </div>
             <!-- Adicione mais cards conforme necessário -->
         </div>
     </section>
@@ -120,7 +120,7 @@
             <h2> Modulos Gratuitos</h2>
             <div class="carousel-container">
              <div class="card Gratuitos">  
-                   <a href="consultaCPF.php"> <img src="../assets/img/CONSULTA CPF MAX.jpg" alt="CRLV (Todos os Estados)"></a>
+                   <a href="consultaCPF.php"> <img src="../assets/img/consulta_CPF_max.jpg" alt="CRLV (Todos os Estados)"></a>
                    </div>
                    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
                     <a href="consultaTel.php"> <img src="../assets/img/consulta_telefone_(adicionando).jpg" alt="CRLV (Todos os Estados)"></a>
