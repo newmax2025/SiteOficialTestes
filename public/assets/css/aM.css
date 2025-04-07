@@ -71,6 +71,20 @@ transition: opacity 4s ease-in-out;
   overflow: hidden;
   position: relative;
 }
+
+.tarja {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ff0000; /* cor da tarja */
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    border-radius: 4px;
+    z-index: 10;
+    font-size: 14px;
+}
+ 
 .grande {
   width: 500px;
   height: 170px;
