@@ -57,7 +57,7 @@
     </ul>
     </div>
     <header>
-         <img src="../assets/img/New Max Buscas.png" alt="New Max Buscas.png"></a>
+         <img src="../assets/img/new_max_buscas.png" alt="New Max Buscas.png"></a>
     </header>
      <!-- código do popup -->
 
