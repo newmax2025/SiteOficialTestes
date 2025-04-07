@@ -9,7 +9,10 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
-// Verifica se recebeu CPF via POST
+// Inclui a configuração do banco de dados
+require 'config.php'; // certifique-se de que $conexao (mysqli) está sendo criado corretamente aqui
+
+// Lê e valida o CPF
 $input = json_decode(file_get_contents('php://input'), true);
 if (!isset($input['cpf'])) {
     http_response_code(400);
@@ -17,23 +20,38 @@ if (!isset($input['cpf'])) {
     exit;
 }
 
-$cpf = preg_replace('/\D/', '', $input['cpf']); // Limpa CPF
+$cpf = preg_replace('/\D/', '', $input['cpf']);
 if (strlen($cpf) !== 11) {
     http_response_code(400);
     echo json_encode(['erro' => 'CPF inválido.']);
     exit;
 }
 
-// Token da API (buscado do banco ou fixo temporariamente)
-$token = '5fa870ba-d164-4854-ac19-600ee9f4f981'; // substitua por seu método seguro
+// Busca o token no banco de dados
+$token = null;
+$stmt = $conexao->prepare("SELECT valor FROM config WHERE chave = ?");
+$chave = 'token_nova_api';
+$stmt->bind_param("s", $chave);
+$stmt->execute();
+$result = $stmt->get_result();
 
-$url = "https://consultafacil.pro/api/cpf/{$cpf}?token={$token}";
+if ($row = $result->fetch_assoc()) {
+    $token = $row['valor'];
+}
+$stmt->close();
+
+if (empty($token)) {
+    http_response_code(500);
+    echo json_encode(['erro' => 'Token da API não encontrado no banco de dados.']);
+    exit;
+}
 
 // Consulta à API externa
+$url = "https://consultafacil.pro/api/cpf/{$cpf}?token={$token}";
 $ch = curl_init($url);
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_SSL_VERIFYPEER => false, // ajuste conforme seu servidor
+    CURLOPT_SSL_VERIFYPEER => true,
     CURLOPT_USERAGENT => 'Mozilla/5.0',
     CURLOPT_TIMEOUT => 30
 ]);
@@ -43,7 +61,6 @@ $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 $curlError = curl_error($ch);
 curl_close($ch);
 
-// Valida resposta da API
 if ($curlError) {
     http_response_code(500);
     echo json_encode(['erro' => 'Erro na requisição: ' . $curlError]);
@@ -56,7 +73,7 @@ if ($httpCode !== 200) {
     exit;
 }
 
-// Tenta decodificar JSON
+// Decodifica a resposta da API externa
 $data = json_decode($response, true);
 if ($data === null) {
     http_response_code(500);
@@ -64,7 +81,6 @@ if ($data === null) {
     exit;
 }
 
-// Aqui você pode salvar no banco se quiser (logs etc.)
-
-// Envia resultado para o JavaScript
+// Retorna os dados para o frontend
 echo json_encode(['sucesso' => true, 'dados' => $data]);
+?>
