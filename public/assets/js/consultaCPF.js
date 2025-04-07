@@ -1,5 +1,62 @@
 let captchaValidado = false;
 
+const interessesLabels = {
+    credit_personal_pre_approved: "Crédito Pessoal Pré-Aprovado",
+    credit_real_estate_pre_approved: "Crédito Imobiliário Pré-Aprovado",
+    vehicle_financing_pre_approved: "Financiamento de Veículos Pré-Aprovado",
+    middle_class: "Classe Média",
+    automatic_debit: "Débito Automático",
+    has_luxury: "Possui Itens de Luxo",
+    has_investments: "Possui Investimentos",
+    has_credit_card: "Possui Cartão de Crédito",
+    has_multiple_cards: "Possui Múltiplos Cartões",
+    has_high_standard_account: "Conta de Alto Padrão",
+    has_black_card: "Possui Cartão Black",
+    has_prime_card: "Possui Cartão Prime",
+    has_prepaid_cell: "Celular Pré-Pago",
+    has_postpaid_cell: "Celular Pós-Pago",
+    has_accumulated_miles: "Possui Milhas Acumuladas",
+    has_own_house: "Possui Casa Própria",
+    has_discounts: "Utiliza Descontos",
+    has_checking_accounts: "Possui Conta Corrente",
+    has_auto_insurance: "Possui Seguro Automotivo",
+    has_private_pension: "Possui Previdência Privada",
+    has_internet_banking: "Utiliza Internet Banking",
+    has_token_installed: "Token de Segurança Instalado",
+    has_traveled: "Já Viajou",
+
+    // Probabilidades
+    personal_credit_probability: "Probabilidade de Crédito Pessoal",
+    vehicle_financing_probability: "Probabilidade de Financiamento de Veículos",
+    internet_shopping_probability: "Probabilidade de Compras Online",
+    multiple_cards_probability: "Probabilidade de Múltiplos Cartões",
+    prime_card_probability: "Probabilidade de Cartão Prime",
+    cable_tv_probability: "Probabilidade de TV por Assinatura",
+    broadband_probability: "Probabilidade de Banda Larga",
+    own_house_probability: "Probabilidade de Ter Casa Própria",
+    prepaid_cell_probability: "Probabilidade de Celular Pré-Pago",
+    postpaid_cell_probability: "Probabilidade de Celular Pós-Pago",
+    real_estate_credit_probability: "Probabilidade de Crédito Imobiliário",
+    auto_insurance_probability: "Probabilidade de Seguro Automotivo",
+    health_insurance_probability: "Probabilidade de Plano de Saúde",
+    life_insurance_probability: "Probabilidade de Seguro de Vida",
+    home_insurance_probability: "Probabilidade de Seguro Residencial",
+    investments_probability: "Probabilidade de Ter Investimentos",
+    consigned_probability: "Probabilidade de Empréstimo Consignado",
+    private_pension_probability: "Probabilidade de Previdência Privada",
+    miles_redemption_probability: "Probabilidade de Resgate de Milhas",
+    discount_hunter_probability: "Probabilidade de Ser Caçador de Descontos",
+    fitness_probability: "Probabilidade de Estilo de Vida Fitness",
+    tourism_probability: "Probabilidade de Interesse em Turismo",
+    luxury_probability: "Probabilidade de Interesse em Luxo",
+    cinephile_probability: "Probabilidade de Ser Cinéfilo",
+    public_transport_probability: "Probabilidade de Uso de Transporte Público",
+    online_games_probability: "Probabilidade de Interesse em Jogos Online",
+    video_game_probability: "Probabilidade de Interesse em Video Games",
+    early_adopters_probability: "Probabilidade de Ser um Inovador (Early Adopter)"
+};
+
+
 function onCaptchaSuccess() {
     captchaValidado = true;
     document.getElementById("consultarBtn").disabled = false;
@@ -24,8 +81,12 @@ function resetCaptcha() {
 }
 
 function exibirCampo(label, valor) {
-    return `<p><strong>${label}:</strong> ${valor ?? "Não disponível"}</p>`;
+    if (valor === null || valor === undefined || valor === "" || valor === "0.00") {
+        return `<p><strong>${label}:</strong> Não disponível</p>`;
+    }
+    return `<p><strong>${label}:</strong> ${valor}</p>`;
 }
+
 
 function consultarCPF() {
     if (!captchaValidado) {
@@ -128,6 +189,16 @@ function consultarCPF() {
             html += "<p>Não disponível</p>";
         }
 
+        html += "<h3>Compras</h3>";
+        if (dados.purchases?.length) {
+            dados.purchases.forEach((compra) => {
+            html += `<p><strong>Produto:</strong> ${compra.product || "N/A"} | <strong>Quantidade:</strong> ${compra.quantity || "1"} | <strong>Preço:</strong> R$ ${compra.price || "0,00"}</p>`;
+            });
+        } else {
+            html += "<p>Não disponível</p>";
+        }
+
+
         html += "<h3>Vacinas</h3>";
         if (dados.vaccines?.length) {
             dados.vaccines.forEach(vac => {
@@ -138,11 +209,17 @@ function consultarCPF() {
         }
 
         html += "<h3>Interesses</h3>";
-        const interesses = dados.interests || {};
-        for (const [chave, valor] of Object.entries(interesses)) {
-            const nome = chave.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-            html += exibirCampo(nome, typeof valor === "boolean" ? (valor ? "Sim" : "Não") : valor);
-        }
+        const interesses = dados.interests;
+        if (interesses && Object.keys(interesses).length) {
+            for (const chave in interesses) {
+                const label = interessesLabels[chave] || chave; // usa label traduzido se existir
+                const valor = interesses[chave];
+                html += `<p><strong>${label}:</strong> ${valor === true ? "Sim" : valor === false ? "Não" : "Não disponível"}</p>`;
+            }
+        } else {
+            html += "<p>Não disponível</p>";
+}
+
 
         dadosElement.innerHTML = html;
         dadosElement.style.display = "block";
