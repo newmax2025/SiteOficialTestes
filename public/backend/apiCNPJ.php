@@ -21,7 +21,7 @@ if (!isset($input['cnpj'])) {
 }
 
 $cnpj = preg_replace('/\D/', '', $input['cnpj']);
-if (strlen($cnpj) !== 11) {
+if (strlen($cnpj) !== 14) {
     http_response_code(400);
     echo json_encode(['erro' => 'CNPJ inválido.']);
     exit;
