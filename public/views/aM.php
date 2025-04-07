@@ -123,7 +123,7 @@
                    <a href="consultaCPF.php"> <img src="../assets/img/CONSULTA CPF MAX.jpg" alt="CRLV (Todos os Estados)"></a>
                    </div>
                    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-                    <a href="consultaTel.php"> <img src="../assets/img/Consulta Telefone (adicionando).jpg" alt="CRLV (Todos os Estados)"></a>
+                    <a href="consultaTel.php"> <img src="../assets/img/consulta_telefone_(adicionando).jpg" alt="CRLV (Todos os Estados)"></a>
                     <button class="botao">Sendo Adicionado</button>
                 </div>
                   <div class="card Gratuitos" onclick="mostrarBotao(this)">  
@@ -401,7 +401,7 @@
                                             
                                             <div class="card pequeno"> 
                                                
-                                                <img src="../assets/img/BACEN.jpg" alt="BACEN">
+                                                <img src="../assets/img/bacem.jpg" alt="BACEN">
                                               
                                             </div>
 
