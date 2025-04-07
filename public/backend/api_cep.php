@@ -12,7 +12,7 @@ if (!isset($_SESSION['usuario_id'])) {
 // Inclui a configuração do banco de dados
 require 'config.php';
 
-// Lê e valida o telefone
+// Lê e valida o cep
 $input = json_decode(file_get_contents('php://input'), true);
 if (!isset($input['cep'])) {
     http_response_code(400);

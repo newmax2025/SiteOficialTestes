@@ -84,21 +84,20 @@ function consultarCep() {
         const endereco = pessoa.endereco || {};
 
         html += `<div style="margin-bottom: 16px; border-bottom: 1px solid #ccc; padding-bottom: 8px;">
-          <strong>Resultado ${index + 1}</strong><br>
-          ${exibirCampo("Nome", pessoa.nome)}
-          ${exibirCampo("CPF", pessoa.cpf)}
-          ${exibirCampo("RG", pessoa.rg)}
-          ${exibirCampo("Mãe", pessoa.mae)}
-          <br><strong>Endereço:</strong><br>
-          ${exibirCampo("Tipo", endereco.tipo)}
-          ${exibirCampo("Logradouro", endereco.logradouro)}
-          ${exibirCampo("Número", endereco.numero)}
-          ${exibirCampo("Complemento", endereco.complemento)}
-          ${exibirCampo("Bairro", endereco.bairro)}
-          ${exibirCampo("CEP", endereco.cep)}
-          ${exibirCampo("Cidade", endereco.cidade)}
-          ${exibirCampo("Estado", endereco.estado)}
+        <strong>Resultado ${index + 1}</strong><br>
+        ${exibirCampo("Nome", pessoa.nome)}
+        ${exibirCampo("CPF", pessoa.cpf)}
+        ${exibirCampo("Nome da Mãe", pessoa.mae)}
+        <br><strong>Endereço:</strong><br>
+        ${exibirCampo("Rua", endereco.logradouro)}
+        ${exibirCampo("Número", endereco.numero)}
+        ${exibirCampo("Complemento", endereco.complemento)}
+        ${exibirCampo("Bairro", endereco.bairro)}
+        ${exibirCampo("CEP", endereco.cep)}
+        ${exibirCampo("Cidade", endereco.cidade)}
+        ${exibirCampo("Estado", endereco.estado)}
         </div>`;
+
       });
 
       dadosElement.innerHTML = html;
