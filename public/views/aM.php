@@ -406,12 +406,6 @@
                                             </div>
 
                                             <div class="card pequeno"> 
-                                       
-                                                <img src="../assets/img/buscar cep.jpg" alt="BACEN">
-                                              
-                                            </div>
-
-                                            <div class="card pequeno"> 
                                        <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
                                                 <img src="../assets/img/faceMatch.jpg" alt="BACEN">
                                               
