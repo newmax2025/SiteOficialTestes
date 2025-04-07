@@ -21,7 +21,7 @@ if (!isset($input['cep'])) {
 }
 
 $cep = preg_replace('/\D/', '', $input['cep']);
-if (strlen($cep) !== 8) {
+if (strlen($cep) !== 9) {
     http_response_code(400);
     echo json_encode(['erro' => 'Cep inválido.']);
     exit;
