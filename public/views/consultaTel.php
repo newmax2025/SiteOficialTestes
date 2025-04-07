@@ -28,7 +28,7 @@
             <img class="logo" src="../assets/img/New Max Buscas.png" alt="Logo do Cliente">
         </div>
         <h2>Consulta Telefone</h2>
-        <input type="text" id="tel" placeholder="Digite o Telefone" maxlength="11" oninput="formatTel(this)">
+        <input type="text" id="tel" placeholder="Digite o Telefone" maxlength="14" oninput="formatTel(this)">
         <button id="consultarBtn" onclick="consultarTel()" disabled>Consultar</button>
 
         <!-- Turnstile CAPTCHA -->
