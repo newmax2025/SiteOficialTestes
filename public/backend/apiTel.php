@@ -14,7 +14,7 @@ require 'config.php';
 
 // Lê e valida o telefone
 $input = json_decode(file_get_contents('php://input'), true);
-if (!isset($input['cpf'])) {
+if (!isset($input['tel'])) {
     http_response_code(400);
     echo json_encode(['erro' => 'Telefone não informado.']);
     exit;
