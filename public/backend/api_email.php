@@ -20,7 +20,7 @@ if (!isset($input['email'])) {
     exit;
 }
 
-$email = preg_replace('/\D/', '', $input['email']);
+$email = trim($input['email']); // Limpa espaços em branco, mas mantém o email intacto
 
 // Busca o token no banco de dados
 $token = null;
