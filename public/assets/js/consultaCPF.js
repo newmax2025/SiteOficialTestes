@@ -212,13 +212,27 @@ function consultarCPF() {
         const interesses = dados.interests;
         if (interesses && Object.keys(interesses).length) {
             for (const chave in interesses) {
-                const label = interessesLabels[chave] || chave; // usa label traduzido se existir
+                const label = interessesLabels[chave] || chave;
                 const valor = interesses[chave];
-                html += `<p><strong>${label}:</strong> ${valor === true ? "Sim" : valor === false ? "Não" : "Não disponível"}</p>`;
+
+                let exibicao;
+
+                if (typeof valor === "boolean") {
+                    exibicao = valor ? "Sim" : "Não";
+                } else if (typeof valor === "number") {
+                    exibicao = valor.toFixed(0) + "%";
+                } else if (valor === null || valor === undefined) {
+                    exibicao = "Não disponível";
+                } else {
+                    exibicao = valor;
+                }
+
+                html += `<p><strong>${label}:</strong> ${exibicao}</p>`;
             }
         } else {
             html += "<p>Não disponível</p>";
-}
+        }
+
 
 
         dadosElement.innerHTML = html;
