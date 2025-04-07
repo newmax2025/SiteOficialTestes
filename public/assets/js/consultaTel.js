@@ -90,7 +90,7 @@ function consultarTel() {
         html += `<div style="margin-bottom: 16px; border-bottom: 1px solid #ccc; padding-bottom: 8px;">
           <strong>Resultado ${index + 1}</strong><br>
           ${exibirCampo("Nome", pessoa.name)}
-          ${exibirCampo("CPF", formatarCPF(pessoa.document))}
+          ${exibirCampo("CPF", pessoa.document)}
           ${exibirCampo("Telefone", pessoa.phone)}
           <br><strong>Endereço:</strong><br>
           ${exibirCampo("Rua", endereco.street)}
