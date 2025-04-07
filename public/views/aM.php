@@ -131,7 +131,7 @@
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <img src="../assets/img/consulta_CNPJ_max.jpg.jpg" alt="CRLV (Todos os Estados)">
+        <img src="../assets/img/consulta_CNPJ_max.jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
@@ -152,7 +152,7 @@
     </div>
 
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <img src="public/assets/img/buscar_cep.jpg" alt="CRLV (Todos os Estados)">
+        <img src="../assets/img/buscar_cep.jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
     </div>
