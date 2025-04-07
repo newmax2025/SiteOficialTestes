@@ -67,9 +67,12 @@ function consultarEmail() {
       }
       return response.json();
     })
-    .then((pessoas) => {
+    .then((resposta) => {
+      const pessoas = resposta.dados;
+
       if (!Array.isArray(pessoas) || pessoas.length === 0) {
-        throw new Error("Nenhum dado encontrado para este email.");
+        resultadoElement.innerText = "Nenhum dado encontrado para o email informado.";
+        return;
       }
 
       let html = `<h3>Resultado da consulta</h3>`;
