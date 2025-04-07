@@ -27,7 +27,7 @@
         <div class="logo-container">
             <img class="logo" src="../assets/img/New Max Buscas.png" alt="Logo do Cliente">
         </div>
-        <h2>Consulta CNPJ</h2>
+        <h2>Consulta Email</h2>
         <input type="text" id="email" placeholder="Digite o Email">
         <button id="consultarBtn" onclick="consultarEmail()" disabled>Consultar</button>
 
