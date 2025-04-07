@@ -139,11 +139,7 @@
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <img src="../assets/img/Consulta Placa (adicionando).jpg" alt="CRLV (Todos os Estados)">
-        <button class="botao">Sendo Adicionado</button>
-    </div>
-    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <img src="../assets/img/desmascarar Pix (adicionando).jpg" alt="CRLV (Todos os Estados)">
+        <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
