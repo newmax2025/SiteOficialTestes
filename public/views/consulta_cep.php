@@ -28,7 +28,7 @@
             <img class="logo" src="../assets/img/New Max Buscas.png" alt="Logo do Cliente">
         </div>
         <h2>Consulta Cep</h2>
-        <input type="text" id="cep" placeholder="Digite o Cep" maxlength="8" oninput="formatCep(this)">
+        <input type="text" id="cep" placeholder="Digite o Cep" maxlength="9" oninput="formatCep(this)">
         <button id="consultarBtn" onclick="consultarCep()" disabled>Consultar</button>
 
         <!-- Turnstile CAPTCHA -->
