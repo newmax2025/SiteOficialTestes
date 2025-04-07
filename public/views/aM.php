@@ -212,7 +212,7 @@
 
         </div>
         <div class="card pequeno"> 
-           
+           <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
             <img src="../assets/img/Impressão CNH (Original).jpg" alt="img/Impressão CNH (Original)a">
             
         </div>
@@ -256,13 +256,6 @@
     <img src="../assets/img/Consulta Tracker.jpg" alt="Consulta Tracker">
    
 </div>
-           <div class="card pequeno"> 
-                                       
-     <img src="../assets/img/motorista  de ifood_uber eats.jpg" alt="BACEN">
-                                              
-</div>
- <!-- Adicione mais cards conforme necessário -->
-</div>
         <!-- Adicione mais cards conforme necessário -->
     </div>
     <!-- Adicione mais Colunas conforme necessário -->
@@ -274,7 +267,7 @@
                
             </div>
             <div class="card pequeno"> 
-               
+               <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
                 <img src="../assets/img/Buscar Modelo de Veículo.jpg" alt="Treino Academia">
                
             </div>
@@ -396,7 +389,7 @@
                                         
                                         </div>
                                         <div class="card pequeno"> 
-                                       
+                                       <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
                                             <img src="../assets/img/condutor pro.jpg" alt="condutor pro">
                                             </div>
                                             
@@ -413,7 +406,7 @@
                                             </div>
 
                                             <div class="card pequeno"> 
-                                       
+                                       <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
                                                 <img src="../assets/img/faceMatch.jpg" alt="BACEN">
                                               
                                             </div>
