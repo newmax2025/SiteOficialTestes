@@ -1,149 +1,266 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Buscador de Sites</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f4f4f9;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
-    }
+let captchaValidado = false;
 
-    h1 {
-      color: #333;
-      text-align: center;
-    }
+const interessesLabels = {
+    credit_personal_pre_approved: "Crédito Pessoal Pré-Aprovado",
+    credit_real_estate_pre_approved: "Crédito Imobiliário Pré-Aprovado",
+    vehicle_financing_pre_approved: "Financiamento de Veículos Pré-Aprovado",
+    middle_class: "Classe Média",
+    automatic_debit: "Débito Automático",
+    has_luxury: "Possui Itens de Luxo",
+    has_investments: "Possui Investimentos",
+    has_credit_card: "Possui Cartão de Crédito",
+    has_multiple_cards: "Possui Múltiplos Cartões",
+    has_high_standard_account: "Conta de Alto Padrão",
+    has_black_card: "Possui Cartão Black",
+    has_prime_card: "Possui Cartão Prime",
+    has_prepaid_cell: "Celular Pré-Pago",
+    has_postpaid_cell: "Celular Pós-Pago",
+    has_accumulated_miles: "Possui Milhas Acumuladas",
+    has_own_house: "Possui Casa Própria",
+    has_discounts: "Utiliza Descontos",
+    has_checking_accounts: "Possui Conta Corrente",
+    has_auto_insurance: "Possui Seguro Automotivo",
+    has_private_pension: "Possui Previdência Privada",
+    has_internet_banking: "Utiliza Internet Banking",
+    has_token_installed: "Token de Segurança Instalado",
+    has_traveled: "Já Viajou",
 
-    input[type="text"] {
-      width: 80%;
-      padding: 10px;
-      font-size: 16px;
-      margin-right: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+    // Probabilidades
+    personal_credit_probability: "Probabilidade de Crédito Pessoal",
+    vehicle_financing_probability: "Probabilidade de Financiamento de Veículos",
+    internet_shopping_probability: "Probabilidade de Compras Online",
+    multiple_cards_probability: "Probabilidade de Múltiplos Cartões",
+    prime_card_probability: "Probabilidade de Cartão Prime",
+    cable_tv_probability: "Probabilidade de TV por Assinatura",
+    broadband_probability: "Probabilidade de Banda Larga",
+    own_house_probability: "Probabilidade de Ter Casa Própria",
+    prepaid_cell_probability: "Probabilidade de Celular Pré-Pago",
+    postpaid_cell_probability: "Probabilidade de Celular Pós-Pago",
+    real_estate_credit_probability: "Probabilidade de Crédito Imobiliário",
+    auto_insurance_probability: "Probabilidade de Seguro Automotivo",
+    health_insurance_probability: "Probabilidade de Plano de Saúde",
+    life_insurance_probability: "Probabilidade de Seguro de Vida",
+    home_insurance_probability: "Probabilidade de Seguro Residencial",
+    investments_probability: "Probabilidade de Ter Investimentos",
+    consigned_probability: "Probabilidade de Empréstimo Consignado",
+    private_pension_probability: "Probabilidade de Previdência Privada",
+    miles_redemption_probability: "Probabilidade de Resgate de Milhas",
+    discount_hunter_probability: "Probabilidade de Ser Caçador de Descontos",
+    fitness_probability: "Probabilidade de Estilo de Vida Fitness",
+    tourism_probability: "Probabilidade de Interesse em Turismo",
+    luxury_probability: "Probabilidade de Interesse em Luxo",
+    cinephile_probability: "Probabilidade de Ser Cinéfilo",
+    public_transport_probability: "Probabilidade de Uso de Transporte Público",
+    online_games_probability: "Probabilidade de Interesse em Jogos Online",
+    video_game_probability: "Probabilidade de Interesse em Video Games",
+    early_adopters_probability: "Probabilidade de Ser um Inovador (Early Adopter)"
+};
 
-    button {
-      padding: 10px 15px;
-      font-size: 16px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+function onCaptchaSuccess() {
+    captchaValidado = true;
+    document.getElementById("consultarBtn").disabled = false;
+}
 
-    button:hover {
-      opacity: 0.9;
-    }
+function resetCaptcha() {
+    captchaValidado = false; // Reseta a validação do CAPTCHA
+    document.getElementById("consultarBtn").disabled = true; // Desativa o botão
 
-    .search-btn {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    .pdf-btn {
-      background-color: #2196F3;
-      color: white;
-      margin-top: 20px;
-    }
-
-    #results {
-      margin-top: 30px;
-    }
-
-    .result-item {
-      background-color: white;
-      border-radius: 6px;
-      padding: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .result-item a {
-      color: #2196F3;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .result-item a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <h1>Buscador de Sites</h1>
-  <input type="text" id="searchInput" placeholder="Digite sua busca..." />
-  <button class="search-btn" onclick="search()">Buscar</button>
-
-  <div id="results"></div>
-  <button class="pdf-btn" onclick="generatePDF()" style="display: none;" id="savePdfBtn">Salvar em PDF</button>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-  <script>
-    async function search() {
-      const query = document.getElementById("searchInput").value;
-      const response = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_redirect=1&no_html=1&skip_disambig=1`);
-      const data = await response.json();
-
-      const resultsContainer = document.getElementById("results");
-      resultsContainer.innerHTML = '';
-
-      const saveBtn = document.getElementById("savePdfBtn");
-
-      if (data.RelatedTopics.length === 0) {
-        resultsContainer.innerHTML = "<p>Nenhum resultado encontrado.</p>";
-        saveBtn.style.display = "none";
-        return;
-      }
-
-      data.RelatedTopics.forEach(topic => {
-        if (topic.Text && topic.FirstURL) {
-          const item = document.createElement("div");
-          item.className = "result-item";
-          item.innerHTML = `<p>${topic.Text}</p><a href="${topic.FirstURL}" target="_blank">${topic.FirstURL}</a>`;
-          resultsContainer.appendChild(item);
+    setTimeout(() => {
+        const captchaContainer = document.getElementById("captcha");
+        if (captchaContainer) {
+            captchaContainer. innerHTML = ""; // Remove o CAPTCHA antigo
+            turnstile.render("#captcha", {
+                sitekey: "0x4AAAAAABDPzCDp7OiEAfvh",
+                callback: onCaptchaSuccess,
+            });
+        } else {
+            console.warn("Elemento CAPTCHA não encontrado!");
         }
-      });
+    }, 500); // Aguarda 500ms antes de recriar o CAPTCHA
+}
 
-      saveBtn.style.display = "inline-block";
+function exibirCampo(label, valor) {
+    if (valor === null || valor === undefined || valor === "" || valor === "0.00") {
+        return `<p><strong>${label}:</strong> Não disponível</p>`;
+    }
+    return `<p><strong>${label}:</strong> ${valor}</p>`;
+}
+
+
+function consultarCPF() {
+    if (!captchaValidado) {
+        document.getElementById("resultado").innerText = "Por favor, resolva o CAPTCHA.";
+        return;
     }
 
-    function generatePDF() {
-      const results = document.getElementById("results");
-      const clone = results.cloneNode(true);
+    const consultarBtn = document.getElementById("consultarBtn");
+    consultarBtn.disabled = true;
 
-      const container = document.createElement("div");
-      container.style.padding = "20px";
-      container.style.fontFamily = "Arial";
+    const cpfInput = document.getElementById("cpf");
+    const cpf = cpfInput.value;
+    const resultadoElement = document.getElementById("resultado");
+    const dadosElement = document.getElementById("dados");
 
-      const logo = document.createElement("img");
-      logo.src = "https://via.placeholder.com/200x50?text=Seu+Logo"; // Substitua pelo seu logo real
-      logo.style.display = "block";
-      logo.style.margin = "0 auto 20px";
-      logo.style.maxWidth = "200px";
-
-      const title = document.createElement("h2");
-      title.innerText = "Resultados da Busca";
-      title.style.textAlign = "center";
-      title.style.color = "#333";
-      title.style.marginBottom = "20px";
-
-      container.appendChild(logo);
-      container.appendChild(title);
-      container.appendChild(clone);
-
-      html2pdf().from(container).set({
-        margin: 10,
-        filename: 'resultados-da-busca.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      }).save();
+    if (cpf.length < 14) {
+        resultadoElement.innerText = "CPF inválido!";
+        return;
     }
-  </script>
-</body>
-</html>
+
+    resultadoElement.innerText = "Consultando...";
+    dadosElement.style.display = "none";
+
+    const localApiUrl = "../backend/api.php";
+    const cpfLimpo = cpf.replace(/\D/g, "");
+
+    fetch(localApiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cpf: cpfLimpo }),
+    })
+    .then((response) => {
+        if (!response.ok) throw new Error(`Erro na consulta (${response.status}).`);
+        return response.json();
+    })
+    .then((data) => {
+        if (!data || !data.dados || typeof data.dados !== "object") {
+            console.log("Resposta inesperada:", data);
+            throw new Error("Nenhuma informação encontrada para este CPF.");
+        }
+        const dados = data.dados;
+        let html = "";
+
+        const info = dados.personal_info || {};
+        html += "<h3>Informações Pessoais</h3>";
+        html += exibirCampo("Nome", info.name);
+        html += exibirCampo("CPF", formatarCPF(info.document_number));
+        html += exibirCampo("Nascimento", info.birthday_date);
+        html += exibirCampo("Sexo", info.gender === "M" ? "Masculino" : "Feminino");
+        html += exibirCampo("Nome da Mãe", info.mother_name);
+        html += exibirCampo("Nome do Pai", info.father_name);
+        html += exibirCampo("Nacionalidade", info.nationality);
+        html += exibirCampo("Renda", info.income);
+
+        const status = dados.status?.registration_status || {};
+        html += "<h3>Status</h3>";
+        html += exibirCampo("Status Receita", status.description);
+        html += exibirCampo("Data", status.date);
+        html += exibirCampo("Óbito", dados.status?.death ? "Sim" : "Não");
+
+        const score = dados.score || {};
+        html += "<h3>Score</h3>";
+        html += exibirCampo("Score CSBA", score.score_csba);
+        html += exibirCampo("Risco", score.score_csba_risk_range);
+
+        const serasa = dados.serasa?.new_mosaic || {};
+        html += "<h3>Perfil Serasa</h3>";
+        html += exibirCampo("Código", serasa.code);
+        html += exibirCampo("Descrição", serasa.description);
+        html += exibirCampo("Classe", serasa.class);
+
+        const poderCompra = dados.purchasing_power || {};
+        html += "<h3>Poder de Compra</h3>";
+        html += exibirCampo("Descrição", poderCompra.description);
+        html += exibirCampo("Faixa", poderCompra.range);
+        html += exibirCampo("Renda Estimada", poderCompra.income);
+
+        html += "<h3>Endereços</h3>";
+        if (dados.addresses?.length) {
+            dados.addresses.forEach(end => {
+                html += `<p>${end.type || ""} ${end.place || ""}, ${end.number || "s/n"} - ${end.neighborhood || ""}, ${end.city || ""} - ${end.state || ""} (${end.zip_code || ""})</p>`;
+            });
+        } else {
+            html += "<p>Não disponível</p>";
+        }
+
+        html += "<h3>Telefones</h3>";
+        if (dados.phones?.length) {
+            html += dados.phones.map(tel => `<p>${tel.number}</p>`).join("");
+        } else {
+            html += "<p>Não disponível</p>";
+        }
+
+        html += "<h3>Empregos</h3>";
+        if (dados.jobs?.length) {
+            dados.jobs.forEach(emp => {
+                html += `<p><strong>Empresa:</strong> ${emp.trade_name || "N/A"} | <strong>Admissão:</strong> ${emp.admission_date} | <strong>Saída:</strong> ${emp.termination_date}</p>`;
+            });
+        } else {
+            html += "<p>Não disponível</p>";
+        }
+
+        html += "<h3>Compras</h3>";
+        if (dados.purchases?.length) {
+            dados.purchases.forEach((compra) => {
+            html += `<p><strong>Produto:</strong> ${compra.product || "N/A"} | <strong>Quantidade:</strong> ${compra.quantity || "1"} | <strong>Preço:</strong> R$ ${compra.price || "0,00"}</p>`;
+            });
+        } else {
+            html += "<p>Não disponível</p>";
+        }
+
+
+        html += "<h3>Vacinas</h3>";
+        if (dados.vaccines?.length) {
+            dados.vaccines.forEach(vac => {
+                html += `<p><strong>${vac.vaccine}</strong> - ${vac.dose}, ${vac.date} - ${vac.establishment}</p>`;
+            });
+        } else {
+            html += "<p>Não disponível</p>";
+        }
+
+        html += "<h3>Interesses</h3>";
+        const interesses = dados.interests;
+        if (interesses && Object.keys(interesses).length) {
+            for (const chave in interesses) {
+                const label = interessesLabels[chave] || chave;
+                const valor = interesses[chave];
+
+                let exibicao;
+
+                if (typeof valor === "boolean") {
+                    exibicao = valor ? "Sim" : "Não";
+                } else if (typeof valor === "number") {
+                    exibicao = valor.toFixed(0) + "%";
+                } else if (valor === null || valor === undefined) {
+                    exibicao = "Não disponível";
+                } else {
+                    exibicao = valor;
+                }
+
+                html += `<p><strong>${label}:</strong> ${exibicao}</p>`;
+            }
+        } else {
+            html += "<p>Não disponível</p>";
+        }
+
+
+
+        dadosElement.innerHTML = html;
+        dadosElement.style.display = "block";
+        resultadoElement.innerText = `Consulta realizada para o CPF: ${cpf}`;
+    })
+    .catch((error) => {
+        console.error("Erro ao consultar CPF:", error);
+        resultadoElement.innerText = `Erro: ${error.message}`;
+        dadosElement.style.display = "none";
+    })
+    .finally(() => {
+        consultarBtn.disabled = false;
+        resetCaptcha(); // Agora recria o CAPTCHA corretamente
+    });
+}
+
+
+function formatarCPF(cpf) {
+    if (!cpf) return "";
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+}
+
+function formatCPF(input) {
+    let value = input.value.replace(/\D/g, "");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    input.value = value;
+  }
+
+
