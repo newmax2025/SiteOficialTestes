@@ -83,5 +83,6 @@ if ($data === null) {
 }
 
 // Retorna os dados para o frontend
-echo json_encode(['sucesso' => true, 'dados' => $data]);
+echo json_encode(['sucesso' => true, 'dados' => [$data]]);
+
 ?>
