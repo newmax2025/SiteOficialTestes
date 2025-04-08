@@ -30,6 +30,8 @@
         <h2>Consulta CPF Comum</h2>
         <input type="text" id="cpf" placeholder="Digite o CPF" maxlength="14" oninput="formatCPF(this)">
         <button id="consultarBtn" onclick="consultarCPF()" disabled>Consultar</button>
+          <!-- Botão para baixar PDF -->
+            <button id="baixarPDFBtn" onclick="baixarPDF()" style="margin-top: 15px;">Baixar PDF</button>
 
         <!-- Turnstile CAPTCHA -->
         <div class="cf-turnstile" id="captcha" data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh" data-callback="onCaptchaSuccess">
@@ -44,8 +46,7 @@
     </div>
 
      <div id="dados" class="dados" style="display: none;">
-            <!-- Botão para baixar PDF -->
-            <button id="baixarPDFBtn" onclick="baixarPDF()" style="margin-top: 15px;">Baixar PDF</button>
+
         </div>
     </div>
 
