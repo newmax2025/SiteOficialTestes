@@ -431,11 +431,6 @@
                                                 <img src="../assets/img/motorista  de 99_uber.jpg" alt="BACEN">
                                               
                                             </div>
-
-                                            <div class="card pequeno"> 
-                                                <img src="../assets/img/motorista_de_ifood_uber_eats.jpg" alt="BACEN">
-                                              
-                                            </div>
                                             <!-- Adicione mais cards conforme necessário -->
                                         </div>
                                                 <section class="carousel" id="treinos">
