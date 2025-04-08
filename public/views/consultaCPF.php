@@ -8,17 +8,18 @@
     <link rel="stylesheet" href="../assets/css/consultaCPF.css?v=<?php echo md5_file('../assets/css/consultaCPF.css'); ?>">
     <script>
         fetch("../backend/verifica_sessao.php")
-            .then(response => response.json())
-            .then(data => {
-                if (!data.autenticado) {
-                    window.location.href = "login.php"; // Redireciona se não estiver autenticado
-                }
-            })
-            .catch(error => {
-                console.error("Erro ao verificar sessão:", error);
-                window.location.href = "login.php"; // Opcional: Redireciona em caso de erro
-            });
-    </script>
+    .then(response => response.json())
+    .then(data => {
+        if (!data.autenticado) {
+            window.location.href = "login.php"; // Redireciona se não estiver autenticado
+        }
+    })
+    .catch(error => {
+        console.error("Erro ao verificar sessão:", error);
+        window.location.href = "login.php"; // Opcional: Redireciona em caso de erro
+    });
+
+        </script>
 </head>
 
 <body>
@@ -36,48 +37,23 @@
 
         <input type="hidden" id="captcha-response" name="cf-turnstile-response">
 
-        <p id="resultado"></p> 
+        <p id="resultado"></p>
 
         <div id="dados" class="dados" style="display: none;"></div>
 
-        <!-- Botão para baixar PDF -->
-        <button id="baixarPDFBtn" onclick="baixarPDF()" style="display: none; margin-top: 15px;">Baixar PDF</button>
-
     </div>
+
+     <div id="dados" class="dados" style="display: none;">
+            <!-- Botão para baixar PDF -->
+            <button id="baixarPDFBtn" onclick="baixarPDF()" style="margin-top: 15px;">Baixar PDF</button>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="../assets/js/consultaCPF.js?v=<?php echo md5_file('../assets/js/consultaCPF.js'); ?>"></script>
-
-    <script>
-        // Exibir botão PDF se dados forem preenchidos
-        function mostrarBotaoPDF() {
-            const btn = document.getElementById("baixarPDFBtn");
-            btn.style.display = "block";
-        }
-
-        // Função para gerar PDF com o conteúdo da div#dados
-        async function baixarPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            const dadosDiv = document.getElementById("dados");
-            const texto = dadosDiv.innerText.split('\n');
-
-            doc.setFontSize(16);
-            doc.text("Resultado da Consulta CPF", 20, 20);
-            doc.setFontSize(12);
-
-            let y = 40;
-            texto.forEach(linha => {
-                doc.text(linha, 20, y);
-                y += 10;
-            });
-
-            doc.save("consulta-cpf.pdf");
-        }
-    </script>
 </body>
 
 </html>
+
+
