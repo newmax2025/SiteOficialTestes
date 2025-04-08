@@ -20,12 +20,13 @@ if (!isset($input['placa'])) {
     exit;
 }
 
-$placa = preg_replace('/\D/', '', $input['placa']);
+$placa = strtoupper(preg_replace('/[^A-Z0-9]/i', '', $input['placa']));
 if (strlen($placa) !== 7) {
     http_response_code(400);
     echo json_encode(['erro' => 'Placa inválido.']);
     exit;
 }
+
 
 // Busca o token no banco de dados
 $token = null;

@@ -60,7 +60,8 @@ function consultarPlaca() {
   dadosElement.style.display = "none";
 
   const localApiUrl = "../backend/api_placa.php";
-  const placaLimpo = placa.replace(/\D/g, "");
+  const placaLimpo = placa.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+
 
   fetch(localApiUrl, {
     method: "POST",
