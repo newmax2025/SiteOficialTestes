@@ -141,14 +141,27 @@ function consultarPlaca() {
 }
 
 function formatarPlaca(placa) {
-  const placaLimpo = placa.replace(/\D/g, "");
-  return placaLimpo.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+  const placaLimpa = placa.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+
+  if (placaLimpa.length === 7) {
+    return placaLimpa.replace(/^([A-Z]{3})(\d{4})$/, "$1-$2");
+  }
+
+  return placaLimpa;
 }
 
+
 function formatPlaca(input) {
-  let value = input.value.replace(/\D/g, "");
-  value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
-  value = value.replace(/(\d{5})(\d)/, "$1-$2");
+  let value = input.value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+
+  if (value.length > 7) {
+    value = value.slice(0, 7);
+  }
+
+  if (value.length === 7) {
+    value = value.replace(/^([A-Z]{3})(\d{4})$/, "$1-$2");
+  }
 
   input.value = value;
 }
+
