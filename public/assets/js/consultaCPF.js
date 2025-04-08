@@ -264,37 +264,20 @@ function formatCPF(input) {
     input.value = value;
   }
 
-async function baixarPDF() {
+<script>
+  async function gerarPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    const dados = {
-        nome: document.getElementById('nome').innerText,
-        cpf: document.getElementById('cpf_resultado').innerText,
-        safra: document.getElementById('safra').innerText,
-        nascimento: document.getElementById('nascimento').innerText,
-        nome_mae: document.getElementById('nome_mae').innerText,
-        sexo: document.getElementById('sexo').innerText,
-        email: document.getElementById('email').innerText,
-        obito: document.getElementById('obito').innerText,
-        status_receita: document.getElementById('status_receita').innerText,
-        cbo: document.getElementById('cbo').innerText,
-        faixa_renda: document.getElementById('faixa_renda').innerText,
-        veiculos: document.getElementById('veiculos').innerText,
-        telefones: document.getElementById('telefones').innerText,
-        celulares: document.getElementById('celulares').innerText,
-        empregos: document.getElementById('empregos').innerText,
-        enderecos: document.getElementById('enderecos').innerText,
-    };
+    const resultado = document.getElementById("resultado");
 
-    doc.text("Relatório da Consulta CPF", 10, 10);
-
-    let y = 20;
-    for (const [chave, valor] of Object.entries(dados)) {
-        doc.text(`${chave.charAt(0).toUpperCase() + chave.slice(1)}: ${valor}`, 10, y);
-        y += 10;
-    }
-
-    doc.save("consulta-cpf.pdf");
-}
-
+    await html2canvas(resultado).then(canvas => {
+      const imgData = canvas.toDataURL("image/png");
+      const imgProps = doc.getImageProperties(imgData);
+      const pdfWidth = doc.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      doc.save("resultado-cpf.pdf");
+    });
+  }
+</script>
