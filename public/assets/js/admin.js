@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const mensagemCadastro = document.getElementById("mensagemCadastro");
   const mensagemRemocao = document.getElementById("mensagemRemocao");
   const mensagemStatus = document.getElementById("mensagemStatus");
+  const formAlterarSenha = document.getElementById("formAlterarSenha");
+  const mensagemSenha = document.getElementById("mensagemSenha");
 
   const formMudarVendedor = document.getElementById("formMudarVendedor");
   const mensagemMudarVendedor = document.getElementById(
@@ -38,7 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
   updateUserList();
 
   if (!formMudarVendedor) {
-    console.error("Erro: Formulário 'formMudarVendedor' não encontrado no HTML.");
+    console.error(
+      "Erro: Formulário 'formMudarVendedor' não encontrado no HTML."
+    );
     return;
   }
 
@@ -49,7 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const vendedorInput = document.getElementById("novoVendedorId");
 
     if (!clienteInput || !vendedorInput) {
-      console.error("Erro: Campos 'clienteNome' ou 'novoVendedorId' não encontrados no HTML.");
+      console.error(
+        "Erro: Campos 'clienteNome' ou 'novoVendedorId' não encontrados no HTML."
+      );
       return;
     }
 
@@ -67,8 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           cliente: cliente,
-          vendedor_id: parseInt(vendedor_id)
-        })
+          vendedor_id: parseInt(vendedor_id),
+        }),
       });
 
       const result = await response.json();
@@ -86,8 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
       mensagemMudarVendedor.style.color = "red";
     }
   });
-
-
 
   // Cadastro de novo usuário
   userForm.addEventListener("submit", async function (event) {
@@ -179,6 +183,43 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     } catch (error) {
       handleFetchError(error, mensagemStatus, "alteração de status");
+    }
+  });
+
+  // Alterar Senha do Usuário
+  formAlterarSenha.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const username = document.getElementById("usuarioSenha").value.trim();
+    const novaSenha = document.getElementById("novaSenha").value;
+
+    mensagemSenha.textContent = "";
+
+    if (!username || !novaSenha) {
+      mensagemSenha.textContent = "Preencha todos os campos.";
+      mensagemSenha.style.color = "red";
+      return;
+    }
+
+    try {
+      const response = await fetch("../backend/alterar_senha.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, novaSenha }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        mensagemSenha.textContent =
+          result.message || "Senha alterada com sucesso!";
+        mensagemSenha.style.color = "green";
+        formAlterarSenha.reset();
+      } else {
+        mensagemSenha.textContent = result.message || "Erro ao alterar senha.";
+        mensagemSenha.style.color = "red";
+      }
+    } catch (error) {
+      handleFetchError(error, mensagemSenha, "alteração de senha");
     }
   });
 

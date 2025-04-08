@@ -84,6 +84,25 @@
       </form>
       <p id="mensagemMudarVendedor"></p>
 
+      <h3>Alterar Senha do Usuário</h3>
+      <form id="formAlterarSenha">
+        <input
+          type="text"
+          id="usuarioSenha"
+          placeholder="Usuário"
+          required
+        />
+        <input
+          type="password"
+          id="novaSenha"
+          placeholder="Nova Senha"
+          required
+        />
+        <button type="submit">Alterar Senha</button>
+      </form>
+      <p id="mensagemSenha"></p>
+
+
 
       <button onclick="window.location.href='login.php'">Sair</button>
     </div>
