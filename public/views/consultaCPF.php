@@ -38,16 +38,10 @@
         <input type="hidden" id="captcha-response" name="cf-turnstile-response">
 
         <p id="resultado"></p> 
-         <!-- Botão para baixar PDF -->
-            <button id="baixarPDFBtn" onclick="baixarPDF()" style="margin-top: 15px;">Baixar PDF</button>
 
         <div id="dados" class="dados" style="display: none;"></div>
 
     </div>
-
-     <div id="dados" class="dados" style="display: none;">
-
-        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
