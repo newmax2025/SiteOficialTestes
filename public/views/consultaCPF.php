@@ -1,87 +1,149 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Consulta CPF</title>
-    <link rel="stylesheet" href="../assets/css/consultaCPF.css?v=<?php echo md5_file('../assets/css/consultaCPF.css'); ?>">
-    <script>
-        fetch("../backend/verifica_sessao.php")
-        .then(response => response.json())
-        .then(data => {
-            if (!data.autenticado) {
-                window.location.href = "login.php";
-            }
-        })
-        .catch(error => {
-            console.error("Erro ao verificar sessão:", error);
-            window.location.href = "login.php";
-        });
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buscador de Sites</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .search-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .pdf-btn {
+      background-color: #2196F3;
+      color: white;
+      margin-top: 20px;
+    }
+
+    #results {
+      margin-top: 30px;
+    }
+
+    .result-item {
+      background-color: white;
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .result-item a {
+      color: #2196F3;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .result-item a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <div class="logo-container">
-            <img class="logo" src="../assets/img/New Max Buscas.png" alt="Logo do Cliente">
-        </div>
-        <h2>Consulta CPF Comum</h2>
-        <input type="text" id="cpf" placeholder="Digite o CPF" maxlength="14" oninput="formatCPF(this)">
-        <button id="consultarBtn" onclick="consultarCPF()" disabled>Consultar</button>
+  <h1>Buscador de Sites</h1>
+  <input type="text" id="searchInput" placeholder="Digite sua busca..." />
+  <button class="search-btn" onclick="search()">Buscar</button>
 
-        <!-- Turnstile CAPTCHA -->
-        <div class="cf-turnstile" id="captcha" data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh" data-callback="onCaptchaSuccess"></div>
-        <input type="hidden" id="captcha-response" name="cf-turnstile-response">
+  <div id="results"></div>
+  <button class="pdf-btn" onclick="generatePDF()" style="display: none;" id="savePdfBtn">Salvar em PDF</button>
 
-        <p id="resultado"></p>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-        <div id="dados" class="dados" style="display: none;">
-            <!-- Aqui vão os dados retornados pela consulta -->
-        </div>
+  <script>
+    async function search() {
+      const query = document.getElementById("searchInput").value;
+      const response = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_redirect=1&no_html=1&skip_disambig=1`);
+      const data = await response.json();
 
-        <!-- Botão para baixar PDF -->
-        <div style="margin-top: 15px; display: none;" id="pdfContainer">
-            <button id="baixarPDFBtn" onclick="baixarPDF()">Baixar PDF</button>
-        </div>
-    </div>
+      const resultsContainer = document.getElementById("results");
+      resultsContainer.innerHTML = '';
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <script src="../assets/js/consultaCPF.js?v=<?php echo md5_file('../assets/js/consultaCPF.js'); ?>"></script>
+      const saveBtn = document.getElementById("savePdfBtn");
 
-    <script>
-        // Mostra o botão PDF apenas se houver dados
-        function mostrarPDFBtn() {
-            document.getElementById("pdfContainer").style.display = "block";
+      if (data.RelatedTopics.length === 0) {
+        resultsContainer.innerHTML = "<p>Nenhum resultado encontrado.</p>";
+        saveBtn.style.display = "none";
+        return;
+      }
+
+      data.RelatedTopics.forEach(topic => {
+        if (topic.Text && topic.FirstURL) {
+          const item = document.createElement("div");
+          item.className = "result-item";
+          item.innerHTML = `<p>${topic.Text}</p><a href="${topic.FirstURL}" target="_blank">${topic.FirstURL}</a>`;
+          resultsContainer.appendChild(item);
         }
+      });
 
-        // Função para gerar PDF com os dados da consulta
-        async function baixarPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+      saveBtn.style.display = "inline-block";
+    }
 
-            const dadosDiv = document.getElementById("dados");
-            const texto = dadosDiv.innerText || "Nenhum dado disponível";
+    function generatePDF() {
+      const results = document.getElementById("results");
+      const clone = results.cloneNode(true);
 
-            doc.text("Resultado da Consulta por CPF", 10, 10);
-            const linhas = doc.splitTextToSize(texto, 180); // Quebra em múltiplas linhas
-            doc.text(linhas, 10, 20);
+      const container = document.createElement("div");
+      container.style.padding = "20px";
+      container.style.fontFamily = "Arial";
 
-            doc.save("consulta-cpf.pdf");
-        }
+      const logo = document.createElement("img");
+      logo.src = "https://via.placeholder.com/200x50?text=Seu+Logo"; // Substitua pelo seu logo real
+      logo.style.display = "block";
+      logo.style.margin = "0 auto 20px";
+      logo.style.maxWidth = "200px";
 
-        // Exemplo: chamada após sucesso da consulta
-        function exibirDadosNaTela(dados) {
-            const dadosDiv = document.getElementById("dados");
-            dadosDiv.style.display = "block";
-            dadosDiv.innerText = dados;
-            mostrarPDFBtn(); // Mostra botão PDF
-        }
+      const title = document.createElement("h2");
+      title.innerText = "Resultados da Busca";
+      title.style.textAlign = "center";
+      title.style.color = "#333";
+      title.style.marginBottom = "20px";
 
-        // Essa função deve ser chamada no seu JS original (consultaCPF.js)
-        // após o fetch/consulta com os dados recebidos.
-    </script>
+      container.appendChild(logo);
+      container.appendChild(title);
+      container.appendChild(clone);
+
+      html2pdf().from(container).set({
+        margin: 10,
+        filename: 'resultados-da-busca.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      }).save();
+    }
+  </script>
 </body>
 </html>
