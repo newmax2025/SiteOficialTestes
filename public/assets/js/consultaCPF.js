@@ -81,9 +81,9 @@ function resetCaptcha() {
 
 function exibirCampo(label, valor) {
     if (valor === null || valor === undefined || valor === "" || valor === "0.00") {
-        return <p><strong>${label}:</strong> Não disponível</p>;
+        return `<p><strong>${label}:</strong> Não disponível</p>`;
     }
-    return <p><strong>${label}:</strong> ${valor}</p>;
+    return `<p><strong>${label}:</strong> ${valor}</p>`;
 }
 
 
@@ -118,7 +118,7 @@ function consultarCPF() {
         body: JSON.stringify({ cpf: cpfLimpo }),
     })
     .then((response) => {
-        if (!response.ok) throw new Error(Erro na consulta (${response.status}).);
+        if (!response.ok) throw new Error(`Erro na consulta (${response.status}).`);
         return response.json();
     })
     .then((data) => {
@@ -166,7 +166,7 @@ function consultarCPF() {
         html += "<h3>Endereços</h3>";
         if (dados.addresses?.length) {
             dados.addresses.forEach(end => {
-                html += <p>${end.type || ""} ${end.place || ""}, ${end.number || "s/n"} - ${end.neighborhood || ""}, ${end.city || ""} - ${end.state || ""} (${end.zip_code || ""})</p>;
+                html += `<p>${end.type || ""} ${end.place || ""}, ${end.number || "s/n"} - ${end.neighborhood || ""}, ${end.city || ""} - ${end.state || ""} (${end.zip_code || ""})</p>`;
             });
         } else {
             html += "<p>Não disponível</p>";
@@ -174,7 +174,7 @@ function consultarCPF() {
 
         html += "<h3>Telefones</h3>";
         if (dados.phones?.length) {
-            html += dados.phones.map(tel => <p>${tel.number}</p>).join("");
+            html += dados.phones.map(tel => `<p>${tel.number}</p>`).join("");
         } else {
             html += "<p>Não disponível</p>";
         }
@@ -182,7 +182,7 @@ function consultarCPF() {
         html += "<h3>Empregos</h3>";
         if (dados.jobs?.length) {
             dados.jobs.forEach(emp => {
-                html += <p><strong>Empresa:</strong> ${emp.trade_name || "N/A"} | <strong>Admissão:</strong> ${emp.admission_date} | <strong>Saída:</strong> ${emp.termination_date}</p>;
+                html += `<p><strong>Empresa:</strong> ${emp.trade_name || "N/A"} | <strong>Admissão:</strong> ${emp.admission_date} | <strong>Saída:</strong> ${emp.termination_date}</p>`;
             });
         } else {
             html += "<p>Não disponível</p>";
@@ -191,7 +191,7 @@ function consultarCPF() {
         html += "<h3>Compras</h3>";
         if (dados.purchases?.length) {
             dados.purchases.forEach((compra) => {
-            html += <p><strong>Produto:</strong> ${compra.product || "N/A"} | <strong>Quantidade:</strong> ${compra.quantity || "1"} | <strong>Preço:</strong> R$ ${compra.price || "0,00"}</p>;
+            html += `<p><strong>Produto:</strong> ${compra.product || "N/A"} | <strong>Quantidade:</strong> ${compra.quantity || "1"} | <strong>Preço:</strong> R$ ${compra.price || "0,00"}</p>`;
             });
         } else {
             html += "<p>Não disponível</p>";
@@ -201,7 +201,7 @@ function consultarCPF() {
         html += "<h3>Vacinas</h3>";
         if (dados.vaccines?.length) {
             dados.vaccines.forEach(vac => {
-                html += <p><strong>${vac.vaccine}</strong> - ${vac.dose}, ${vac.date} - ${vac.establishment}</p>;
+                html += `<p><strong>${vac.vaccine}</strong> - ${vac.dose}, ${vac.date} - ${vac.establishment}</p>`;
             });
         } else {
             html += "<p>Não disponível</p>";
@@ -226,7 +226,7 @@ function consultarCPF() {
                     exibicao = valor;
                 }
 
-                html += <p><strong>${label}:</strong> ${exibicao}</p>;
+                html += `<p><strong>${label}:</strong> ${exibicao}</p>`;
             }
         } else {
             html += "<p>Não disponível</p>";
@@ -236,11 +236,11 @@ function consultarCPF() {
 
         dadosElement.innerHTML = html;
         dadosElement.style.display = "block";
-        resultadoElement.innerText = Consulta realizada para o CPF: ${cpf};
+        resultadoElement.innerText = `Consulta realizada para o CPF: ${cpf}`;
     })
     .catch((error) => {
         console.error("Erro ao consultar CPF:", error);
-        resultadoElement.innerText = Erro: ${error.message};
+        resultadoElement.innerText = `Erro: ${error.message}`;
         dadosElement.style.display = "none";
     })
     .finally(() => {
@@ -262,3 +262,5 @@ function formatCPF(input) {
     value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
     input.value = value;
   }
+
+
