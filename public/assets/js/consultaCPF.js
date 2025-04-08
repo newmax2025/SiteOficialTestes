@@ -264,7 +264,6 @@ function formatCPF(input) {
     input.value = value;
   }
 
-<script>
   async function gerarPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
@@ -280,4 +279,3 @@ function formatCPF(input) {
       doc.save("resultado-cpf.pdf");
     });
   }
-</script>
