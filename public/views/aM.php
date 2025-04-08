@@ -66,7 +66,7 @@
     <div class="popup">
       <button class="close-btn" onclick="document.getElementById('popupOverlay').style.display='none'">Fechar</button>
   
-      <img src="../assets/img/New Max Buscas.png" alt="Logo NEW MAX BUSCAS" />
+      <img src="../assets/img/new_max_buscas.png" alt="Logo NEW MAX BUSCAS" />
   
       <h2>⚠️ Atenção!</h2>
   
@@ -159,7 +159,7 @@
         <div class="carousel-container">
             <div class="card Premium"> 
                 
-                <img src="../assets/img/Consulta  CREDI LINK.jpg" alt="CRLV (Todos os Estados)">
+                <img src="../assets/img/consulta_credi_link.jpg" alt="CRLV (Todos os Estados)">
     
             </div>
             <div class="card Premium"> 
@@ -174,21 +174,21 @@
             </div>
             <div class="card Premium"> 
                
-                <img src="../assets/img/cONSULTA Detran Pro.jpg" alt="SCPC">
+                <img src="../assets/img/consulta_detran_pro.jpg" alt="SCPC">
                 
             </div>
             <div class="card Premium"> 
                
-                <img src="../assets/img/Despachante Condutor.jpg" alt="SCPC">
+                <img src="../assets/img/despachante_condutor.jpg" alt="SCPC">
                 
             </div>
             <div class="card Premium"> 
                
-                <img src="../assets/img/Despachante Veicular.jpg" alt="SCPC">
+                <img src="../assets/img/despachante_veicular.jpg" alt="SCPC">
                 
             </div> <div class="card Premium"> 
                
-                <img src="../assets/img/CONSULTA RADAR DE VEÍCULOS.jpg" alt="CONSULTA RADAR DE VEÍCULOS">
+                <img src="../assets/img/consulta_radar_de_veiculos.jpg" alt="CONSULTA RADAR DE VEÍCULOS">
 
             </div>
             <!-- Adicione mais cards conforme necessário -->
