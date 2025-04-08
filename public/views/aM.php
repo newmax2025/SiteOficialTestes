@@ -169,7 +169,7 @@
             </div>
             <div class="card Premium"> 
                 
-                <img src="../assets/img/Placa Plus Plano Premium.jpg" alt="Consulta SERASA">
+                <img src="../assets/img/placa_plus_plano_premium.jpg" alt="Consulta SERASA">
                 
             </div>
             <div class="card Premium"> 
