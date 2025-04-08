@@ -8,18 +8,17 @@
     <link rel="stylesheet" href="../assets/css/consultaCPF.css?v=<?php echo md5_file('../assets/css/consultaCPF.css'); ?>">
     <script>
         fetch("../backend/verifica_sessao.php")
-    .then(response => response.json())
-    .then(data => {
-        if (!data.autenticado) {
-            window.location.href = "login.php"; // Redireciona se não estiver autenticado
-        }
-    })
-    .catch(error => {
-        console.error("Erro ao verificar sessão:", error);
-        window.location.href = "login.php"; // Opcional: Redireciona em caso de erro
-    });
-
-        </script>
+            .then(response => response.json())
+            .then(data => {
+                if (!data.autenticado) {
+                    window.location.href = "login.php"; // Redireciona se não estiver autenticado
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao verificar sessão:", error);
+                window.location.href = "login.php"; // Opcional: Redireciona em caso de erro
+            });
+    </script>
 </head>
 
 <body>
@@ -39,19 +38,35 @@
 
         <p id="resultado"></p>
 
-        <div id="dados" class="dados" style="display: none;"></div>
-
-    </div>
-
-     <div id="dados" class="dados" style="display: none;">
+        <div id="dados" class="dados" style="display: none;">
             <!-- Botão para baixar PDF -->
             <button id="baixarPDFBtn" onclick="baixarPDF()" style="margin-top: 15px;">Baixar PDF</button>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="../assets/js/consultaCPF.js?v=<?php echo md5_file('../assets/js/consultaCPF.js'); ?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        async function baixarPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const dadosDiv = document.getElementById("dados");
+            const texto = dadosDiv.innerText || dadosDiv.textContent;
+
+            doc.text("Relatório da Consulta CPF", 10, 10);
+
+            const linhas = texto.split('\n');
+            let y = 20;
+            linhas.forEach(linha => {
+                doc.text(linha, 10, y);
+                y += 10;
+            });
+
+            doc.save("consulta-cpf.pdf");
+        }
+    </script>
 </body>
 
 </html>
