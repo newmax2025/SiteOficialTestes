@@ -66,7 +66,7 @@
     <div class="popup">
       <button class="close-btn" onclick="document.getElementById('popupOverlay').style.display='none'">Fechar</button>
   
-      <img src="img/new_max_buscas.png" alt="Logo NEW MAX BUSCAS" />
+      <img src="../assets/img/new_max_buscas.png" alt="Logo NEW MAX BUSCAS" />
   
       <h2>⚠️ Atenção!</h2>
   
@@ -445,7 +445,7 @@
  const banner = document.querySelector('.banner-grande');
   const imagens = [
     '../assets/img/banner_new_MAX.png',
-    '../assets/img/assine_o_plano_premium1.png'
+    '../assets/img/assine_o_plano_premium .jpg'
     
   ];
 
