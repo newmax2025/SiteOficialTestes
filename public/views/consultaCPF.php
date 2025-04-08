@@ -39,6 +39,8 @@
         <p id="resultado"></p>
 
         <div id="dados" class="dados" style="display: none;">
+            <!-- Os dados da consulta serão inseridos aqui pelo JavaScript -->
+            
             <!-- Botão para baixar PDF -->
             <button id="baixarPDFBtn" onclick="baixarPDF()" style="margin-top: 15px;">Baixar PDF</button>
         </div>
@@ -53,13 +55,23 @@
             const doc = new jsPDF();
 
             const dadosDiv = document.getElementById("dados");
-            const texto = dadosDiv.innerText || dadosDiv.textContent;
+
+            // Clona os dados para evitar pegar o texto do botão também
+            const dadosClone = dadosDiv.cloneNode(true);
+            const btn = dadosClone.querySelector("#baixarPDFBtn");
+            if (btn) btn.remove(); // Remove o botão do clone
+
+            const texto = dadosClone.innerText || dadosClone.textContent;
 
             doc.text("Relatório da Consulta CPF", 10, 10);
 
             const linhas = texto.split('\n');
             let y = 20;
             linhas.forEach(linha => {
+                if (y >= 280) {
+                    doc.addPage();
+                    y = 20;
+                }
                 doc.text(linha, 10, y);
                 y += 10;
             });
