@@ -41,7 +41,8 @@
 
         <div id="dados" class="dados" style="display: none;"></div>
          <!-- BOTÃO DE BAIXAR PDF -->
-              <button onclick="baixarPDF()">Baixar PDF</button>
+             <button onclick="gerarPDF()">Imprimir em PDF</button>
+
     </div>
     </div>
 
