@@ -21,7 +21,7 @@ if (!isset($input['placa'])) {
 }
 
 $placa = preg_replace('/\D/', '', $input['placa']);
-if (strlen($placa) !== 8) {
+if (strlen($placa) !== 7) {
     http_response_code(400);
     echo json_encode(['erro' => 'Placa inválido.']);
     exit;
