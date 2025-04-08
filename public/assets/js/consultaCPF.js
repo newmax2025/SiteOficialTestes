@@ -25,7 +25,6 @@ const interessesLabels = {
     has_token_installed: "Token de Segurança Instalado",
     has_traveled: "Já Viajou",
 
-    // Probabilidades
     personal_credit_probability: "Probabilidade de Crédito Pessoal",
     vehicle_financing_probability: "Probabilidade de Financiamento de Veículos",
     internet_shopping_probability: "Probabilidade de Compras Online",
@@ -62,13 +61,17 @@ function onCaptchaSuccess() {
 }
 
 function resetCaptcha() {
-    captchaValidado = false; // Reseta a validação do CAPTCHA
-    document.getElementById("consultarBtn").disabled = true; // Desativa o botão
+    captchaValidado = false;
+    document.getElementById("consultarBtn").disabled = true;
+
+    const captchaContainer = document.getElementById("captcha");
+    if (captchaContainer) {
+        captchaContainer.innerHTML = "<p>Recarregando CAPTCHA...</p><div class='spinner'></div>";
+    }
 
     setTimeout(() => {
-        const captchaContainer = document.getElementById("captcha");
         if (captchaContainer) {
-            captchaContainer. innerHTML = ""; // Remove o CAPTCHA antigo
+            captchaContainer.innerHTML = "";
             turnstile.render("#captcha", {
                 sitekey: "0x4AAAAAABDPzCDp7OiEAfvh",
                 callback: onCaptchaSuccess,
@@ -76,7 +79,7 @@ function resetCaptcha() {
         } else {
             console.warn("Elemento CAPTCHA não encontrado!");
         }
-    }, 500); // Aguarda 500ms antes de recriar o CAPTCHA
+    }, 800);
 }
 
 function exibirCampo(label, valor) {
@@ -85,7 +88,6 @@ function exibirCampo(label, valor) {
     }
     return `<p><strong>${label}:</strong> ${valor}</p>`;
 }
-
 
 function consultarCPF() {
     if (!captchaValidado) {
@@ -191,12 +193,11 @@ function consultarCPF() {
         html += "<h3>Compras</h3>";
         if (dados.purchases?.length) {
             dados.purchases.forEach((compra) => {
-            html += `<p><strong>Produto:</strong> ${compra.product || "N/A"} | <strong>Quantidade:</strong> ${compra.quantity || "1"} | <strong>Preço:</strong> R$ ${compra.price || "0,00"}</p>`;
+                html += `<p><strong>Produto:</strong> ${compra.product || "N/A"} | <strong>Quantidade:</strong> ${compra.quantity || "1"} | <strong>Preço:</strong> R$ ${compra.price || "0,00"}</p>`;
             });
         } else {
             html += "<p>Não disponível</p>";
         }
-
 
         html += "<h3>Vacinas</h3>";
         if (dados.vaccines?.length) {
@@ -215,7 +216,6 @@ function consultarCPF() {
                 const valor = interesses[chave];
 
                 let exibicao;
-
                 if (typeof valor === "boolean") {
                     exibicao = valor ? "Sim" : "Não";
                 } else if (typeof valor === "number") {
@@ -232,8 +232,6 @@ function consultarCPF() {
             html += "<p>Não disponível</p>";
         }
 
-
-
         dadosElement.innerHTML = html;
         dadosElement.style.display = "block";
         resultadoElement.innerText = `Consulta realizada para o CPF: ${cpf}`;
@@ -245,10 +243,9 @@ function consultarCPF() {
     })
     .finally(() => {
         consultarBtn.disabled = false;
-        resetCaptcha(); // Agora recria o CAPTCHA corretamente
+        resetCaptcha(); // Recria o CAPTCHA após a consulta
     });
 }
-
 
 function formatarCPF(cpf) {
     if (!cpf) return "";
@@ -261,39 +258,4 @@ function formatCPF(input) {
     value = value.replace(/(\d{3})(\d)/, "$1.$2");
     value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
     input.value = value;
-  }
-async function baixarPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-
-    const dados = {
-        nome: document.getElementById('nome').innerText,
-        cpf: document.getElementById('cpf_resultado').innerText,
-        safra: document.getElementById('safra').innerText,
-        nascimento: document.getElementById('nascimento').innerText,
-        nome_mae: document.getElementById('nome_mae').innerText,
-        sexo: document.getElementById('sexo').innerText,
-        email: document.getElementById('email').innerText,
-        obito: document.getElementById('obito').innerText,
-        status_receita: document.getElementById('status_receita').innerText,
-        cbo: document.getElementById('cbo').innerText,
-        faixa_renda: document.getElementById('faixa_renda').innerText,
-        veiculos: document.getElementById('veiculos').innerText,
-        telefones: document.getElementById('telefones').innerText,
-        celulares: document.getElementById('celulares').innerText,
-        empregos: document.getElementById('empregos').innerText,
-        enderecos: document.getElementById('enderecos').innerText,
-    };
-
-    doc.text("Relatório da Consulta CPF", 10, 10);
-
-    let y = 20;
-    for (const [chave, valor] of Object.entries(dados)) {
-        doc.text(`${chave.charAt(0).toUpperCase() + chave.slice(1)}: ${valor}`, 10, y);
-        y += 10;
-    }
-
-    doc.save("consulta-cpf.pdf");
 }
-
-
