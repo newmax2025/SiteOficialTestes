@@ -1,3 +1,4 @@
+
 let captchaValidado = false;
 
 const interessesLabels = {
@@ -25,6 +26,7 @@ const interessesLabels = {
     has_token_installed: "Token de Segurança Instalado",
     has_traveled: "Já Viajou",
 
+    // Probabilidades
     personal_credit_probability: "Probabilidade de Crédito Pessoal",
     vehicle_financing_probability: "Probabilidade de Financiamento de Veículos",
     internet_shopping_probability: "Probabilidade de Compras Online",
@@ -61,17 +63,13 @@ function onCaptchaSuccess() {
 }
 
 function resetCaptcha() {
-    captchaValidado = false;
-    document.getElementById("consultarBtn").disabled = true;
-
-    const captchaContainer = document.getElementById("captcha");
-    if (captchaContainer) {
-        captchaContainer.innerHTML = "<p>Recarregando CAPTCHA...</p><div class='spinner'></div>";
-    }
+    captchaValidado = false; // Reseta a validação do CAPTCHA
+    document.getElementById("consultarBtn").disabled = true; // Desativa o botão
 
     setTimeout(() => {
+        const captchaContainer = document.getElementById("captcha");
         if (captchaContainer) {
-            captchaContainer.innerHTML = "";
+            captchaContainer. innerHTML = ""; // Remove o CAPTCHA antigo
             turnstile.render("#captcha", {
                 sitekey: "0x4AAAAAABDPzCDp7OiEAfvh",
                 callback: onCaptchaSuccess,
@@ -79,7 +77,7 @@ function resetCaptcha() {
         } else {
             console.warn("Elemento CAPTCHA não encontrado!");
         }
-    }, 800);
+    }, 500); // Aguarda 500ms antes de recriar o CAPTCHA
 }
 
 function exibirCampo(label, valor) {
@@ -88,6 +86,7 @@ function exibirCampo(label, valor) {
     }
     return `<p><strong>${label}:</strong> ${valor}</p>`;
 }
+
 
 function consultarCPF() {
     if (!captchaValidado) {
@@ -193,11 +192,12 @@ function consultarCPF() {
         html += "<h3>Compras</h3>";
         if (dados.purchases?.length) {
             dados.purchases.forEach((compra) => {
-                html += `<p><strong>Produto:</strong> ${compra.product || "N/A"} | <strong>Quantidade:</strong> ${compra.quantity || "1"} | <strong>Preço:</strong> R$ ${compra.price || "0,00"}</p>`;
+            html += `<p><strong>Produto:</strong> ${compra.product || "N/A"} | <strong>Quantidade:</strong> ${compra.quantity || "1"} | <strong>Preço:</strong> R$ ${compra.price || "0,00"}</p>`;
             });
         } else {
             html += "<p>Não disponível</p>";
         }
+
 
         html += "<h3>Vacinas</h3>";
         if (dados.vaccines?.length) {
@@ -216,6 +216,7 @@ function consultarCPF() {
                 const valor = interesses[chave];
 
                 let exibicao;
+
                 if (typeof valor === "boolean") {
                     exibicao = valor ? "Sim" : "Não";
                 } else if (typeof valor === "number") {
@@ -232,6 +233,8 @@ function consultarCPF() {
             html += "<p>Não disponível</p>";
         }
 
+
+
         dadosElement.innerHTML = html;
         dadosElement.style.display = "block";
         resultadoElement.innerText = `Consulta realizada para o CPF: ${cpf}`;
@@ -243,9 +246,10 @@ function consultarCPF() {
     })
     .finally(() => {
         consultarBtn.disabled = false;
-        resetCaptcha(); // Recria o CAPTCHA após a consulta
+        resetCaptcha(); // Agora recria o CAPTCHA corretamente
     });
 }
+
 
 function formatarCPF(cpf) {
     if (!cpf) return "";
@@ -258,4 +262,4 @@ function formatCPF(input) {
     value = value.replace(/(\d{3})(\d)/, "$1.$2");
     value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
     input.value = value;
-}
+  }
