@@ -88,7 +88,8 @@ function exibirCampo(label, valor) {
 }
 
 
-function consultarCPF() {
+function consultarCPF(mostrarBotaoPDF();
+) {
     if (!captchaValidado) {
         document.getElementById("resultado").innerText = "Por favor, resolva o CAPTCHA.";
         return;
