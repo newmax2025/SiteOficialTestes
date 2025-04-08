@@ -202,58 +202,53 @@
     <div class="carousel-container">
         <div class="card pequeno"> 
             
-            <img src="../assets/img/CRLV (Todos os Estados).jpg" alt="CRLV (Todos os Estados)">
+            <img src="../assets/img/CRV_+código.jpg" alt="CRLV (Todos os Estados)">
 
         </div>
-        <div class="card pequeno"> 
-           <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
-            <img src="../assets/img/Impressão CNH (Original).jpg" alt="img/Impressão CNH (Original)a">
-            
-        </div>
+        
         <div class="card pequeno"> 
             
-            <img src="../assets/img/Consulta SERASA.jpg" alt="Consulta SERASA">
+            <img src="../assets/img/consulta_SERASA.jpg" alt="Consulta SERASA">
             
         </div>
         <div class="card pequeno"> 
            
-            <img src="../assets/img/SCPC.jpg" alt="SCPC">
+            <img src="../assets/img/scpc.jpg" alt="SCPC">
             
         </div>
 
         <div class="card pequeno"> 
             
-            <img src="../assets/img/CNH Simples.jpg" alt="CNH Simples">
+            <img src="../assets/img/CNH_simples.jpg" alt="CNH Simples">
             
         </div>
         <div class="card pequeno"> 
             
-            <img src="../assets/img/Consulta Veicular Max.jpg" alt="Consulta Veicular Max">
+            <img src="../assets/img/consulta_veicular_max.jpg" alt="Consulta Veicular Max">
         </div>
         <div class="card pequeno"> 
                
-            <img src="../assets/img/Consulta Frota Veicular.jpg" alt="Treino Academia">
+            <img src="../assets/img/consulta_frota_veicular.jpg" alt="Treino Academia">
           
         </div>
         <div class="card pequeno"> 
             
-            <img src="../assets/img/CONSULTA RECEITA FEDERAL.jpg" alt="Treino Academia">
+            <img src="../assets/img/consulta_receita_federal.jpg" alt="Treino Academia">
            
         </div>
 
 <div class="card pequeno"> 
    
-    <img src="../assets/img/CONSULTA  CADSUS.jpg" alt="CONSULTA  CADSUS">
+    <img src="../assets/img/consulta_cadsus.jpg" alt="CONSULTA  CADSUS">
 </div>
 <div class="card pequeno"> 
     
-    <img src="../assets/img/Consulta Tracker.jpg" alt="Consulta Tracker">
+    <img src="../assets/img/consulta_tracker.jpg" alt="Consulta Tracker">
    
 </div>
         <div class="card pequeno"> 
                                 
-                                <img src="../assets/img/Consultar FGTS.jpg" alt="Buscar Processo">
-                               
+                                <img src="../assets/img/consultar_FGTS.jpg
                             </div>
         <!-- Adicione mais cards conforme necessário -->
     </div>
@@ -262,58 +257,58 @@
         <div class="carousel-container">
             <div class="card pequeno"> 
                         
-                <img src="../assets/img/Gerar Score.jpg" alt="Treino Academia">
+                <img src="../assets/img/gerar_score.jpg" alt="Treino Academia">
                
             </div>
             <div class="card pequeno"> 
                <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
-                <img src="../assets/img/Buscar Modelo de Veículo.jpg" alt="Treino Academia">
+                <img src="../assets/img/buscar_modelo_de_veículo.jpg" alt="Treino Academia">
                
             </div>
             <div class="card pequeno"> 
              
-                <img src="../assets/img/Gerador de Aniversário.jpg" alt="Treino Academia">
+                <img src="../assets/img/gerador_de_aniversario.jpg" alt="Treino Academia">
                
             </div>
             <div class="card pequeno"> 
               
-                <img src="../assets/img/CONSULTA INSS.jpg" alt="Treino Casa">
+                <img src="../assets/imgconsulta_INSS.jpg" alt="Treino Casa">
                 
             </div>
 
             <div class="card pequeno"> 
                 
-                <img src="../assets/img/Consulta Tracker AVANÇADO.jpg" alt="Consulta Tracker AVANÇADO">
+                <img src="../assets/img/consulta_tracker_avançado.jpg" alt="Consulta Tracker AVANÇADO">
                 
             </div>
             <div class="card pequeno"> 
                 
-                <img src="../assets/img/Consulta Score.jpg" alt="Consulta Score">
+                <img src="../assets/img/consulta_score.jpg" alt="Consulta Score">
                 
             </div>
             <div class="card pequeno"> 
                 
-                <img src="../assets/img/Consulta DateCorp.jpg" alt="Consulta DateCorp">
+                <img src="../assets/img/consulta_datecorp.jpg" alt="Consulta DateCorp">
                 
             </div>
             <div class="card pequeno"> 
                
-                <img src="../assets/img/Consulta Search Data.jpg" alt="Consulta Search Data">
+                <img src="../assets/img/consulta_search_data.jpg" alt="Consulta Search Data">
               
             </div>
             <div class="card pequeno"> 
                
-                <img src="../assets/img/Consulta Dívida.jpg" alt="Consulta Dívida">
+                <img src="../assets/img/consulta_divida.jpg" alt="Consulta Dívida">
                
             </div>
             <div class="card pequeno"> 
                
-                <img src="../assets/img/Consulta  Cadin.jpg" alt="Consulta  Cadin">
+                <img src="../assets/img/consulta_cadin.jpg" alt="Consulta  Cadin">
                 
             </div>
             <d <div class="card pequeno"> 
               
-                <img src="../assets/img/CONSULTA EMPRESARIAL.jpg" alt="CONSULTA EMPRESARIAL">
+                <img src="../assets/img/consulta_empresarial.jpg" alt="CONSULTA EMPRESARIAL">
               
             </div>
             
