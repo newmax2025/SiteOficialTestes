@@ -40,10 +40,8 @@
         <p id="resultado"></p>
 
         <div id="dados" class="dados" style="display: none;"></div>
-
-           <!-- Botão para baixar PDF -->
-          <button onclick="gerarPDF()">Imprimir em PDF</button>
-
+         <!-- BOTÃO DE BAIXAR PDF -->
+              <button onclick="baixarPDF()">Baixar PDF</button>
     </div>
     </div>
 
