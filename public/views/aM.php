@@ -66,7 +66,7 @@
     <div class="popup">
       <button class="close-btn" onclick="document.getElementById('popupOverlay').style.display='none'">Fechar</button>
   
-      <img src="img/new_max_buscas.png" alt="Logo NEW MAX BUSCAS" />
+      <img src="../assets/img/new_max_buscas.png" alt="Logo NEW MAX BUSCAS" />
   
       <h2>⚠️ Atenção!</h2>
   
