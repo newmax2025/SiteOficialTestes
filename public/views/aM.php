@@ -66,7 +66,7 @@
     <div class="popup">
       <button class="close-btn" onclick="document.getElementById('popupOverlay').style.display='none'">Fechar</button>
   
-      <img src="../assets/img/new_max_buscas.png" alt="Logo NEW MAX BUSCAS" />
+      <img src="img/new_max_buscas.png" alt="Logo NEW MAX BUSCAS" />
   
       <h2>⚠️ Atenção!</h2>
   
@@ -213,6 +213,12 @@
             <img src="../assets/img/consulta_SERASA.jpg" alt="consulta_SERASA.jpg">
             
         </div>
+
+        <div class="card Gratuitos" onclick="mostrarBotao(this)">  
+            <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)">
+             <button class="botao">Sendo Adicionado</button>
+               </div>
+
         <div class="card pequeno"> 
            
             <img src="../assets/img/scpc.jpg" alt="SCPC">
@@ -275,6 +281,11 @@
               
                 <img src="../assets/img/consulta_INSS.jpg" alt="consulta_INSS">
                 
+            </div>
+
+            <div class="card Gratuitos" onclick="mostrarBotao(this)">  
+                <img src="../assets/img/consulta_funcionarios.jpg" alt="consulta_funcionarios">
+                <button class="botao">Sendo Adicionado</button>
             </div>
 
             <div class="card pequeno"> 
@@ -383,17 +394,7 @@
                         <!-- 4° FILEIRA DOS AVANÇADOS -->
                         <section class="carousel" id="treinos">
                             <div class="carousel-container">
-
-                                  <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-                                      <img src="../assets/img/consulta_funcionarios.jpg" alt="consulta_funcionarios">
-                                      <button class="botao">Sendo Adicionado</button>
-                                  </div>
-
-                                   <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-                                     <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)">
-                                      <button class="botao">Sendo Adicionado</button>
-                                        </div>
-                                            
+       
                                             <div class="card pequeno"> 
                                                
                                                 <img src="../assets/img/bacen.jpg" alt="bacen">
@@ -443,8 +444,8 @@
               
  const banner = document.querySelector('.banner-grande');
   const imagens = [
-    '../assets/img/assine_o_plano_premium.jpg',
-    '../assets/img/banner_principal1.jpg.'
+    '../assets/img/banner_new_MAX.png',
+    '../assets/img/assine_o_plano_premium1.png'
     
   ];
 
