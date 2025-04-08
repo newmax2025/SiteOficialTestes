@@ -38,7 +38,7 @@ header img {
 .banner-grande {
 width: 100%;
 height: 40vh; /* Altura adaptável ao tamanho da tela */
-background-image: url('img/assine\ o\ plano\ premium\ .jpg'); /* Imagem inicial */
+background-image: url('img/assine_o_plano_premium\ .jpg'); /* Imagem inicial */
 background-size: contain; /* Ajusta a imagem sem cortar, mantendo a proporção */
 background-position: center;
 transition: background-image 0.5s ease;
