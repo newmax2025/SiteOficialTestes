@@ -30,7 +30,7 @@ function exibirCampo(label, valor) {
     valor === "" ||
     valor === "0.00"
   ) {
-    return `<p><strong>${label}:</strong> Não disponível</p>`;
+    return `<p><strong>${label}:</strong> Não disponível / Não existe</p>`;
   }
   return `<p><strong>${label}:</strong> ${valor}</p>`;
 }
