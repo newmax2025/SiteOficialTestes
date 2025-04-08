@@ -127,19 +127,11 @@
                     <button class="botao">Sendo Adicionado</button>
                 </div>
                   <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <img src="../assets/img/consulta_EMAIL.jpg" alt="CRLV (Todos os Estados)">
+      <a href="consulta_email.php"><img src="../assets/img/consulta_EMAIL.jpg" alt="CRLV (Todos os Estados)"></a>
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
          <a href="consultaCNPJ.php"> <img src="../assets/img/consulta_CNPJ_max.jpg" alt="CRLV (Todos os Estados)"></a>
-        <button class="botao">Sendo Adicionado</button>
-    </div>
-    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <img src="../assets/img/consulta_funcionarios.jpg" alt="CRLV (Todos os Estados)">
-        <button class="botao">Sendo Adicionado</button>
-    </div>
-    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
@@ -148,7 +140,7 @@
     </div>
 
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <img src="../assets/img/buscar_cep.jpg" alt="CRLV (Todos os Estados)">
+       <a href="consulta_cep.php"> <img src="../assets/img/buscar_cep.jpg" alt="CRLV (Todos os Estados)"></a>
         <button class="botao">Sendo Adicionado</button>
     </div>
     </div>
@@ -172,7 +164,7 @@
             </div>
             <div class="card Premium"> 
                
-                <img src="../assets/img/CNH_completa_com_Foto.jpg" alt="img/Impressão CNH (Original)a">
+                <img src="../assets/img/CNH_completa_com_foto.jpg" alt="img/Impressão CNH (Original)a">
                 
             </div>
             <div class="card Premium"> 
@@ -390,6 +382,15 @@
                         <section class="carousel" id="treinos">
                             <div class="carousel-container">
 
+                                  <div class="card Gratuitos" onclick="mostrarBotao(this)">  
+        <img src="../assets/img/consulta_funcionarios.jpg" alt="CRLV (Todos os Estados)">
+        <button class="botao">Sendo Adicionado</button>
+    </div>
+    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
+        <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="CRLV (Todos os Estados)">
+        <button class="botao">Sendo Adicionado</button>
+    </div>
+
                                         <div class="card pequeno"> 
                                        <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
                                             <img src="../assets/img/condutor pro.jpg" alt="condutor pro">
@@ -397,7 +398,7 @@
                                             
                                             <div class="card pequeno"> 
                                                
-                                                <img src="../assets/img/bacem.jpg" alt="BACEN">
+                                                <img src="../assets/img/bacen.jpg" alt="BACEN">
                                               
                                             </div>
 
