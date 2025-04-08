@@ -311,7 +311,7 @@
                 <img src="../assets/img/Consulta  Cadin.jpg" alt="Consulta  Cadin">
                 
             </div>
-            <div class="card pequeno"> 
+            <d <div class="card pequeno"> 
               
                 <img src="../assets/img/CONSULTA EMPRESARIAL.jpg" alt="CONSULTA EMPRESARIAL">
               
@@ -390,13 +390,23 @@
         <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
+
+                                        <div class="card pequeno"> 
+                                       
+                                            <img src="../assets/img/condutor pro.jpg" alt="condutor pro">
+                                            </div>
                                             
                                             <div class="card pequeno"> 
                                                
                                                 <img src="../assets/img/bacen.jpg" alt="BACEN">
                                               
                                             </div>
-                                           </div>
+
+                                            <div class="card pequeno"> 
+                                       
+                                                <img src="../assets/img/faceMatch.jpg" alt="BACEN">
+                                              
+                                            </div>
 
                                             <div class="card pequeno"> 
                                        
@@ -421,9 +431,13 @@
                                                 <img src="../assets/img/motorista  de 99_uber.jpg" alt="BACEN">
                                               
                                             </div>
+
+                                            <div class="card pequeno"> 
+                                                <img src="../assets/img/motorista_de_ifood_uber_eats.jpg" alt="BACEN">
+                                              
+                                            </div>
                                             <!-- Adicione mais cards conforme necessário -->
                                         </div>
-                                                </div>
                                                 <section class="carousel" id="treinos">
                                                     <section><div id="modal" class="modal">
                                                         <div class="modal-content">
