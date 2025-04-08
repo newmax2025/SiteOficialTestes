@@ -444,7 +444,7 @@
  const banner = document.querySelector('.banner-grande');
   const imagens = [
     '../assets/img/assine_o_plano_premium.jpg',
-    '../assets/img/assine_o_plano_premium2.png'
+    '../assets/img/banner_principal1.jpg.'
     
   ];
 
