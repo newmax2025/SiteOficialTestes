@@ -390,23 +390,13 @@
         <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="CRLV (Todos os Estados)">
         <button class="botao">Sendo Adicionado</button>
     </div>
-
-                                        <div class="card pequeno"> 
-                                       <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
-                                            <img src="../assets/img/condutor pro.jpg" alt="condutor pro">
-                                            </div>
                                             
                                             <div class="card pequeno"> 
                                                
                                                 <img src="../assets/img/bacen.jpg" alt="BACEN">
                                               
                                             </div>
-
-                                            <div class="card pequeno"> 
-                                       <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
-                                                <img src="../assets/img/faceMatch.jpg" alt="BACEN">
-                                              
-                                            </div>
+                                           </div>
 
                                             <div class="card pequeno"> 
                                        
@@ -429,12 +419,6 @@
                                             <div class="card pequeno"> 
                                        
                                                 <img src="../assets/img/motorista  de 99_uber.jpg" alt="BACEN">
-                                              
-                                            </div>
-
-                                            <div class="card pequeno"> 
-                                        <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
-                                                <img src="../assets/img/motorista  de ifood_uber eats.jpg" alt="BACEN">
                                               
                                             </div>
                                             <!-- Adicione mais cards conforme necessário -->
