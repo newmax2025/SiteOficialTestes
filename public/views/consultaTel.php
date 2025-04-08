@@ -40,7 +40,8 @@
         <p id="resultado"></p>
 
         <div id="dados" class="dados" style="display: none;"></div>
-
+         <!-- BOTÃO DE BAIXAR PDF -->
+              <button onclick="baixarPDF()">Baixar PDF</button>
     </div>
 
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
