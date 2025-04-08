@@ -198,6 +198,8 @@
     </section>
     <section class="carousel" id="favoritos">
 
+
+        <!-- 1° FILEIRA DOS AVANÇADOS -->
     <h2>Modulos Avançados</h2>
     <div class="carousel-container">
         <div class="card pequeno"> 
@@ -205,11 +207,7 @@
             <img src="../assets/img/CRLV_(Todos_os_estados).jpg" alt="CRLV_(Todos_os_estados)">
 
         </div>
-        <div class="card pequeno"> 
-           
-            <img src="../assets/img/Impressão_CN_(original).jpg" alt="Impressão_CN_(original)">
-            
-        </div>
+
         <div class="card pequeno"> 
             
             <img src="../assets/img/consulta_SERASA.jpg" alt="consulta_SERASA.jpg">
@@ -258,6 +256,8 @@
         <!-- Adicione mais cards conforme necessário -->
     </div>
     <!-- Adicione mais Colunas conforme necessário -->
+
+    <!-- 2° FILEIRA DOS AVANÇADOS -->
         <section class="carousel" id="treinos">
         <div class="carousel-container">
             <div class="card pequeno"> 
@@ -265,11 +265,7 @@
                 <img src="../assets/img/gerar_score.jpg" alt="gerar_score">
                
             </div>
-            <div class="card pequeno"> 
-               
-                <img src="../assets/img/buscar_modelo_de_veículo.jpg" alt="buscar_modelo_de_veículo">
-               
-            </div>
+
             <div class="card pequeno"> 
              
                 <img src="../assets/img/gerador_de_aniversario.jpg" alt="gerador_de_aniversario">
@@ -319,6 +315,9 @@
             
             <!-- Adicione mais cards conforme necessário -->
         </div>
+
+
+        <!-- 3° FILEIRA DOS AVANÇADOS -->
         <section class="carousel" id="treinos">
             <div class="carousel-container">
 
@@ -378,7 +377,10 @@
                                         <img src="../assets/img/gerador_de_rendas.jpg" alt="gerador_de_rendas">
                                         
                                         </div>
-                        </div>
+                                    </div>
+
+
+                        <!-- 4° FILEIRA DOS AVANÇADOS -->
                         <section class="carousel" id="treinos">
                             <div class="carousel-container">
 
@@ -386,15 +388,11 @@
                                       <img src="../assets/img/consulta_funcionarios.jpg" alt="consulta_funcionarios">
                                       <button class="botao">Sendo Adicionado</button>
                                   </div>
-                         <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-                         <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)">
-                         <button class="botao">Sendo Adicionado</button>
-                        </div>
 
-                                        <div class="card pequeno"> 
-                                       
-                                            <img src="../assets/img/condutor_pro.jpg" alt="condutor_pro">
-                                            </div>
+                                   <div class="card Gratuitos" onclick="mostrarBotao(this)">  
+                                     <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)">
+                                      <button class="botao">Sendo Adicionado</button>
+                                        </div>
                                             
                                             <div class="card pequeno"> 
                                                
