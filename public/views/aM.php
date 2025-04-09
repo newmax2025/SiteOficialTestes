@@ -164,13 +164,13 @@
 
                <div class="card Gratuitos" onclick="mostrarBotao(this)">
                 <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
-                <img src="../assets/img/buscar_chassi.jpg" alt="pesquisa_por_nome">
+                <img src="../assets/img3D/buscar_chassi.jpg" alt="pesquisa_por_nome">
                  <button class="botao">Sendo Adicionado</button>
                    </div>
 
                    <div class="card Gratuitos" onclick="mostrarBotao(this)">
                     <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
-                    <img src="../assets/img/Foto_rj.jpg" alt="pesquisa_por_nome">
+                    <img src="../assets/img3D/Foto_rj.jpg" alt="pesquisa_por_nome">
                      <button class="botao">Sendo Adicionado</button>
                        </div>
 
