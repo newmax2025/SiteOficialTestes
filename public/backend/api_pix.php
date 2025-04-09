@@ -10,28 +10,26 @@ if (!isset($_SESSION['usuario_id'])) {
 }
 
 // Inclui a configuração do banco de dados
-require 'config.php'; // Deve conter a variável $conexao (mysqli)
+require 'config.php';
 
-// Lê e valida os dados de entrada
+// Lê os dados JSON enviados
 $input = json_decode(file_get_contents('php://input'), true);
 
-if (!isset($input['cpf']) || !isset($input['nome'])) {
+// Valida CPF
+if (!isset($input['cpf']) || empty($input['cpf'])) {
     http_response_code(400);
-    echo json_encode(['erro' => 'CPF ou nome não informados.']);
+    echo json_encode(['erro' => 'CPF não informado.']);
     exit;
 }
+$cpf = preg_replace('/\D/', '', $input['cpf']);
 
-$cpf = preg_replace('/\D/', '', $input['cpf']); // Remove tudo que não for número
-$nome = trim($input['nome']);
-
-if (strlen($cpf) < 1) {
+// Valida Nome
+if (!isset($input['nome']) || empty(trim($input['nome']))) {
     http_response_code(400);
-    echo json_encode(['erro' => 'CPF incompleto.']);
+    echo json_encode(['erro' => 'Nome não informado.']);
     exit;
 }
-
-// Codifica o nome para URL
-$nomeCodificado = urlencode(strtolower($nome)); // minúsculo e codificado
+$nome = trim($input['nome']); // mantém os espaços intactos
 
 // Busca o token no banco de dados
 $token = null;
@@ -40,7 +38,6 @@ $chave = 'token_nova_api';
 $stmt->bind_param("s", $chave);
 $stmt->execute();
 $result = $stmt->get_result();
-
 if ($row = $result->fetch_assoc()) {
     $token = $row['valor'];
 }
@@ -52,10 +49,10 @@ if (empty($token)) {
     exit;
 }
 
-// Monta URL no novo formato
-$url = "https://consultafacil.pro/api/consult-pix/{$nomeCodificado}/{$cpf}?token={$token}";
+// Monta a URL com nome com espaços
+$url = "https://consultafacil.pro/api/consult-pix/{$nome}/{$cpf}?token={$token}";
 
-// Executa consulta na API externa
+// Executa a requisição externa
 $ch = curl_init($url);
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
@@ -81,14 +78,14 @@ if ($httpCode !== 200) {
     exit;
 }
 
-// Decodifica resposta da API externa
+// Decodifica a resposta da API externa
 $data = json_decode($response, true);
-if ($data === null) {
+if (!isset($data['dados'])) {
     http_response_code(500);
-    echo json_encode(['erro' => 'Resposta da API inválida.']);
+    echo json_encode(['erro' => 'Resposta inesperada da API externa.']);
     exit;
 }
 
-// Retorna os dados diretamente
-echo json_encode($data);
+// Retorna apenas os dados
+echo json_encode($data['dados']);
 ?>
