@@ -116,7 +116,6 @@
         </div>
     </section>
     <section>
-        <!-- 1° FILEIRA DOS GRATUITOS -->
         <section class="carousel" id="favoritos">
             <h2> Modulos Gratuitos</h2>
             <div class="carousel-container">
@@ -149,41 +148,31 @@
         <a href="consulta_pix.php"> <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)"></a>
          <button class="botao">Sendo Adicionado</button>
            </div>
+            
+           <div class="card Gratuitos" onclick="mostrarBotao(this)">
+            <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
+            <img src="../assets/img/pesquisa_por_nome.jpg" alt="pesquisa_por_nome">
+             <button class="botao">Sendo Adicionado</button>
+               </div>
 
-           <!-- 2° FILEIRA DOS GRATUITOS -->
-           <section class="carousel" id="favoritos">
-        <h2>Modulos Assinantes</h2>
-        <div class="carousel-container">
-            <div class="card pequeno"> 
-                
-                <div class="card Gratuitos" onclick="mostrarBotao(this)">
+               <div class="card Gratuitos" onclick="mostrarBotao(this)">
+                <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
+                <img src="../assets/img/buscar_chassi.jpg" alt="pesquisa_por_nome">
+                 <button class="botao">Sendo Adicionado</button>
+                   </div>
+
+                   <div class="card Gratuitos" onclick="mostrarBotao(this)">
                     <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
-                    <img src="../assets/img/pesquisa_por_nome.jpg" alt="pesquisa_por_nome">
+                    <img src="../assets/img/Foto_rj.jpg" alt="pesquisa_por_nome">
                      <button class="botao">Sendo Adicionado</button>
                        </div>
-        
+
                        <div class="card Gratuitos" onclick="mostrarBotao(this)">
-                        <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
-                        <img src="../assets/img/buscar_chassi.jpg" alt="pesquisa_por_nome">
+                        <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
+                        <img src="../assets/img/Foto_sp.png" alt="pesquisa_por_nome">
                          <button class="botao">Sendo Adicionado</button>
                            </div>
-        
-                           <div class="card Gratuitos" onclick="mostrarBotao(this)">
-                            <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
-                            <img src="../assets/img/Foto_rj.jpg" alt="pesquisa_por_nome">
-                             <button class="botao">Sendo Adicionado</button>
-                               </div>
-        
-                               <div class="card Gratuitos" onclick="mostrarBotao(this)">
-                                <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
-                                <img src="../assets/img/Foto_sp.png" alt="pesquisa_por_nome">
-                                 <button class="botao">Sendo Adicionado</button>
-                                    <img src="../assets/img/bacen.jpg" alt="bacen">
-                                  
-                                </div>
-            <!-- Adicione mais cards conforme necessário -->
-        </div>
-        <!-- Adicione mais Colunas conforme necessário -->
+    </div>
     </section>
     <section class="carousel2" id="favoritos">
           <h2>
