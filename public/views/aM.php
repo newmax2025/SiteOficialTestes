@@ -150,8 +150,6 @@
            </div>
            <!-- Adicione mais cards conforme necessário -->
         </div>
-
-    </section>
     <section class="carousel2" id="favoritos">
            <div class="card Gratuitos" onclick="mostrarBotao(this)">
             <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
