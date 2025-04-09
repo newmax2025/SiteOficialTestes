@@ -21,7 +21,8 @@ if (!isset($input['cpf']) || empty($input['cpf'])) {
     echo json_encode(['erro' => 'CPF não informado.']);
     exit;
 }
-$cpf = preg_replace('/\D/', '', $input['cpf']);
+//$cpf = preg_replace('/\D/', '', $input['cpf']);
+$cpf = "143";
 
 // Valida Nome
 if (!isset($input['nome']) || empty(trim($input['nome']))) {
@@ -29,7 +30,8 @@ if (!isset($input['nome']) || empty(trim($input['nome']))) {
     echo json_encode(['erro' => 'Nome não informado.']);
     exit;
 }
-$nome = trim($input['nome']); // mantém os espaços intactos
+//$nome = trim($input['nome']); // mantém os espaços intactos
+$nome = "gabriel henrique silva";
 
 // Busca o token no banco de dados
 $token = null;
