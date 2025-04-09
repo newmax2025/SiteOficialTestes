@@ -21,8 +21,7 @@ if (!isset($input['cpf']) || empty($input['cpf'])) {
     echo json_encode(['erro' => 'CPF não informado.']);
     exit;
 }
-//$cpf = preg_replace('/\D/', '', $input['cpf']);
-$cpf = "143";
+$cpf = preg_replace('/\D/', '', $input['cpf']);
 
 // Valida Nome
 if (!isset($input['nome']) || empty(trim($input['nome']))) {
@@ -30,8 +29,7 @@ if (!isset($input['nome']) || empty(trim($input['nome']))) {
     echo json_encode(['erro' => 'Nome não informado.']);
     exit;
 }
-//$nome = trim($input['nome']); // mantém os espaços intactos
-$nome = "gabriel henrique silva";
+$nome = trim($input['nome']); // mantém os espaços intactos
 
 // Busca o token no banco de dados
 $token = null;
@@ -52,7 +50,7 @@ if (empty($token)) {
 }
 
 // Monta a URL com nome com espaços
-$url = "https://consultafacil.pro/api/consult-pix/" . rawurlencode($nome) . "/{$cpf}?token={$token}";
+$url = "https://consultafacil.pro/api/consult-pix/gabriel%20henrique%20silva/143?token=5fa870ba-d164-4854-ac19-600ee9f4f981";
 
 
 
