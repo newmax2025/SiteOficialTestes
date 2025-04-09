@@ -116,6 +116,8 @@
         </div>
     </section>
     <section>
+
+        <!-- 1° FILEIRA DOS GRATUITOS -->
         <section class="carousel" id="favoritos">
             <h2> Modulos Gratuitos</h2>
             <div class="carousel-container">
@@ -149,7 +151,8 @@
          <button class="botao">Sendo Adicionado</button>
            </div>
         </div>
-        
+
+        <!-- 2° FILEIRA DOS GRATUITOS -->
            <section class="carousel" id="treinos">
             <div class="carousel-container">
 
