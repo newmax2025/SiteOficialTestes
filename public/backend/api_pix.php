@@ -12,20 +12,16 @@ if (!isset($_SESSION['usuario_id'])) {
 // Inclui a configuração do banco de dados
 require 'config.php';
 
-// Lê e valida o cep
-$input = json_decode(file_get_contents('php://input'), true);
-if (!isset($input['cep'])) {
+$input = json_decode(file_get_contents("php://input"), true);
+$cpf = isset($input['cpf']) ? preg_replace('/\D/', '', $input['cpf']) : '';
+$nome = isset($input['nome']) ? trim($input['nome']) : '';
+
+if (empty($cpf) || empty($nome)) {
     http_response_code(400);
-    echo json_encode(['erro' => 'Cep não informado.']);
+    echo json_encode(['erro' => 'Nome e CPF são obrigatórios.']);
     exit;
 }
 
-$cep = preg_replace('/\D/', '', $input['cep']);
-if (strlen($cep) !== 8) {
-    http_response_code(400);
-    echo json_encode(['erro' => 'Cep inválido.']);
-    exit;
-}
 
 // Busca o token no banco de dados
 $token = null;
@@ -48,6 +44,8 @@ if (empty($token)) {
 
 // Consulta à API externa
 $url = "https://consultafacil.pro/api/consult-pix/gabriel%20henrique%20silva/143?token=5fa870ba-d164-4854-ac19-600ee9f4f981";
+
+// Faz a requisição cURL
 $ch = curl_init($url);
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,

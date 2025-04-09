@@ -65,6 +65,10 @@ function consultarCPF() {
       return response.json();
     })
     .then((data) => {
+      if (!data.sucesso) {
+        throw new Error("A consulta não foi bem-sucedida.");
+      }
+
       if (!Array.isArray(data.dados) || data.dados.length === 0) {
         throw new Error("Nenhum resultado encontrado.");
       }
@@ -110,6 +114,7 @@ function consultarCPF() {
       dadosElement.style.display = "block";
       resultadoElement.innerText = `Foram encontrados ${data.dados.length} resultado(s).`;
     })
+
     .catch((error) => {
       console.error("Erro ao consultar:", error);
       resultadoElement.innerText = `Erro: ${error.message}`;
