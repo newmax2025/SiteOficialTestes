@@ -149,6 +149,9 @@
          <button class="botao">Sendo Adicionado</button>
            </div>
 
+        </section>
+        <section class="carousel" id="favoritos">
+            
            <div class="card Gratuitos" onclick="mostrarBotao(this)">
             <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
             <img src="../assets/img/pesquisa_por_nome.jpg" alt="pesquisa_por_nome">
