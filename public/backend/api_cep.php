@@ -14,14 +14,14 @@ require 'config.php';
 
 // Lê e valida o cep
 $input = json_decode(file_get_contents('php://input'), true);
-if (!isset($input['cep'])) {
+if (!isset($input['cpf'])) {
     http_response_code(400);
     echo json_encode(['erro' => 'Cep não informado.']);
     exit;
 }
 
-$cep = preg_replace('/\D/', '', $input['cep']);
-if (strlen($cep) !== 8) {
+$cpf = preg_replace('/\D/', '', $input['cep']);
+if (strlen($cpf) === 8) {
     http_response_code(400);
     echo json_encode(['erro' => 'Cep inválido.']);
     exit;
