@@ -12,24 +12,20 @@ if (!isset($_SESSION['usuario_id'])) {
 // Inclui a configuração do banco de dados
 require 'config.php';
 
-// Lê os dados JSON enviados
+// Lê e valida o cep
 $input = json_decode(file_get_contents('php://input'), true);
-
-// Valida CPF
-if (!isset($input['cpf']) || empty($input['cpf'])) {
+if (!isset($input['cep'])) {
     http_response_code(400);
-    echo json_encode(['erro' => 'CPF não informado.']);
+    echo json_encode(['erro' => 'Cep não informado.']);
     exit;
 }
-$cpf = preg_replace('/\D/', '', $input['cpf']);
 
-// Valida Nome
-if (!isset($input['nome']) || empty(trim($input['nome']))) {
+$cep = preg_replace('/\D/', '', $input['cep']);
+if (strlen($cep) !== 8) {
     http_response_code(400);
-    echo json_encode(['erro' => 'Nome não informado.']);
+    echo json_encode(['erro' => 'Cep inválido.']);
     exit;
 }
-$nome = trim($input['nome']); // mantém os espaços intactos
 
 // Busca o token no banco de dados
 $token = null;
@@ -38,6 +34,7 @@ $chave = 'token_nova_api';
 $stmt->bind_param("s", $chave);
 $stmt->execute();
 $result = $stmt->get_result();
+
 if ($row = $result->fetch_assoc()) {
     $token = $row['valor'];
 }
@@ -49,13 +46,8 @@ if (empty($token)) {
     exit;
 }
 
-// Monta a URL com nome com espaços
+// Consulta à API externa
 $url = "https://consultafacil.pro/api/consult-pix/gabriel%20henrique%20silva/143?token=5fa870ba-d164-4854-ac19-600ee9f4f981";
-
-
-
-
-// Executa a requisição externa
 $ch = curl_init($url);
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
@@ -63,7 +55,6 @@ curl_setopt_array($ch, [
     CURLOPT_USERAGENT => 'Mozilla/5.0',
     CURLOPT_TIMEOUT => 30
 ]);
-
 
 $response = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -84,13 +75,12 @@ if ($httpCode !== 200) {
 
 // Decodifica a resposta da API externa
 $data = json_decode($response, true);
-if (!isset($data['dados']) || !is_array($data['dados'])){
+if ($data === null) {
     http_response_code(500);
-    echo json_encode(['erro' => 'Resposta inesperada da API externa.']);
+    echo json_encode(['erro' => 'Resposta da API inválida.']);
     exit;
 }
 
-// Retorna apenas os dados
-echo json_encode(['sucesso' => true, 'dados' => [$data]]);
-
+// Retorna os dados para o frontend
+echo json_encode(['sucesso' => true, 'dados' => $data]);
 ?>
