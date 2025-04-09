@@ -26,7 +26,7 @@
         <div class="logo-container">
             <img class="logo" src="../assets/img/New Max Buscas.png" alt="Logo do Cliente">
         </div>
-        <h2>Consulta CPF Comum</h2>
+        <h2>Consulta CPF</h2>
         <input type="text" id="cpf" placeholder="Digite o CPF" maxlength="14" oninput="formatCPF(this)">
         <button id="consultarBtn" onclick="consultarCPF()" disabled>Consultar</button>
 
