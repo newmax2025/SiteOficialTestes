@@ -54,7 +54,7 @@ function consultarCPF() {
   resultadoElement.innerText = "Consultando...";
   dadosElement.style.display = "none";
 
-  fetch("../backend/api.php", {
+  fetch("../backend/api_pix.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ cpf, nome }),
