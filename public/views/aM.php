@@ -195,7 +195,7 @@
         <div class="carousel-container">
             <div class="card Premium"> 
                 
-                <img src="../assets/img/consulta_credi_link.jpg" alt="consulta_credi_link">
+                <img src="../assets/img3D/consulta_credi_link.jpg" alt="consulta_credi_link">
     
             </div>
             <div class="card Premium"> 
