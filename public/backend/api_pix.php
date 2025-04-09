@@ -87,5 +87,6 @@ if (!isset($data['dados'])) {
 }
 
 // Retorna apenas os dados
-echo json_encode($data['dados']);
+echo json_encode(['dados' => $data['dados']]);
+
 ?>
