@@ -40,6 +40,13 @@
         <p id="resultado"></p>
 
         <div id="dados" class="dados" style="display: none;"></div>
+
+        <!-- Botões de ação -->
+        <div id="acoes" style="display: none; margin-top: 20px;">
+            <button onclick="copiarDados()">Copiar Dados</button>
+            <button style="margin-top: 20px;" onclick="baixarPDF()">Baixar em PDF</button>
+            <button style="margin-top: 20px;" onclick="baixarTXT()">Baixar em TXT</button>
+        </div>
     </div>
 
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
