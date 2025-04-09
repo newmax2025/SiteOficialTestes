@@ -42,7 +42,7 @@ if (empty($token)) {
 }
 
 // Consulta à API externa
-$url = "api.dbconsultas.com/api/v1/{$token}/datalinknome/{$nome}";
+$url = "https://api.dbconsultas.com/api/v1/{$token}/datalinknome/" . urlencode($nome);
 
 $ch = curl_init($url);
 curl_setopt_array($ch, [
