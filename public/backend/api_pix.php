@@ -43,8 +43,9 @@ if (empty($token)) {
 }
 
 // Consulta à API externa
-$nomeEncoded = urlencode($nome);
+$nomeEncoded = rawurlencode($nome);
 $url = "https://consultafacil.pro/api/consult-pix/{$nomeEncoded}/{$cpf}?token={$token}";
+
 
 // Faz a requisição cURL
 $ch = curl_init($url);
