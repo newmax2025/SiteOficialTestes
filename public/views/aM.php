@@ -144,9 +144,8 @@
         <button class="botao">Sendo Adicionado</button>
     </div>
 
-    <div class="card Gratuitos" onclick="mostrarBotao(this)">
-        <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->  
-        <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)">
+    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
+        <a href="consulta_pix.php"> <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)"></a>
          <button class="botao">Sendo Adicionado</button>
            </div>
 
