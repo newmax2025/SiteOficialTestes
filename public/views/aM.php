@@ -148,7 +148,11 @@
         <a href="consulta_pix.php"> <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)"></a>
          <button class="botao">Sendo Adicionado</button>
            </div>
-            
+           <!-- Adicione mais cards conforme necessário -->
+        </div>
+
+    </section>
+    <section class="carousel2" id="favoritos">
            <div class="card Gratuitos" onclick="mostrarBotao(this)">
             <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
             <img src="../assets/img/pesquisa_por_nome.jpg" alt="pesquisa_por_nome">
