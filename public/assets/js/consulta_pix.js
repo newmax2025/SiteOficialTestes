@@ -97,14 +97,15 @@ function consultarCPF() {
           pessoa.presumed_income || "Não disponível"
         }</p>
         <p><strong>Endereço:</strong><br>
-          ${endereco.street || ""} ${endereco.number || ""}${
-          endereco.complement ? ", " + endereco.complement : ""
-        }<br>
-          ${endereco.neighborhood || ""}${endereco.neighborhood ? ", " : ""}${
-          endereco.city || ""
-        } - ${endereco.state || endereco.uf || ""}<br>
-          CEP: ${endereco.zip_code || "Não disponível"}
-        </p>
+        Rua: ${endereco.street || "Não disponível"}<br>
+        Número: ${endereco.number || "Não disponível"}<br>
+        Complemento: ${endereco.complement || "Não disponível"}<br>
+        Bairro: ${endereco.neighborhood || "Não disponível"}<br>
+        Cidade: ${endereco.city || "Não disponível"}<br>
+        Estado: ${endereco.state || endereco.uf || "Não disponível"}<br>
+        CEP: ${endereco.zip_code || "Não disponível"}
+</p>
+
       </div>
       <hr>
     `;
