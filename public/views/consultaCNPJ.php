@@ -28,7 +28,7 @@
             <img class="logo" src="../assets/img/New Max Buscas.png" alt="Logo do Cliente">
         </div>
         <h2>Consulta CNPJ</h2>
-        <input type="text" id="cnpj" placeholder="Digite o CNPJ" maxlength="15" oninput="formatCNPJ(this)">
+        <input type="text" id="cnpj" placeholder="Digite o CNPJ" maxlength="18" oninput="formatCNPJ(this)">
         <button id="consultarBtn" onclick="consultarCNPJ()" disabled>Consultar</button>
 
         <!-- Turnstile CAPTCHA -->
