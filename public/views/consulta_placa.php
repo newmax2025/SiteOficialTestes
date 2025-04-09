@@ -48,7 +48,7 @@
             <button style="margin-top: 20px;" onclick="baixarTXT()">Baixar em TXT</button>
         </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="../assets/js/consulta_placa.js?v=<?php echo md5_file('../assets/js/consulta_placa.js'); ?>"></script>
 </body>
