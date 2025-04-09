@@ -63,13 +63,10 @@ curl_setopt_array($ch, [
 ]);
 
 // Apenas para debug temporário
-echo json_encode([
-    'url_utilizada' => $url,
-    'nome' => $nome,
-    'cpf' => $cpf,
-    'token' => $token
-]);
-exit;
+echo "<pre>Nome: '$nome'\n";
+echo "CPF: '$cpf'\n";
+echo "URL: $url\n";
+echo "Resposta: " . $response . "</pre>";
 
 
 $response = curl_exec($ch);
