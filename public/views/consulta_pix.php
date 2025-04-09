@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Consulta CPF</title>
+    <title>Painel de Consulta Desmascara Pix</title>
     <link rel="stylesheet" href="../assets/css/consultaCPF.css?v=<?php echo md5_file('../assets/css/consultaCPF.css'); ?>">
     <script>
         fetch("../backend/verifica_sessao.php")
@@ -27,7 +27,7 @@
         <div class="logo-container">
             <img class="logo" src="../assets/img/New Max Buscas.png" alt="Logo do Cliente">
         </div>
-        <h2>Consulta CPF Comum</h2>
+        <h2>Consulta Pix</h2>
         <input type="text" id="cpf" placeholder="Digite o CPF ou parte dele" maxlength="14">
         <input type="text" id="nome" placeholder="Digite o nome ou parte dele" maxlength="50">
         <button id="consultarBtn" onclick="consultarCPF()" disabled>Consultar</button>
