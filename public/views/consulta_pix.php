@@ -28,8 +28,8 @@
             <img class="logo" src="../assets/img/New Max Buscas.png" alt="Logo do Cliente">
         </div>
         <h2>Consulta CPF Comum</h2>
-        <input type="text" id="cpf" placeholder="Digite o CPF" maxlength="14">
-        <input type="text" id="nome" placeholder="Digite o nome">
+        <input type="text" id="cpf" placeholder="Digite o CPF ou parte dele" maxlength="14">
+        <input type="text" id="nome" placeholder="Digite o nome ou parte dele" maxlength="50">
         <button id="consultarBtn" onclick="consultarCPF()" disabled>Consultar</button>
 
         <!-- Turnstile CAPTCHA -->
