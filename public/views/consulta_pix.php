@@ -52,7 +52,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <script src="../assets/js/consultaCPF.js?v=<?php echo md5_file('../assets/js/consultaCPF.js'); ?>"></script>
+    <script src="../assets/js/consulta_pix.js?v=<?php echo md5_file('../assets/js/consulta_pix.js'); ?>"></script>
 </body>
 
 </html>
