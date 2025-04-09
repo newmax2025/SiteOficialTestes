@@ -62,12 +62,6 @@ curl_setopt_array($ch, [
     CURLOPT_TIMEOUT => 30
 ]);
 
-// Apenas para debug temporário
-echo "<pre>Nome: '$nome'\n";
-echo "CPF: '$cpf'\n";
-echo "URL: $url\n";
-echo "Resposta: " . $response . "</pre>";
-
 
 $response = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -88,7 +82,7 @@ if ($httpCode !== 200) {
 
 // Decodifica a resposta da API externa
 $data = json_decode($response, true);
-if (!isset($data['dados'])) {
+if (!isset($data['dados']) || !is_array($data['dados'])){
     http_response_code(500);
     echo json_encode(['erro' => 'Resposta inesperada da API externa.']);
     exit;

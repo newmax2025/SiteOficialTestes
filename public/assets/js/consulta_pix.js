@@ -46,7 +46,7 @@ function consultarCPF() {
   consultarBtn.disabled = true;
 
   const cpf = document.getElementById("cpf").value.replace(/\D/g, "");
-  const nome = document.getElementById("nome").value.trim(); // não usa mais toUpperCase
+  const nome = document.getElementById("nome").value.trim();
 
   const resultadoElement = document.getElementById("resultado");
   const dadosElement = document.getElementById("dados");
@@ -119,4 +119,9 @@ function consultarCPF() {
       consultarBtn.disabled = false;
       resetCaptcha();
     });
+}
+
+function formatarCPF(cpf) {
+  if (!cpf) return "";
+  return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 }
