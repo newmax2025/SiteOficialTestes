@@ -43,7 +43,8 @@ if (empty($token)) {
 }
 
 // Consulta à API externa
-$url = "https://consultafacil.pro/api/consult-pix/gabriel%20henrique%20silva/143?token=5fa870ba-d164-4854-ac19-600ee9f4f981";
+$nomeEncoded = urlencode($nome);
+$url = "https://consultafacil.pro/api/consult-pix/{$nomeEncoded}/{$cpf}?token={$token}";
 
 // Faz a requisição cURL
 $ch = curl_init($url);
