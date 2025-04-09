@@ -91,6 +91,6 @@ if (!isset($data['dados']) || !is_array($data['dados'])){
 }
 
 // Retorna apenas os dados
-echo json_encode(['dados' => $data['dados']]);
+echo json_encode(['sucesso' => true, 'dados' => [$data]]);
 
 ?>
