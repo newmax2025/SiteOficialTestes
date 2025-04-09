@@ -237,6 +237,7 @@ function consultarCPF() {
         dadosElement.innerHTML = html;
         dadosElement.style.display = "block";
         resultadoElement.innerText = `Consulta realizada para o CPF: ${cpf}`;
+        document.getElementById("acoes").style.display = "block";
     })
     .catch((error) => {
         console.error("Erro ao consultar CPF:", error);
@@ -262,3 +263,35 @@ function formatCPF(input) {
     value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
     input.value = value;
   }
+
+  function copiarDados() {
+    const dados = document.getElementById("dados").innerText;
+    navigator.clipboard
+      .writeText(dados)
+      .then(() => {
+        alert("Dados copiados para a área de transferência!");
+      })
+      .catch((err) => {
+        alert("Erro ao copiar os dados: " + err);
+      });
+  }
+
+  function baixarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const texto = document.getElementById("dados").innerText;
+
+    const linhas = doc.splitTextToSize(texto, 180);
+    doc.text(linhas, 10, 10);
+    doc.save("dados_cpf.pdf");
+  }
+
+  function baixarTXT() {
+    const dados = document.getElementById("dados").innerText;
+    const blob = new Blob([dados], { type: "text/plain;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "dados_cpf.txt";
+    link.click();
+  }
+
