@@ -200,7 +200,7 @@
             </div>
             <div class="card Premium"> 
                
-                <img src="../assets/img/CNH_completa_com_foto.jpg" alt="CNH_completa_com_foto">
+                <img src../assets/img3D/CNH_completa_com_foto.jpg" alt="CNH_completa_com_foto">
                 
             </div>
             <div class="card Premium"> 
@@ -210,21 +210,21 @@
             </div>
             <div class="card Premium"> 
                
-                <img src="../assets/img/consulta_detran_pro.jpg" alt="consulta_detran_pro.jpg">
+                <img src="../assets/img3D/consulta_detran_pro.jpg" alt="consulta_detran_pro.jpg">
                 
             </div>
             <div class="card Premium"> 
                
-                <img src="../assets/img/despachante_condutor.jpg" alt="despachante_condutor">
+                <img src="../assets/img3D/despachante_condutor.jpg" alt="despachante_condutor">
                 
             </div>
             <div class="card Premium"> 
                
-                <img src="../assets/img/despachante_veicular.jpg" alt="despachante_veicular">
+                <img src="../assets/img3D/despachante_veicular.jpg" alt="despachante_veicular">
                 
             </div> <div class="card Premium"> 
                
-                <img src="../assets/img/consulta_radar_de_veiculos.jpg" alt="consulta_radar_de_veiculos">
+                <img src="../assets/img3D/consulta_radar_de_veiculos.jpg" alt="consulta_radar_de_veiculos">
 
             </div>
             <!-- Adicione mais cards conforme necessário -->
