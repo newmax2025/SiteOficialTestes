@@ -40,8 +40,8 @@
         <!-- Botões de ação -->
         <div id="acoes" style="display: none; margin-top: 20px;">
             <button onclick="copiarDados()">Copiar Dados</button>
-            <button onclick="baixarPDF()">Baixar em PDF</button>
-            <button onclick="baixarTXT()">Baixar em TXT</button>
+            <button style="margin-top: 20px;" onclick="baixarPDF()">Baixar em PDF</button>
+            <button style="margin-top: 20px;" onclick="baixarTXT()">Baixar em TXT</button>
         </div>
     </div>
 
