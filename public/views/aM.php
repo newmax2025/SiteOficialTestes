@@ -122,7 +122,7 @@
             <h2> Modulos Gratuitos</h2>
             <div class="carousel-container">
              <div class="card Gratuitos">  
-                   <a href="consultaCPF.php"> <img src="../assets/img/consulta_CPF_max.jpg" alt="consulta_CPF_max"></a>
+                   <a href="consultaCPF.php"> <img src="../assets/img3D/consulta_CPF_max.jpg" alt="consulta_CPF_max"></a>
                    </div>
                    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
                     <a href="consultaTel.php"> <img src="../assets/img/consulta_telefone_(adicionando).jpg" alt="consulta_telefone"></a>
