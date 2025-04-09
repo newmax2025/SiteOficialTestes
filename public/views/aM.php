@@ -147,7 +147,7 @@
     </div>
 
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <a href="consulta_pix.php"> <img src="../assets/img/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)"></a>
+        <a href="consulta_pix.php"> <img src="../assets/img3D/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)"></a>
          <button class="botao">Sendo Adicionado</button>
            </div>
         </div>
