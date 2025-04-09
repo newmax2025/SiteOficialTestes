@@ -176,7 +176,7 @@
 
                        <div class="card Gratuitos" onclick="mostrarBotao(this)">
                         <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
-                        <img src="../assets/img3D/Foto_sp.png" alt="pesquisa_por_nome">
+                        <img src="../assets/img3D/Foto_sp.jpg" alt="pesquisa_por_nome">
                          <button class="botao">Sendo Adicionado</button>
                            </div>
     </div>
