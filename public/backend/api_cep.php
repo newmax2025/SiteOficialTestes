@@ -20,7 +20,7 @@ if (!isset($input['cpf'])) {
     exit;
 }
 
-$cpf = preg_replace('/\D/', '', $input['cep']);
+$cpf = preg_replace('/\D/', '', $input['cpf']);
 if (strlen($cpf) === 8) {
     http_response_code(400);
     echo json_encode(['erro' => 'Cep inválido.']);
