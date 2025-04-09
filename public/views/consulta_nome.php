@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Consulta Email</title>
+    <title>Painel de Consulta Nome</title>
     <link rel="stylesheet" href="../assets/css/consultaCPF.css?v=<?php echo md5_file('../assets/css/consultaCPF.css'); ?>">
     <script>
         fetch("../backend/verifica_sessao.php")
@@ -27,9 +27,9 @@
         <div class="logo-container">
             <img class="logo" src="../assets/img/New Max Buscas.png" alt="Logo do Cliente">
         </div>
-        <h2>Consulta Email</h2>
-        <input type="text" id="email" placeholder="Digite o Email">
-        <button id="consultarBtn" onclick="consultarEmail()" disabled>Consultar</button>
+        <h2>Consulta Nome</h2>
+        <input type="text" id="nome" placeholder="Digite o Nome">
+        <button id="consultarBtn" onclick="consultarNome()" disabled>Consultar</button>
 
         <!-- Turnstile CAPTCHA -->
         <div class="cf-turnstile" id="captcha" data-sitekey="0x4AAAAAABDPzCDp7OiEAfvh" data-callback="onCaptchaSuccess">
@@ -51,7 +51,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <script src="../assets/js/consulta_email.js?v=<?php echo md5_file('../assets/js/consulta_email.js'); ?>"></script>
+    <script src="../assets/js/consulta_nome.js?v=<?php echo md5_file('../assets/js/consulta_nome.js'); ?>"></script>
 </body>
 
 </html>
