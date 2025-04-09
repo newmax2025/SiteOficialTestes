@@ -62,6 +62,16 @@ curl_setopt_array($ch, [
     CURLOPT_TIMEOUT => 30
 ]);
 
+// Apenas para debug temporário
+echo json_encode([
+    'url_utilizada' => $url,
+    'nome' => $nome,
+    'cpf' => $cpf,
+    'token' => $token
+]);
+exit;
+
+
 $response = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 $curlError = curl_error($ch);
