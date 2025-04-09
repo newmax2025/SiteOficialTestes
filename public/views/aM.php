@@ -133,7 +133,7 @@
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-         <a href="consultaCNPJ.php"> <img src="../assets/img/consulta_CNPJ_max.jpg" alt="consulta_CNPJ"></a>
+         <a href="consultaCNPJ.php"> <img src="../assets/img3D/consulta_CNPJ_max.jpg" alt="consulta_CNPJ"></a>
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
