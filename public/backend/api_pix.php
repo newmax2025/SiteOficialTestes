@@ -50,7 +50,8 @@ if (empty($token)) {
 }
 
 // Monta a URL com nome com espaços
-$url = "https://consultafacil.pro/api/consult-pix/" . rawurlencode($nome) . "/$cpf?token=$token";
+$url = "https://consultafacil.pro/api/consult-pix/" . rawurlencode($nome) . "/{$cpf}?token={$token}";
+
 
 
 
