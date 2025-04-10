@@ -239,7 +239,7 @@
     <div class="carousel-container">
         <div class="card pequeno"> 
             
-            <img src="../assets/img/CRLV_(Todos_os_estados).jpg" alt="CRLV_(Todos_os_estados)">
+            <img src="../assets/img3D/CRLV_(Todos_os_estados).jpg" alt="CRLV_(Todos_os_estados)">
 
         </div>
 
@@ -271,7 +271,7 @@
         </div>
         <div class="card pequeno"> 
             
-            <img src="../assets/img/consulta_receita_federal.jpg" alt="consulta_receita_federal">
+            <img src="../assets/img3D/consulta_receita_federal.jpg" alt="consulta_receita_federal">
            
                             </div>
 
@@ -291,7 +291,7 @@
                             </div>
                             <div class="card pequeno"> 
                                                
-                                <img src="../assets/img/bacen.jpg" alt="bacen">
+                                <img src="../assets/img3D/bacen.jpg" alt="bacen">
                               
                             </div>
         <!-- Adicione mais cards conforme necessário -->
