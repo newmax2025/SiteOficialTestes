@@ -13,7 +13,7 @@ error_reporting(E_ALL);
 </head>
 <body>
     <div class="login-container">
-        <img src="../assets/img/New Max Buscas.png" alt="Logo do Cliente" class="logo">
+        <img src="../assets/img/new_max_buscas.png" alt="Logo do Cliente" class="logo">
         <form id="loginForm">
             <input type="text" id="username" placeholder="Usuário" required>
             <input type="password" id="password" placeholder="Senha" required>
