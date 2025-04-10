@@ -6,7 +6,7 @@ ob_start();
 
 // Inclui a configuração do banco de dados e outras configurações
 // Isso fornecerá a variável $conexao
-require 'config.php';
+require '../config.php';
 
 try {
     // Recebendo os dados via POST com corpo JSON

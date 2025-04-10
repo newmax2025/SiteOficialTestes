@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 // Inicia o buffer de saída
 ob_start();
 
-require 'config.php'; // Fornece $conexao
+require '../config.php'; // Fornece $conexao
 
 try {
     // Recebe os dados

@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario_id'])) {
 }
 
 // Inclui a configuração do banco de dados
-require 'config.php';
+require '../config.php';
 
 // Lê e valida o nome
 $input = json_decode(file_get_contents('php://input'), true);

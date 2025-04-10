@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 ob_start();
 
-require 'config.php';
+require '../config.php';
 
 try {
     // Seleciona os usuários (considerar adicionar limites/paginação para muitos usuários)

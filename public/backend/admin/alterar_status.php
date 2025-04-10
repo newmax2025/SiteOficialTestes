@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 ob_start();
 
-require 'config.php';
+require '../config.php';
 
 try {
     // Obtém os dados enviados via JSON
