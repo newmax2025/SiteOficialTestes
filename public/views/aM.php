@@ -141,6 +141,11 @@
         <button class="botao">Sendo Adicionado</button>
     </div>
 
+                <div class="card Gratuitos" onclick="mostrarBotao(this)">
+            <a href="consulta_nome.php"><img src="../assets/img3D/pesquisa_por_nome.jpg" alt="pesquisa_por_nome"></a>
+             <button class="botao">Sendo Adicionado</button>
+               </div>
+
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
        <a href="consulta_cep.php"> <img src="../assets/img3D/buscar_cep.jpg" alt="buscar_cep"></a>
         <button class="botao">Sendo Adicionado</button>
@@ -155,11 +160,6 @@
         <!-- 2° FILEIRA DOS GRATUITOS -->
            <section class="carousel" id="treinos">
             <div class="carousel-container">
-
-           <div class="card Gratuitos" onclick="mostrarBotao(this)">
-            <a href="consulta_nome.php"><img src="../assets/img3D/pesquisa_por_nome.jpg" alt="pesquisa_por_nome"></a>
-             <button class="botao">Sendo Adicionado</button>
-               </div>
 
                <div class="card Gratuitos" onclick="mostrarBotao(this)">
                 <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
