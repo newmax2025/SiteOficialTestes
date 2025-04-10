@@ -59,7 +59,7 @@ function consultarTel() {
   resultadoElement.innerText = "Consultando...";
   dadosElement.style.display = "none";
 
-  const localApiUrl = "../../backend/apiTel.php";
+  const localApiUrl = "../../backend/api_tel.php";
   const telLimpo = tel.replace(/\D/g, "");
 
   fetch(localApiUrl, {
