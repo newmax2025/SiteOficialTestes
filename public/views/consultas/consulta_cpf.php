@@ -7,7 +7,7 @@
     <title>Painel de Consulta CPF</title>
     <link rel="stylesheet" href="../assets/css/consultaCPF.css?v=<?php echo md5_file('../assets/css/consultaCPF.css'); ?>">
     <script>
-        fetch("../backend/verifica_sessao.php")
+        fetch("../../backend/verifica_sessao.php")
             .then(response => response.json())
             .then(data => {
                 if (!data.autenticado) {
