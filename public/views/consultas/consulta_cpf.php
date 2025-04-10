@@ -11,12 +11,12 @@
             .then(response => response.json())
             .then(data => {
                 if (!data.autenticado) {
-                    window.location.href = "login.php";
+                    window.location.href = "../login.php";
                 }
             })
             .catch(error => {
                 console.error("Erro ao verificar sessão:", error);
-                window.location.href = "login.php";
+                window.location.href = "../login.php";
             });
     </script>
 </head>
