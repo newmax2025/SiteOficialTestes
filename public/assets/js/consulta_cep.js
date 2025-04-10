@@ -59,7 +59,7 @@ function consultarCep() {
   resultadoElement.innerText = "Consultando...";
   dadosElement.style.display = "none";
 
-  const localApiUrl = "../backend/api_cep.php";
+  const localApiUrl = "../../backend/api_cep.php";
   const cepLimpo = cep.replace(/\D/g, "");
 
   fetch(localApiUrl, {

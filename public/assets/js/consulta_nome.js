@@ -64,7 +64,7 @@ function consultarNome() {
   resultadoElement.innerText = "Consultando...";
   dadosElement.style.display = "none";
 
-  const localApiUrl = "../backend/api_nome.php";
+  const localApiUrl = "../../backend/api_nome.php";
   const nomeLimpo = nome.trim();
 
   fetch(localApiUrl, {

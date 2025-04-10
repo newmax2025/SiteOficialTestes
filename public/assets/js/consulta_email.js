@@ -53,7 +53,7 @@ function consultarEmail() {
   resultadoElement.innerText = "Consultando...";
   dadosElement.style.display = "none";
 
-  const localApiUrl = "../backend/api_email.php";
+  const localApiUrl = "../../backend/api_email.php";
   const emailLimpo = email.replace(/\s/g, "");
 
   fetch(localApiUrl, {
