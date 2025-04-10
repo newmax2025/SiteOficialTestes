@@ -7,25 +7,24 @@
     <title>Painel de Consulta Telefone</title>
     <link rel="stylesheet" href="../assets/css/consultaCPF.css?v=<?php echo md5_file('../assets/css/consultaCPF.css'); ?>">
     <script>
-        fetch("../backend/verifica_sessao.php")
-    .then(response => response.json())
-    .then(data => {
-        if (!data.autenticado) {
-            window.location.href = "../login.php"; // Redireciona se não estiver autenticado
-        }
-    })
-    .catch(error => {
-        console.error("Erro ao verificar sessão:", error);
-        window.location.href = "../login.php"; // Opcional: Redireciona em caso de erro
-    });
-
-        </script>
+        fetch("../../backend/verifica_sessao.php")
+            .then(response => response.json())
+            .then(data => {
+                if (!data.autenticado) {
+                    window.location.href = "../login.php";
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao verificar sessão:", error);
+                window.location.href = "../login.php";
+            });
+    </script>
 </head>
 
 <body>
     <div class="container">
         <div class="logo-container">
-            <img class="logo" src="../assets/img/New Max Buscas.png" alt="Logo do Cliente">
+            <img class="logo" src="../../assets/img/New Max Buscas.png" alt="Logo do Cliente">
         </div>
         <h2>Consulta Telefone</h2>
         <input type="text" id="tel" placeholder="Digite o Telefone" maxlength="15" oninput="formatTel(this)">
@@ -50,8 +49,8 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <script src="../assets/js/consulta_tel.js?v=<?php echo md5_file('../assets/js/consulta_tel.js'); ?>"></script>
-    <script src="../assets/js/baixar_consultas.js?v=<?php echo md5_file('../assets/js/baixar_consultas.js'); ?>"></script>
+    <script src="../../assets/js/consulta_tel.js?v=<?php echo md5_file('../../assets/js/consulta_tel.js'); ?>"></script>
+    <script src="../../assets/js/baixar_consultas.js?v=<?php echo md5_file('../../assets/js/baixar_consultas.js'); ?>"></script>
 </body>
 
 </html>
