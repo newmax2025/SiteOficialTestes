@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario_id'])) {
 }
 
 // Inclui a configuração do banco de dados
-require 'config.php'; // certifique-se de que $conexao (mysqli) está sendo criado corretamente aqui
+require '../config.php'; // certifique-se de que $conexao (mysqli) está sendo criado corretamente aqui
 
 // Lê e valida o CPF
 $input = json_decode(file_get_contents('php://input'), true);
