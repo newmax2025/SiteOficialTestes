@@ -125,7 +125,7 @@
                    <a href="consultaCPF.php"> <img src="../assets/img3D/consulta_CPF_max.jpg" alt="consulta_CPF_max"></a>
                    </div>
                    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-                    <a href="consultaTel.php"> <img src="../assets/img3D/consulta_telefone_(adicionando).jpg" alt="consulta_telefone"></a>
+                    <a href="consultaTel.php"> <img src="../assets/img3D/buscar_telefone.jpg" alt="consulta_telefone"></a>
                     <button class="botao">Sendo Adicionado</button>
                 </div>
                   <div class="card Gratuitos" onclick="mostrarBotao(this)">  
