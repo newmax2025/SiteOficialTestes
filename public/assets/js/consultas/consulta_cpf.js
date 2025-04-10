@@ -109,7 +109,7 @@ function consultarCPF() {
     resultadoElement.innerText = "Consultando...";
     dadosElement.style.display = "none";
 
-    const localApiUrl = "../../backend/api_cpf.php";
+    const localApiUrl = "../../backend/consultas/api_cpf.php";
     const cpfLimpo = cpf.replace(/\D/g, "");
 
     fetch(localApiUrl, {

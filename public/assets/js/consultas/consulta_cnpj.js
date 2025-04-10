@@ -59,7 +59,7 @@ function consultarCNPJ() {
   resultadoElement.innerText = "Consultando...";
   dadosElement.style.display = "none";
 
-  const localApiUrl = "../../backend/api_cnpj.php";
+  const localApiUrl = "../../backend/consultas/api_cnpj.php";
   const cnpjLimpo = cnpj.replace(/\D/g, "");
 
   fetch(localApiUrl, {

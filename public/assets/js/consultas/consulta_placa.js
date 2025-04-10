@@ -59,7 +59,7 @@ function consultarPlaca() {
   resultadoElement.innerText = "Consultando...";
   dadosElement.style.display = "none";
 
-  const localApiUrl = "../../backend/api_placa.php";
+  const localApiUrl = "../../backend/consultas/api_placa.php";
   const placaLimpo = placa.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
 
 

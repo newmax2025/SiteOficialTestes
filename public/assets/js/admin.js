@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     try {
-      const response = await fetch("../backend/mudar_vendedor.php", {
+      const response = await fetch("../backend/admin/mudar_vendedor.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mensagemCadastro.textContent = "";
 
     try {
-      const response = await fetch("../backend/cadastro.php", {
+      const response = await fetch("../backend/admin/cadastro.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mensagemRemocao.textContent = "";
 
     try {
-      const response = await fetch("../backend/remover.php", {
+      const response = await fetch("../backend/admin/remover.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username }),
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mensagemStatus.textContent = "";
 
     try {
-      const response = await fetch("../backend/alterar_status.php", {
+      const response = await fetch("../backend/admin/alterar_status.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, status }),
@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     try {
-      const response = await fetch("../backend/alterar_senha.php", {
+      const response = await fetch("../backend/admin/alterar_senha.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, novaSenha }),
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
     userListElement.innerHTML = "<li>Carregando...</li>";
 
     try {
-      const response = await fetch("../backend/listar.php");
+      const response = await fetch("../backend/admin/listar.php");
 
       if (!response.ok) {
         let errorText = await response.text();

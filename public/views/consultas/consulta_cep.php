@@ -50,8 +50,8 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <script src="../../assets/js/consulta_cep.js?v=<?php echo md5_file('../../assets/js/consulta_cep.js'); ?>"></script>
-    <script src="../../assets/js/baixar_consultas.js?v=<?php echo md5_file('../../assets/js/baixar_consultas.js'); ?>"></script>
+    <script src="../../assets/js/consultas/consulta_cep.js?v=<?php echo md5_file('../../assets/js/consultas/consulta_cep.js'); ?>"></script>
+    <script src="../../assets/js/consultas/baixar_consultas.js?v=<?php echo md5_file('../../assets/js/consultas/baixar_consultas.js'); ?>"></script>
 </body>
 
 </html>
