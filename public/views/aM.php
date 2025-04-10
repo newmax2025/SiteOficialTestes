@@ -122,37 +122,37 @@
             <h2> Modulos Gratuitos</h2>
             <div class="carousel-container">
              <div class="card Gratuitos">  
-                   <a href="consultaCPF.php"> <img src="../assets/img3D/consulta_CPF_max.jpg" alt="consulta_CPF_max"></a>
+                   <a href="consultas/consulta_cpf.php"> <img src="../assets/img3D/consulta_CPF_max.jpg" alt="consulta_CPF_max"></a>
                    </div>
                    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-                    <a href="consultaTel.php"> <img src="../assets/img3D/buscar_telefone.jpg" alt="consulta_telefone"></a>
+                    <a href="consultas/consulta_tel.php"> <img src="../assets/img3D/buscar_telefone.jpg" alt="consulta_telefone"></a>
                     <button class="botao">Sendo Adicionado</button>
                 </div>
                   <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-      <a href="consulta_email.php"><img src="../assets/img3D/consulta_EMAIL.jpg" alt="consulta_EMAIL"></a>
+      <a href="consultas/consulta_email.php"><img src="../assets/img3D/consulta_EMAIL.jpg" alt="consulta_EMAIL"></a>
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-         <a href="consultaCNPJ.php"> <img src="../assets/img3D/consulta_CNPJ_max.jpg" alt="consulta_CNPJ"></a>
+         <a href="consultas/consulta_cnpj.php"> <img src="../assets/img3D/consulta_CNPJ_max.jpg" alt="consulta_CNPJ"></a>
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <a href="consulta_placa.php"> <img src="../assets/img3D/consulta_placa_(adicionando).jpg" alt="consulta_placa"></a>
+        <a href="consultas/consulta_placa.php"> <img src="../assets/img3D/consulta_placa_(adicionando).jpg" alt="consulta_placa"></a>
         <button class="botao">Sendo Adicionado</button>
     </div>
 
                 <div class="card Gratuitos" onclick="mostrarBotao(this)">
-            <a href="consulta_nome.php"><img src="../assets/img3D/pesquisa_por_nome.jpg" alt="pesquisa_por_nome"></a>
+            <a href="consultas/consulta_nome.php"><img src="../assets/img3D/pesquisa_por_nome.jpg" alt="pesquisa_por_nome"></a>
              <button class="botao">Sendo Adicionado</button>
                </div>
 
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-       <a href="consulta_cep.php"> <img src="../assets/img3D/buscar_cep.jpg" alt="buscar_cep"></a>
+       <a href="consultas/consulta_cep.php"> <img src="../assets/img3D/buscar_cep.jpg" alt="buscar_cep"></a>
         <button class="botao">Sendo Adicionado</button>
     </div>
 
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-        <a href="consulta_pix.php"> <img src="../assets/img3D/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)"></a>
+        <a href="consultas/consulta_pix.php"> <img src="../assets/img3D/desmascarar_pix_(adicionando).jpg" alt="desmascarar_pix_(adicionando)"></a>
          <button class="botao">Sendo Adicionado</button>
            </div>
         </div>
