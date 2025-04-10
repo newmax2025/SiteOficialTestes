@@ -24,7 +24,7 @@
 <body>
     <div class="container">
         <div class="logo-container">
-            <img class="logo" src="../../assets/img/New Max Buscas.png" alt="Logo do Cliente">
+        <img class="logo" src="../../assets/img/new_max_buscas.png" alt="Logo do Cliente">
         </div>
         <h2>Consulta Email</h2>
         <input type="text" id="email" placeholder="Digite o Email">
