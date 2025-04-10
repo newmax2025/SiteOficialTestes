@@ -122,7 +122,7 @@
             <h2> Modulos Gratuitos</h2>
             <div class="carousel-container">
              <div class="card Gratuitos">  
-                   <a href="consultas/consulta_cpf.php"> <img src="../assets/img3D/consulta_CPF_max.jpg" alt="consulta_CPF_max"></a>
+                   <a href="consultas/consulta_cpf.php"> <img src="../assets/img3D/consulta_cpf.jpg" alt="consulta_cpf"></a>
                    </div>
                    <div class="card Gratuitos" onclick="mostrarBotao(this)">  
                     <a href="consultas/consulta_tel.php"> <img src="../assets/img3D/buscar_telefone.jpg" alt="consulta_telefone"></a>
@@ -133,7 +133,7 @@
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
-         <a href="consultas/consulta_cnpj.php"> <img src="../assets/img3D/consulta_CNPJ_max.jpg" alt="consulta_CNPJ"></a>
+         <a href="consultas/consulta_cnpj.php"> <img src="../assets/img3D/consulta_cnpj.jpg" alt="consulta_cnpj"></a>
         <button class="botao">Sendo Adicionado</button>
     </div>
     <div class="card Gratuitos" onclick="mostrarBotao(this)">  
@@ -169,13 +169,13 @@
 
                    <div class="card Gratuitos" onclick="mostrarBotao(this)">
                     <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui --> 
-                    <img src="../assets/img3D/Foto_rj.jpg" alt="pesquisa_por_nome">
+                    <img src="../assets/img3D/foto_rj.jpg" alt="pesquisa_por_nome">
                      <button class="botao">Sendo Adicionado</button>
                        </div>
 
                        <div class="card Gratuitos" onclick="mostrarBotao(this)">
                         <div class="tarja">Manutenção</div> <!-- Tarja adicionada aqui -->
-                        <img src="../assets/img3D/Foto_sp.jpg" alt="pesquisa_por_nome">
+                        <img src="../assets/img3D/foto_sp.jpg" alt="pesquisa_por_nome">
                          <button class="botao">Sendo Adicionado</button>
                            </div>
     </div>
@@ -239,7 +239,7 @@
     <div class="carousel-container">
         <div class="card pequeno"> 
             
-            <img src="../assets/img3D/CRLV_(Todos_os_estados).jpg" alt="CRLV_(Todos_os_estados)">
+            <img src="../assets/img3D/crlv_(Todos_os_estados).jpg" alt="CRLV_(Todos_os_estados)">
 
         </div>
 
@@ -257,7 +257,7 @@
 
         <div class="card pequeno"> 
             
-            <img src="../assets/img/CNH_simples.jpg" alt="CNH_simples">
+            <img src="../assets/img/cnh_simples.jpg" alt="CNH_simples">
             
         </div>
         <div class="card pequeno"> 
