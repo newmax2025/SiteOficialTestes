@@ -26,6 +26,7 @@ margin-left: 10px;
   overflow: hidden;
   width: 100%;
   position: relative;
+   overflow-x: hidden;
 }
 
 header {
@@ -76,7 +77,6 @@ transition: opacity 4s ease-in-out;
   animation: scrollCarousel 10s linear infinite;
   pointer-events: none; /* impede interação manual */
   user-select: none;
-   overflow-x: hidden;
 }
 
 .carousel-container2 img {
