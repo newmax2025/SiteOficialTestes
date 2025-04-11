@@ -243,7 +243,7 @@ async function checarPagamento(transacaoId, tentativas = 0) {
     if (statusDiv && result.status) {
       statusDiv.innerHTML = `<strong>Status do Pagamento:</strong> ${result.status}`;
 
-      if (result.status.toLowerCase() === "paid") {
+      if (result.status.toLowerCase() !== "paid") {
         statusDiv.innerHTML += `<p style='color: green;'><strong>Pagamento confirmado!</strong></p>`;
         setTimeout(() => {
           saldoForm();
