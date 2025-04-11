@@ -157,12 +157,11 @@
         </div>
 
              </section>
-    <section class="carousel2" id="favoritos">
+    <section class="carousel" id="favoritos">
           <h2>
             Em Manutenção
           </h2>
-
-        <!-- 2° FILEIRA DOS GRATUITOS -->
+        <!-- 1° FILEIRA MANUTENÇÃO -->
            <section class="carousel" id="treinos">
             <div class="carousel-container">
 
