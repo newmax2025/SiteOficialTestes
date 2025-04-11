@@ -1,14 +1,14 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require '../config.php'; // Caminho ajustado se estiver em /backend/
+require '../config.php';
 
-if (!isset($_SESSION["usuario"])) {
+if (!isset($_SESSION["usuario"]) || !isset($_SESSION["usuario"]["usuario"])) {
     echo json_encode(["autenticado" => false]);
     exit();
 }
 
-$usuario = $_SESSION["usuario"];
+$usuario = $_SESSION["usuario"]["usuario"];
 
 $sql = "SELECT c.usuario, c.plano, c.saldo, v.nome AS revendedor_nome, v.whatsapp AS revendedor_whatsapp 
         FROM clientes c
