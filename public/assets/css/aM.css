@@ -22,12 +22,6 @@ margin-left: 10px;
   align-self: center;
 }
 
-.carousel-wrapper {
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-}
-
 header {
   text-align: center;
   padding: 20px;
@@ -68,7 +62,6 @@ transition: opacity 4s ease-in-out;
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
-   animation: scrollCarousel 15s linear infinite;
 }
 
 .carousel-container::-webkit-scrollbar { 
