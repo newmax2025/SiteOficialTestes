@@ -21,7 +21,6 @@ color: gold;
 margin-left: 10px;
   align-self: center;
 }
-
 header {
   text-align: center;
   padding: 20px;
@@ -63,7 +62,6 @@ transition: opacity 4s ease-in-out;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
-
 .carousel-container::-webkit-scrollbar { 
   display: none;  /* Chrome, Safari, Opera */
 }
@@ -510,15 +508,5 @@ footer .copy p {
     padding: 10px;
     max-height: 80vh;
     overflow-y: auto;
-  }
-}
-
-/* Animação de rolagem infinita */
-@keyframes scrollCarousel {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
   }
 }
