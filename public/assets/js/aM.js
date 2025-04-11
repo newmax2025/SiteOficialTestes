@@ -45,16 +45,6 @@ document.querySelectorAll('.carousel-container').forEach(container => {
     container.addEventListener('touchend', () => {
         isDown = false;
     });
-
-   document.addEventListener("DOMContentLoaded", function () {
-  const container = document.getElementById("carousel-container2");
-  if (!container) return;
-
-  const cards = Array.from(container.children);
-  cards.forEach(card => {
-    const clone = card.cloneNode(true);
-    container.appendChild(clone);
-  });
 });
 
 
