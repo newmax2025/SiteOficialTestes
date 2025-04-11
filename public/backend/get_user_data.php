@@ -11,7 +11,7 @@ if (!isset($_SESSION["usuario"])) {
 
 $usuario = $_SESSION["usuario"];
 
-$sql = "SELECT c.usuario, c.plano, v.nome AS revendedor_nome, v.whatsapp AS revendedor_whatsapp 
+$sql = "SELECT c.usuario, c.plano, c.saldo, v.nome AS revendedor_nome, v.whatsapp AS revendedor_whatsapp 
         FROM clientes c
         LEFT JOIN vendedores v ON c.vendedor_id = v.id
         WHERE c.usuario = ?";
