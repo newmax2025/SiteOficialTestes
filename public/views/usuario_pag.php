@@ -18,6 +18,7 @@ if (!isset($_SESSION['usuario'])) {
     font-family: Arial, sans-serif;
     background: #f5f7fa;
     padding: 40px;
+    color: black;
 }
 
 .card {
