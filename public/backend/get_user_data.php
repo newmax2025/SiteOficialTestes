@@ -26,6 +26,7 @@ if ($result->num_rows > 0) {
 
     echo json_encode([
         "autenticado" => true,
+        "usuario" => $dados["usuario"],
         "nome" => $dados["revendedor_nome"] ?? "Não informado",
         "whatsapp" => !empty($dados["revendedor_whatsapp"]) ? "https://wa.me/".$dados["revendedor_whatsapp"] : "#",
         "plano" => $dados["plano"],
