@@ -102,7 +102,7 @@
 
     <section class="carousel" id="favoritos">
         <h2>Favoritos</h2>
-        <div class="carousel-container2">
+        <div class="carousel-container">
              <div class="card grande"> <img src="../assets/img_banner/CRLV_digital_horizontal.jpg" alt="CRLV DIGITAL Horizontal"> </div>
             <div class="card grande"> <img src="../assets/img_banner/consulta_SERASA_horizontal.jpg" alt="Consulta SERASA Horizontal"> </div>
             <div class="card grande"> <img src="../assets/img_banner/SCPC_horizontal.jpg" alt="SCPC Horizontal"> </div>
