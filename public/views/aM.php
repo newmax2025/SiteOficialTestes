@@ -108,7 +108,7 @@
             <div class="card grande"> <img src="../assets/img_banner/SCPC_horizontal.jpg" alt="SCPC Horizontal"> </div>
             <div class="card grande"> <img src="../assets/img_banner/CNH_completa_com_foto_horizontal.jpg" alt="CNH Completa com Foto Horizontal"> </div>
             <div class="card grande"> <img src="../assets/img_banner/consulta_radar_de_veiculos_horizontal.jpg" alt="CONSULTA RADAR DE VEÍCULOS Horizontal"> </div>
-            <div class="card grande"> <img src="../assets/img_banner/consulta_detran_pro.jpg" alt="CONSULTA Detran Pro Horizontal"> </div>
+            <div class="card grande"> <img src="../assets/img_banner/consulta_detran pro_horizontal.jpg" alt="CONSULTA Detran Pro Horizontal"> </div>
             <div class="card grande"> <img src="../assets/img_banner/placa_plus_plano_premium_horinzontal.jpg" alt="Placa Plus Plano Premium Horinzontal"> </div>
             <div class="card grande"> <img src="../assets/img_banner/consulta_credi_link_horizontal.jpg" alt="Consulta  CREDI LINK Horizontal"> </div>
             <!-- Adicione mais cards conforme necessário -->
