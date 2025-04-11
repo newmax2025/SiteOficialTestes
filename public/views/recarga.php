@@ -24,7 +24,7 @@ if (!isset($_SESSION['usuario'])) {
             background: white;
             padding: 30px;
             border-radius: 10px;
-            max-width: 600px;
+            max-width: 500px;
             margin: auto;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -35,19 +35,22 @@ if (!isset($_SESSION['usuario'])) {
             color: #333;
         }
 
-        .btn-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
-            margin-top: 30px;
+        select {
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
         }
 
         .recarga-btn {
-            padding: 15px;
+            padding: 12px 20px;
+            margin-top: 20px;
             background-color: #28a745;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
@@ -74,25 +77,21 @@ if (!isset($_SESSION['usuario'])) {
 <body>
 
     <div class="card">
-        <h2>Escolha um valor para recarregar</h2>
+        <h2>Recarregar Saldo</h2>
 
-        <div class="btn-grid">
-            <form action="processar_recarga.php" method="POST">
-                <button class="recarga-btn" name="valor" value="10">R$ 10</button>
-            </form>
-            <form action="processar_recarga.php" method="POST">
-                <button class="recarga-btn" name="valor" value="20">R$ 20</button>
-            </form>
-            <form action="processar_recarga.php" method="POST">
-                <button class="recarga-btn" name="valor" value="30">R$ 30</button>
-            </form>
-            <form action="processar_recarga.php" method="POST">
-                <button class="recarga-btn" name="valor" value="50">R$ 50</button>
-            </form>
-            <form action="processar_recarga.php" method="POST">
-                <button class="recarga-btn" name="valor" value="100">R$ 100</button>
-            </form>
-        </div>
+        <form action="processar_recarga.php" method="POST">
+            <label for="valor">Escolha o valor da recarga:</label>
+            <select name="valor" id="valor" required>
+                <option value="" disabled selected>Selecione um valor</option>
+                <option value="10">R$ 10,00</option>
+                <option value="20">R$ 20,00</option>
+                <option value="30">R$ 30,00</option>
+                <option value="50">R$ 50,00</option>
+                <option value="100">R$ 100,00</option>
+            </select>
+
+            <button type="submit" class="recarga-btn">Confirmar Recarga</button>
+        </form>
 
         <a href="aM.php" class="voltar">← Voltar para área de membros</a>
     </div>
