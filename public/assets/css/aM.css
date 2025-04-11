@@ -68,6 +68,7 @@ transition: opacity 4s ease-in-out;
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
+   animation: scrollCarousel 15s linear infinite;
 }
 
 .carousel-container2 {
