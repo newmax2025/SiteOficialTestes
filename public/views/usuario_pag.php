@@ -12,7 +12,9 @@ if (!isset($_SESSION['usuario'])) {
 <head>
     <meta charset="UTF-8">
     <title>Página do Usuário</title>
+    <link rel="stylesheet" href="../assets/css/aM.css?v=<?php echo md5_file('../assets/css/aM.css'); ?>">
     <link rel="stylesheet" href="../assets/css/usuario_pag.css?v=<?php echo md5_file('../assets/css/usuario_pag.css'); ?>">
+
 </head>
 <body>
     <input type="checkbox" id="check">
