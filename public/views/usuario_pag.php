@@ -50,12 +50,13 @@ if (!isset($_SESSION['usuario'])) {
                 }
 
                 document.getElementById("usuario-card").innerHTML = `
-                    <h2>Bem-vindo, ${dados.usuario}!</h2>
-                    <div class="info"><span class="label">Plano:</span> ${dados.plano}</div>
-                    <div class="info"><span class="label">Saldo:</span> R$ ${parseFloat(dados.saldo).toFixed(2)}</div>
-                    <div class="info"><span class="label">Vendedor:</span> ${dados.nome}</div>
-                    <a href="${dados.whatsapp}" class="whatsapp-link" target="_blank">Falar no WhatsApp</a>
-                `;
+    <h2>Bem-vindo, ${dados.usuario}!</h2>
+    <div class="info"><span class="label">Plano:</span> ${dados.plano}</div>
+    <div class="info"><span class="label">Saldo:</span> R$ ${parseFloat(dados.saldo).toFixed(2)}</div>
+    <div class="info"><span class="label">Vendedor:</span> ${dados.nome}</div>
+    <a href="${dados.whatsapp}" class="whatsapp-link" target="_blank">Falar no WhatsApp</a>
+`;
+
 
             } catch (erro) {
                 document.getElementById("usuario-card").innerHTML = `
