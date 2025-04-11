@@ -100,3 +100,20 @@ h2 {
 .sidebar a:hover {
     background: #1a242f;
 }
+
+.saldo-btn {
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.saldo-btn:hover {
+    background-color: #0056b3;
+}
