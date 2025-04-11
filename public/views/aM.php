@@ -467,34 +467,6 @@
                         </footer>
     </section>
     <script>
-
-         // ANIMAÇÃO BANNER
-  const container = document.getElementById("carousel-container");
-  const cards = container.children;
-
-  // Duplicar os cards para criar efeito infinito
-  for (let i = 0; i < cards.length; i++) {
-    const clone = cards[i].cloneNode(true);
-    container.appendChild(clone);
-  }
-
-  let scrollAmount = 0;
-
-  function animateCarousel() {
-    scrollAmount += 1;
-    container.scrollLeft = scrollAmount;
-
-    if (scrollAmount >= container.scrollWidth / 2) {
-      scrollAmount = 0;
-      container.scrollLeft = 0;
-    }
-
-    requestAnimationFrame(animateCarousel);
-  }
-
-  animateCarousel();
-
-        
               
  const banner = document.querySelector('.banner-grande');
   const imagens = [
