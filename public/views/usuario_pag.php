@@ -84,12 +84,13 @@ h2 {
                 const dados = await resposta.json();
 
                 if (!dados.autenticado) {
-                    document.getElementById("usuario-card").innerHTML = 
-                        <h2>Usuário não autenticado</h2>
-                        <p>Por favor, faça login novamente.</p>
-                    ;
-                    return;
-                }
+                    document.getElementById("usuario-card").innerHTML = `
+                    <h2>Usuário não autenticado</h2>
+                    <p>Por favor, faça login novamente.</p>
+                    `;
+                return;
+}
+
 
                 document.getElementById("usuario-card").innerHTML = `
                     <h2>Bem-vindo, ${dados.usuario}!</h2>
@@ -100,11 +101,12 @@ h2 {
                 `;
 
             } catch (erro) {
-                document.getElementById("usuario-card").innerHTML = 
-                    <h2>Erro ao carregar os dados</h2>
-                    <p>${erro}</p>
-                ;
+                document.getElementById("usuario-card").innerHTML = `
+                <h2>Erro ao carregar os dados</h2>
+                <p>${erro}</p>
+                `;
             }
+
         }
 
         carregarDadosUsuario();
