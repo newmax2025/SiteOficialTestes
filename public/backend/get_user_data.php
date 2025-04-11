@@ -1,9 +1,8 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require 'config.php';
+require '../config.php'; // Caminho ajustado se estiver em /backend/
 
-// Verifica se o usuário está autenticado
 if (!isset($_SESSION["usuario"])) {
     echo json_encode(["autenticado" => false]);
     exit();
@@ -26,10 +25,11 @@ if ($result->num_rows > 0) {
 
     echo json_encode([
         "autenticado" => true,
+        "usuario" => $dados["usuario"],
         "nome" => $dados["revendedor_nome"] ?? "Não informado",
         "whatsapp" => !empty($dados["revendedor_whatsapp"]) ? "https://wa.me/".$dados["revendedor_whatsapp"] : "#",
-        "plano" => $dados["plano"],
-        "saldo" => isset($dados["saldo"]) ? floatval($dados["saldo"]) : 0.0
+        "plano" => $dados["plano"] ?? "Não definido",
+        "saldo" => isset($dados["saldo"]) ? number_format($dados["saldo"], 2, ',', '.') : "0,00"
     ]);
 } else {
     echo json_encode(["autenticado" => false]);
