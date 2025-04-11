@@ -30,7 +30,7 @@
             document.getElementById("revendedor").innerHTML = `Revendedor: ${data.nome}`;
             document.getElementById("whatsapp").setAttribute("href", data.whatsapp);
             document.getElementById("plano").innerHTML = `Plano: ${data.plano}`;
-            document.getElementById("saldo").innerHTML = `Saldo: ${data.saldo}`;
+            document.getElementById("saldo").innerHTML = `Saldo: ${data.saldo},00`;
         })
         .catch(error => {
             console.error("Erro ao carregar os dados do usuário:", error);
