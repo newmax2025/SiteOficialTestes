@@ -36,7 +36,7 @@ if (!isset($_SESSION["usuario"])) {
             document.getElementById("revendedor").innerHTML = `Revendedor: ${data.nome}`;
             document.getElementById("whatsapp").setAttribute("href", data.whatsapp);
             document.getElementById("plano").innerHTML = `Plano: ${data.plano}`;
-            document.getElementById("saldo").innerHTML = `Saldo: ${data.saldo},00`;
+            document.getElementById("saldo").innerHTML = `Saldo: R$ ${parseFloat(data.saldo).toFixed(2)}`;
         })
         .catch(error => {
             console.error("Erro ao carregar os dados do usuário:", error);

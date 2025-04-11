@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
         "nome" => $dados["revendedor_nome"] ?? "Não informado",
         "whatsapp" => !empty($dados["revendedor_whatsapp"]) ? "https://wa.me/".$dados["revendedor_whatsapp"] : "#",
         "plano" => $dados["plano"],
-        "saldo" => $dados["saldo"] ?? 0
+        "saldo" => number_format((float)$dados["saldo"], 2, '.', '')
     ]);
 } else {
     echo json_encode(["autenticado" => false]);
