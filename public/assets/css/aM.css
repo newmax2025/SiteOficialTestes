@@ -62,6 +62,21 @@ transition: opacity 4s ease-in-out;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
+
+.carousel-container2 {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-container2 img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .carousel-container::-webkit-scrollbar { 
   display: none;  /* Chrome, Safari, Opera */
 }
