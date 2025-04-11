@@ -156,6 +156,12 @@
            </div>
         </div>
 
+             </section>
+    <section class="carousel2" id="favoritos">
+          <h2>
+            Em Manutenção
+          </h2>
+
         <!-- 2° FILEIRA DOS GRATUITOS -->
            <section class="carousel" id="treinos">
             <div class="carousel-container">
