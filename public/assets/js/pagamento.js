@@ -1,3 +1,8 @@
+const selectValor = document.getElementById("valor");
+const depositButton = document.getElementById("depositButton");
+const resultDiv = document.getElementById("resultDiv");
+let pessoaSelecionada = {};
+
 
 let token = "";
 
@@ -260,13 +265,13 @@ async function checarPagamento(transacaoId, tentativas = 0) {
   }
 }
 
-// Alterar Status do Usuário
-async function statusForm() {
+// Alterar Saldo do Usuário
+async function saldoForm() {
   const username = currentUser;
   const amount = selectValor.value;
 
   try {
-    const response = await fetch("../backend/alterar_status.php", {
+    const response = await fetch("../backend/processar_recarga.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, amount }),

@@ -31,11 +31,16 @@ if (!isset($_SESSION['usuario'])) {
                 <option value="100">R$ 100,00</option>
             </select>
 
-            <button type="submit" class="recarga-btn">Confirmar Recarga</button>
+            <button id="depositButton" type="button" class="recarga-btn">Confirmar Recarga</button>
         </form>
+        <div id="resultDiv" class="resultado"></div>
+
 
         <a href="aM.php" class="voltar">← Voltar para área de membros</a>
     </div>
-
+    <script>
+        const currentUser = "<?php echo $_SESSION['usuario']; ?>";
+    </script>
+    <script src="../assets/js/pagamento.js?v=<?php echo md5_file('../assets/js/pagamento.js'); ?>"></script>
 </body>
 </html>
