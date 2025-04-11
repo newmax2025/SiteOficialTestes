@@ -73,7 +73,7 @@ transition: opacity 4s ease-in-out;
 .carousel-container2 {
  display: flex;
   gap: 20px;
-  animation: scrollCarousel 20s linear infinite;
+  animation: scrollCarousel 10s linear infinite;
 }
 
 .carousel-container2 img {
