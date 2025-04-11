@@ -46,34 +46,15 @@ document.querySelectorAll('.carousel-container').forEach(container => {
         isDown = false;
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-  const container = document.getElementById("carousel-container");
-
+   document.addEventListener("DOMContentLoaded", function () {
+  const container = document.getElementById("carousel-container2");
   if (!container) return;
 
   const cards = Array.from(container.children);
-
-  // Duplicar os cards
   cards.forEach(card => {
     const clone = card.cloneNode(true);
     container.appendChild(clone);
   });
-
-  let scrollAmount = 0;
-
-  function animateCarousel() {
-    scrollAmount += 1;
-    container.scrollLeft = scrollAmount;
-
-    if (scrollAmount >= container.scrollWidth / 2) {
-      scrollAmount = 0;
-      container.scrollLeft = 0;
-    }
-
-    requestAnimationFrame(animateCarousel);
-  }
-
-  animateCarousel();
 });
-});
+
 
