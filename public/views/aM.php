@@ -30,6 +30,7 @@
             document.getElementById("revendedor").innerHTML = `Revendedor: ${data.nome}`;
             document.getElementById("whatsapp").setAttribute("href", data.whatsapp);
             document.getElementById("plano").innerHTML = `Plano: ${data.plano}`;
+            document.getElementById("saldo").innerHTML = `Saldo: ${data.saldo}`;
         })
         .catch(error => {
             console.error("Erro ao carregar os dados do usuário:", error);
@@ -53,6 +54,7 @@
         <li><a href="#" id="revendedor"><i class=""></i>Revendedor: Carregando...</a></li>
         <li><a href="https://wa.me/" id="whatsapp"><i class="fa-brands fa-whatsapp"></i>Whatsapp</a></li>
         <li><a href="#" id="plano"><i class=""></i>Plano: Carregando...</a></li>
+        <li><a href="#" id="saldo"><i class=""></i>Saldo: Carregando...</a></li>
         <a href="../backend/logout.php">Sair</a>
     </ul>
     </div>
