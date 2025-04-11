@@ -21,6 +21,13 @@ color: gold;
 margin-left: 10px;
   align-self: center;
 }
+
+.carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
 header {
   text-align: center;
   padding: 20px;
@@ -64,11 +71,9 @@ transition: opacity 4s ease-in-out;
 }
 
 .carousel-container2 {
-  display: flex;
+ display: flex;
   gap: 20px;
-  overflow: hidden;
-  width: 100%;
-  position: relative;
+  animation: scrollCarousel 40s linear infinite;
 }
 
 .carousel-container2 img {
@@ -523,5 +528,15 @@ footer .copy p {
     padding: 10px;
     max-height: 80vh;
     overflow-y: auto;
+  }
+}
+
+/* Animação de rolagem infinita */
+@keyframes scrollCarousel {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
