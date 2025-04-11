@@ -75,10 +75,8 @@ transition: opacity 4s ease-in-out;
   overflow-x: auto;
   gap: 10px;
   padding: 10px;
-  animation: scrollCarousel 10s linear infinite;
-  pointer-events: none; /* impede interação manual */
-  user-select: none;
-  width: max-content; /* só ocupa o necessário */
+  animation: scrollCarousel 15s linear infinite;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
 
 .carousel-container2 img {
