@@ -11,6 +11,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+   overflow-x: hidden;
 }
 
 h2 {
@@ -74,6 +75,8 @@ transition: opacity 4s ease-in-out;
  display: flex;
   gap: 20px;
   animation: scrollCarousel 10s linear infinite;
+  pointer-events: none; /* impede interação manual */
+  user-select: none;
 }
 
 .carousel-container2 img {
