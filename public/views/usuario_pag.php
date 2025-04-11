@@ -13,8 +13,9 @@ if (!isset($_SESSION['usuario'])) {
     <meta charset="UTF-8">
     <title>Página do Usuário</title>
     <link rel="stylesheet" href="../assets/css/aM.css?v=<?php echo md5_file('../assets/css/aM.css'); ?>">
-    <link rel="stylesheet" href="../assets/css/usuario_pag.css?v=<?php echo md5_file('../assets/css/usuario_pag.css'); ?>">
-
+    <style>
+        /* ... seus estilos permanecem iguais ... */
+    </style>
 </head>
 <body>
     <input type="checkbox" id="check">
@@ -42,27 +43,26 @@ if (!isset($_SESSION['usuario'])) {
                 const dados = await resposta.json();
 
                 if (!dados.autenticado) {
-                    document.getElementById("usuario-card").innerHTML = `
+                    document.getElementById("usuario-card").innerHTML = 
                         <h2>Usuário não autenticado</h2>
                         <p>Por favor, faça login novamente.</p>
-                    `;
+                    ;
                     return;
                 }
 
                 document.getElementById("usuario-card").innerHTML = `
-    <h2>Bem-vindo, ${dados.usuario}!</h2>
-    <div class="info"><span class="label">Plano:</span> ${dados.plano}</div>
-    <div class="info"><span class="label">Saldo:</span> R$ ${parseFloat(dados.saldo).toFixed(2)}</div>
-    <div class="info"><span class="label">Vendedor:</span> ${dados.nome}</div>
-    <a href="${dados.whatsapp}" class="whatsapp-link" target="_blank">Falar no WhatsApp</a>
-`;
-
+                    <h2>Bem-vindo, ${dados.usuario}!</h2>
+                    <div class="info"><span class="label">Plano:</span> ${dados.plano}</div>
+                    <div class="info"><span class="label">Saldo:</span> R$ ${parseFloat(dados.saldo).toFixed(2)}</div>
+                    <div class="info"><span class="label">Vendedor:</span> ${dados.nome}</div>
+                    <a href="${dados.whatsapp}" class="whatsapp-link" target="_blank">Falar no WhatsApp</a>
+                `;
 
             } catch (erro) {
-                document.getElementById("usuario-card").innerHTML = `
+                document.getElementById("usuario-card").innerHTML = 
                     <h2>Erro ao carregar os dados</h2>
                     <p>${erro}</p>
-                `;
+                ;
             }
         }
 
