@@ -1,16 +1,17 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require '../config.php';
+require 'config.php';
 
-if (!isset($_SESSION["usuario"]) || !isset($_SESSION["usuario"]["usuario"])) {
+// Verifica se o usuário está autenticado
+if (!isset($_SESSION["usuario"])) {
     echo json_encode(["autenticado" => false]);
     exit();
 }
 
-$usuario = $_SESSION["usuario"]["usuario"];
+$usuario = $_SESSION["usuario"];
 
-$sql = "SELECT c.usuario, c.plano, c.saldo, v.nome AS revendedor_nome, v.whatsapp AS revendedor_whatsapp 
+$sql = "SELECT c.usuario, c.plano, v.nome AS revendedor_nome, v.whatsapp AS revendedor_whatsapp 
         FROM clientes c
         LEFT JOIN vendedores v ON c.vendedor_id = v.id
         WHERE c.usuario = ?";
@@ -25,11 +26,9 @@ if ($result->num_rows > 0) {
 
     echo json_encode([
         "autenticado" => true,
-        "usuario" => $dados["usuario"],
         "nome" => $dados["revendedor_nome"] ?? "Não informado",
         "whatsapp" => !empty($dados["revendedor_whatsapp"]) ? "https://wa.me/".$dados["revendedor_whatsapp"] : "#",
-        "plano" => $dados["plano"] ?? "Não definido",
-        "saldo" => isset($dados["saldo"]) ? number_format($dados["saldo"], 2, ',', '.') : "0,00"
+        "plano" => $dados["plano"]
     ]);
 } else {
     echo json_encode(["autenticado" => false]);

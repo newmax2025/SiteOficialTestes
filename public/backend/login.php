@@ -82,10 +82,10 @@ function verificarLogin($conexao, $user, $pass, $tabela, $sessao, $redirect, $ve
         }
 
         if (password_verify($pass, $row["senha"])) {
+            // Registra a sessão corretamente
             session_regenerate_id(true); // Evita session fixation
             $_SESSION[$sessao] = $user;
-            $_SESSION["usuario"] = $user; // Sessão unificada para uso geral
-            $_SESSION["usuario_id"] = $row["id"];
+            $_SESSION["usuario_id"] = $row["id"]; // Salva o ID do usuário para futuras consultas
             echo json_encode(["success" => true, "redirect" => $redirect]);
             return true;
         }
