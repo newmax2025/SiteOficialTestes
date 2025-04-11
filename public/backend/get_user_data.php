@@ -28,7 +28,8 @@ if ($result->num_rows > 0) {
         "autenticado" => true,
         "nome" => $dados["revendedor_nome"] ?? "Não informado",
         "whatsapp" => !empty($dados["revendedor_whatsapp"]) ? "https://wa.me/".$dados["revendedor_whatsapp"] : "#",
-        "plano" => $dados["plano"]
+        "plano" => $dados["plano"],
+        "saldo" => $dados["saldo"] ?? 0
     ]);
 } else {
     echo json_encode(["autenticado" => false]);
