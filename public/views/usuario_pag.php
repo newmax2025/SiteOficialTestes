@@ -14,7 +14,46 @@ if (!isset($_SESSION['usuario'])) {
     <title>Página do Usuário</title>
     <link rel="stylesheet" href="../assets/css/aM.css?v=<?php echo md5_file('../assets/css/aM.css'); ?>">
     <style>
-        
+        body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    padding: 40px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.info {
+    margin-bottom: 15px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.whatsapp-link {
+    display: inline-block;
+    margin-top: 5px;
+    color: white;
+    background-color: #25D366;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.whatsapp-link:hover {
+    background-color: #1ebe5d;
+}
     </style>
 </head>
 <body>
