@@ -11,6 +11,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 h2 {
@@ -26,7 +27,6 @@ margin-left: 10px;
   overflow: hidden;
   width: 100%;
   position: relative;
-   overflow-x: hidden;
 }
 
 header {
