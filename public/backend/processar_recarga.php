@@ -4,7 +4,8 @@ header('Content-Type: application/json');
 require 'config.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
-$valor = isset($data['valor']) ? (float)$data['valor'] : 0;
+$valor = isset($data['amount']) ? (float)$data['amount'] : 0;
+
 
 if (!isset($_SESSION['usuario']) || $valor <= 0) {
     echo json_encode(['sucesso' => false, 'mensagem' => 'Dados inválidos ou usuário não autenticado.']);

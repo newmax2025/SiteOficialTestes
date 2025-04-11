@@ -246,7 +246,7 @@ async function checarPagamento(transacaoId, tentativas = 0) {
       if (result.status.toLowerCase() === "paid") {
         statusDiv.innerHTML += `<p style='color: green;'><strong>Pagamento confirmado!</strong></p>`;
         setTimeout(() => {
-          statusForm();
+          saldoForm();
           window.location.href = "pagamento_confirmado.php";
         }, 2000);
       } else {
@@ -278,9 +278,9 @@ async function saldoForm() {
     });
 
     const result = await response.json();
-    console.log("Resposta do statusForm:", result);
+    console.log("Resposta do saldoForm:", result);
   } catch (error) {
-    console.error("Erro no statusForm:", error);
+    console.error("Erro no saldoForm:", error);
   }
 }
 
