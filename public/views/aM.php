@@ -60,7 +60,7 @@ if (!isset($_SESSION["usuario"])) {
         <li><a href="#" id="revendedor"><i class=""></i>Revendedor: Carregando...</a></li>
         <li><a href="https://wa.me/" id="whatsapp"><i class="fa-brands fa-whatsapp"></i>Whatsapp</a></li>
         <li><a href="#" id="plano"><i class=""></i>Plano: Carregando...</a></li>
-        <li><a href="#" id="saldo"><i class=""></i>Saldo: Carregando...</a></li>
+        <li><a href="usuario_pag.php" id="saldo"><i class=""></i>Saldo: Carregando...</a></li>
         <a href="../backend/logout.php">Sair</a>
     </ul>
     </div>
