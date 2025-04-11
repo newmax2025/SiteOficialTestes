@@ -102,6 +102,25 @@
       </form>
       <p id="mensagemSenha"></p>
 
+      <h3>Alterar Plano do Usuário</h3>
+      <form id="formAlterarPlano">
+        <input type="text" id="usuarioPlano" placeholder="Usuário" required />
+  
+        <label for="novoPlano">Novo Plano:</label>
+        <select id="novoPlano" required>
+        <option value="Simples">Simples</option>
+        <option value="Básico">Básico</option>
+        <option value="Premium">Premium</option>
+        <option value="Diamante">Diamante</option>
+        <option value="Premium Anual">Premium Anual</option>
+        <option value="Diamante Anual">Diamante Anual</option>
+        <option value="Revendedor">Revendedor</option>
+        </select>
+
+        <button type="submit">Alterar Plano</button>
+      </form>
+      <p id="mensagemPlano"></p>
+
 
 
       <button onclick="window.location.href='login.php'">Sair</button>

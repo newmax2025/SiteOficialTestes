@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const removeUserForm = document.getElementById("removeUserForm");
   const statusForm = document.getElementById("formAlterarStatus");
   const userListElement = document.getElementById("userList");
+  const formAlterarPlano = document.getElementById("formAlterarPlano");
+  const mensagemPlano = document.getElementById("mensagemPlano");
 
   const mensagemCadastro = document.getElementById("mensagemCadastro");
   const mensagemRemocao = document.getElementById("mensagemRemocao");
@@ -222,6 +224,46 @@ document.addEventListener("DOMContentLoaded", function () {
       handleFetchError(error, mensagemSenha, "alteração de senha");
     }
   });
+
+  if (formAlterarPlano) {
+    formAlterarPlano.addEventListener("submit", async function (event) {
+      event.preventDefault();
+  
+      const username = document.getElementById("usuarioPlano").value.trim();
+      const plano = document.getElementById("novoPlano").value;
+  
+      mensagemPlano.textContent = "";
+  
+      if (!username || !plano) {
+        mensagemPlano.textContent = "Preencha todos os campos.";
+        mensagemPlano.style.color = "red";
+        return;
+      }
+  
+      try {
+        const response = await fetch("../backend/admin/alterar_plano.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, plano }),
+        });
+  
+        const result = await response.json();
+  
+        if (result.success) {
+          mensagemPlano.textContent = result.message || "Plano alterado com sucesso!";
+          mensagemPlano.style.color = "green";
+          formAlterarPlano.reset();
+        } else {
+          mensagemPlano.textContent = result.message || "Erro ao alterar plano.";
+          mensagemPlano.style.color = "red";
+        }
+      } catch (error) {
+        console.error("Erro ao alterar plano:", error);
+        mensagemPlano.textContent = "Erro ao enviar solicitação.";
+        mensagemPlano.style.color = "red";
+      }
+    });
+  }
 
   // Atualiza a lista de usuários
   async function updateUserList() {
